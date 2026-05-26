@@ -14,7 +14,229 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      quiz_leads: {
+        Row: {
+          career_moment: string | null
+          communication_type: string | null
+          converted_to_paid: boolean
+          created_at: string
+          email: string | null
+          first_name: string | null
+          id: string
+          recommended_pathway: string | null
+          recommended_price: string | null
+          source: string | null
+          urgency: string | null
+        }
+        Insert: {
+          career_moment?: string | null
+          communication_type?: string | null
+          converted_to_paid?: boolean
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          id?: string
+          recommended_pathway?: string | null
+          recommended_price?: string | null
+          source?: string | null
+          urgency?: string | null
+        }
+        Update: {
+          career_moment?: string | null
+          communication_type?: string | null
+          converted_to_paid?: boolean
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          id?: string
+          recommended_pathway?: string | null
+          recommended_price?: string | null
+          source?: string | null
+          urgency?: string | null
+        }
+        Relationships: []
+      }
+      sessions: {
+        Row: {
+          authority_score: number | null
+          clarity_score: number | null
+          confidence_score: number | null
+          created_at: string
+          duration_minutes: number | null
+          evidence_score: number | null
+          homework_instructions: string | null
+          id: string
+          pathway: string | null
+          practice_focus: string | null
+          questions_covered: string | null
+          readiness_score_end: number | null
+          readiness_score_start: number | null
+          session_number: number | null
+          session_status: string
+          strongest_moment: string | null
+          transcript: string | null
+          upsell_shown: boolean
+          user_id: string
+        }
+        Insert: {
+          authority_score?: number | null
+          clarity_score?: number | null
+          confidence_score?: number | null
+          created_at?: string
+          duration_minutes?: number | null
+          evidence_score?: number | null
+          homework_instructions?: string | null
+          id?: string
+          pathway?: string | null
+          practice_focus?: string | null
+          questions_covered?: string | null
+          readiness_score_end?: number | null
+          readiness_score_start?: number | null
+          session_number?: number | null
+          session_status?: string
+          strongest_moment?: string | null
+          transcript?: string | null
+          upsell_shown?: boolean
+          user_id: string
+        }
+        Update: {
+          authority_score?: number | null
+          clarity_score?: number | null
+          confidence_score?: number | null
+          created_at?: string
+          duration_minutes?: number | null
+          evidence_score?: number | null
+          homework_instructions?: string | null
+          id?: string
+          pathway?: string | null
+          practice_focus?: string | null
+          questions_covered?: string | null
+          readiness_score_end?: number | null
+          readiness_score_start?: number | null
+          session_number?: number | null
+          session_status?: string
+          strongest_moment?: string | null
+          transcript?: string | null
+          upsell_shown?: boolean
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      story_bank: {
+        Row: {
+          answer_final: string | null
+          created_at: string
+          id: string
+          notes: string | null
+          question: string | null
+          readiness_score: number | null
+          user_id: string
+        }
+        Insert: {
+          answer_final?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          question?: string | null
+          readiness_score?: number | null
+          user_id: string
+        }
+        Update: {
+          answer_final?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          question?: string | null
+          readiness_score?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "story_bank_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          access_expires_at: string | null
+          communication_type: string | null
+          created_at: string
+          cv_text: string | null
+          email: string
+          first_name: string | null
+          id: string
+          jd_key_phrases: string | null
+          jd_text: string | null
+          last_readiness_score: number | null
+          minutes_per_session: number
+          pathway: string | null
+          payment_status: string
+          quiz_urgency: string | null
+          sessions_completed: number
+          sessions_purchased: number
+          source: string | null
+          stripe_customer_id: string | null
+          stripe_payment_id: string | null
+          upsell_shown: boolean
+        }
+        Insert: {
+          access_expires_at?: string | null
+          communication_type?: string | null
+          created_at?: string
+          cv_text?: string | null
+          email: string
+          first_name?: string | null
+          id: string
+          jd_key_phrases?: string | null
+          jd_text?: string | null
+          last_readiness_score?: number | null
+          minutes_per_session?: number
+          pathway?: string | null
+          payment_status?: string
+          quiz_urgency?: string | null
+          sessions_completed?: number
+          sessions_purchased?: number
+          source?: string | null
+          stripe_customer_id?: string | null
+          stripe_payment_id?: string | null
+          upsell_shown?: boolean
+        }
+        Update: {
+          access_expires_at?: string | null
+          communication_type?: string | null
+          created_at?: string
+          cv_text?: string | null
+          email?: string
+          first_name?: string | null
+          id?: string
+          jd_key_phrases?: string | null
+          jd_text?: string | null
+          last_readiness_score?: number | null
+          minutes_per_session?: number
+          pathway?: string | null
+          payment_status?: string
+          quiz_urgency?: string | null
+          sessions_completed?: number
+          sessions_purchased?: number
+          source?: string | null
+          stripe_customer_id?: string | null
+          stripe_payment_id?: string | null
+          upsell_shown?: boolean
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
