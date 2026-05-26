@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { StatBar } from "@/components/landing/StatBar";
+import { PainChecklist } from "@/components/landing/PainChecklist";
 
 export const Route = createFileRoute("/")({
   component: Index,
