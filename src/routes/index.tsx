@@ -227,26 +227,36 @@ function Pathways() {
     {
       name: "The Graduate",
       for: "First serious interview",
+      price: "$99 AUD",
+      cadence: "one-time",
       blurb: "Land the role that sets the next ten years in motion.",
     },
     {
       name: "The Comeback",
       for: "Returning to work",
+      price: "$199 AUD",
+      cadence: "one-time",
       blurb: "Rebuild fluency, authority, and presence on your own terms.",
     },
     {
       name: "The Confidence",
       for: "Mid-career pivot",
+      price: "$249 AUD",
+      cadence: "one-time",
       blurb: "Translate what you've already done into the language of the next role.",
     },
     {
       name: "The Executive",
       for: "Board rooms & C-suite",
+      price: "$499 AUD",
+      cadence: "one-time",
       blurb: "Calibrate every sentence for stakes measured in millions.",
     },
     {
       name: "The Club",
       for: "Always-on access",
+      price: "$79 AUD",
+      cadence: "per month",
       blurb: "Bramwell stays with you — for every interview, every pitch, every year.",
     },
   ];
@@ -284,6 +294,10 @@ function Pathways() {
               <h3 className="mt-3 text-2xl font-semibold tracking-tight">
                 {p.name}
               </h3>
+              <div className="mt-3 flex items-baseline gap-1.5">
+                <span className="text-xl font-semibold tracking-tight">{p.price}</span>
+                <span className="text-xs text-muted-foreground">{p.cadence}</span>
+              </div>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 {p.blurb}
               </p>
