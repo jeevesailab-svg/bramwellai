@@ -24,6 +24,13 @@ function Index() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Hero />
+      <Problem />
+      <HowItWorks />
+      <Pathways />
+      <Testimonials />
+      <FAQ />
+      <FinalCTA />
+      <Footer />
     </main>
   );
 }
@@ -126,5 +133,341 @@ function Hero() {
         </p>
       </div>
     </section>
+  );
+}
+
+/* ───────────── Problem ───────────── */
+function Problem() {
+  return (
+    <section className="border-t border-border bg-background py-24 md:py-32">
+      <div className="mx-auto max-w-4xl px-6 md:px-10">
+        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+          The gap
+        </p>
+        <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+          You're brilliant on paper. But the room only hears the{" "}
+          <span
+            className="bg-clip-text text-transparent"
+            style={{ backgroundImage: "var(--gradient-gold)" }}
+          >
+            first ninety seconds.
+          </span>
+        </h2>
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          Most coaching is generic, expensive, and gone the moment you hang up.
+          Bramwell listens, asks the questions you'll actually face, and
+          rehearses with you until the answer lives in your voice — not on a
+          script.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────── How it works ───────────── */
+function HowItWorks() {
+  const steps = [
+    {
+      n: "01",
+      title: "Upload the moment",
+      body: "Drop in your CV and the job description, promotion brief, or pitch. Bramwell reads between the lines.",
+    },
+    {
+      n: "02",
+      title: "Rehearse out loud",
+      body: "Live voice sessions with an AI coach trained on executive communication. No typing. Just talking.",
+    },
+    {
+      n: "03",
+      title: "Walk in ready",
+      body: "Get a readiness score, your strongest moment, and the one thing to sharpen before the real conversation.",
+    },
+  ];
+  return (
+    <section
+      id="how"
+      className="relative border-t border-border py-24 md:py-32"
+      style={{ background: "var(--gradient-hero)" }}
+    >
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="mb-16 max-w-2xl">
+          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+            How it works
+          </p>
+          <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+            Three steps between you and the room.
+          </h2>
+        </div>
+        <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
+          {steps.map((s) => (
+            <div key={s.n} className="bg-background p-8 md:p-10">
+              <div
+                className="text-sm font-medium tracking-[0.2em]"
+                style={{ color: "var(--primary)" }}
+              >
+                {s.n}
+              </div>
+              <h3 className="mt-6 text-xl font-semibold tracking-tight">
+                {s.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {s.body}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────── Pathways ───────────── */
+function Pathways() {
+  const pathways = [
+    {
+      name: "The Graduate",
+      for: "First serious interview",
+      blurb: "Land the role that sets the next ten years in motion.",
+    },
+    {
+      name: "The Comeback",
+      for: "Returning to work",
+      blurb: "Rebuild fluency, authority, and presence on your own terms.",
+    },
+    {
+      name: "The Confidence",
+      for: "Mid-career pivot",
+      blurb: "Translate what you've already done into the language of the next role.",
+    },
+    {
+      name: "The Executive",
+      for: "Board rooms & C-suite",
+      blurb: "Calibrate every sentence for stakes measured in millions.",
+    },
+    {
+      name: "The Club",
+      for: "Always-on access",
+      blurb: "Bramwell stays with you — for every interview, every pitch, every year.",
+    },
+  ];
+  return (
+    <section className="border-t border-border bg-background py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="mb-14 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <div className="max-w-xl">
+            <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+              Five pathways
+            </p>
+            <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+              Coaching tuned to the moment you're in.
+            </h2>
+          </div>
+          <a
+            href="/pricing"
+            className="inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium transition hover:bg-foreground/10"
+          >
+            Compare pathways →
+          </a>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {pathways.map((p, i) => (
+            <div
+              key={p.name}
+              className={`group rounded-2xl border border-border bg-foreground/[0.02] p-7 transition hover:border-foreground/20 hover:bg-foreground/[0.04] ${
+                i === pathways.length - 1 ? "lg:col-span-1 md:col-span-2" : ""
+              }`}
+            >
+              <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                {p.for}
+              </p>
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight">
+                {p.name}
+              </h3>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                {p.blurb}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────── Testimonials ───────────── */
+function Testimonials() {
+  const quotes = [
+    {
+      q: "I walked in knowing exactly how I sounded. That changed everything.",
+      a: "Director, FTSE 100 — promotion panel",
+    },
+    {
+      q: "It's the only coach that's there at 11pm the night before.",
+      a: "Senior PM — Series B fintech",
+    },
+    {
+      q: "Within two sessions my answers stopped wandering. I got the offer.",
+      a: "Returning to work after maternity leave",
+    },
+  ];
+  return (
+    <section
+      className="relative border-t border-border py-24 md:py-32"
+      style={{ background: "var(--gradient-hero)" }}
+    >
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+          What people say
+        </p>
+        <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+          The conversations that change careers.
+        </h2>
+
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {quotes.map((t, i) => (
+            <figure
+              key={i}
+              className="flex h-full flex-col rounded-2xl border border-border bg-background/60 p-8 backdrop-blur"
+            >
+              <div
+                className="text-3xl leading-none"
+                style={{ color: "var(--primary)" }}
+              >
+                "
+              </div>
+              <blockquote className="mt-3 flex-1 text-lg font-medium leading-snug tracking-tight">
+                {t.q}
+              </blockquote>
+              <figcaption className="mt-6 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                {t.a}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────── FAQ ───────────── */
+function FAQ() {
+  const faqs = [
+    {
+      q: "Is this an AI, a human coach, or both?",
+      a: "Bramwell is a private AI coach with the calibre of a senior executive communications partner. It listens, asks, and responds in real time — available the moment you need it.",
+    },
+    {
+      q: "How long is a session?",
+      a: "Sessions are timed to your pathway — typically 15 to 30 minutes. Enough to rehearse the hardest questions without losing your voice.",
+    },
+    {
+      q: "Is my data private?",
+      a: "Yes. Your CV, your job spec, and your recordings are stored privately to your account and never used to train public models.",
+    },
+    {
+      q: "What if I'm not in the UK?",
+      a: "Bramwell works wherever the conversation matters. Native English coaching, available globally.",
+    },
+  ];
+  return (
+    <section className="border-t border-border bg-background py-24 md:py-32">
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[1fr_2fr] md:px-10">
+        <div>
+          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+            FAQ
+          </p>
+          <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Questions worth asking.
+          </h2>
+        </div>
+        <div className="divide-y divide-border border-y border-border">
+          {faqs.map((f) => (
+            <details key={f.q} className="group py-6">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-base font-medium tracking-tight">
+                {f.q}
+                <span className="mt-0.5 text-muted-foreground transition group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                {f.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────── Final CTA ───────────── */
+function FinalCTA() {
+  return (
+    <section
+      className="relative overflow-hidden border-t border-border py-28 md:py-40"
+      style={{ background: "var(--gradient-hero)" }}
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-25 blur-3xl"
+        style={{ background: "var(--gradient-gold)" }}
+      />
+      <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
+        <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+          Sound as capable
+          <br />
+          <span
+            className="bg-clip-text text-transparent"
+            style={{ backgroundImage: "var(--gradient-gold)" }}
+          >
+            as you already are.
+          </span>
+        </h2>
+        <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
+          Take the four-minute benchmark. See where you stand. Then decide.
+        </p>
+        <a
+          href="/benchmark"
+          className="mt-10 inline-flex h-12 items-center justify-center gap-2 rounded-full px-8 text-sm font-semibold transition hover:opacity-95"
+          style={{
+            background: "var(--gradient-gold)",
+            color: "var(--primary-foreground)",
+            boxShadow: "var(--shadow-elegant)",
+          }}
+        >
+          Start the benchmark
+          <span>→</span>
+        </a>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────── Footer ───────────── */
+function Footer() {
+  return (
+    <footer className="border-t border-border bg-background py-12">
+      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 md:flex-row md:items-center md:px-10">
+        <div className="flex items-baseline gap-1.5">
+          <span className="text-base font-semibold tracking-tight">Bramwell</span>
+          <span
+            className="text-base font-light tracking-tight"
+            style={{ color: "var(--primary)" }}
+          >
+            AI
+          </span>
+        </div>
+        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+          <a href="/benchmark" className="transition-colors hover:text-foreground">Benchmark</a>
+          <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
+          <a href="/login" className="transition-colors hover:text-foreground">Sign in</a>
+          <a href="/signup" className="transition-colors hover:text-foreground">Sign up</a>
+        </nav>
+        <p className="text-xs text-muted-foreground">
+          © {new Date().getFullYear()} Bramwell AI. All rights reserved.
+        </p>
+      </div>
+    </footer>
   );
 }
