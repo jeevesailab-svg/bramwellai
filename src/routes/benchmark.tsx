@@ -1,6 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/benchmark")({
   component: BenchmarkPage,
@@ -373,45 +372,22 @@ function BenchmarkPage() {
     const r = computeResult({ ...answers });
 
     try {
-      // Save to Supabase
-      const { error: insertErr } = await supabase.from("quiz_leads").insert({
-        email: cleanEmail,
-        first_name: cleanName,
-        communication_type: r.type,
-        career_moment: r.career_moment,
-        urgency: r.urgency,
-        recommended_pathway: r.pathwayKey,
-        recommended_price: r.price,
-        source: "benchmark",
+      // Server route handles insert + Zapier webhook (URL stays server-side)
+      const res = await fetch("/api/public/quiz-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          first_name: cleanName,
+          email: cleanEmail,
+          communication_type: r.type,
+          career_moment: r.career_moment,
+          urgency: r.urgency,
+          recommended_pathway: r.pathwayKey,
+          recommended_pathway_name: r.pathwayName,
+          recommended_price: r.price,
+        }),
       });
-      if (insertErr) throw insertErr;
-
-      // Fire Zapier webhook (best-effort, non-blocking failure)
-      const zapUrl = import.meta.env.VITE_ZAPIER_QUIZ as string | undefined;
-      if (zapUrl) {
-        try {
-          await fetch(zapUrl, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              timestamp: new Date().toISOString(),
-              source: "benchmark",
-              first_name: cleanName,
-              email: cleanEmail,
-              communication_type: r.type,
-              career_moment: r.career_moment,
-              urgency: r.urgency,
-              recommended_pathway: r.pathwayKey,
-              recommended_pathway_name: r.pathwayName,
-              recommended_price: r.price,
-            }),
-          });
-        } catch (zapErr) {
-          console.warn("Zapier webhook failed", zapErr);
-        }
-      }
-
+      if (!res.ok) throw new Error(`Server returned ${res.status}`);
       setStage("result");
     } catch (err: unknown) {
       console.error(err);
