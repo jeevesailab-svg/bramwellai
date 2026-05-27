@@ -1,27 +1,27 @@
 const PAINS = [
   {
     q: "I ramble and lose the point I was trying to make",
-    a: "Bramwell rehearses you into tight, structured answers — so every sentence lands the point before you lose the thread.",
+    a: "Bramwell gives you PREP — a framework that structures any answer in under 60 seconds. You'll land the point before you lose the thread.",
   },
   {
     q: "I freeze when the pressure is on",
-    a: "Live voice reps under realistic pressure rewire the freeze response. By session three, the hard questions feel familiar.",
+    a: "Bramwell drills you under pressure until freezing stops being your response. Live voice reps on the questions you dread most, until they feel familiar.",
   },
   {
     q: "I walk out replaying what I should have said",
-    a: "You'll have already said it — out loud, with Bramwell, the night before. The room hears your best take, not your second draft.",
+    a: "Bramwell rehearses you the night before, out loud, on the exact moments you'll face. The room hears your best take — not your second draft on the drive home.",
   },
   {
     q: "I know I am capable but I cannot sell myself",
-    a: "Bramwell mines your CV for the moments that prove your level, then drills you on telling them in the language of the next role.",
+    a: "Bramwell mines your CV for the moments that prove your level, then drills you on telling them in the language of the role you actually want.",
   },
   {
     q: "I sound less senior than I am",
-    a: "We calibrate cadence, vocabulary, and conviction until the way you sound matches the work you've actually done.",
+    a: "Bramwell calibrates your cadence, vocabulary, and conviction in real time — until the way you sound matches the work you've actually done.",
   },
   {
     q: "I have watched less qualified people get roles I deserved",
-    a: "They weren't better. They were better rehearsed. Bramwell closes that gap before the next interview, not after.",
+    a: "They weren't better. They were better rehearsed. Bramwell closes that gap before the next interview — not after you've lost it.",
   },
 ];
 

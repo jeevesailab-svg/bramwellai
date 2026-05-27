@@ -173,18 +173,18 @@ function HowItWorks() {
   const steps = [
     {
       n: "01",
-      title: "Upload the moment",
-      body: "Drop in your CV and the job description, promotion brief, or pitch. Bramwell reads between the lines.",
+      title: "Take the free Bramwell Benchmark",
+      body: "Discover your communication type and your three biggest gaps. No credit card.",
     },
     {
       n: "02",
-      title: "Rehearse out loud",
-      body: "Live voice sessions with an AI coach trained on executive communication. No typing. Just talking.",
+      title: "Choose your pathway",
+      body: "Graduate Sprint, Career Comeback, Interview Confidence Sprint, or Executive Communication Sprint. Built for your specific situation and level.",
     },
     {
       n: "03",
-      title: "Walk in ready",
-      body: "Get a readiness score, your strongest moment, and the one thing to sharpen before the real conversation.",
+      title: "Practice with Bramwell",
+      body: "Live two-way voice coaching. You speak. Bramwell listens. Coaches the single most important fix. You retry. Bramwell does not move on until the answer is genuinely ready.",
     },
   ];
   return (
