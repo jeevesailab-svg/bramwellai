@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
+import { extractKeyPhrases } from "@/lib/extract-key-phrases";
 
 export const Route = createFileRoute("/portal/setup")({
   component: PortalSetupPage,
@@ -85,9 +86,14 @@ function PortalSetupPage() {
     if (jd.length < 50) return setError("The job description looks too short. Paste the full posting.");
 
     setSaving(true);
+    const keyPhrases = extractKeyPhrases(jd, 7);
     const { error: updErr } = await supabase
       .from("users")
-      .update({ cv_text: cv, jd_text: jd })
+      .update({
+        cv_text: cv,
+        jd_text: jd,
+        jd_key_phrases: keyPhrases.join(", "),
+      })
       .eq("id", userId);
     setSaving(false);
     if (updErr) {
@@ -96,6 +102,7 @@ function PortalSetupPage() {
       return;
     }
     setSavedAt(new Date());
+    navigate({ to: "/portal/coach" });
   }
 
   const cvReady = cvText.trim().length >= 50;
