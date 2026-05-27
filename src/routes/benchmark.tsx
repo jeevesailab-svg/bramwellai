@@ -538,18 +538,18 @@ function Intro({ onStart }: { onStart: () => void }) {
         The Bramwell Benchmark · 4 minutes
       </div>
       <h1 className="mx-auto max-w-3xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-        Find your{" "}
+        The{" "}
         <span
           className="bg-clip-text text-transparent"
           style={{ backgroundImage: "var(--gradient-gold)" }}
         >
-          communication type
-        </span>{" "}
-        — and the three gaps holding you back.
+          Bramwell Benchmark
+        </span>
       </h1>
       <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-        Twelve honest questions. One private result. The pathway that meets you
-        exactly where you are.
+        Discover your communication type, the three patterns holding you back
+        under pressure, and the exact pathway to fix them. Three minutes. No
+        credit card.
       </p>
       <button
         onClick={onStart}
@@ -560,7 +560,7 @@ function Intro({ onStart }: { onStart: () => void }) {
           boxShadow: "var(--shadow-elegant)",
         }}
       >
-        Start the benchmark
+        Discover how you actually come across
         <span className="transition-transform group-hover:translate-x-0.5">→</span>
       </button>
       <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground/80">
