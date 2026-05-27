@@ -753,60 +753,74 @@ function Result({
   result: ReturnType<typeof computeResult>;
   onContinue: () => void;
 }) {
-  const meta = RESULTS[result.type];
+  const meta = RESULTS[result.letter];
+  const isUrgent =
+    result.urgency === "this_week" || result.urgency === "two_weeks";
   return (
     <div>
       <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
         Your result, {firstName}
       </p>
       <h2 className="mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-        You're{" "}
         <span
           className="bg-clip-text text-transparent"
           style={{ backgroundImage: "var(--gradient-gold)" }}
         >
-          {meta.title}.
+          {meta.title}
         </span>
       </h2>
-      <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-        {meta.blurb}
+      <p className="mt-5 max-w-2xl text-lg leading-snug text-foreground/90 md:text-xl">
+        {meta.subline}
+      </p>
+      <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+        {meta.body}
       </p>
 
-      <div className="mt-12">
-        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          Your three biggest gaps
-        </p>
-        <ul className="mt-6 grid gap-3">
-          {meta.gaps.map((g, i) => (
-            <li
-              key={g}
-              className="flex items-start gap-4 rounded-2xl border border-border bg-foreground/[0.02] p-5"
-            >
-              <span
-                aria-hidden
-                className="inline-flex h-7 w-7 flex-none items-center justify-center rounded-full text-xs font-semibold"
-                style={{
-                  background: "var(--gradient-gold)",
-                  color: "var(--primary-foreground)",
-                }}
-              >
-                {i + 1}
-              </span>
-              <span className="text-base leading-snug">{g}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {isUrgent && (
+        <div
+          className="mt-10 rounded-2xl border p-6 md:p-7"
+          style={{
+            borderColor: "color-mix(in oklab, var(--primary) 40%, transparent)",
+            background:
+              "color-mix(in oklab, var(--primary) 12%, transparent)",
+          }}
+        >
+          <p
+            className="text-[11px] font-semibold uppercase tracking-[0.22em]"
+            style={{ color: "var(--primary)" }}
+          >
+            Urgent · {result.urgency === "this_week" ? "This week" : "Next two weeks"}
+          </p>
+          <p className="mt-3 text-base leading-snug text-foreground/95 md:text-lg">
+            Your conversation is coming up fast. Bramwell has a{" "}
+            <strong>Crammer Mode</strong> built for exactly this — one session,
+            full pressure, all questions. Start today.
+          </p>
+        </div>
+      )}
 
       <div
         className="mt-12 rounded-2xl border border-border p-7 md:p-10"
         style={{ background: "oklch(0.12 0.02 255)" }}
       >
-        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          Recommended pathway
-        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+            Recommended pathway
+          </p>
+          {isUrgent && (
+            <span
+              className="inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]"
+              style={{
+                background: "var(--gradient-gold)",
+                color: "var(--primary-foreground)",
+              }}
+            >
+              Urgent
+            </span>
+          )}
+        </div>
         <h3 className="mt-3 text-balance text-2xl font-semibold tracking-tight md:text-3xl">
-          The {result.pathwayName}
+          {result.pathwayName}
         </h3>
         <div className="mt-3 flex items-baseline gap-2">
           <span
@@ -815,7 +829,9 @@ function Result({
           >
             {result.price}
           </span>
-          <span className="text-sm text-muted-foreground">one-time</span>
+          <span className="text-sm text-muted-foreground">
+            {result.pathwayKey === "club" ? "cancel anytime" : "one-time"}
+          </span>
         </div>
         <button
           onClick={onContinue}
@@ -826,10 +842,12 @@ function Result({
             boxShadow: "var(--shadow-elegant)",
           }}
         >
-          See your pathway →
+          {result.pathwayKey === "club"
+            ? `Join the ${result.pathwayName} →`
+            : `Start my ${result.pathwayName} →`}
         </button>
         <p className="mt-4 text-xs text-muted-foreground">
-          You can also compare all five pathways before you decide.
+          Or compare all five Bramwell pathways before you decide.
         </p>
       </div>
     </div>
