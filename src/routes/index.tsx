@@ -65,7 +65,7 @@ function Hero() {
           href="/benchmark"
           className="inline-flex h-10 items-center justify-center rounded-full border border-border bg-foreground/5 px-5 text-sm font-medium backdrop-blur transition hover:bg-foreground/10"
         >
-          Free benchmark
+          Benchmark
         </a>
       </header>
 
@@ -121,7 +121,7 @@ function Hero() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Take the free benchmark
+            Discover how you actually come across
             <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
           <a
@@ -133,7 +133,7 @@ function Hero() {
         </div>
 
         <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground/80">
-          No card required · 4-minute benchmark · Private by design
+          3 minutes · No credit card · Find out what is holding your voice back
         </p>
       </div>
     </section>
@@ -173,7 +173,7 @@ function HowItWorks() {
   const steps = [
     {
       n: "01",
-      title: "Take the free Bramwell Benchmark",
+      title: "Take the free Benchmark",
       body: "Discover your communication type and your three biggest gaps. No credit card.",
     },
     {
@@ -454,7 +454,7 @@ function FinalCTA() {
             boxShadow: "var(--shadow-elegant)",
           }}
         >
-          Start the benchmark
+          Discover how you actually come across
           <span>→</span>
         </a>
       </div>
