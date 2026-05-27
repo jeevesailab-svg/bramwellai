@@ -387,6 +387,13 @@ function BenchmarkPage() {
     const r = computeResult({ ...answers });
 
     try {
+      console.log("[benchmark] VITE_ZAPIER_QUIZ =", import.meta.env.VITE_ZAPIER_QUIZ);
+      console.log("[benchmark] POST /api/public/quiz-lead → firing", {
+        first_name: cleanName,
+        email: cleanEmail,
+        communication_type: r.name,
+        recommended_pathway: r.pathwayKey,
+      });
       // Server route handles insert + Zapier webhook (URL stays server-side)
       const res = await fetch("/api/public/quiz-lead", {
         method: "POST",
@@ -401,6 +408,12 @@ function BenchmarkPage() {
           recommended_pathway_name: r.pathwayName,
           recommended_price: r.price,
         }),
+      });
+      const responseText = await res.clone().text().catch(() => "");
+      console.log("[benchmark] POST /api/public/quiz-lead ← response", {
+        status: res.status,
+        ok: res.ok,
+        body: responseText,
       });
       if (!res.ok) throw new Error(`Server returned ${res.status}`);
       setStage("result");
