@@ -2,6 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
+  validateSearch: (search: Record<string, unknown>) => ({
+    recommended:
+      typeof search.recommended === "string" ? search.recommended : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Pricing — Bramwell AI" },
@@ -120,6 +124,15 @@ const PATHWAYS: Pathway[] = [
 ];
 
 function PricingPage() {
+  const { recommended } = Route.useSearch();
+  const recommendedKey = (
+    ["graduate", "comeback", "confidence", "executive", "club"] as const
+  ).find((k) => k === recommended);
+
+  const pathways = recommendedKey
+    ? PATHWAYS.map((p) => ({ ...p, highlight: p.key === recommendedKey }))
+    : PATHWAYS;
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
@@ -160,8 +173,25 @@ function PricingPage() {
       </section>
 
       <section className="bg-background py-20 md:py-28">
+        {recommendedKey && (
+          <div className="mx-auto mb-10 max-w-3xl px-6 text-center md:px-10">
+            <span
+              className="inline-flex items-center rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em]"
+              style={{
+                background: "var(--gradient-gold)",
+                color: "var(--primary-foreground)",
+              }}
+            >
+              Your Bramwell Benchmark match
+            </span>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Based on your benchmark, we've highlighted your recommended
+              pathway. You can still pick a different one if it feels closer.
+            </p>
+          </div>
+        )}
         <div className="mx-auto grid max-w-6xl gap-5 px-6 md:grid-cols-2 md:px-10 lg:grid-cols-3">
-          {PATHWAYS.map((p) => (
+          {pathways.map((p) => (
             <PathwayCard key={p.key} p={p} href={STRIPE[p.key]} />
           ))}
         </div>
