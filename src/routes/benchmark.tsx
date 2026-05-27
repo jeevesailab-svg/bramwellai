@@ -394,7 +394,7 @@ function BenchmarkPage() {
         body: JSON.stringify({
           first_name: cleanName,
           email: cleanEmail,
-          communication_type: r.type,
+          communication_type: r.name,
           career_moment: r.career_moment,
           urgency: r.urgency,
           recommended_pathway: r.pathwayKey,
