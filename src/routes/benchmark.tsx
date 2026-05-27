@@ -22,9 +22,10 @@ export const Route = createFileRoute("/benchmark")({
 });
 
 /* ─────────────────────────────────────────────
-   Result types
+   Result types — R/U/O/A/I/N letter system per spec
    ───────────────────────────────────────────── */
-type ResultType =
+type Letter = "R" | "U" | "O" | "A" | "I" | "N";
+type ResultName =
   | "Rambler"
   | "Under-Seller"
   | "Over-Explainer"
@@ -32,286 +33,300 @@ type ResultType =
   | "Invisible Achiever"
   | "Next-Level Leader";
 
+type PathwayKey = "graduate" | "comeback" | "confidence" | "executive" | "club";
+
+const LETTER_TO_NAME: Record<Letter, ResultName> = {
+  R: "Rambler",
+  U: "Under-Seller",
+  O: "Over-Explainer",
+  A: "Apologiser",
+  I: "Invisible Achiever",
+  N: "Next-Level Leader",
+};
+
 const RESULTS: Record<
-  ResultType,
-  {
-    title: string;
-    blurb: string;
-    gaps: [string, string, string];
-    pathwayKey: "graduate" | "comeback" | "confidence" | "executive" | "club";
-    pathwayName: string;
-    price: string;
-  }
+  Letter,
+  { title: string; subline: string; body: string }
 > = {
-  Rambler: {
-    title: "The Rambler",
-    blurb:
-      "You know the answer — but it arrives wrapped in three other answers. The room loses the point before you do.",
-    gaps: [
-      "Answers run 90+ seconds before landing the point",
-      "You restart sentences mid-thought",
-      "You finish unsure if the interviewer got the takeaway",
-    ],
-    pathwayKey: "confidence",
-    pathwayName: "Interview Confidence Sprint",
-    price: "$249 AUD",
+  R: {
+    title: "You are a Rambler.",
+    subline:
+      "You have more to say than you have structure to say it in.",
+    body: "Your ideas are strong. The problem is they come out in the wrong order under pressure. You start strong, then go in three directions at once, then trail off before your best point lands. The room hears potential — but misses the proof. Bramwell fixes this with one framework that organises any answer in under 60 seconds.",
   },
-  "Under-Seller": {
-    title: "The Under-Seller",
-    blurb:
-      "You've done the work. You just refuse to take the credit out loud. The interviewer hears 'we' when they need to hear 'I'.",
-    gaps: [
-      "You default to 'we' instead of 'I'",
-      "You skip the result and stay in the process",
-      "Your CV is stronger than your interview",
-    ],
-    pathwayKey: "comeback",
-    pathwayName: "Career Comeback Sprint",
-    price: "$199 AUD",
+  U: {
+    title: "You are an Under-Seller.",
+    subline: "You have done impressive things. You just do not say so.",
+    body: "You minimise. You qualify. You say just and only and a little bit. You describe what you did without naming what changed because of you. The room sees someone capable — but undersells themselves out of roles and promotions they deserved. Bramwell excavates what is actually there and coaches you to own it.",
   },
-  "Over-Explainer": {
-    title: "The Over-Explainer",
-    blurb:
-      "You answer the question — then justify the answer, then justify the justification. The room mistakes detail for doubt.",
-    gaps: [
-      "You add caveats nobody asked for",
-      "Your answers shrink in authority as they grow in length",
-      "You explain instead of decide",
-    ],
-    pathwayKey: "confidence",
-    pathwayName: "Interview Confidence Sprint",
-    price: "$249 AUD",
+  O: {
+    title: "You are an Over-Explainer.",
+    subline: "You give the room everything — when it only needed one thing.",
+    body: "You are thorough. You are detailed. You cover every angle because you want to be accurate. But the room loses the thread before you get to the point. Bramwell coaches you to lead with the conclusion and let the evidence follow — not the other way around.",
   },
-  Apologiser: {
-    title: "The Apologiser",
-    blurb:
-      "Your sentences open with 'sorry', 'just', and 'I might be wrong but'. You're discounting yourself before the room can.",
-    gaps: [
-      "You hedge before you've even answered",
-      "You apologise for taking up space",
-      "You sound less senior than your CV reads",
-    ],
-    pathwayKey: "comeback",
-    pathwayName: "Career Comeback Sprint",
-    price: "$199 AUD",
+  A: {
+    title: "You are an Apologiser.",
+    subline: "You shrink when you should stand.",
+    body: "You hedge. You qualify. You apologise for taking up space. Under pressure your voice rises at the end of statements, turning conviction into questions. The room hears uncertainty instead of capability. Bramwell coaches the delivery of belief — until what comes out of your mouth matches what you know about yourself.",
   },
-  "Invisible Achiever": {
-    title: "The Invisible Achiever",
-    blurb:
-      "Your work is exceptional. Nobody knows because you've never been taught to name it. Promotions go to louder rooms.",
-    gaps: [
-      "You don't have a 60-second version of your impact",
-      "You wait to be asked rather than offer",
-      "Stakeholders underestimate your scope",
-    ],
-    pathwayKey: "executive",
-    pathwayName: "Executive Communication Sprint",
-    price: "$499 AUD",
+  I: {
+    title: "You are an Invisible Achiever.",
+    subline:
+      "You deliver at the highest level. Nobody outside your immediate team knows it.",
+    body: "You do the work. You hit the outcomes. You just do not talk about it in a way that makes the right people notice. You describe tasks not transformations. You sound like someone doing the job — not someone ready for the next one. Bramwell helps you build the language of the level above.",
   },
-  "Next-Level Leader": {
-    title: "The Next-Level Leader",
-    blurb:
-      "You're already capable. The next role asks for a different register — calmer, sharper, scarcer with words. That's the work.",
-    gaps: [
-      "Your authority needs calibration for the next room",
-      "You're translating from doer-language to leader-language",
-      "Stakes are now measured in millions, not minutes",
-    ],
-    pathwayKey: "executive",
-    pathwayName: "Executive Communication Sprint",
-    price: "$499 AUD",
+  N: {
+    title: "You are a Next-Level Leader.",
+    subline: "You are closer than you think. You just need sharper edges.",
+    body: "You communicate well. You know your value. What you need is precision — the specific language, the exact framework, the pressure practice that turns good into exceptional. Bramwell sharpens what is already there.",
   },
 };
 
 /* ─────────────────────────────────────────────
    Questions
    ───────────────────────────────────────────── */
-type Option = { label: string; type?: ResultType; meta?: Record<string, string> };
+type Scores = Partial<Record<Letter, number>>;
+type Option = {
+  label: string;
+  scores?: Scores;
+  meta?: Record<string, string>;
+};
 type Question = { id: string; q: string; sub?: string; options: Option[] };
 
 const QUESTIONS: Question[] = [
   {
-    id: "moment",
-    q: "Which moment are you preparing for?",
+    id: "q1",
+    q: "What career moment are you preparing for?",
     sub: "We'll tune the recommendation to your situation.",
     options: [
-      { label: "My first serious interview after study", meta: { career_moment: "graduate" } },
-      { label: "Returning to work after a break", meta: { career_moment: "comeback" } },
-      { label: "A mid-career interview or pivot", meta: { career_moment: "confidence" } },
-      { label: "A board, exec or C-suite conversation", meta: { career_moment: "executive" } },
-    ],
-  },
-  {
-    id: "q1",
-    q: "When the interviewer asks 'tell me about yourself' — what actually happens?",
-    options: [
-      { label: "I start strong then trail into three other stories", type: "Rambler" },
-      { label: "I undersell. I leave the best parts out", type: "Under-Seller" },
-      { label: "I justify every step instead of summarising it", type: "Over-Explainer" },
-      { label: "I open with 'sorry, where do I start' or similar", type: "Apologiser" },
+      { label: "Job interview", meta: { career_moment: "interview" } },
+      { label: "Promotion conversation", meta: { career_moment: "promotion" } },
+      { label: "Pay rise or salary negotiation", meta: { career_moment: "pay_rise" } },
+      { label: "Performance review", meta: { career_moment: "review" } },
+      { label: "Media interview or podcast", meta: { career_moment: "media" } },
+      { label: "Board or senior stakeholder presentation", meta: { career_moment: "board" } },
+      { label: "I want to sound more confident generally", meta: { career_moment: "general_confidence" } },
     ],
   },
   {
     id: "q2",
-    q: "Read your last big achievement out loud, right now. How does it come out?",
+    q: "Which best describes you right now?",
     options: [
-      { label: "Long. With three caveats and a tangent", type: "Rambler" },
-      { label: "I say 'we' more than 'I'", type: "Under-Seller" },
-      { label: "I describe HOW more than WHAT it delivered", type: "Over-Explainer" },
-      { label: "I literally have not said it out loud before", type: "Invisible Achiever" },
+      { label: "Student or graduate", meta: { life_stage: "student" } },
+      { label: "Job seeker", meta: { life_stage: "job_seeker" } },
+      { label: "Recently made redundant", meta: { life_stage: "redundant" } },
+      { label: "Mid-career professional", meta: { life_stage: "mid_career" } },
+      { label: "Manager or senior leader", meta: { life_stage: "manager" } },
+      { label: "Executive or C-suite", meta: { life_stage: "executive" } },
+      { label: "Founder or business owner", meta: { life_stage: "founder" } },
+      { label: "Returning to work after a break", meta: { life_stage: "returning" } },
     ],
   },
   {
     id: "q3",
-    q: "Walk into the room. What's the first word out of your mouth?",
+    q: "What do you struggle with most when speaking under pressure?",
     options: [
-      { label: "'Sorry I'm—' something", type: "Apologiser" },
-      { label: "A small joke to break the tension", type: "Rambler" },
-      { label: "'Thanks for having me' — polite, neutral", type: "Under-Seller" },
-      { label: "A clean, direct hello. I own the room", type: "Next-Level Leader" },
+      { label: "I ramble and lose the point", scores: { R: 2 } },
+      { label: "I freeze and go blank", scores: { A: 2 } },
+      { label: "I over-explain and give too much detail", scores: { O: 2 } },
+      { label: "I under-sell myself and minimise my achievements", scores: { U: 2 } },
+      { label: "I sound nervous or less confident than I feel", scores: { A: 2 } },
+      { label: "I sound too junior for the level I am going for", scores: { I: 2 } },
+      { label: "I struggle to organise my thoughts quickly", scores: { R: 2 } },
     ],
   },
   {
     id: "q4",
-    q: "When asked a question you don't immediately know the answer to:",
+    q: "When someone says 'tell me about yourself' — what happens?",
     options: [
-      { label: "I fill the silence. I keep talking until I find one", type: "Rambler" },
-      { label: "I panic and minimise — 'I'm probably not the best person to answer'", type: "Apologiser" },
-      { label: "I over-explain the adjacent thing I do know", type: "Over-Explainer" },
-      { label: "I pause, think, give a clean honest answer", type: "Next-Level Leader" },
+      { label: "I give a long career history that goes everywhere", scores: { R: 2 } },
+      { label: "I freeze and sound awkward", scores: { A: 2 } },
+      { label: "I speak too generally and nothing lands", scores: { I: 2 } },
+      { label: "I under-sell my achievements", scores: { U: 2 } },
+      { label: "I sound rehearsed and robotic", scores: { O: 2 } },
+      { label: "I do not know where to start", scores: { R: 2 } },
     ],
   },
   {
     id: "q5",
-    q: "How often do you use the word 'just' in interviews? ('I just helped with…')",
+    q: "What feedback have you received before?",
     options: [
-      { label: "Constantly. It's a verbal tic", type: "Apologiser" },
-      { label: "A lot — I'm trying to be humble", type: "Under-Seller" },
-      { label: "Sometimes, when I'm explaining detail", type: "Over-Explainer" },
-      { label: "Almost never", type: "Next-Level Leader" },
+      { label: "Be more concise", scores: { R: 2 } },
+      { label: "Speak with more confidence", scores: { A: 2 } },
+      { label: "Get to the point", scores: { R: 2 } },
+      { label: "Show more leadership presence", scores: { I: 2 } },
+      { label: "Use more specific examples", scores: { U: 2 } },
+      { label: "Be more strategic in how you talk about your work", scores: { I: 2 } },
+      { label: "I have not had clear feedback", scores: { O: 1 } },
     ],
   },
   {
     id: "q6",
-    q: "Have you ever watched a less qualified person get a role you wanted?",
+    q: "What do you want people to think after hearing you speak?",
     options: [
-      { label: "Yes. More than once. It still stings", type: "Invisible Achiever" },
-      { label: "Yes — and I know it's because they spoke better, not did better", type: "Invisible Achiever" },
-      { label: "Once or twice", type: "Under-Seller" },
-      { label: "Not really — but I'm worried it's coming", type: "Next-Level Leader" },
+      { label: "They are the obvious hire", meta: { outcome_want: "obvious_hire" } },
+      { label: "They are ready for the next level", meta: { outcome_want: "next_level" } },
+      { label: "They are calm and completely credible", meta: { outcome_want: "credible" } },
+      { label: "They are a strong leader", meta: { outcome_want: "leader" } },
+      { label: "They know exactly what they are worth", meta: { outcome_want: "worth" } },
+      { label: "They are memorable — I want to hear more", meta: { outcome_want: "memorable" } },
     ],
   },
   {
     id: "q7",
-    q: "When you describe what you actually do at work to a stranger:",
+    q: "Which statement feels most true?",
     options: [
-      { label: "I take five sentences when one would do", type: "Rambler" },
-      { label: "I downplay it. 'It's not that interesting'", type: "Under-Seller" },
-      { label: "I go deep on jargon and process", type: "Over-Explainer" },
-      { label: "I realise mid-sentence I've never had a clean version", type: "Invisible Achiever" },
+      { label: "I have the experience but I do not communicate it well", scores: { U: 2 } },
+      { label: "I know I am capable but I struggle to sell myself", scores: { U: 2 } },
+      { label: "I feel confident in my head but not when I speak", scores: { A: 2 } },
+      { label: "I sound better in writing than out loud", scores: { O: 2 } },
+      { label: "I am ready for the next level but need to sound like it", scores: { I: 2 } },
+      { label: "I need to rebuild my confidence after a setback", scores: { A: 2 } },
     ],
   },
   {
     id: "q8",
-    q: "In meetings with senior people, you mostly:",
+    q: "How often do you practise important conversations before they happen?",
     options: [
-      { label: "Talk to fill space, then regret what I said", type: "Rambler" },
-      { label: "Stay quiet unless directly asked", type: "Invisible Achiever" },
-      { label: "Apologise before disagreeing", type: "Apologiser" },
-      { label: "Pick my moment and land one clean point", type: "Next-Level Leader" },
+      { label: "Never", scores: { R: 1 } },
+      { label: "Only in my head", scores: { A: 1 } },
+      { label: "Sometimes with notes", scores: { O: 1 } },
+      { label: "With a friend or partner", scores: { N: 1 } },
+      { label: "I practise properly and want sharper feedback", scores: { N: 2 } },
     ],
   },
   {
     id: "q9",
-    q: "The night before a big interview you usually:",
+    q: "What would be most valuable to you right now?",
     options: [
-      { label: "Lie awake replaying scenarios", type: "Apologiser" },
-      { label: "Read the JD for the eighth time", type: "Over-Explainer" },
-      { label: "Rehearse out loud — but it's never quite right", type: "Rambler" },
-      { label: "I'd love to rehearse out loud but I have no one to rehearse with", type: "Invisible Achiever" },
+      { label: "A better 'tell me about yourself' answer", scores: { R: 1 } },
+      { label: "Stronger interview answers with real examples", scores: { U: 1 } },
+      { label: "More executive presence and authority", scores: { I: 1 } },
+      { label: "A clearer promotion or career story", scores: { I: 1 } },
+      { label: "Help with salary or pay rise conversations", scores: { U: 1 } },
+      { label: "Rebuilding confidence after redundancy or a gap", scores: { A: 1 } },
+      { label: "Better stakeholder communication", scores: { I: 1 } },
+      { label: "A personalised career story bank", scores: { N: 1 } },
     ],
   },
   {
     id: "q10",
-    q: "After an interview, the dominant feeling is:",
+    q: "How soon is your next career-defining conversation?",
+    sub: "Honest answer. We'll calibrate the urgency of your pathway.",
     options: [
-      { label: "'I should have said X.' Always", type: "Rambler" },
-      { label: "'I sounded smaller than I am'", type: "Under-Seller" },
-      { label: "'I over-explained the third question'", type: "Over-Explainer" },
-      { label: "'I apologised when I should have stood firm'", type: "Apologiser" },
+      { label: "This week", meta: { urgency: "this_week" } },
+      { label: "Next two weeks", meta: { urgency: "two_weeks" } },
+      { label: "Next month", meta: { urgency: "this_month" } },
+      { label: "Next three months", meta: { urgency: "this_quarter" } },
+      { label: "No date yet but I want to be ready", meta: { urgency: "no_date" } },
     ],
   },
   {
     id: "q11",
-    q: "If a senior leader said 'you'd be ready for the next level if…' — what's the most likely ending?",
+    q: "What is your biggest fear going into that conversation?",
     options: [
-      { label: "…you were more concise", type: "Rambler" },
-      { label: "…you took more credit", type: "Under-Seller" },
-      { label: "…you spoke with more authority", type: "Apologiser" },
-      { label: "…the right people knew what you'd done", type: "Invisible Achiever" },
+      { label: "Sounding stupid or unprepared", scores: { A: 1 } },
+      { label: "Being too nervous to think clearly", scores: { A: 2 } },
+      { label: "Forgetting what I wanted to say", scores: { R: 1 } },
+      { label: "Not sounding senior enough", scores: { I: 2 } },
+      { label: "Freezing under pressure", scores: { A: 2 } },
+      { label: "Missing the opportunity", scores: { U: 1 } },
     ],
   },
   {
-    id: "urgency",
-    q: "How soon is the moment that matters?",
-    sub: "Honest answer. We won't push you faster than you need.",
+    id: "q12",
+    q: "What outcome do you want most?",
     options: [
-      { label: "This week", meta: { urgency: "this_week" } },
-      { label: "Within the next month", meta: { urgency: "this_month" } },
-      { label: "Next 1–3 months", meta: { urgency: "this_quarter" } },
-      { label: "I'm getting ahead of it", meta: { urgency: "exploring" } },
+      { label: "Get hired", meta: { outcome: "hired" } },
+      { label: "Get promoted", meta: { outcome: "promoted" } },
+      { label: "Get paid more", meta: { outcome: "paid" } },
+      { label: "Speak with more authority", meta: { outcome: "authority" } },
+      { label: "Build lasting confidence", meta: { outcome: "confidence" } },
+      { label: "Command the room", meta: { outcome: "command" } },
+      { label: "Sound as strong as my experience", meta: { outcome: "match_experience" } },
     ],
   },
 ];
 
 /* ─────────────────────────────────────────────
-   Pathway recommendation
+   Scoring + pathway recommendation
    ───────────────────────────────────────────── */
+
+// Tie-break by Q1 career moment (priority list of letters when scores tie)
+const TIEBREAK_BY_MOMENT: Record<string, Letter> = {
+  interview: "R",
+  promotion: "I",
+  pay_rise: "U",
+  review: "A",
+  media: "I",
+  board: "I",
+  general_confidence: "A",
+};
+
+function pickPathway(
+  letter: Letter,
+  life_stage: string,
+): { key: PathwayKey; name: string; price: string } {
+  // Apologiser routes via life stage
+  if (letter === "A") {
+    if (life_stage === "redundant" || life_stage === "returning") {
+      return { key: "comeback", name: "Career Comeback Sprint", price: "$199 AUD" };
+    }
+    return { key: "confidence", name: "Interview Confidence Sprint", price: "$249 AUD" };
+  }
+  if (letter === "I")
+    return { key: "executive", name: "Executive Communication Sprint", price: "$499 AUD" };
+  if (letter === "N")
+    return { key: "club", name: "Career Confidence Club", price: "$79 AUD / month" };
+  // R, U, O default to the Confidence Sprint
+  return { key: "confidence", name: "Interview Confidence Sprint", price: "$249 AUD" };
+}
+
 function computeResult(answers: Record<string, Option>): {
-  type: ResultType;
-  pathwayKey: string;
+  letter: Letter;
+  name: ResultName;
+  pathwayKey: PathwayKey;
   pathwayName: string;
   price: string;
   career_moment: string;
+  life_stage: string;
   urgency: string;
 } {
-  const tally: Record<ResultType, number> = {
-    Rambler: 0,
-    "Under-Seller": 0,
-    "Over-Explainer": 0,
-    Apologiser: 0,
-    "Invisible Achiever": 0,
-    "Next-Level Leader": 0,
-  };
+  const tally: Record<Letter, number> = { R: 0, U: 0, O: 0, A: 0, I: 0, N: 0 };
   for (const opt of Object.values(answers)) {
-    if (opt?.type) tally[opt.type] += 1;
-  }
-  const top = (Object.entries(tally) as [ResultType, number][])
-    .sort((a, b) => b[1] - a[1])[0][0];
-
-  const meta = RESULTS[top];
-  const career_moment = answers["moment"]?.meta?.career_moment ?? "";
-  const urgency = answers["urgency"]?.meta?.urgency ?? "";
-
-  // Career-moment overrides — moment trumps type for pathway selection
-  let pathwayKey = meta.pathwayKey;
-  let pathwayName = meta.pathwayName;
-  let price = meta.price;
-  if (career_moment === "graduate") {
-    pathwayKey = "graduate";
-    pathwayName = "Graduate Interview Sprint";
-    price = "$99 AUD";
-  } else if (career_moment === "executive" && pathwayKey !== "executive") {
-    pathwayKey = "executive";
-    pathwayName = "Executive Communication Sprint";
-    price = "$499 AUD";
-  } else if (career_moment === "comeback" && pathwayKey === "confidence") {
-    pathwayKey = "comeback";
-    pathwayName = "Career Comeback Sprint";
-    price = "$199 AUD";
+    if (!opt?.scores) continue;
+    for (const [k, v] of Object.entries(opt.scores) as [Letter, number][]) {
+      tally[k] += v;
+    }
   }
 
-  return { type: top, pathwayKey, pathwayName, price, career_moment, urgency };
+  const career_moment = answers["q1"]?.meta?.career_moment ?? "";
+  const life_stage = answers["q2"]?.meta?.life_stage ?? "";
+  const urgency = answers["q10"]?.meta?.urgency ?? "";
+
+  // Highest score wins; ties broken by Q1 career moment
+  const max = Math.max(...Object.values(tally));
+  const topLetters = (Object.entries(tally) as [Letter, number][])
+    .filter(([, n]) => n === max)
+    .map(([l]) => l);
+
+  let letter: Letter = topLetters[0];
+  if (topLetters.length > 1) {
+    const preferred = TIEBREAK_BY_MOMENT[career_moment];
+    if (preferred && topLetters.includes(preferred)) letter = preferred;
+  }
+
+  const pathway = pickPathway(letter, life_stage);
+  return {
+    letter,
+    name: LETTER_TO_NAME[letter],
+    pathwayKey: pathway.key,
+    pathwayName: pathway.name,
+    price: pathway.price,
+    career_moment,
+    life_stage,
+    urgency,
+  };
 }
 
 /* ─────────────────────────────────────────────
@@ -379,7 +394,7 @@ function BenchmarkPage() {
         body: JSON.stringify({
           first_name: cleanName,
           email: cleanEmail,
-          communication_type: r.type,
+          communication_type: r.name,
           career_moment: r.career_moment,
           urgency: r.urgency,
           recommended_pathway: r.pathwayKey,
@@ -738,60 +753,74 @@ function Result({
   result: ReturnType<typeof computeResult>;
   onContinue: () => void;
 }) {
-  const meta = RESULTS[result.type];
+  const meta = RESULTS[result.letter];
+  const isUrgent =
+    result.urgency === "this_week" || result.urgency === "two_weeks";
   return (
     <div>
       <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
         Your result, {firstName}
       </p>
       <h2 className="mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-        You're{" "}
         <span
           className="bg-clip-text text-transparent"
           style={{ backgroundImage: "var(--gradient-gold)" }}
         >
-          {meta.title}.
+          {meta.title}
         </span>
       </h2>
-      <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-        {meta.blurb}
+      <p className="mt-5 max-w-2xl text-lg leading-snug text-foreground/90 md:text-xl">
+        {meta.subline}
+      </p>
+      <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+        {meta.body}
       </p>
 
-      <div className="mt-12">
-        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          Your three biggest gaps
-        </p>
-        <ul className="mt-6 grid gap-3">
-          {meta.gaps.map((g, i) => (
-            <li
-              key={g}
-              className="flex items-start gap-4 rounded-2xl border border-border bg-foreground/[0.02] p-5"
-            >
-              <span
-                aria-hidden
-                className="inline-flex h-7 w-7 flex-none items-center justify-center rounded-full text-xs font-semibold"
-                style={{
-                  background: "var(--gradient-gold)",
-                  color: "var(--primary-foreground)",
-                }}
-              >
-                {i + 1}
-              </span>
-              <span className="text-base leading-snug">{g}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {isUrgent && (
+        <div
+          className="mt-10 rounded-2xl border p-6 md:p-7"
+          style={{
+            borderColor: "color-mix(in oklab, var(--primary) 40%, transparent)",
+            background:
+              "color-mix(in oklab, var(--primary) 12%, transparent)",
+          }}
+        >
+          <p
+            className="text-[11px] font-semibold uppercase tracking-[0.22em]"
+            style={{ color: "var(--primary)" }}
+          >
+            Urgent · {result.urgency === "this_week" ? "This week" : "Next two weeks"}
+          </p>
+          <p className="mt-3 text-base leading-snug text-foreground/95 md:text-lg">
+            Your conversation is coming up fast. Bramwell has a{" "}
+            <strong>Crammer Mode</strong> built for exactly this — one session,
+            full pressure, all questions. Start today.
+          </p>
+        </div>
+      )}
 
       <div
         className="mt-12 rounded-2xl border border-border p-7 md:p-10"
         style={{ background: "oklch(0.12 0.02 255)" }}
       >
-        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          Recommended pathway
-        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+            Recommended pathway
+          </p>
+          {isUrgent && (
+            <span
+              className="inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]"
+              style={{
+                background: "var(--gradient-gold)",
+                color: "var(--primary-foreground)",
+              }}
+            >
+              Urgent
+            </span>
+          )}
+        </div>
         <h3 className="mt-3 text-balance text-2xl font-semibold tracking-tight md:text-3xl">
-          The {result.pathwayName}
+          {result.pathwayName}
         </h3>
         <div className="mt-3 flex items-baseline gap-2">
           <span
@@ -800,7 +829,9 @@ function Result({
           >
             {result.price}
           </span>
-          <span className="text-sm text-muted-foreground">one-time</span>
+          <span className="text-sm text-muted-foreground">
+            {result.pathwayKey === "club" ? "cancel anytime" : "one-time"}
+          </span>
         </div>
         <button
           onClick={onContinue}
@@ -811,10 +842,12 @@ function Result({
             boxShadow: "var(--shadow-elegant)",
           }}
         >
-          See your pathway →
+          {result.pathwayKey === "club"
+            ? `Join the ${result.pathwayName} →`
+            : `Start my ${result.pathwayName} →`}
         </button>
         <p className="mt-4 text-xs text-muted-foreground">
-          You can also compare all five pathways before you decide.
+          Or compare all five Bramwell pathways before you decide.
         </p>
       </div>
     </div>
