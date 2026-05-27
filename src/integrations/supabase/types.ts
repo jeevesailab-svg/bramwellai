@@ -179,10 +179,12 @@ export type Database = {
           id: string
           jd_key_phrases: string | null
           jd_text: string | null
+          last_question_worked_on: string | null
           last_readiness_score: number | null
           minutes_per_session: number
           pathway: string | null
           payment_status: string
+          practice_focus: string | null
           quiz_urgency: string | null
           sessions_completed: number
           sessions_purchased: number
@@ -201,10 +203,12 @@ export type Database = {
           id: string
           jd_key_phrases?: string | null
           jd_text?: string | null
+          last_question_worked_on?: string | null
           last_readiness_score?: number | null
           minutes_per_session?: number
           pathway?: string | null
           payment_status?: string
+          practice_focus?: string | null
           quiz_urgency?: string | null
           sessions_completed?: number
           sessions_purchased?: number
@@ -223,10 +227,12 @@ export type Database = {
           id?: string
           jd_key_phrases?: string | null
           jd_text?: string | null
+          last_question_worked_on?: string | null
           last_readiness_score?: number | null
           minutes_per_session?: number
           pathway?: string | null
           payment_status?: string
+          practice_focus?: string | null
           quiz_urgency?: string | null
           sessions_completed?: number
           sessions_purchased?: number
