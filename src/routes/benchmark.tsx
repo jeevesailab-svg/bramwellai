@@ -816,6 +816,12 @@ function Result({
         className="mt-12 rounded-2xl border border-border p-7 md:p-10"
         style={{ background: "oklch(0.12 0.02 255)" }}
       >
+        <p className="mb-8 max-w-2xl text-base leading-relaxed text-foreground/90 md:text-lg">
+          Your Bramwell Readiness Score — out of 100 — is waiting. It is
+          generated after your first live coaching session and tracks your
+          improvement across every session. Start your {result.pathwayName} to
+          get your score.
+        </p>
         <div className="flex flex-wrap items-center gap-3">
           <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
             Recommended pathway
