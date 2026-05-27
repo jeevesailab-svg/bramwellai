@@ -15,6 +15,7 @@ import { Route as PortalRouteImport } from './routes/portal'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as BenchmarkRouteImport } from './routes/benchmark'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PortalIndexRouteImport } from './routes/portal.index'
 import { Route as PortalSetupRouteImport } from './routes/portal.setup'
 import { Route as ApiPublicQuizLeadRouteImport } from './routes/api/public/quiz-lead'
 
@@ -48,6 +49,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalIndexRoute = PortalIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PortalRoute,
+} as any)
 const PortalSetupRoute = PortalSetupRouteImport.update({
   id: '/setup',
   path: '/setup',
@@ -67,16 +73,17 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
   '/portal/setup': typeof PortalSetupRoute
+  '/portal/': typeof PortalIndexRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/benchmark': typeof BenchmarkRoute
   '/login': typeof LoginRoute
-  '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
   '/portal/setup': typeof PortalSetupRoute
+  '/portal': typeof PortalIndexRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
 }
 export interface FileRoutesById {
@@ -88,6 +95,7 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
   '/portal/setup': typeof PortalSetupRoute
+  '/portal/': typeof PortalIndexRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
 }
 export interface FileRouteTypes {
@@ -100,16 +108,17 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/signup'
     | '/portal/setup'
+    | '/portal/'
     | '/api/public/quiz-lead'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/benchmark'
     | '/login'
-    | '/portal'
     | '/pricing'
     | '/signup'
     | '/portal/setup'
+    | '/portal'
     | '/api/public/quiz-lead'
   id:
     | '__root__'
@@ -120,6 +129,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/signup'
     | '/portal/setup'
+    | '/portal/'
     | '/api/public/quiz-lead'
   fileRoutesById: FileRoutesById
 }
@@ -177,6 +187,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portal/': {
+      id: '/portal/'
+      path: '/'
+      fullPath: '/portal/'
+      preLoaderRoute: typeof PortalIndexRouteImport
+      parentRoute: typeof PortalRoute
+    }
     '/portal/setup': {
       id: '/portal/setup'
       path: '/setup'
@@ -196,10 +213,12 @@ declare module '@tanstack/react-router' {
 
 interface PortalRouteChildren {
   PortalSetupRoute: typeof PortalSetupRoute
+  PortalIndexRoute: typeof PortalIndexRoute
 }
 
 const PortalRouteChildren: PortalRouteChildren = {
   PortalSetupRoute: PortalSetupRoute,
+  PortalIndexRoute: PortalIndexRoute,
 }
 
 const PortalRouteWithChildren =
