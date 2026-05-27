@@ -15,7 +15,9 @@ import { Route as PortalRouteImport } from './routes/portal'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as BenchmarkRouteImport } from './routes/benchmark'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PortalIndexRouteImport } from './routes/portal.index'
 import { Route as PortalSetupRouteImport } from './routes/portal.setup'
+import { Route as PortalCoachRouteImport } from './routes/portal.coach'
 import { Route as ApiPublicQuizLeadRouteImport } from './routes/api/public/quiz-lead'
 
 const SignupRoute = SignupRouteImport.update({
@@ -48,9 +50,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalIndexRoute = PortalIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PortalRoute,
+} as any)
 const PortalSetupRoute = PortalSetupRouteImport.update({
   id: '/setup',
   path: '/setup',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalCoachRoute = PortalCoachRouteImport.update({
+  id: '/coach',
+  path: '/coach',
   getParentRoute: () => PortalRoute,
 } as any)
 const ApiPublicQuizLeadRoute = ApiPublicQuizLeadRouteImport.update({
@@ -66,17 +78,20 @@ export interface FileRoutesByFullPath {
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
+  '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
+  '/portal/': typeof PortalIndexRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/benchmark': typeof BenchmarkRoute
   '/login': typeof LoginRoute
-  '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
+  '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
+  '/portal': typeof PortalIndexRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
 }
 export interface FileRoutesById {
@@ -87,7 +102,9 @@ export interface FileRoutesById {
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
+  '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
+  '/portal/': typeof PortalIndexRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
 }
 export interface FileRouteTypes {
@@ -99,17 +116,20 @@ export interface FileRouteTypes {
     | '/portal'
     | '/pricing'
     | '/signup'
+    | '/portal/coach'
     | '/portal/setup'
+    | '/portal/'
     | '/api/public/quiz-lead'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/benchmark'
     | '/login'
-    | '/portal'
     | '/pricing'
     | '/signup'
+    | '/portal/coach'
     | '/portal/setup'
+    | '/portal'
     | '/api/public/quiz-lead'
   id:
     | '__root__'
@@ -119,7 +139,9 @@ export interface FileRouteTypes {
     | '/portal'
     | '/pricing'
     | '/signup'
+    | '/portal/coach'
     | '/portal/setup'
+    | '/portal/'
     | '/api/public/quiz-lead'
   fileRoutesById: FileRoutesById
 }
@@ -177,11 +199,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portal/': {
+      id: '/portal/'
+      path: '/'
+      fullPath: '/portal/'
+      preLoaderRoute: typeof PortalIndexRouteImport
+      parentRoute: typeof PortalRoute
+    }
     '/portal/setup': {
       id: '/portal/setup'
       path: '/setup'
       fullPath: '/portal/setup'
       preLoaderRoute: typeof PortalSetupRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/coach': {
+      id: '/portal/coach'
+      path: '/coach'
+      fullPath: '/portal/coach'
+      preLoaderRoute: typeof PortalCoachRouteImport
       parentRoute: typeof PortalRoute
     }
     '/api/public/quiz-lead': {
@@ -195,11 +231,15 @@ declare module '@tanstack/react-router' {
 }
 
 interface PortalRouteChildren {
+  PortalCoachRoute: typeof PortalCoachRoute
   PortalSetupRoute: typeof PortalSetupRoute
+  PortalIndexRoute: typeof PortalIndexRoute
 }
 
 const PortalRouteChildren: PortalRouteChildren = {
+  PortalCoachRoute: PortalCoachRoute,
   PortalSetupRoute: PortalSetupRoute,
+  PortalIndexRoute: PortalIndexRoute,
 }
 
 const PortalRouteWithChildren =
