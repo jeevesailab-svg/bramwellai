@@ -148,7 +148,7 @@ function DiagnosticPage() {
       setPhase("error");
     },
     onMessage: (msg) => {
-      const m = msg as { type?: string; [k: string]: unknown };
+      const m = msg as unknown as { type?: string; [k: string]: unknown };
       if (m?.type === "user_transcript") {
         const t = (m as { user_transcription_event?: { user_transcript?: string } })
           .user_transcription_event?.user_transcript;
@@ -179,7 +179,7 @@ function DiagnosticPage() {
       setSecondsLeft(left);
       if (left <= 0) {
         clearInterval(tick);
-        conversation.endSession().catch(() => undefined);
+        void Promise.resolve(conversation.endSession()).catch(() => undefined);
         setPhase("wrapping");
       }
     }, 1000);
