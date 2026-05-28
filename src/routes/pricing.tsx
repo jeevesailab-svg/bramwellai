@@ -161,13 +161,13 @@ function PricingPage() {
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
             Five Bramwell pathways. Each one tuned to the moment you're standing in.
-            Take the free benchmark first — we'll recommend the right fit.
+            Take the free diagnostic first — we'll recommend the right fit.
           </p>
           <Link
-            to="/benchmark"
+            to="/diagnostic"
             className="mt-8 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium backdrop-blur transition hover:bg-foreground/10"
           >
-            Take the free Benchmark →
+            Take the free diagnostic →
           </Link>
         </div>
       </section>
@@ -182,10 +182,10 @@ function PricingPage() {
                 color: "var(--primary-foreground)",
               }}
             >
-              Your Bramwell Benchmark match
+              Your Bramwell diagnostic match
             </span>
             <p className="mt-4 text-sm text-muted-foreground">
-              Based on your benchmark, we've highlighted your recommended
+              Based on your diagnostic, we've highlighted your recommended
               pathway. You can still pick a different one if it feels closer.
             </p>
           </div>

@@ -66,7 +66,7 @@ function SignupPage() {
   }
 
   return (
-    <AuthShell title="Create your account" subtitle="Free benchmark included. No card required.">
+    <AuthShell title="Create your account" subtitle="Free voice diagnostic included. No card required.">
       <button
         type="button"
         onClick={onGoogle}
