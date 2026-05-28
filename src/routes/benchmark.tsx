@@ -556,7 +556,7 @@ function Intro({ onStart }: { onStart: () => void }) {
           boxShadow: "var(--shadow-elegant)",
         }}
       >
-        Discover how you actually come across
+        Start with a test
         <span className="transition-transform group-hover:translate-x-0.5">→</span>
       </button>
       <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground/80">
