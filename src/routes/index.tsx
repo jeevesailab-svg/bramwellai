@@ -86,23 +86,27 @@ function Hero() {
 
       {/* Hero content */}
       <div className="relative z-10 mx-auto max-w-5xl px-6 pb-32 pt-20 text-center md:px-10 md:pb-40 md:pt-32">
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
-          <span
-            className="h-1.5 w-1.5 rounded-full"
-            style={{ background: "var(--primary)" }}
-          />
-          Always-on AI communication coach
-        </div>
+        <p
+          className="mb-6 text-sm font-medium uppercase tracking-[0.22em] md:text-base"
+          style={{
+            backgroundImage: "var(--gradient-gold)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
+        >
+          Command the room. Be the one they remember.
+        </p>
 
-        <h1 className="mx-auto max-w-4xl text-balance text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl lg:text-[5.5rem]">
-          Command the room.
-          <br />
+        <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
+          Is your{" "}
           <span
             className="bg-clip-text text-transparent"
             style={{ backgroundImage: "var(--gradient-gold)" }}
           >
-            Be the one they remember.
-          </span>
+            Tell Me About Yourself
+          </span>{" "}
+          answer costing you the interview?
         </h1>
 
         <p className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
@@ -133,7 +137,10 @@ function Hero() {
         </div>
 
         <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground/80">
-          3 minutes · No credit card · Find out what is holding your voice back
+          <span className="sm:hidden">3 minutes · No credit card</span>
+          <span className="hidden sm:inline">
+            3 minutes · No credit card · Find out what is holding your voice back
+          </span>
         </p>
       </div>
     </section>
@@ -443,7 +450,7 @@ function FinalCTA() {
           </span>
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-          Take the four-minute benchmark. See where you stand. Then decide.
+          Take the 3-minute Benchmark. See where you stand. Then decide.
         </p>
         <a
           href="/benchmark"
