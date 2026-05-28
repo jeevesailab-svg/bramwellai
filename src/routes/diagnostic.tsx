@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useConversation } from "@elevenlabs/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -80,7 +80,6 @@ function routePathway(
 }
 
 function DiagnosticPage() {
-  const navigate = useNavigate();
   const [phase, setPhase] = useState<"intro" | "connecting" | "live" | "wrapping" | "error">(
     "intro",
   );
@@ -90,8 +89,7 @@ function DiagnosticPage() {
   const sessionIdRef = useRef<string | null>(null);
   const submittedRef = useRef(false);
 
-  const submitResult = useCallback(
-    async (input: SubmitInput) => {
+  const submitResult = useCallback(async (input: SubmitInput) => {
       if (submittedRef.current) return "Already submitted";
       const sessionId = sessionIdRef.current;
       if (!sessionId) return "Missing session";
@@ -126,16 +124,10 @@ function DiagnosticPage() {
       } catch (e) {
         console.error("[diagnostic] result POST failed", e);
       }
-      navigate({
-        to: "/diagnostic/result",
-        search: { id: sessionId },
-      }).catch(() => {
-        /* result route not built yet; ignore */
-      });
+      // Score screen route is built in the next step.
+      window.location.assign(`/diagnostic/result?id=${sessionId}`);
       return "Result captured";
-    },
-    [navigate],
-  );
+    }, []);
 
   const conversation = useConversation({
     onConnect: () => setPhase("live"),
