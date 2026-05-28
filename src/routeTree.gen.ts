@@ -18,6 +18,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as PortalIndexRouteImport } from './routes/portal.index'
 import { Route as PortalSetupRouteImport } from './routes/portal.setup'
 import { Route as PortalCoachRouteImport } from './routes/portal.coach'
+import { Route as DiagnosticResultRouteImport } from './routes/diagnostic.result'
 import { Route as ApiPublicQuizLeadRouteImport } from './routes/api/public/quiz-lead'
 import { Route as ApiPublicDiagnosticTokenRouteImport } from './routes/api/public/diagnostic-token'
 import { Route as ApiPublicDiagnosticResultRouteImport } from './routes/api/public/diagnostic-result'
@@ -68,6 +69,11 @@ const PortalCoachRoute = PortalCoachRouteImport.update({
   path: '/coach',
   getParentRoute: () => PortalRoute,
 } as any)
+const DiagnosticResultRoute = DiagnosticResultRouteImport.update({
+  id: '/result',
+  path: '/result',
+  getParentRoute: () => DiagnosticRoute,
+} as any)
 const ApiPublicQuizLeadRoute = ApiPublicQuizLeadRouteImport.update({
   id: '/api/public/quiz-lead',
   path: '/api/public/quiz-lead',
@@ -94,11 +100,12 @@ const ApiPublicDiagnosticEmailRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/diagnostic': typeof DiagnosticRoute
+  '/diagnostic': typeof DiagnosticRouteWithChildren
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
+  '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
   '/portal/': typeof PortalIndexRoute
@@ -109,10 +116,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/diagnostic': typeof DiagnosticRoute
+  '/diagnostic': typeof DiagnosticRouteWithChildren
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
+  '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
   '/portal': typeof PortalIndexRoute
@@ -124,11 +132,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/diagnostic': typeof DiagnosticRoute
+  '/diagnostic': typeof DiagnosticRouteWithChildren
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
+  '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
   '/portal/': typeof PortalIndexRoute
@@ -146,6 +155,7 @@ export interface FileRouteTypes {
     | '/portal'
     | '/pricing'
     | '/signup'
+    | '/diagnostic/result'
     | '/portal/coach'
     | '/portal/setup'
     | '/portal/'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/pricing'
     | '/signup'
+    | '/diagnostic/result'
     | '/portal/coach'
     | '/portal/setup'
     | '/portal'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/portal'
     | '/pricing'
     | '/signup'
+    | '/diagnostic/result'
     | '/portal/coach'
     | '/portal/setup'
     | '/portal/'
@@ -186,7 +198,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DiagnosticRoute: typeof DiagnosticRoute
+  DiagnosticRoute: typeof DiagnosticRouteWithChildren
   LoginRoute: typeof LoginRoute
   PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
@@ -262,6 +274,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalCoachRouteImport
       parentRoute: typeof PortalRoute
     }
+    '/diagnostic/result': {
+      id: '/diagnostic/result'
+      path: '/result'
+      fullPath: '/diagnostic/result'
+      preLoaderRoute: typeof DiagnosticResultRouteImport
+      parentRoute: typeof DiagnosticRoute
+    }
     '/api/public/quiz-lead': {
       id: '/api/public/quiz-lead'
       path: '/api/public/quiz-lead'
@@ -293,6 +312,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface DiagnosticRouteChildren {
+  DiagnosticResultRoute: typeof DiagnosticResultRoute
+}
+
+const DiagnosticRouteChildren: DiagnosticRouteChildren = {
+  DiagnosticResultRoute: DiagnosticResultRoute,
+}
+
+const DiagnosticRouteWithChildren = DiagnosticRoute._addFileChildren(
+  DiagnosticRouteChildren,
+)
+
 interface PortalRouteChildren {
   PortalCoachRoute: typeof PortalCoachRoute
   PortalSetupRoute: typeof PortalSetupRoute
@@ -310,7 +341,7 @@ const PortalRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DiagnosticRoute: DiagnosticRoute,
+  DiagnosticRoute: DiagnosticRouteWithChildren,
   LoginRoute: LoginRoute,
   PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,
