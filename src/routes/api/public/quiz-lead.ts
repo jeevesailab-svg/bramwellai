@@ -49,10 +49,6 @@ export const Route = createFileRoute("/api/public/quiz-lead")({
 
         // Fire Zapier webhook server-side (URL never reaches the browser)
         const zapUrl = process.env.ZAPIER_QUIZ_WEBHOOK_URL;
-        let zapier:
-          | { configured: boolean; status?: number; ok?: boolean; body?: string; error?: string } = {
-          configured: Boolean(zapUrl),
-        };
         if (zapUrl) {
           try {
             const zapRes = await fetch(zapUrl, {
@@ -72,23 +68,21 @@ export const Route = createFileRoute("/api/public/quiz-lead")({
               }),
             });
             const bodyText = await zapRes.text().catch(() => "");
-            zapier = {
-              configured: true,
+            // Server-side logging only — never expose to the client
+            console.log("Zapier webhook response", {
               status: zapRes.status,
               ok: zapRes.ok,
               body: bodyText.slice(0, 300),
-            };
-            console.log("Zapier webhook response", zapier);
+            });
           } catch (zapErr) {
             const msg = zapErr instanceof Error ? zapErr.message : String(zapErr);
-            zapier = { configured: true, error: msg };
             console.warn("Zapier webhook failed", msg);
           }
         } else {
           console.warn("ZAPIER_QUIZ_WEBHOOK_URL not configured");
         }
 
-        return Response.json({ ok: true, zapier });
+        return Response.json({ ok: true });
       },
     },
   },

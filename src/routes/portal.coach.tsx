@@ -4,6 +4,7 @@ import { useConversation } from "@elevenlabs/react";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { getElevenLabsCoachToken } from "@/lib/elevenlabs.functions";
+import { recordCompletedSession } from "@/lib/sessions.functions";
 
 export const Route = createFileRoute("/portal/coach")({
   component: PortalCoachPage,
@@ -46,6 +47,7 @@ type SessionRow = {
 function PortalCoachPage() {
   const navigate = useNavigate();
   const fetchToken = useServerFn(getElevenLabsCoachToken);
+  const completeSession = useServerFn(recordCompletedSession);
 
   const [user, setUser] = useState<UserRow | null>(null);
   const [lastSession, setLastSession] = useState<SessionRow | null>(null);
@@ -202,27 +204,10 @@ function PortalCoachPage() {
     );
 
     try {
-      const { error: insertErr } = await supabase.from("sessions").insert({
-        user_id: user.id,
-        pathway: user.pathway,
-        session_number: sessionNumber,
-        duration_minutes: durationMin,
-        session_status: "completed",
+      const { sessions_completed } = await completeSession({
+        data: { duration_minutes: durationMin },
       });
-      if (insertErr) console.error("Insert session failed:", insertErr);
-
-      const { error: updErr } = await supabase
-        .from("users")
-        .update({
-          sessions_completed: (user.sessions_completed ?? 0) + 1,
-        })
-        .eq("id", user.id);
-      if (updErr) console.error("Update user failed:", updErr);
-
-      // Refresh local user state
-      setUser((u) =>
-        u ? { ...u, sessions_completed: (u.sessions_completed ?? 0) + 1 } : u,
-      );
+      setUser((u) => (u ? { ...u, sessions_completed } : u));
     } catch (e) {
       console.error(e);
     } finally {
