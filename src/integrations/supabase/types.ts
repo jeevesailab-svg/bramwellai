@@ -14,6 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
+      diagnostic_sessions: {
+        Row: {
+          career_moment: string | null
+          communication_type: string | null
+          completed_at: string | null
+          created_at: string
+          email: string | null
+          first_name: string | null
+          gaps: Json | null
+          id: string
+          ip_address: string
+          readiness_score: number | null
+          recommended_pathway: string | null
+          recommended_pathway_name: string | null
+          recommended_price: string | null
+          transcript: string | null
+        }
+        Insert: {
+          career_moment?: string | null
+          communication_type?: string | null
+          completed_at?: string | null
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          gaps?: Json | null
+          id?: string
+          ip_address: string
+          readiness_score?: number | null
+          recommended_pathway?: string | null
+          recommended_pathway_name?: string | null
+          recommended_price?: string | null
+          transcript?: string | null
+        }
+        Update: {
+          career_moment?: string | null
+          communication_type?: string | null
+          completed_at?: string | null
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          gaps?: Json | null
+          id?: string
+          ip_address?: string
+          readiness_score?: number | null
+          recommended_pathway?: string | null
+          recommended_pathway_name?: string | null
+          recommended_price?: string | null
+          transcript?: string | null
+        }
+        Relationships: []
+      }
       quiz_leads: {
         Row: {
           career_moment: string | null
