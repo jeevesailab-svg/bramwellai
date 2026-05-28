@@ -5,17 +5,17 @@ export const Route = createFileRoute("/benchmark")({
   component: BenchmarkPage,
   head: () => ({
     meta: [
-      { title: "The Bramwell Benchmark — Free 4-minute communication assessment" },
+      { title: "The Bramwell Benchmark — Free 3-minute communication assessment" },
       {
         name: "description",
         content:
-          "Discover your communication type and the three biggest gaps holding you back. Free. No credit card. 12 questions, 4 minutes.",
+          "Discover your communication type and the three biggest gaps holding you back. Free. No credit card. 12 questions, 3 minutes.",
       },
       { property: "og:title", content: "The Bramwell Benchmark" },
       {
         property: "og:description",
         content:
-          "Find your communication type in 4 minutes. Get the right pathway for the moment you're in.",
+          "Find your communication type in 3 minutes. Get the right pathway for the moment you're in.",
       },
     ],
   }),
@@ -533,10 +533,6 @@ function Footer() {
 function Intro({ onStart }: { onStart: () => void }) {
   return (
     <div className="text-center">
-      <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
-        <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--primary)" }} />
-        The Bramwell Benchmark · 4 minutes
-      </div>
       <h1 className="mx-auto max-w-3xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
         The{" "}
         <span
@@ -548,7 +544,7 @@ function Intro({ onStart }: { onStart: () => void }) {
       </h1>
       <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
         Discover your communication type, the three patterns holding you back
-        under pressure, and the exact pathway to fix them. Three minutes. No
+        under pressure, and the exact pathway to fix them. 3 minutes. No
         credit card.
       </p>
       <button
