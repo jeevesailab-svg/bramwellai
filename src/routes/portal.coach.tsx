@@ -160,11 +160,10 @@ function PortalCoachPage() {
     setStarting(true);
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
-      const { token, agentId } = await fetchToken();
+      const { token } = await fetchToken();
       const context = buildContext(user, lastSession);
       const id = await conversation.startSession({
         conversationToken: token,
-        agentId,
         connectionType: "webrtc",
         overrides: {
           agent: {
