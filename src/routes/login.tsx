@@ -22,10 +22,10 @@ function LoginPage() {
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (session) navigate({ to: "/dashboard" as never });
+      if (session) navigate({ to: "/portal" });
     });
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/dashboard" as never });
+      if (data.session) navigate({ to: "/portal" });
     });
     return () => subscription.unsubscribe();
   }, [navigate]);
@@ -42,7 +42,7 @@ function LoginPage() {
   async function onGoogle() {
     setError(null);
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin + "/dashboard",
+      redirect_uri: window.location.origin + "/portal",
     });
     if (result.error) setError(result.error.message);
   }
