@@ -25,6 +25,28 @@ const Schema = z.object({
 export const Route = createFileRoute("/api/public/diagnostic-result")({
   server: {
     handlers: {
+      GET: async ({ request }) => {
+        const url = new URL(request.url);
+        const id = url.searchParams.get("id");
+        if (!id || !/^[0-9a-f-]{36}$/i.test(id)) {
+          return Response.json({ error: "Invalid id" }, { status: 400 });
+        }
+        const { data, error } = await supabaseAdmin
+          .from("diagnostic_sessions")
+          .select(
+            "id, first_name, email, communication_type, readiness_score, gaps, career_moment, recommended_pathway, recommended_pathway_name, recommended_price, completed_at",
+          )
+          .eq("id", id)
+          .maybeSingle();
+        if (error) {
+          console.error("diagnostic-result GET failed", error);
+          return Response.json({ error: "Server error" }, { status: 500 });
+        }
+        if (!data || !data.completed_at) {
+          return Response.json({ error: "Not found" }, { status: 404 });
+        }
+        return Response.json({ result: data });
+      },
       POST: async ({ request }) => {
         let payload: unknown;
         try {
