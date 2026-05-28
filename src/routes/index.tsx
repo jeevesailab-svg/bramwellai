@@ -62,10 +62,10 @@ function Hero() {
           <a href="/login" className="transition-colors hover:text-foreground">Sign in</a>
         </nav>
         <a
-          href="/benchmark"
+          href="/diagnostic"
           className="inline-flex h-10 items-center justify-center rounded-full border border-border bg-foreground/5 px-5 text-sm font-medium backdrop-blur transition hover:bg-foreground/10"
         >
-          Benchmark
+          Free diagnostic
         </a>
       </header>
 
@@ -117,7 +117,7 @@ function Hero() {
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <a
-            href="/benchmark"
+            href="/diagnostic"
             className="group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold transition hover:opacity-95"
             style={{
               background: "var(--gradient-gold)",
@@ -125,7 +125,7 @@ function Hero() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Discover how you actually come across
+            Take the test
             <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
           <a
@@ -180,8 +180,8 @@ function HowItWorks() {
   const steps = [
     {
       n: "01",
-      title: "Take the free Benchmark",
-      body: "Discover your communication type and your three biggest gaps. No credit card.",
+      title: "Take the free diagnostic",
+      body: "Five minutes with Bramwell. Hear your communication type, your three biggest gaps, and your Readiness Score. No login, no card.",
     },
     {
       n: "02",
@@ -450,10 +450,10 @@ function FinalCTA() {
           </span>
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-          Take the 3-minute Benchmark. See where you stand. Then decide.
+          Take the free 5-minute diagnostic. Hear where you stand. Then decide.
         </p>
         <a
-          href="/benchmark"
+          href="/diagnostic"
           className="mt-10 inline-flex h-12 items-center justify-center gap-2 rounded-full px-8 text-sm font-semibold transition hover:opacity-95"
           style={{
             background: "var(--gradient-gold)",
@@ -461,7 +461,7 @@ function FinalCTA() {
             boxShadow: "var(--shadow-elegant)",
           }}
         >
-          Discover how you actually come across
+          Take the test
           <span>→</span>
         </a>
       </div>
@@ -484,7 +484,7 @@ function Footer() {
           </span>
         </div>
         <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-          <a href="/benchmark" className="transition-colors hover:text-foreground">Benchmark</a>
+          <a href="/diagnostic" className="transition-colors hover:text-foreground">Free diagnostic</a>
           <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
           <a href="/login" className="transition-colors hover:text-foreground">Sign in</a>
           <a href="/signup" className="transition-colors hover:text-foreground">Sign up</a>

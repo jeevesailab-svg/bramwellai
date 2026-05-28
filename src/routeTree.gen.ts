@@ -14,7 +14,6 @@ import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DiagnosticRouteImport } from './routes/diagnostic'
-import { Route as BenchmarkRouteImport } from './routes/benchmark'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PortalIndexRouteImport } from './routes/portal.index'
 import { Route as PortalSetupRouteImport } from './routes/portal.setup'
@@ -46,11 +45,6 @@ const LoginRoute = LoginRouteImport.update({
 const DiagnosticRoute = DiagnosticRouteImport.update({
   id: '/diagnostic',
   path: '/diagnostic',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BenchmarkRoute = BenchmarkRouteImport.update({
-  id: '/benchmark',
-  path: '/benchmark',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -93,7 +87,6 @@ const ApiPublicDiagnosticResultRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/benchmark': typeof BenchmarkRoute
   '/diagnostic': typeof DiagnosticRoute
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
@@ -108,7 +101,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/benchmark': typeof BenchmarkRoute
   '/diagnostic': typeof DiagnosticRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
@@ -123,7 +115,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/benchmark': typeof BenchmarkRoute
   '/diagnostic': typeof DiagnosticRoute
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
@@ -140,7 +131,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/benchmark'
     | '/diagnostic'
     | '/login'
     | '/portal'
@@ -155,7 +145,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/benchmark'
     | '/diagnostic'
     | '/login'
     | '/pricing'
@@ -169,7 +158,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/benchmark'
     | '/diagnostic'
     | '/login'
     | '/portal'
@@ -185,7 +173,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BenchmarkRoute: typeof BenchmarkRoute
   DiagnosticRoute: typeof DiagnosticRoute
   LoginRoute: typeof LoginRoute
   PortalRoute: typeof PortalRouteWithChildren
@@ -231,13 +218,6 @@ declare module '@tanstack/react-router' {
       path: '/diagnostic'
       fullPath: '/diagnostic'
       preLoaderRoute: typeof DiagnosticRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/benchmark': {
-      id: '/benchmark'
-      path: '/benchmark'
-      fullPath: '/benchmark'
-      preLoaderRoute: typeof BenchmarkRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -309,7 +289,6 @@ const PortalRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BenchmarkRoute: BenchmarkRoute,
   DiagnosticRoute: DiagnosticRoute,
   LoginRoute: LoginRoute,
   PortalRoute: PortalRouteWithChildren,
@@ -322,3 +301,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
