@@ -46,6 +46,23 @@ type Pathway = {
 
 const PATHWAYS: Pathway[] = [
   {
+    key: "club",
+    name: "The Club",
+    forWho: "Always-on access",
+    price: "$79 AUD",
+    cadence: "per month",
+    sessions: "Unlimited sessions",
+    highlight: true,
+    blurb:
+      "Every interview. Every pitch. Every year. Bramwell stays with you — the moment you need it, whatever the stakes.",
+    includes: [
+      "Unlimited live voice sessions",
+      "Full story-bank & history",
+      "Priority feature access",
+      "Cancel anytime",
+    ],
+  },
+  {
     key: "graduate",
     name: "The Graduate",
     forWho: "First serious interview",
@@ -93,32 +110,18 @@ const PATHWAYS: Pathway[] = [
   },
   {
     key: "executive",
-    name: "The Executive",
-    forWho: "Board rooms & C-suite",
+    name: "Executive Presence",
+    forWho: "C-suite · Board rooms · High-stakes pitches",
     price: "$499 AUD",
     cadence: "one-time",
     sessions: "8 sessions · 30 min",
-    blurb: "Calibrate every sentence for stakes measured in millions.",
+    blurb:
+      "For leaders where every word carries commercial weight. Bramwell calibrates your authority, cadence, and conviction — until the room reads you as the most senior person in it.",
     includes: [
       "Everything in The Confidence",
       "Board-level question banks",
       "Stakeholder & investor rehearsal",
       "90-day access window",
-    ],
-  },
-  {
-    key: "club",
-    name: "The Club",
-    forWho: "Always-on access",
-    price: "$79 AUD",
-    cadence: "per month",
-    sessions: "Unlimited sessions",
-    blurb: "Bramwell stays with you — for every interview, every pitch, every year.",
-    includes: [
-      "Unlimited live voice sessions",
-      "Full story-bank & history",
-      "Priority feature access",
-      "Cancel anytime",
     ],
   },
 ];
@@ -220,17 +223,17 @@ function PathwayCard({ p, href }: { p: Pathway; href: string }) {
   const isStub = href === "#";
   return (
     <article
-      className={`group flex flex-col rounded-2xl border bg-foreground/[0.02] p-8 transition ${
+      className={`group relative flex flex-col rounded-2xl border bg-foreground/[0.02] p-8 transition ${
         p.highlight ? "border-foreground/30 bg-foreground/[0.04]" : "border-border hover:border-foreground/20 hover:bg-foreground/[0.04]"
       } ${p.key === "club" ? "md:col-span-2 lg:col-span-1" : ""}`}
       style={p.highlight ? { boxShadow: "var(--shadow-elegant)" } : undefined}
     >
       {p.highlight && (
         <span
-          className="mb-4 inline-flex w-fit items-center rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]"
+          className="absolute -top-3 right-5 inline-flex items-center rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]"
           style={{ background: "var(--gradient-gold)", color: "var(--primary-foreground)" }}
         >
-          Most chosen
+          Most popular
         </span>
       )}
       <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{p.forWho}</p>
