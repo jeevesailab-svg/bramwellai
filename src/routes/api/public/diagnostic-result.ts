@@ -45,7 +45,10 @@ export const Route = createFileRoute("/api/public/diagnostic-result")({
         if (!data || !data.completed_at) {
           return Response.json({ error: "Not found" }, { status: 404 });
         }
-        return Response.json({ result: data });
+        const { email, ...safe } = data;
+        return Response.json({
+          result: { ...safe, has_email: email !== null && email !== "" },
+        });
       },
       POST: async ({ request }) => {
         let payload: unknown;

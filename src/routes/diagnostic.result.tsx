@@ -28,7 +28,7 @@ type PathwayKey =
 type Result = {
   id: string;
   first_name: string | null;
-  email: string | null;
+  has_email: boolean;
   communication_type: string;
   readiness_score: number;
   gaps: string[];
@@ -342,7 +342,7 @@ function ResultBody({ result }: { result: Result }) {
       </section>
 
       {/* SECTION 6 — Email capture */}
-      {!result.email && <EmailCapture sessionId={result.id} />}
+      {!result.has_email && <EmailCapture sessionId={result.id} />}
     </div>
   );
 }
