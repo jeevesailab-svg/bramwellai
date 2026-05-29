@@ -23,6 +23,10 @@ const PAINS = [
     q: "I have watched less qualified people get roles I deserved",
     a: "They weren't better. They were better rehearsed. Bramwell closes that gap before the next interview — not after you've lost it.",
   },
+  {
+    q: "People tell me I come across as boring or hard to read",
+    a: "Bramwell works on the specific signals that make someone magnetic in conversation — pace, energy, warmth, and the ability to hold a room. You'll hear the difference within two sessions.",
+  },
 ];
 
 export function PainChecklist() {
