@@ -2,7 +2,7 @@ export function StatBar() {
   const stats = [
     { value: "93%", label: "of candidates experience interview anxiety" },
     { value: "340", label: "average applicants per job posting" },
-    { value: "$27,650", label: "average Australian student HECS debt" },
+    { value: "$15,000", label: "cost of sounding less senior than you are" },
   ];
   return (
     <section
