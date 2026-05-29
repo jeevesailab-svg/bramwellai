@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { StatBar } from "@/components/landing/StatBar";
 import { PainChecklist } from "@/components/landing/PainChecklist";
+import { GraduationCap, RefreshCcw, TrendingUp, Award } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -28,6 +29,7 @@ function Index() {
       <Hero />
       <StatBar />
       <PainChecklist />
+      <WhoFor />
       <Problem />
       <HowItWorks />
       <Pathways />
@@ -99,20 +101,19 @@ function Hero() {
         </p>
 
         <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-          Is your{" "}
+          You're more capable than you sound{" "}
           <span
             className="bg-clip-text text-transparent"
             style={{ backgroundImage: "var(--gradient-gold)" }}
           >
-            Tell Me About Yourself
-          </span>{" "}
-          answer costing you the interview?
+            under pressure.
+          </span>
         </h1>
 
         <p className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Bramwell is your private AI coach for the conversations that decide
-          your career — interviews, promotions, board rooms. Rehearse out loud.
-          Sound as capable as you are.
+          Bramwell is your private AI voice coach — built for interviews,
+          promotions, and boardroom moments. Speak out loud. Sound as capable
+          as you already are.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
@@ -148,6 +149,70 @@ function Hero() {
 }
 
 /* ───────────── Problem ───────────── */
+function WhoFor() {
+  const cards = [
+    {
+      Icon: GraduationCap,
+      title: "First serious interview.",
+      body: "You've got the skills. Now make the room feel it in the first 90 seconds.",
+    },
+    {
+      Icon: RefreshCcw,
+      title: "Back after a break.",
+      body: "You haven't interviewed in years. Everything has changed. Bramwell gets you back up to speed — fast.",
+    },
+    {
+      Icon: TrendingUp,
+      title: "Mid-career pivot.",
+      body: "You've done the work. Now translate it into the language of the role you actually want.",
+    },
+    {
+      Icon: Award,
+      title: "Executive and C-suite.",
+      body: "Every sentence is measured in millions. Calibrate your presence before the room does it for you.",
+    },
+  ];
+  return (
+    <section className="border-t border-border bg-background py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+          Who is this for?
+        </p>
+        <h2 className="mt-4 max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+          Built for the moment{" "}
+          <span
+            className="bg-clip-text text-transparent"
+            style={{ backgroundImage: "var(--gradient-gold)" }}
+          >
+            you're in.
+          </span>
+        </h2>
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {cards.map(({ Icon, title, body }) => (
+            <div
+              key={title}
+              className="rounded-2xl border border-border bg-foreground/[0.02] p-7 transition hover:border-foreground/20 hover:bg-foreground/[0.04]"
+            >
+              <div
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border"
+                style={{ color: "var(--primary)" }}
+              >
+                <Icon size={20} />
+              </div>
+              <h3 className="mt-5 text-xl font-semibold tracking-tight">
+                {title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {body}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Problem() {
   return (
     <section className="border-t border-border bg-background py-24 md:py-32">
