@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useConversation } from "@elevenlabs/react";
+import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/diagnostic")({
-  component: DiagnosticPage,
+  component: DiagnosticRoute,
   head: () => ({
     meta: [
       { title: "Free Bramwell Diagnostic — Hear how you really sound" },
@@ -77,6 +77,14 @@ function routePathway(
   }
 
   return { key: "confidence", ...PATHWAY.confidence };
+}
+
+function DiagnosticRoute() {
+  return (
+    <ConversationProvider>
+      <DiagnosticPage />
+    </ConversationProvider>
+  );
 }
 
 function DiagnosticPage() {
