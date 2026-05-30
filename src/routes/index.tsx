@@ -33,6 +33,7 @@ function Index() {
       <Problem />
       <HowItWorks />
       <Pathways />
+      <AlwaysOn />
       <Testimonials />
       <FAQ />
       <FinalCTA />
