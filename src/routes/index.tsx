@@ -33,6 +33,7 @@ function Index() {
       <Problem />
       <HowItWorks />
       <Pathways />
+      <AlwaysOn />
       <Testimonials />
       <FAQ />
       <FinalCTA />
@@ -387,6 +388,74 @@ function Pathways() {
 
 /* ───────────── Testimonials ───────────── */
 function Testimonials() {
+  return TestimonialsImpl();
+}
+
+function AlwaysOn() {
+  return (
+    <section className="border-t border-border bg-background py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+          The always-on coach
+        </p>
+        <h2 className="mt-4 max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+          Courses teach you once.{" "}
+          <span
+            className="bg-clip-text text-transparent"
+            style={{ backgroundImage: "var(--gradient-gold)" }}
+          >
+            Bramwell trains you daily.
+          </span>
+        </h2>
+
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          <div className="rounded-2xl border border-border bg-foreground/[0.02] p-7 transition hover:border-foreground/20 hover:bg-foreground/[0.04]">
+            <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              The Intensive
+            </p>
+            <h3 className="mt-3 text-2xl font-semibold tracking-tight">
+              One moment. Coached until ready.
+            </h3>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Sprint for the interview, the promotion, the media appearance,
+              the board presentation. We rehearse it until the answer lives
+              in your voice.
+            </p>
+          </div>
+          <div
+            className="rounded-2xl border p-7 transition"
+            style={{
+              borderColor: "oklch(0.78 0.13 78 / 0.35)",
+              background: "oklch(0.78 0.13 78 / 0.06)",
+            }}
+          >
+            <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              The Club — $79 AUD / month
+            </p>
+            <h3 className="mt-3 text-2xl font-semibold tracking-tight">
+              Your always-on coach. For life.
+            </h3>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              After the intensive, Bramwell stays with you. New job intro.
+              Performance review. Pay rise conversation. Media interview.
+              Every high-stakes moment. One coach. For life.
+            </p>
+          </div>
+        </div>
+
+        <blockquote
+          className="mt-12 border-l-2 pl-6 text-lg italic leading-relaxed text-foreground/90 md:text-xl"
+          style={{ borderColor: "var(--primary)" }}
+        >
+          "You do not rise to the occasion. You fall to the level of your
+          rehearsal. Bramwell makes rehearsal part of your life."
+        </blockquote>
+      </div>
+    </section>
+  );
+}
+
+function TestimonialsImpl() {
   const quotes = [
     {
       q: "I walked in knowing exactly how I sounded. That changed everything.",
