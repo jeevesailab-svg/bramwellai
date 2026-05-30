@@ -102,7 +102,7 @@ function Hero() {
         </p>
 
         <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-          You're more capable than you sound{" "}
+          You are more capable than you sound{" "}
           <span
             className="bg-clip-text text-transparent"
             style={{ backgroundImage: "var(--gradient-gold)" }}
@@ -112,9 +112,12 @@ function Hero() {
         </h1>
 
         <p className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Bramwell is your private AI voice coach — built for interviews,
-          promotions, and boardroom moments. Speak out loud. Sound as capable
-          as you already are.
+          Bramwell is your private AI voice coach — trained on the world's
+          leading communication experts to help you win interviews, earn
+          promotions, and own every high-stakes moment.
+        </p>
+        <p className="mx-auto mt-4 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground/90 md:text-lg">
+          Speak out loud. Sound like the real you.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
@@ -127,7 +130,7 @@ function Hero() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Take the test
+            Take the test — free, 5 minutes
             <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
           <a
