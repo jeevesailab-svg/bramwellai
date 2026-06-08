@@ -1,9 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/diagnostic")({
   component: DiagnosticRoute,
+  validateSearch: (search: Record<string, unknown>) => ({
+    autostart: search.autostart === "1" ? "1" : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Free Bramwell Diagnostic — Hear how you really sound" },
@@ -219,6 +222,16 @@ function DiagnosticPage() {
       setPhase("error");
     }
   }, [conversation]);
+
+  // Auto-start when coming from the hero CTA with ?autostart=1
+  const search = useSearch({ from: "/diagnostic" });
+  const autoStartedRef = useRef(false);
+  useEffect(() => {
+    if (search.autostart === "1" && phase === "intro" && !autoStartedRef.current) {
+      autoStartedRef.current = true;
+      void startDiagnostic();
+    }
+  }, [search.autostart, phase, startDiagnostic]);
 
   const endEarly = useCallback(async () => {
     try {
