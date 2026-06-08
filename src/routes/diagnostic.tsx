@@ -4,6 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/diagnostic")({
   component: DiagnosticRoute,
+  validateSearch: (search: Record<string, unknown>) => ({
+    autostart: search.autostart === "1" ? "1" : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Free Bramwell Diagnostic — Hear how you really sound" },
