@@ -122,7 +122,7 @@ function Hero() {
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <a
-            href="/diagnostic"
+            href="/diagnostic?autostart=1"
             className="group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold transition hover:opacity-95"
             style={{
               background: "var(--gradient-gold)",
