@@ -24,6 +24,7 @@ import { Route as ApiPublicQuizLeadRouteImport } from './routes/api/public/quiz-
 import { Route as ApiPublicDiagnosticTokenRouteImport } from './routes/api/public/diagnostic-token'
 import { Route as ApiPublicDiagnosticResultRouteImport } from './routes/api/public/diagnostic-result'
 import { Route as ApiPublicDiagnosticEmailRouteImport } from './routes/api/public/diagnostic-email'
+import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -103,6 +104,12 @@ const ApiPublicDiagnosticEmailRoute =
     path: '/api/public/diagnostic-email',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicPaymentsWebhookRoute =
+  ApiPublicPaymentsWebhookRouteImport.update({
+    id: '/api/public/payments/webhook',
+    path: '/api/public/payments/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -120,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -136,6 +144,7 @@ export interface FileRoutesByTo {
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -154,6 +163,7 @@ export interface FileRoutesById {
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -173,6 +183,7 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-result'
     | '/api/public/diagnostic-token'
     | '/api/public/quiz-lead'
+    | '/api/public/payments/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -189,6 +200,7 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-result'
     | '/api/public/diagnostic-token'
     | '/api/public/quiz-lead'
+    | '/api/public/payments/webhook'
   id:
     | '__root__'
     | '/'
@@ -206,6 +218,7 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-result'
     | '/api/public/diagnostic-token'
     | '/api/public/quiz-lead'
+    | '/api/public/payments/webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -220,6 +233,7 @@ export interface RootRouteChildren {
   ApiPublicDiagnosticResultRoute: typeof ApiPublicDiagnosticResultRoute
   ApiPublicDiagnosticTokenRoute: typeof ApiPublicDiagnosticTokenRoute
   ApiPublicQuizLeadRoute: typeof ApiPublicQuizLeadRoute
+  ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -329,6 +343,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicDiagnosticEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/payments/webhook': {
+      id: '/api/public/payments/webhook'
+      path: '/api/public/payments/webhook'
+      fullPath: '/api/public/payments/webhook'
+      preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -371,7 +392,18 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicDiagnosticResultRoute: ApiPublicDiagnosticResultRoute,
   ApiPublicDiagnosticTokenRoute: ApiPublicDiagnosticTokenRoute,
   ApiPublicQuizLeadRoute: ApiPublicQuizLeadRoute,
+  ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
