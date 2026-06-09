@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
+import { useStripeCheckout } from "@/hooks/useStripeCheckout";
+import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
@@ -23,17 +27,17 @@ export const Route = createFileRoute("/pricing")({
   }),
 });
 
-// TODO (Section 10): replace stubs with real Stripe payment links via env vars.
-const STRIPE = {
-  graduate: import.meta.env.VITE_STRIPE_GRADUATE ?? "#",
-  comeback: import.meta.env.VITE_STRIPE_COMEBACK ?? "#",
-  confidence: import.meta.env.VITE_STRIPE_CONFIDENCE ?? "#",
-  executive: import.meta.env.VITE_STRIPE_EXECUTIVE ?? "#",
-  club: import.meta.env.VITE_STRIPE_CLUB ?? "#",
-};
+// Stripe lookup_keys for the 5 Bramwell pathways
+const PRICE_IDS = {
+  graduate: "graduate_sprint_onetime",
+  comeback: "comeback_sprint_onetime",
+  confidence: "confidence_sprint_onetime",
+  executive: "executive_sprint_onetime",
+  club: "career_confidence_club_monthly",
+} as const;
 
 type Pathway = {
-  key: keyof typeof STRIPE;
+  key: keyof typeof PRICE_IDS;
   name: string;
   forWho: string;
   price: string;
