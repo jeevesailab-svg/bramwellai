@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
+import { useStripeCheckout } from "@/hooks/useStripeCheckout";
+import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
@@ -23,17 +27,17 @@ export const Route = createFileRoute("/pricing")({
   }),
 });
 
-// TODO (Section 10): replace stubs with real Stripe payment links via env vars.
-const STRIPE = {
-  graduate: import.meta.env.VITE_STRIPE_GRADUATE ?? "#",
-  comeback: import.meta.env.VITE_STRIPE_COMEBACK ?? "#",
-  confidence: import.meta.env.VITE_STRIPE_CONFIDENCE ?? "#",
-  executive: import.meta.env.VITE_STRIPE_EXECUTIVE ?? "#",
-  club: import.meta.env.VITE_STRIPE_CLUB ?? "#",
-};
+// Stripe lookup_keys for the 5 Bramwell pathways
+const PRICE_IDS = {
+  graduate: "graduate_sprint_onetime",
+  comeback: "comeback_sprint_onetime",
+  confidence: "confidence_sprint_onetime",
+  executive: "executive_sprint_onetime",
+  club: "career_confidence_club_monthly",
+} as const;
 
 type Pathway = {
-  key: keyof typeof STRIPE;
+  key: keyof typeof PRICE_IDS;
   name: string;
   forWho: string;
   price: string;
@@ -136,8 +140,35 @@ function PricingPage() {
     ? PATHWAYS.map((p) => ({ ...p, highlight: p.key === recommendedKey }))
     : PATHWAYS;
 
+  const { openCheckout, closeCheckout, isOpen, checkoutElement } = useStripeCheckout();
+  const [user, setUser] = useState<{ id: string; email?: string | null } | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    supabase.auth.getUser().then(({ data }) => {
+      if (!cancelled) setUser(data.user ? { id: data.user.id, email: data.user.email } : null);
+    });
+    return () => { cancelled = true; };
+  }, []);
+
+  const handlePurchase = (key: keyof typeof PRICE_IDS) => {
+    if (!user) {
+      // Send the user to sign up and remember which pathway they picked
+      sessionStorage.setItem("bramwell_pending_purchase", key);
+      window.location.href = "/signup?next=/pricing";
+      return;
+    }
+    openCheckout({
+      priceId: PRICE_IDS[key],
+      customerEmail: user.email ?? undefined,
+      userId: user.id,
+      returnUrl: `${window.location.origin}/portal?checkout=success&pathway=${key}&session_id={CHECKOUT_SESSION_ID}`,
+    });
+  };
+
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <PaymentTestModeBanner />
       <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
         <Link to="/" className="flex items-baseline gap-1.5">
           <span className="text-xl font-semibold tracking-tight">Bramwell</span>
@@ -195,7 +226,7 @@ function PricingPage() {
         )}
         <div className="mx-auto grid max-w-6xl gap-5 px-6 md:grid-cols-2 md:px-10 lg:grid-cols-3">
           {pathways.map((p) => (
-            <PathwayCard key={p.key} p={p} href={STRIPE[p.key]} />
+            <PathwayCard key={p.key} p={p} onSelect={() => handlePurchase(p.key)} />
           ))}
         </div>
 
@@ -215,12 +246,25 @@ function PricingPage() {
           </p>
         </div>
       </footer>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/70 p-4 backdrop-blur-sm">
+          <div className="relative w-full max-w-2xl rounded-2xl bg-background p-6 shadow-2xl">
+            <button
+              onClick={closeCheckout}
+              className="absolute right-4 top-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-foreground/5 text-sm hover:bg-foreground/10"
+              aria-label="Close checkout"
+            >
+              ✕
+            </button>
+            {checkoutElement}
+          </div>
+        </div>
+      )}
     </main>
   );
 }
 
-function PathwayCard({ p, href }: { p: Pathway; href: string }) {
-  const isStub = href === "#";
+function PathwayCard({ p, onSelect }: { p: Pathway; onSelect: () => void }) {
   return (
     <article
       className={`group relative flex flex-col rounded-2xl border bg-foreground/[0.02] p-8 transition ${
@@ -255,26 +299,22 @@ function PathwayCard({ p, href }: { p: Pathway; href: string }) {
         ))}
       </ul>
 
-      <a
-        href={href}
-        target={isStub ? undefined : "_blank"}
-        rel={isStub ? undefined : "noopener noreferrer"}
-        aria-disabled={isStub}
+      <button
+        type="button"
+        onClick={onSelect}
         className={`mt-8 inline-flex h-11 items-center justify-center rounded-full text-sm font-semibold transition ${
-          isStub
-            ? "cursor-not-allowed border border-border bg-foreground/5 text-muted-foreground"
-            : p.highlight
+          p.highlight
               ? "hover:opacity-95"
               : "border border-foreground/30 bg-foreground/5 hover:bg-foreground/10"
         }`}
         style={
-          !isStub && p.highlight
+          p.highlight
             ? { background: "var(--gradient-gold)", color: "var(--primary-foreground)" }
             : undefined
         }
       >
-        {isStub ? "Coming soon" : `Choose ${p.name}`}
-      </a>
+        Choose {p.name}
+      </button>
     </article>
   );
 }

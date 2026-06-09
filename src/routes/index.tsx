@@ -117,7 +117,7 @@ function Hero() {
           promotions, and own every high-stakes moment.
         </p>
         <p className="mx-auto mt-4 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground/90 md:text-lg">
-          Walk in unshakeable. Speak like the leader they've been waiting for.
+          The version of you that walks into that room and owns it — that is who Bramwell builds.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">

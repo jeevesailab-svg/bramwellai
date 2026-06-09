@@ -219,6 +219,63 @@ export type Database = {
           },
         ]
       }
+      transactions: {
+        Row: {
+          amount_cents: number
+          created_at: string
+          currency: string
+          customer_email: string | null
+          environment: string
+          id: string
+          pathway: string | null
+          price_id: string
+          product_id: string | null
+          status: string
+          stripe_customer_id: string | null
+          stripe_invoice_id: string | null
+          stripe_payment_intent_id: string | null
+          stripe_session_id: string | null
+          stripe_subscription_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          amount_cents: number
+          created_at?: string
+          currency?: string
+          customer_email?: string | null
+          environment?: string
+          id?: string
+          pathway?: string | null
+          price_id: string
+          product_id?: string | null
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_invoice_id?: string | null
+          stripe_payment_intent_id?: string | null
+          stripe_session_id?: string | null
+          stripe_subscription_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          amount_cents?: number
+          created_at?: string
+          currency?: string
+          customer_email?: string | null
+          environment?: string
+          id?: string
+          pathway?: string | null
+          price_id?: string
+          product_id?: string | null
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_invoice_id?: string | null
+          stripe_payment_intent_id?: string | null
+          stripe_session_id?: string | null
+          stripe_subscription_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       users: {
         Row: {
           access_expires_at: string | null
@@ -242,7 +299,12 @@ export type Database = {
           source: string | null
           stripe_customer_id: string | null
           stripe_payment_id: string | null
+          stripe_subscription_id: string | null
+          subscription_cancel_at_period_end: boolean
+          subscription_price_id: string | null
+          subscription_status: string | null
           upsell_shown: boolean
+          welcome_shown: boolean
         }
         Insert: {
           access_expires_at?: string | null
@@ -266,7 +328,12 @@ export type Database = {
           source?: string | null
           stripe_customer_id?: string | null
           stripe_payment_id?: string | null
+          stripe_subscription_id?: string | null
+          subscription_cancel_at_period_end?: boolean
+          subscription_price_id?: string | null
+          subscription_status?: string | null
           upsell_shown?: boolean
+          welcome_shown?: boolean
         }
         Update: {
           access_expires_at?: string | null
@@ -290,7 +357,12 @@ export type Database = {
           source?: string | null
           stripe_customer_id?: string | null
           stripe_payment_id?: string | null
+          stripe_subscription_id?: string | null
+          subscription_cancel_at_period_end?: boolean
+          subscription_price_id?: string | null
+          subscription_status?: string | null
           upsell_shown?: boolean
+          welcome_shown?: boolean
         }
         Relationships: []
       }
