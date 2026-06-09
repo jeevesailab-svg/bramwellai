@@ -25,7 +25,16 @@ function SignupPage() {
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (session) navigate({ to: "/portal" });
+      if (session) {
+        const pending = typeof window !== "undefined"
+          ? sessionStorage.getItem("bramwell_pending_purchase")
+          : null;
+        if (pending) {
+          navigate({ to: "/pricing", search: { resume: pending } as any });
+        } else {
+          navigate({ to: "/portal" });
+        }
+      }
     });
     return () => subscription.unsubscribe();
   }, [navigate]);
@@ -38,7 +47,11 @@ function SignupPage() {
       email,
       password,
       options: {
-        emailRedirectTo: window.location.origin + "/portal",
+        emailRedirectTo:
+          window.location.origin +
+          (sessionStorage.getItem("bramwell_pending_purchase")
+            ? `/pricing?resume=${sessionStorage.getItem("bramwell_pending_purchase")}`
+            : "/portal"),
         data: { first_name: firstName },
       },
     });
@@ -49,8 +62,10 @@ function SignupPage() {
 
   async function onGoogle() {
     setError(null);
+    const pending = sessionStorage.getItem("bramwell_pending_purchase");
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin + "/portal",
+      redirect_uri:
+        window.location.origin + (pending ? `/pricing?resume=${pending}` : "/portal"),
     });
     if (result.error) setError(result.error.message);
   }
