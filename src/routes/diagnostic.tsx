@@ -202,19 +202,29 @@ function DiagnosticPage() {
         const body = (await res.json().catch(() => ({}))) as { error?: string };
         throw new Error(body?.error ?? `Could not start (${res.status})`);
       }
-      const { token, sessionId } = (await res.json()) as {
-        token: string;
+      const { token, sessionId, agentId, authMode } = (await res.json()) as {
+        token?: string;
         agentId: string;
         sessionId: string;
+        authMode?: "token" | "public-agent";
       };
       sessionIdRef.current = sessionId;
       transcriptRef.current = [];
       submittedRef.current = false;
 
-      await conversation.startSession({
-        conversationToken: token,
-        connectionType: "webrtc",
-      });
+      if (authMode === "public-agent") {
+        await conversation.startSession({
+          agentId,
+          connectionType: "webrtc",
+        });
+      } else if (token) {
+        await conversation.startSession({
+          conversationToken: token,
+          connectionType: "webrtc",
+        });
+      } else {
+        throw new Error("Could not start diagnostic");
+      }
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Something went wrong";
       console.error("[diagnostic] start failed", e);
