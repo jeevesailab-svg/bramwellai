@@ -3,12 +3,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { useStripeCheckout } from "@/hooks/useStripeCheckout";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
+import { createPortalSession } from "@/lib/payments.functions";
+import { getStripeEnvironment } from "@/lib/stripe";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
   validateSearch: (search: Record<string, unknown>) => ({
     recommended:
       typeof search.recommended === "string" ? search.recommended : undefined,
+    resume:
+      typeof search.resume === "string" ? search.resume : undefined,
   }),
   head: () => ({
     meta: [
@@ -131,7 +135,7 @@ const PATHWAYS: Pathway[] = [
 ];
 
 function PricingPage() {
-  const { recommended } = Route.useSearch();
+  const { recommended, resume } = Route.useSearch();
   const recommendedKey = (
     ["graduate", "comeback", "confidence", "executive", "club"] as const
   ).find((k) => k === recommended);
@@ -142,12 +146,35 @@ function PricingPage() {
 
   const { openCheckout, closeCheckout, isOpen, checkoutElement } = useStripeCheckout();
   const [user, setUser] = useState<{ id: string; email?: string | null } | null>(null);
+  const [activePlan, setActivePlan] = useState<{
+    pathway: string | null;
+    expiresAt: string | null;
+  } | null>(null);
+  const [blockMessage, setBlockMessage] = useState<string | null>(null);
+  const [portalLoading, setPortalLoading] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
-    supabase.auth.getUser().then(({ data }) => {
-      if (!cancelled) setUser(data.user ? { id: data.user.id, email: data.user.email } : null);
-    });
+    (async () => {
+      const { data } = await supabase.auth.getUser();
+      if (cancelled || !data.user) return;
+      setUser({ id: data.user.id, email: data.user.email });
+      const { data: row } = await supabase
+        .from("users")
+        .select("payment_status, pathway, access_expires_at, sessions_purchased, sessions_completed")
+        .eq("id", data.user.id)
+        .maybeSingle();
+      if (cancelled) return;
+      const isPaid = row?.payment_status === "paid";
+      const notExpired = !row?.access_expires_at || new Date(row.access_expires_at) > new Date();
+      const hasSessionsLeft = (row?.sessions_purchased ?? 0) > (row?.sessions_completed ?? 0);
+      if (isPaid && notExpired && hasSessionsLeft) {
+        setActivePlan({
+          pathway: row?.pathway ?? null,
+          expiresAt: row?.access_expires_at ?? null,
+        });
+      }
+    })();
     return () => { cancelled = true; };
   }, []);
 
@@ -158,12 +185,64 @@ function PricingPage() {
       window.location.href = "/signup?next=/pricing";
       return;
     }
+    if (activePlan) {
+      const expires = activePlan.expiresAt
+        ? new Date(activePlan.expiresAt).toLocaleDateString(undefined, {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })
+        : null;
+      setBlockMessage(
+        `You already have an active ${activePlan.pathway ?? "Bramwell"} plan${
+          expires ? ` through ${expires}` : ""
+        }. Finish your current pathway first, or manage your billing to switch.`,
+      );
+      return;
+    }
     openCheckout({
       priceId: PRICE_IDS[key],
       customerEmail: user.email ?? undefined,
       userId: user.id,
       returnUrl: `${window.location.origin}/portal?checkout=success&pathway=${key}&session_id={CHECKOUT_SESSION_ID}`,
     });
+  };
+
+  // Auto-resume checkout after signup/login
+  useEffect(() => {
+    if (!user) return;
+    const pendingFromUrl = resume;
+    const pendingFromStorage =
+      typeof window !== "undefined"
+        ? sessionStorage.getItem("bramwell_pending_purchase")
+        : null;
+    const pending = (pendingFromUrl || pendingFromStorage) as
+      | keyof typeof PRICE_IDS
+      | null;
+    if (pending && PRICE_IDS[pending]) {
+      sessionStorage.removeItem("bramwell_pending_purchase");
+      // Defer so activePlan check (in handlePurchase) sees latest state
+      setTimeout(() => handlePurchase(pending), 0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, activePlan, resume]);
+
+  const openBillingPortal = async () => {
+    setPortalLoading(true);
+    try {
+      const result = await createPortalSession({
+        data: {
+          returnUrl: `${window.location.origin}/portal`,
+          environment: getStripeEnvironment(),
+        },
+      });
+      if ("error" in result) throw new Error(result.error);
+      window.open(result.url, "_blank");
+    } catch (e) {
+      alert((e as Error).message);
+    } finally {
+      setPortalLoading(false);
+    }
   };
 
   return (
@@ -257,6 +336,38 @@ function PricingPage() {
               ✕
             </button>
             {checkoutElement}
+          </div>
+        </div>
+      )}
+      {blockMessage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
+          <div className="relative w-full max-w-md rounded-2xl border border-border bg-background p-6 shadow-2xl">
+            <h3 className="text-lg font-semibold tracking-tight">You're already in.</h3>
+            <p className="mt-3 text-sm text-muted-foreground">{blockMessage}</p>
+            <div className="mt-6 flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={openBillingPortal}
+                disabled={portalLoading}
+                className="inline-flex h-11 items-center justify-center rounded-full text-sm font-semibold transition hover:opacity-95 disabled:opacity-60"
+                style={{ background: "var(--gradient-gold)", color: "var(--primary-foreground)" }}
+              >
+                {portalLoading ? "Opening…" : "Manage billing"}
+              </button>
+              <Link
+                to="/portal"
+                className="inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 text-sm font-medium hover:bg-foreground/10"
+              >
+                Back to portal
+              </Link>
+              <button
+                type="button"
+                onClick={() => setBlockMessage(null)}
+                className="text-xs uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}

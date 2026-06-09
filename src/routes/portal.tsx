@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Outlet, useNavigate, useSearch } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
+import { createPortalSession } from "@/lib/payments.functions";
+import { getStripeEnvironment } from "@/lib/stripe";
 
 const PATHWAY_WELCOMES: Record<string, string> = {
   graduate: "Welcome. Let us build the career story that lands you the role.",
@@ -25,6 +27,7 @@ function PortalLayout() {
   const [ready, setReady] = useState(false);
   const [welcome, setWelcome] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
+  const [portalLoading, setPortalLoading] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -81,6 +84,24 @@ function PortalLayout() {
     }
   };
 
+  const openBillingPortal = async () => {
+    setPortalLoading(true);
+    try {
+      const result = await createPortalSession({
+        data: {
+          returnUrl: `${window.location.origin}/portal`,
+          environment: getStripeEnvironment(),
+        },
+      });
+      if ("error" in result) throw new Error(result.error);
+      window.open(result.url, "_blank");
+    } catch (e) {
+      alert((e as Error).message);
+    } finally {
+      setPortalLoading(false);
+    }
+  };
+
   if (!ready) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background text-sm text-muted-foreground">
@@ -106,6 +127,16 @@ function PortalLayout() {
           </button>
         </div>
       )}
+      <div className="flex justify-end border-b border-border bg-background/50 px-6 py-2">
+        <button
+          type="button"
+          onClick={openBillingPortal}
+          disabled={portalLoading}
+          className="text-xs uppercase tracking-[0.18em] text-muted-foreground transition hover:text-foreground disabled:opacity-60"
+        >
+          {portalLoading ? "Opening…" : "Manage billing →"}
+        </button>
+      </div>
       <Outlet />
     </>
   );
