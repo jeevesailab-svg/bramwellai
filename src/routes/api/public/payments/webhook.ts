@@ -69,6 +69,7 @@ async function grantAccess(opts: {
   priceId: string;
   customerId: string;
   subscriptionId?: string;
+  email?: string;
 }) {
   const cfg = getPathwayConfig(opts.priceId);
   if (!cfg) {
@@ -77,6 +78,7 @@ async function grantAccess(opts: {
   }
   const expiresAt = new Date(Date.now() + cfg.accessDays * 86400 * 1000).toISOString();
   const update: Record<string, unknown> = {
+    id: opts.userId,
     pathway: cfg.pathway,
     payment_status: "paid",
     sessions_purchased: cfg.sessions,
@@ -85,6 +87,7 @@ async function grantAccess(opts: {
     stripe_customer_id: opts.customerId,
     welcome_shown: false,
   };
+  if (opts.email) update.email = opts.email;
   if (opts.subscriptionId) {
     update.stripe_subscription_id = opts.subscriptionId;
     update.subscription_status = "active";
@@ -93,8 +96,13 @@ async function grantAccess(opts: {
   } else {
     update.stripe_payment_id = opts.customerId;
   }
-  const { error } = await getSupabase().from("users").update(update).eq("id", opts.userId);
-  if (error) console.error("grantAccess update failed", error);
+  // Upsert as a defensive fallback: if the auth.users -> public.users
+  // trigger ever failed (or this user predates it), insert the row
+  // rather than silently no-op'ing the payment.
+  const { error } = await getSupabase()
+    .from("users")
+    .upsert(update, { onConflict: "id" });
+  if (error) console.error("grantAccess upsert failed", error);
   return cfg;
 }
 
@@ -146,7 +154,7 @@ async function handleCheckoutCompleted(session: any, env: StripeEnv) {
   // Grant access (requires userId)
   let cfg = null;
   if (userId) {
-    cfg = await grantAccess({ userId, priceId, customerId, subscriptionId: subId });
+    cfg = await grantAccess({ userId, priceId, customerId, subscriptionId: subId, email });
   }
 
   // Send receipt
