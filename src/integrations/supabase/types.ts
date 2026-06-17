@@ -21,10 +21,12 @@ export type Database = {
           completed_at: string | null
           created_at: string
           email: string | null
+          ended_at: string | null
           first_name: string | null
           gaps: Json | null
           id: string
           ip_address: string
+          needs_followup: boolean
           readiness_score: number | null
           recommended_pathway: string | null
           recommended_pathway_name: string | null
@@ -37,10 +39,12 @@ export type Database = {
           completed_at?: string | null
           created_at?: string
           email?: string | null
+          ended_at?: string | null
           first_name?: string | null
           gaps?: Json | null
           id?: string
           ip_address: string
+          needs_followup?: boolean
           readiness_score?: number | null
           recommended_pathway?: string | null
           recommended_pathway_name?: string | null
@@ -53,10 +57,12 @@ export type Database = {
           completed_at?: string | null
           created_at?: string
           email?: string | null
+          ended_at?: string | null
           first_name?: string | null
           gaps?: Json | null
           id?: string
           ip_address?: string
+          needs_followup?: boolean
           readiness_score?: number | null
           recommended_pathway?: string | null
           recommended_pathway_name?: string | null
