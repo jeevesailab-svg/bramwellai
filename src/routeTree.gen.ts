@@ -23,6 +23,7 @@ import { Route as DiagnosticResultRouteImport } from './routes/diagnostic.result
 import { Route as ApiPublicQuizLeadRouteImport } from './routes/api/public/quiz-lead'
 import { Route as ApiPublicDiagnosticTokenRouteImport } from './routes/api/public/diagnostic-token'
 import { Route as ApiPublicDiagnosticResultRouteImport } from './routes/api/public/diagnostic-result'
+import { Route as ApiPublicDiagnosticIncompleteRouteImport } from './routes/api/public/diagnostic-incomplete'
 import { Route as ApiPublicDiagnosticEmailRouteImport } from './routes/api/public/diagnostic-email'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 
@@ -98,6 +99,12 @@ const ApiPublicDiagnosticResultRoute =
     path: '/api/public/diagnostic-result',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicDiagnosticIncompleteRoute =
+  ApiPublicDiagnosticIncompleteRouteImport.update({
+    id: '/api/public/diagnostic-incomplete',
+    path: '/api/public/diagnostic-incomplete',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicDiagnosticEmailRoute =
   ApiPublicDiagnosticEmailRouteImport.update({
     id: '/api/public/diagnostic-email',
@@ -124,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/portal/setup': typeof PortalSetupRoute
   '/portal/': typeof PortalIndexRoute
   '/api/public/diagnostic-email': typeof ApiPublicDiagnosticEmailRoute
+  '/api/public/diagnostic-incomplete': typeof ApiPublicDiagnosticIncompleteRoute
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
@@ -141,6 +149,7 @@ export interface FileRoutesByTo {
   '/portal/setup': typeof PortalSetupRoute
   '/portal': typeof PortalIndexRoute
   '/api/public/diagnostic-email': typeof ApiPublicDiagnosticEmailRoute
+  '/api/public/diagnostic-incomplete': typeof ApiPublicDiagnosticIncompleteRoute
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
@@ -160,6 +169,7 @@ export interface FileRoutesById {
   '/portal/setup': typeof PortalSetupRoute
   '/portal/': typeof PortalIndexRoute
   '/api/public/diagnostic-email': typeof ApiPublicDiagnosticEmailRoute
+  '/api/public/diagnostic-incomplete': typeof ApiPublicDiagnosticIncompleteRoute
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/portal/setup'
     | '/portal/'
     | '/api/public/diagnostic-email'
+    | '/api/public/diagnostic-incomplete'
     | '/api/public/diagnostic-result'
     | '/api/public/diagnostic-token'
     | '/api/public/quiz-lead'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/portal/setup'
     | '/portal'
     | '/api/public/diagnostic-email'
+    | '/api/public/diagnostic-incomplete'
     | '/api/public/diagnostic-result'
     | '/api/public/diagnostic-token'
     | '/api/public/quiz-lead'
@@ -215,6 +227,7 @@ export interface FileRouteTypes {
     | '/portal/setup'
     | '/portal/'
     | '/api/public/diagnostic-email'
+    | '/api/public/diagnostic-incomplete'
     | '/api/public/diagnostic-result'
     | '/api/public/diagnostic-token'
     | '/api/public/quiz-lead'
@@ -230,6 +243,7 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   SignupRoute: typeof SignupRoute
   ApiPublicDiagnosticEmailRoute: typeof ApiPublicDiagnosticEmailRoute
+  ApiPublicDiagnosticIncompleteRoute: typeof ApiPublicDiagnosticIncompleteRoute
   ApiPublicDiagnosticResultRoute: typeof ApiPublicDiagnosticResultRoute
   ApiPublicDiagnosticTokenRoute: typeof ApiPublicDiagnosticTokenRoute
   ApiPublicQuizLeadRoute: typeof ApiPublicQuizLeadRoute
@@ -336,6 +350,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicDiagnosticResultRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/diagnostic-incomplete': {
+      id: '/api/public/diagnostic-incomplete'
+      path: '/api/public/diagnostic-incomplete'
+      fullPath: '/api/public/diagnostic-incomplete'
+      preLoaderRoute: typeof ApiPublicDiagnosticIncompleteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/diagnostic-email': {
       id: '/api/public/diagnostic-email'
       path: '/api/public/diagnostic-email'
@@ -389,6 +410,7 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   SignupRoute: SignupRoute,
   ApiPublicDiagnosticEmailRoute: ApiPublicDiagnosticEmailRoute,
+  ApiPublicDiagnosticIncompleteRoute: ApiPublicDiagnosticIncompleteRoute,
   ApiPublicDiagnosticResultRoute: ApiPublicDiagnosticResultRoute,
   ApiPublicDiagnosticTokenRoute: ApiPublicDiagnosticTokenRoute,
   ApiPublicQuizLeadRoute: ApiPublicQuizLeadRoute,
