@@ -144,6 +144,16 @@ function DiagnosticPage() {
     onConnect: () => setPhase("live"),
     onDisconnect: () => {
       setPhase((p) => (p === "wrapping" ? "wrapping" : "intro"));
+      // Fallback: if the agent ended the call without invoking submitDiagnostic,
+      // flag the session so we can follow up manually instead of losing the lead.
+      const sid = sessionIdRef.current;
+      if (sid && !submittedRef.current) {
+        void fetch("/api/public/diagnostic-incomplete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId: sid }),
+        }).catch(() => undefined);
+      }
     },
     onError: (err) => {
       console.error("[diagnostic] conversation error", err);
