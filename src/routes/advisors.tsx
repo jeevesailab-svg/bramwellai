@@ -5,9 +5,9 @@ import {
   PageHero,
   StatsBar,
   HowItWorks,
-  FinalPricingCTA,
   GoldText,
 } from "@/components/site/SiteChrome";
+import { InstitutionalAccess } from "@/components/site/InstitutionalAccess";
 
 export const Route = createFileRoute("/advisors")({
   component: AdvisorsPage,
@@ -154,16 +154,7 @@ function AdvisorsPage() {
       />
       </div>
 
-      <div id="access">
-      <FinalPricingCTA
-        pathway="advisors"
-        title="Institutional early access."
-        highlight="Now open to a small group."
-        body="Bulk access, referral codes, and outcome reporting for employability teams. Request early access — or send a student to the free diagnostic today."
-        primary={{ label: "Request Institutional Access", href: "mailto:hello@bramwellai.com?subject=Institutional%20access" }}
-        secondary={{ label: "Try the Free Diagnostic", href: "/diagnostic?autostart=1" }}
-      />
-      </div>
+      <InstitutionalAccess />
 
       <SiteFooter />
     </main>
