@@ -33,6 +33,7 @@ function AdvisorsPage() {
     <main className="min-h-screen bg-background text-foreground">
       <SiteNav ctaLabel="Get Early Access" ctaHref="#access" />
       <PageHero
+        pathway="advisors"
         eyebrow="For career advisors and employability teams"
         headline={
           <>
@@ -152,6 +153,7 @@ function AdvisorsPage() {
       />
 
       <FinalPricingCTA
+        pathway="advisors"
         title="Institutional early access."
         highlight="Now open to a small group."
         body="Bulk access, referral codes, and outcome reporting for employability teams. Request early access — or send a student to the free diagnostic today."

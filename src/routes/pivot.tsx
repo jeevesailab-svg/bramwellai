@@ -35,6 +35,7 @@ function PivotPage() {
     <main className="min-h-screen bg-background text-foreground">
       <SiteNav ctaLabel={PRIMARY.label} ctaHref={PRIMARY.href} />
       <PageHero
+        pathway="pivot"
         eyebrow="For experienced professionals making a career pivot"
         headline={
           <>
@@ -121,6 +122,7 @@ function PivotPage() {
       </section>
 
       <FinalPricingCTA
+        pathway="pivot"
         title="The Confidence Pathway. $249 AUD."
         highlight="The pivot, in the language they hire in."
         body="Live voice coaching that translates twelve years of proof into the role you actually want. One payment. No subscription."

@@ -35,6 +35,7 @@ function ReturnerPage() {
     <main className="min-h-screen bg-background text-foreground">
       <SiteNav ctaLabel={PRIMARY.label} ctaHref={PRIMARY.href} />
       <PageHero
+        pathway="returner"
         eyebrow="For professionals returning from a career gap"
         headline={
           <>
@@ -122,6 +123,7 @@ function ReturnerPage() {
       </section>
 
       <FinalPricingCTA
+        pathway="returner"
         title="The Comeback Pathway. $199 AUD."
         highlight="The gap, owned. The apology, gone."
         body="Live voice coaching on the questions every returner gets — until you answer them without flinching. One payment. No subscription."

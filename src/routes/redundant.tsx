@@ -35,6 +35,7 @@ function RedundantPage() {
     <main className="min-h-screen bg-background text-foreground">
       <SiteNav ctaLabel={PRIMARY.label} ctaHref={PRIMARY.href} />
       <PageHero
+        pathway="comeback"
         eyebrow="For professionals back in the market after redundancy"
         headline={
           <>
@@ -121,6 +122,7 @@ function RedundantPage() {
       </section>
 
       <FinalPricingCTA
+        pathway="comeback"
         title="The Comeback Pathway. $199 AUD."
         highlight="Back in the market. On the front foot."
         body="Live voice coaching on the redundancy question, the gap, the follow-ups. One payment. No subscription."
