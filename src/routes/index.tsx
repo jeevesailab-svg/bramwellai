@@ -99,19 +99,19 @@ function Hero() {
             color: "transparent",
           }}
         >
-          Private coaching for the interviews that matter
+          Voice coaching for the rooms that decide everything
         </p>
 
         <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-          Everyone in that room prepared.
+          Everyone in that room prepared their answers.
           <br />
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
-            Only one of them prepared with Bramwell.
+            Only one of them prepared how they sounded.
           </span>
         </h1>
 
         <p className="mx-auto mt-8 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Live voice coaching that listens to how you actually sound. Real-time feedback on the answers that decide whether you get chosen.
+          Live voice coaching that hears how you actually come across. Real-time, answer-by-answer feedback on the exact moments that get people chosen — or silently forgotten.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
