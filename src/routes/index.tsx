@@ -100,20 +100,24 @@ function Hero() {
         </div>
 
         <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-          Know exactly how you sound{" "}
+          Fix the exact habit that's costing you the{" "}
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>
-            before
-          </span>{" "}
-          the room decides for you.
+            room.
+          </span>
         </h1>
 
-        <p className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Bramwell is the AI communication and interview coach for career-defining conversations.
-        </p>
-
-        <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground/90 md:text-lg">
-          Practise out loud. Get your Readiness Score. Fix the answers, habits and blind spots that could cost you the role, promotion or opportunity.
-        </p>
+        <div className="mx-auto mt-8 max-w-2xl space-y-4 text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
+          <p>
+            You knew the answer. Then you opened your mouth — and the words that came out weren't the ones you had.
+          </p>
+          <p>You didn't get the job. You already know why.</p>
+          <p className="font-medium text-foreground">
+            That's not a confidence problem. It's a practice problem. And it's fixable tonight.
+          </p>
+          <p>
+            Bramwell listens to how you actually sound, scores your Readiness, and fixes the one habit standing between you and the offer.
+          </p>
+        </div>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <a
@@ -125,19 +129,13 @@ function Hero() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Get Your Free Readiness Score
+            Find out what's costing you the room — free, 5 minutes
             <span className="transition-transform group-hover:translate-x-0.5">→</span>
-          </a>
-          <a
-            href="#how"
-            className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-          >
-            See how Bramwell works
           </a>
         </div>
 
         <p className="mx-auto mt-6 text-xs text-muted-foreground/80 md:text-sm">
-          5 minutes. No login. No credit card.
+          No card. No login. Just the truth about where you stand.
         </p>
       </div>
     </section>
