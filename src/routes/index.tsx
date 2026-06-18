@@ -140,39 +140,28 @@ function Hero() {
   );
 }
 
-/* ───────────── Stats ───────────── */
+/* ───────────── Stats Statement ───────────── */
 function Stats() {
-  const stats = [
-    {
-      value: "340",
-      label: "Candidates competing for the role you just applied for.",
-    },
-    {
-      value: "$5,000",
-      label: "Per session with the coaches who built this methodology.",
-    },
-    {
-      value: "$199",
-      label: "What it costs you. Tonight. No waitlist.",
-    },
-  ];
   return (
-    <section
-      className="relative border-y border-border py-16 md:py-20"
-      style={{ background: "oklch(0.12 0.02 255)" }}
-    >
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-3 md:gap-8 md:px-10">
-        {stats.map((s) => (
-          <div key={s.value} className="text-center md:text-left">
-            <div
-              className="bg-clip-text text-5xl font-semibold tracking-tight text-transparent md:text-6xl"
-              style={{ backgroundImage: "var(--gradient-gold)" }}
-            >
-              {s.value}
-            </div>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">{s.label}</p>
-          </div>
-        ))}
+    <section className="relative border-y border-border bg-background py-20 md:py-32">
+      <div className="mx-auto max-w-5xl px-6 md:px-10">
+        <h2 className="text-balance text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
+          ANSWER SHARPER.
+          <br />
+          SOUND SENIOR.
+          <br />
+          <span
+            className="bg-clip-text text-transparent"
+            style={{ backgroundImage: "var(--gradient-gold)" }}
+          >
+            GET CHOSEN.
+          </span>
+        </h2>
+        <p className="mx-auto mt-10 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:mt-14 md:text-xl md:leading-relaxed">
+          Most candidates rehearse in their head, practice with friends who can’t judge senior-level answers, or watch generic tips on repeat. You never actually{" "}
+          <em className="not-italic font-medium text-foreground">hear</em>{" "}
+          how you sound under pressure. Bramwell gives you live voice coaching with real-time feedback on the exact answers that decide whether you get chosen — built on the same methodology as $5,000-a-session executive coaches.
+        </p>
       </div>
     </section>
   );
