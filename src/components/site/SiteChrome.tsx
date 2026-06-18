@@ -149,6 +149,7 @@ export function PageHero({
   primaryCta,
   secondary,
   pathway,
+  badge,
 }: {
   eyebrow: string;
   headline: ReactNode;
@@ -156,6 +157,7 @@ export function PageHero({
   primaryCta: { label: string; href: string };
   secondary?: { label: string; href: string };
   pathway?: Pathway;
+  badge?: string;
 }) {
   return (
     <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
@@ -165,6 +167,12 @@ export function PageHero({
         style={{ background: "var(--gradient-gold)" }}
       />
       <div className="relative z-10 mx-auto max-w-5xl px-6 pb-24 pt-12 text-center md:px-10 md:pb-32 md:pt-20">
+        {badge ? (
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>
+            <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--primary)" }} />
+            {badge}
+          </div>
+        ) : null}
         <p
           className="mx-auto mb-8 text-xs font-medium uppercase tracking-[0.22em] md:text-sm"
           style={{ backgroundImage: "var(--gradient-gold)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}
