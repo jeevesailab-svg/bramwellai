@@ -44,7 +44,7 @@ function AdvisorsPage() {
         }
         subhead="A private voice coach for every student on your caseload. Available 11pm Sunday before Monday's interview. No booking, no waitlist, no extra advisor hours."
         primaryCta={{ label: "Get Early Access for Your Institution", href: "#access" }}
-        secondary={{ label: "See how it works", href: "#how" }}
+        secondary={{ label: "See how it works", href: "#advisor-how" }}
       />
 
       <StatsBar
@@ -142,6 +142,7 @@ function AdvisorsPage() {
         </div>
       </section>
 
+      <div id="advisor-how">
       <HowItWorks
         title="Simple to refer."
         highlight="Transformative to use."
@@ -151,7 +152,9 @@ function AdvisorsPage() {
           { n: "03", t: "Practice until it's owned", b: "Live two-way voice coaching on the exact questions their panel is likely to ask. Bramwell doesn't move on until the answer is ready." },
         ]}
       />
+      </div>
 
+      <div id="access">
       <FinalPricingCTA
         pathway="advisors"
         title="Institutional early access."
@@ -160,6 +163,7 @@ function AdvisorsPage() {
         primary={{ label: "Request Institutional Access", href: "mailto:hello@bramwellai.com?subject=Institutional%20access" }}
         secondary={{ label: "Try the Free Diagnostic", href: "/diagnostic?autostart=1" }}
       />
+      </div>
 
       <SiteFooter />
     </main>
