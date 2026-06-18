@@ -4,20 +4,20 @@ import { StickyMobileCTA } from "@/components/site/StickyMobileCTA";
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
-    meta: [
-      { title: "Bramwell AI — The coaching that gets people chosen" },
-      {
-        name: "description",
-        content:
-          "Live voice coaching for high-stakes interviews. Built on the same methodology as $5,000-a-session executive coaches. Take the free 5-minute diagnostic.",
-      },
-      { property: "og:title", content: "Bramwell AI — The coaching that gets people chosen" },
-      {
-        property: "og:description",
-        content:
-          "Live voice coaching for the interviews that change everything. Free 5-minute diagnostic. No login, no card.",
-      },
-    ],
+      meta: [
+        { title: "Bramwell AI — Voice coaching that gets people chosen" },
+        {
+          name: "description",
+          content:
+            "Live voice coaching that hears what the panel hears. Real-time feedback on the answers that get people chosen. Take the free 5-minute diagnostic.",
+        },
+        { property: "og:title", content: "Bramwell AI — Voice coaching that gets people chosen" },
+        {
+          property: "og:description",
+          content:
+            "Live voice coaching that hears what the panel hears. Real-time feedback on the answers that get people chosen. Free 5-minute diagnostic. No login, no card.",
+        },
+      ],
   }),
 });
 
