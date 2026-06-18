@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as RedundantRouteImport } from './routes/redundant'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as LoginRouteImport } from './routes/login'
@@ -32,6 +33,11 @@ import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/publi
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RedundantRoute = RedundantRouteImport.update({
+  id: '/redundant',
+  path: '/redundant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -139,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/redundant': typeof RedundantRoute
   '/signup': typeof SignupRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
@@ -159,6 +166,7 @@ export interface FileRoutesByTo {
   '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
+  '/redundant': typeof RedundantRoute
   '/signup': typeof SignupRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
@@ -181,6 +189,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/redundant': typeof RedundantRoute
   '/signup': typeof SignupRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
@@ -204,6 +213,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/portal'
     | '/pricing'
+    | '/redundant'
     | '/signup'
     | '/diagnostic/result'
     | '/portal/coach'
@@ -224,6 +234,7 @@ export interface FileRouteTypes {
     | '/graduate'
     | '/login'
     | '/pricing'
+    | '/redundant'
     | '/signup'
     | '/diagnostic/result'
     | '/portal/coach'
@@ -245,6 +256,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/portal'
     | '/pricing'
+    | '/redundant'
     | '/signup'
     | '/diagnostic/result'
     | '/portal/coach'
@@ -267,6 +279,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
+  RedundantRoute: typeof RedundantRoute
   SignupRoute: typeof SignupRoute
   ApiPublicDiagnosticEmailRoute: typeof ApiPublicDiagnosticEmailRoute
   ApiPublicDiagnosticIncompleteRoute: typeof ApiPublicDiagnosticIncompleteRoute
@@ -283,6 +296,13 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/redundant': {
+      id: '/redundant'
+      path: '/redundant'
+      fullPath: '/redundant'
+      preLoaderRoute: typeof RedundantRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -450,6 +470,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,
+  RedundantRoute: RedundantRoute,
   SignupRoute: SignupRoute,
   ApiPublicDiagnosticEmailRoute: ApiPublicDiagnosticEmailRoute,
   ApiPublicDiagnosticIncompleteRoute: ApiPublicDiagnosticIncompleteRoute,
