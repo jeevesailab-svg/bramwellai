@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { z } from "zod";
 import { GoldText } from "@/components/site/SiteChrome";
 
