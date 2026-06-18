@@ -17,6 +17,7 @@ import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PivotRouteImport } from './routes/pivot'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as GraduateRouteImport } from './routes/graduate'
+import { Route as ExecutiveRouteImport } from './routes/executive'
 import { Route as DiagnosticRouteImport } from './routes/diagnostic'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AdvisorsRouteImport } from './routes/advisors'
@@ -70,6 +71,11 @@ const LoginRoute = LoginRouteImport.update({
 const GraduateRoute = GraduateRouteImport.update({
   id: '/graduate',
   path: '/graduate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExecutiveRoute = ExecutiveRouteImport.update({
+  id: '/executive',
+  path: '/executive',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiagnosticRoute = DiagnosticRouteImport.update({
@@ -153,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
   '/diagnostic': typeof DiagnosticRouteWithChildren
+  '/executive': typeof ExecutiveRoute
   '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
   '/pivot': typeof PivotRoute
@@ -177,6 +184,7 @@ export interface FileRoutesByTo {
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
   '/diagnostic': typeof DiagnosticRouteWithChildren
+  '/executive': typeof ExecutiveRoute
   '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
   '/pivot': typeof PivotRoute
@@ -201,6 +209,7 @@ export interface FileRoutesById {
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
   '/diagnostic': typeof DiagnosticRouteWithChildren
+  '/executive': typeof ExecutiveRoute
   '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
   '/pivot': typeof PivotRoute
@@ -227,6 +236,7 @@ export interface FileRouteTypes {
     | '/advisors'
     | '/dashboard'
     | '/diagnostic'
+    | '/executive'
     | '/graduate'
     | '/login'
     | '/pivot'
@@ -251,6 +261,7 @@ export interface FileRouteTypes {
     | '/advisors'
     | '/dashboard'
     | '/diagnostic'
+    | '/executive'
     | '/graduate'
     | '/login'
     | '/pivot'
@@ -274,6 +285,7 @@ export interface FileRouteTypes {
     | '/advisors'
     | '/dashboard'
     | '/diagnostic'
+    | '/executive'
     | '/graduate'
     | '/login'
     | '/pivot'
@@ -299,6 +311,7 @@ export interface RootRouteChildren {
   AdvisorsRoute: typeof AdvisorsRoute
   DashboardRoute: typeof DashboardRoute
   DiagnosticRoute: typeof DiagnosticRouteWithChildren
+  ExecutiveRoute: typeof ExecutiveRoute
   GraduateRoute: typeof GraduateRoute
   LoginRoute: typeof LoginRoute
   PivotRoute: typeof PivotRoute
@@ -371,6 +384,13 @@ declare module '@tanstack/react-router' {
       path: '/graduate'
       fullPath: '/graduate'
       preLoaderRoute: typeof GraduateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/executive': {
+      id: '/executive'
+      path: '/executive'
+      fullPath: '/executive'
+      preLoaderRoute: typeof ExecutiveRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/diagnostic': {
@@ -506,6 +526,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdvisorsRoute: AdvisorsRoute,
   DashboardRoute: DashboardRoute,
   DiagnosticRoute: DiagnosticRouteWithChildren,
+  ExecutiveRoute: ExecutiveRoute,
   GraduateRoute: GraduateRoute,
   LoginRoute: LoginRoute,
   PivotRoute: PivotRoute,
