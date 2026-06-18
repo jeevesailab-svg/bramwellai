@@ -236,6 +236,25 @@ function ValueDislocation() {
             <span className="font-medium text-foreground">Bramwell is open right now.</span>
           </p>
         </div>
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a
+            href="/pricing"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition hover:opacity-95"
+            style={{
+              background: "var(--gradient-gold)",
+              color: "var(--primary-foreground)",
+              boxShadow: "var(--shadow-elegant)",
+            }}
+          >
+            See Pricing →
+          </a>
+          <a
+            href="/diagnostic?autostart=1"
+            className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+          >
+            Or take the free 5-minute diagnostic first
+          </a>
+        </div>
       </div>
     </section>
   );
