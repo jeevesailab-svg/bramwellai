@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { StickyMobileCTA } from "@/components/site/StickyMobileCTA";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -35,6 +36,7 @@ function Index() {
       <FAQ />
       <FinalCTA />
       <Footer />
+      <StickyMobileCTA />
     </main>
   );
 }
