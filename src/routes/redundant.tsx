@@ -40,7 +40,7 @@ function RedundantPage() {
           <>
             They made you redundant.
             <br />
-            <GoldText>Now they want it in sixty seconds.</GoldText>
+            <GoldText>Now explain it in sixty seconds.</GoldText>
           </>
         }
         subhead="You have more capability than most people in this process. You also haven't done this in years — and that gap is loud in the room before you've said a word. Bramwell prepares you for every question that's coming."
