@@ -703,6 +703,16 @@ function FinalCTA() {
         <p className="mt-6 text-xs text-muted-foreground/80 md:text-sm">
           5 minutes. No credit card. No login. Just the truth about where you stand.
         </p>
+        <p className="mt-4 text-xs text-muted-foreground/80 md:text-sm">
+          Not ready to speak yet?{" "}
+          <a
+            href="/the-7-questions"
+            className="underline-offset-4 hover:text-foreground hover:underline"
+            style={{ color: "var(--primary)" }}
+          >
+            Read the 7 questions every panel asks →
+          </a>
+        </p>
         <p className="mt-4 text-xs italic text-muted-foreground/70 md:text-sm">
           The coaches who charge $5,000 for this are booked for six weeks. Bramwell is open right now.
         </p>
