@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { CtaWithCapture, type Pathway } from "./CtaWithCapture";
 
 export function SiteNav({ ctaLabel = "Take the Free Diagnostic", ctaHref = "/diagnostic?autostart=1" }: { ctaLabel?: string; ctaHref?: string }) {
   return (
@@ -147,12 +148,14 @@ export function PageHero({
   subhead,
   primaryCta,
   secondary,
+  pathway,
 }: {
   eyebrow: string;
   headline: ReactNode;
   subhead: string;
   primaryCta: { label: string; href: string };
   secondary?: { label: string; href: string };
+  pathway?: Pathway;
 }) {
   return (
     <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
@@ -175,7 +178,13 @@ export function PageHero({
           {subhead}
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
-          <GoldButton href={primaryCta.href}>{primaryCta.label}</GoldButton>
+          {pathway ? (
+            <CtaWithCapture href={primaryCta.href} pathway={pathway} source="hero_cta">
+              {primaryCta.label}
+            </CtaWithCapture>
+          ) : (
+            <GoldButton href={primaryCta.href}>{primaryCta.label}</GoldButton>
+          )}
           {secondary ? (
             <a href={secondary.href} className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
               {secondary.label}
@@ -218,6 +227,7 @@ export function FinalPricingCTA({
   secondary,
   urgency,
   note,
+  pathway,
 }: {
   title: string;
   highlight: string;
@@ -226,6 +236,7 @@ export function FinalPricingCTA({
   secondary?: { label: string; href: string };
   urgency?: string;
   note?: string;
+  pathway?: Pathway;
 }) {
   return (
     <section className="relative overflow-hidden border-t border-border py-28 md:py-40" style={{ background: "var(--gradient-hero)" }}>
@@ -242,7 +253,13 @@ export function FinalPricingCTA({
         </h2>
         <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">{body}</p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
-          <GoldButton href={primary.href}>{primary.label}</GoldButton>
+          {pathway ? (
+            <CtaWithCapture href={primary.href} pathway={pathway} source="final_cta">
+              {primary.label}
+            </CtaWithCapture>
+          ) : (
+            <GoldButton href={primary.href}>{primary.label}</GoldButton>
+          )}
           {secondary ? (
             <a href={secondary.href} className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
               {secondary.label}
