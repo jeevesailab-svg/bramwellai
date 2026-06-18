@@ -4,20 +4,20 @@ import { StickyMobileCTA } from "@/components/site/StickyMobileCTA";
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
-    meta: [
-      { title: "Bramwell AI — The coaching that gets people chosen" },
-      {
-        name: "description",
-        content:
-          "Live voice coaching for high-stakes interviews. Built on the same methodology as $5,000-a-session executive coaches. Take the free 5-minute diagnostic.",
-      },
-      { property: "og:title", content: "Bramwell AI — The coaching that gets people chosen" },
-      {
-        property: "og:description",
-        content:
-          "Live voice coaching for the interviews that change everything. Free 5-minute diagnostic. No login, no card.",
-      },
-    ],
+      meta: [
+        { title: "Bramwell AI — Voice coaching that gets people chosen" },
+        {
+          name: "description",
+          content:
+            "Live voice coaching that hears what the panel hears. Real-time feedback on the answers that get people chosen. Take the free 5-minute diagnostic.",
+        },
+        { property: "og:title", content: "Bramwell AI — Voice coaching that gets people chosen" },
+        {
+          property: "og:description",
+          content:
+            "Live voice coaching that hears what the panel hears. Real-time feedback on the answers that get people chosen. Free 5-minute diagnostic. No login, no card.",
+        },
+      ],
   }),
 });
 
@@ -99,19 +99,19 @@ function Hero() {
             color: "transparent",
           }}
         >
-          Private coaching for the interviews that matter
+          Voice coaching for the rooms that decide everything
         </p>
 
         <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-          Everyone in that room prepared.
+          Everyone in that room prepared their answers.
           <br />
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
-            Only one of them prepared with Bramwell.
+            Only one of them prepared how they sounded.
           </span>
         </h1>
 
         <p className="mx-auto mt-8 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Live voice coaching that listens to how you actually sound. Real-time feedback on the answers that decide whether you get chosen.
+          Live voice coaching that hears how you actually come across. Real-time, answer-by-answer feedback on the exact moments that get people chosen — or silently forgotten.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
