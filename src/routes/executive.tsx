@@ -35,6 +35,7 @@ function ExecutivePage() {
     <main className="min-h-screen bg-background text-foreground">
       <SiteNav ctaLabel={PRIMARY.label} ctaHref={PRIMARY.href} />
       <PageHero
+        pathway="executive"
         eyebrow="For senior leaders and executives"
         headline={
           <>
@@ -161,6 +162,7 @@ function ExecutivePage() {
       </section>
 
       <FinalPricingCTA
+        pathway="executive"
         title="The Executive Pathway. $499 AUD."
         highlight="The interview that changes the next decade."
         body="The preparation that used to cost $5,000 an engagement — available tonight, privately, without a referral. One payment. No record."

@@ -37,6 +37,7 @@ function GraduatePage() {
     <main className="min-h-screen bg-background text-foreground">
       <SiteNav ctaLabel={PRIMARY.label} ctaHref={PRIMARY.href} />
       <PageHero
+        pathway="graduate"
         eyebrow="For graduates entering the room for the first time"
         headline={
           <>
@@ -129,6 +130,7 @@ function GraduatePage() {
       </section>
 
       <FinalPricingCTA
+        pathway="graduate"
         title="The Graduate Pathway. $99 AUD."
         highlight="The interview that starts your career."
         body="Live voice coaching on the questions you'll actually face. One payment. No subscription."

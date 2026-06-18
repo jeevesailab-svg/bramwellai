@@ -72,6 +72,62 @@ export const Route = createFileRoute("/api/public/diagnostic-email")({
           }
         }
 
+        // Fire Klaviyo "Completed Diagnostic" event tagged with recommended pathway
+        const klaviyoKey = process.env.KLAVIYO_PRIVATE_API_KEY;
+        if (klaviyoKey) {
+          const pathway = (row.recommended_pathway ?? "unknown") as string;
+          const pretty =
+            row.recommended_pathway_name ??
+            pathway.charAt(0).toUpperCase() + pathway.slice(1);
+          try {
+            const kRes = await fetch("https://a.klaviyo.com/api/events/", {
+              method: "POST",
+              headers: {
+                Authorization: `Klaviyo-API-Key ${klaviyoKey}`,
+                "Content-Type": "application/json",
+                accept: "application/json",
+                revision: "2024-10-15",
+              },
+              body: JSON.stringify({
+                data: {
+                  type: "event",
+                  attributes: {
+                    properties: {
+                      pathway,
+                      source: "diagnostic_complete",
+                      readiness_score: row.readiness_score,
+                      communication_type: row.communication_type,
+                      career_moment: row.career_moment,
+                      recommended_price: row.recommended_price,
+                    },
+                    metric: {
+                      data: {
+                        type: "metric",
+                        attributes: { name: `Completed Diagnostic — ${pretty}` },
+                      },
+                    },
+                    profile: {
+                      data: {
+                        type: "profile",
+                        attributes: {
+                          email: row.email,
+                          first_name: row.first_name ?? undefined,
+                        },
+                      },
+                    },
+                  },
+                },
+              }),
+            });
+            if (!kRes.ok && kRes.status !== 202) {
+              console.warn("Klaviyo completion failed", kRes.status, await kRes.text());
+            }
+          } catch (kErr) {
+            const msg = kErr instanceof Error ? kErr.message : String(kErr);
+            console.warn("Klaviyo completion fetch failed", msg);
+          }
+        }
+
         return Response.json({ ok: true });
       },
     },
