@@ -111,7 +111,7 @@ function Hero() {
         </h1>
 
         <p className="mx-auto mt-8 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Live voice coaching that listens to how you actually sound. Real-time feedback on the answers that decide whether you get chosen.
+          Live voice coaching that gets you chosen.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
