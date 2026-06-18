@@ -1,23 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { StatBar } from "@/components/landing/StatBar";
-import { PainChecklist } from "@/components/landing/PainChecklist";
-import { GraduationCap, RefreshCcw, TrendingUp, Award } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Bramwell AI — Command the room. Be the one they remember." },
+      { title: "Bramwell AI — The coaching that gets people chosen" },
       {
         name: "description",
         content:
-          "Bramwell is the always-on AI communication coach for high-stakes career moments. Sound as capable as you are.",
+          "Live voice coaching for high-stakes interviews. Built on the same methodology as $5,000-a-session executive coaches. Take the free 5-minute diagnostic.",
       },
-      { property: "og:title", content: "Bramwell AI — Command the room." },
+      { property: "og:title", content: "Bramwell AI — The coaching that gets people chosen" },
       {
         property: "og:description",
         content:
-          "Always-on AI communication coaching for interviews, promotions, and the moments that matter.",
+          "Live voice coaching for the interviews that change everything. Free 5-minute diagnostic. No login, no card.",
       },
     ],
   }),
@@ -26,14 +23,14 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <Nav />
       <Hero />
-      <StatBar />
-      <PainChecklist />
-      <WhoFor />
-      <Problem />
+      <Stats />
+      <SecretWeapon />
+      <ValueDislocation />
+      <PainAccordion />
       <HowItWorks />
       <Pathways />
-      <AlwaysOn />
       <Testimonials />
       <FAQ />
       <FinalCTA />
@@ -42,55 +39,49 @@ function Index() {
   );
 }
 
+/* ───────────── Nav ───────────── */
+function Nav() {
+  return (
+    <header className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
+      <a href="/" className="flex items-baseline gap-1.5">
+        <span className="text-xl font-semibold tracking-tight">Bramwell</span>
+        <span className="text-xl font-light tracking-tight" style={{ color: "var(--primary)" }}>
+          AI
+        </span>
+      </a>
+      <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
+        <a href="#how" className="transition-colors hover:text-foreground">How It Works</a>
+        <a href="#pathways" className="transition-colors hover:text-foreground">Pathways</a>
+        <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
+        <a href="/login" className="transition-colors hover:text-foreground">Sign In</a>
+      </nav>
+      <a
+        href="/diagnostic?autostart=1"
+        className="inline-flex h-10 items-center justify-center rounded-full px-5 text-sm font-semibold transition hover:opacity-95"
+        style={{
+          background: "var(--gradient-gold)",
+          color: "var(--primary-foreground)",
+          boxShadow: "var(--shadow-elegant)",
+        }}
+      >
+        Take the Free Diagnostic — Free →
+      </a>
+    </header>
+  );
+}
+
+/* ───────────── Hero ───────────── */
 function Hero() {
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{ background: "var(--gradient-hero)" }}
-    >
-      {/* Nav */}
-      <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
-        <a href="/" className="flex items-baseline gap-1.5">
-          <span className="text-xl font-semibold tracking-tight">Bramwell</span>
-          <span
-            className="text-xl font-light tracking-tight"
-            style={{ color: "var(--primary)" }}
-          >
-            AI
-          </span>
-        </a>
-        <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-          <a href="#how" className="transition-colors hover:text-foreground">How it works</a>
-          <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
-          <a href="/login" className="transition-colors hover:text-foreground">Sign in</a>
-        </nav>
-        <a
-          href="/diagnostic"
-          className="inline-flex h-10 items-center justify-center rounded-full border border-border bg-foreground/5 px-5 text-sm font-medium backdrop-blur transition hover:bg-foreground/10"
-        >
-          Free diagnostic
-        </a>
-      </header>
-
-      {/* Ambient glow */}
+    <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 rounded-full opacity-30 blur-3xl"
         style={{ background: "var(--gradient-gold)" }}
       />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px"
-        style={{
-          background:
-            "linear-gradient(90deg, transparent, oklch(0.78 0.13 78 / 0.4), transparent)",
-        }}
-      />
-
-      {/* Hero content */}
-      <div className="relative z-10 mx-auto max-w-5xl px-6 pb-32 pt-20 text-center md:px-10 md:pb-40 md:pt-32">
+      <div className="relative z-10 mx-auto max-w-5xl px-6 pb-28 pt-12 text-center md:px-10 md:pb-40 md:pt-20">
         <p
-          className="mb-6 text-sm font-medium uppercase tracking-[0.22em] md:text-base"
+          className="mx-auto mb-8 max-w-3xl text-xs font-medium uppercase tracking-[0.22em] md:text-sm"
           style={{
             backgroundImage: "var(--gradient-gold)",
             WebkitBackgroundClip: "text",
@@ -98,118 +89,227 @@ function Hero() {
             color: "transparent",
           }}
         >
-          Command the room. Be the one they remember.
+          The private coaching system used by candidates who get chosen — when the shortlist comes down to three.
         </p>
 
         <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-          You are more capable than you sound{" "}
-          <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: "var(--gradient-gold)" }}
-          >
-            under pressure.
+          Everyone in that room prepared.
+          <br />
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
+            Only one of them prepared with this.
           </span>
         </h1>
 
         <p className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Bramwell is your private AI voice coach — trained on the world's
-          leading communication experts to help you win interviews, earn
-          promotions, and own every high-stakes moment.
-        </p>
-        <p className="mx-auto mt-4 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground/90 md:text-lg">
-          The version of you that walks into that room and owns it — that is who Bramwell builds.
+          {`Bramwell is the coaching system that changes the outcome when it's close. Live voice sessions. Real pressure. The exact framework that takes capable people and makes them the one the panel keeps thinking about after everyone else leaves the room.`}
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <a
             href="/diagnostic?autostart=1"
-            className="group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold transition hover:opacity-95"
+            className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold transition hover:opacity-95 sm:w-auto"
             style={{
               background: "var(--gradient-gold)",
               color: "var(--primary-foreground)",
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Take the test — free, 5 minutes
+            {`Find Out What's Costing You the Room — Free, 5 Minutes`}
             <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
-          <a
-            href="/pricing"
-            className="inline-flex h-12 items-center justify-center rounded-full border border-border bg-foreground/5 px-7 text-sm font-medium backdrop-blur transition hover:bg-foreground/10"
-          >
-            See pathways
+          <a href="#how" className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+            See how it works
           </a>
         </div>
 
-        <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground/80">
-          <span className="sm:hidden">3 minutes · No credit card</span>
-          <span className="hidden sm:inline">
-            3 minutes · No credit card · Find out what is holding your voice back
-          </span>
+        <p className="mx-auto mt-6 max-w-xl text-xs text-muted-foreground/80 md:text-sm">
+          No credit card. No login. Just the truth about what's standing between you and the offer.
         </p>
       </div>
     </section>
   );
 }
 
-/* ───────────── Problem ───────────── */
-function WhoFor() {
-  const cards = [
+/* ───────────── Stats ───────────── */
+function Stats() {
+  const stats = [
     {
-      Icon: GraduationCap,
-      title: "First serious interview.",
-      body: "You've got the skills. Now make the room feel it in the first 90 seconds.",
+      value: "340",
+      label:
+        "People competing for the role you just applied for. Most qualified. All preparing. Almost none preparing like this.",
     },
     {
-      Icon: RefreshCcw,
-      title: "Back after a break.",
-      body: "You haven't interviewed in years. Everything has changed. Bramwell gets you back up to speed — fast.",
+      value: "$5,000",
+      label:
+        "What a session with the coaches who built this methodology costs. Per session. If you can get a referral.",
     },
     {
-      Icon: TrendingUp,
-      title: "Mid-career pivot.",
-      body: "You've done the work. Now translate it into the language of the role you actually want.",
+      value: "$199",
+      label:
+        "What it costs you — tonight — with no referral, no waitlist, and no one who needs to know.",
+    },
+  ];
+  return (
+    <section
+      className="relative border-y border-border py-16 md:py-20"
+      style={{ background: "oklch(0.12 0.02 255)" }}
+    >
+      <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-3 md:gap-8 md:px-10">
+        {stats.map((s) => (
+          <div key={s.value} className="text-center md:text-left">
+            <div
+              className="bg-clip-text text-5xl font-semibold tracking-tight text-transparent md:text-6xl"
+              style={{ backgroundImage: "var(--gradient-gold)" }}
+            >
+              {s.value}
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ───────────── Secret Weapon ───────────── */
+function SecretWeapon() {
+  return (
+    <section className="border-t border-border bg-background py-24 md:py-32">
+      <div className="mx-auto max-w-3xl px-6 md:px-10">
+        <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+          Every elite performer has a coach.
+          <br />
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
+            You were just never told that included you.
+          </span>
+        </h2>
+        <div className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p>
+            {`The athletes you watch on Saturday — they have coaches. The executives signing your offer letter — they have coaches. The candidates who consistently get chosen, across industries, across decades, across every kind of room — they had something working on their performance that the other finalists couldn't see and didn't know existed.`}
+          </p>
+          <p>
+            {`The preparation you could buy, if you knew who to call and could afford the $3,000 to $5,000 per engagement, has always been there. It has just never been available to the people who actually needed it.`}
+          </p>
+          <p>
+            {`Every other candidate walking into your interview has practiced. They've rehearsed in the mirror. Run through questions in the shower. Asked a friend to grill them over dinner. They will walk in prepared.`}
+          </p>
+          <p>
+            {`You will walk in prepared at a level they cannot see, cannot match, and will not know existed — until the panel calls your name instead of theirs.`}
+          </p>
+          <p>
+            {`Bramwell is that layer. Not an approximation of it. Not inspired by it. Built on the same live-voice, real-time correction, answer-specific calibration that has always existed at the top of the market — available to you tonight, before the panel ever sees you.`}
+          </p>
+        </div>
+
+        <blockquote
+          className="mt-12 border-l-2 pl-6 text-xl italic leading-relaxed text-foreground/90 md:text-2xl"
+          style={{ borderColor: "var(--primary)" }}
+        >
+          {`"I walked in knowing exactly how I sounded. That changed everything."`}
+          <footer className="mt-3 text-xs font-normal not-italic uppercase tracking-[0.18em] text-muted-foreground">
+            — Director, FTSE 100, promotion panel
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────── Value Dislocation ───────────── */
+function ValueDislocation() {
+  return (
+    <section className="relative border-t border-border py-24 md:py-32" style={{ background: "var(--gradient-hero)" }}>
+      <div className="mx-auto max-w-3xl px-6 md:px-10">
+        <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+          The preparation that gets people chosen.
+          <br />
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
+            Available to you tonight. For $199.
+          </span>
+        </h2>
+        <div className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p>
+            {`The executive communications coaches who work at this level — the ones with real frameworks, real-time voice feedback, and decades reading what panels actually respond to — charge $3,000 to $5,000 per engagement. That is one session. One. Booked weeks in advance. Unavailable the night before.`}
+          </p>
+          <p>
+            {`They spent careers on the inside of the rooms you're trying to get into. They know what the panel is looking for before the panel knows. And they have always been accessible only to the people who least needed the help.`}
+          </p>
+          <p className="font-medium text-foreground">That changes here.</p>
+          <p>
+            {`Bramwell is built on the same principles that coaching at that level runs on — live voice, real-time correction, answer-specific calibration, pressure rehearsal until the response is owned rather than recited. Not approximated. Not inspired by. Built on.`}
+          </p>
+          <p className="font-medium text-foreground">You are not paying $199 for an app.</p>
+          <p>
+            {`You are paying $199 for the preparation that people with access to the right networks have always had — and that everyone else has always been locked out of.`}
+          </p>
+          <p>The interview is in three days. The coaches who charge $5,000 are booked for six weeks.</p>
+          <p className="font-medium text-foreground">Bramwell is open right now.</p>
+        </div>
+        <p className="mt-10 text-sm italic text-muted-foreground/80">
+          This is the coaching that existed only for people who could afford not to need it. Until now.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────── Pain Accordion ───────────── */
+function PainAccordion() {
+  const items = [
+    {
+      q: `"I ramble and lose the point I was trying to make."`,
+      a: `That is not nerves. That is the absence of structure. Bramwell installs PREP — a framework that locks any answer into place in under 60 seconds. You hit the point before you lose the room. The panel follows. Every time.`,
     },
     {
-      Icon: Award,
-      title: "Executive and C-suite.",
-      body: "Every sentence is measured in millions. Calibrate your presence before the room does it for you.",
+      q: `"I freeze. My mind goes blank. I can hear myself falling apart."`,
+      a: `Freezing is a familiarity problem, not a capability problem. Bramwell drills you on the questions you dread most — out loud, under pressure, on repeat — until familiar is the only thing they feel. You cannot freeze on a question you've answered fifty times.`,
+    },
+    {
+      q: `"I walk out replaying what I should have said."`,
+      a: `The answer you thought of on the drive home was your best one. It was also too late. Bramwell runs you through the hardest moments the night before — out loud — so the room hears your best take, not your second draft.`,
+    },
+    {
+      q: `"I know I'm capable. I just can't sell myself."`,
+      a: `You do not have a capability problem. You have a translation problem. Bramwell mines your CV for the moments that prove your level, then drills you on delivering them in the language of the role you actually want. The evidence was always there. Now it lands.`,
+    },
+    {
+      q: `"I sound less senior than I am."`,
+      a: `The panel is forming an opinion of your level in the first ninety seconds. If your cadence, your vocabulary, and your conviction don't match the work you've actually done, the gap costs you the role. Bramwell closes that gap in real time — until the version of you the panel hears matches the version that did the work.`,
+    },
+    {
+      q: `"I've watched less qualified people get the roles I deserved."`,
+      a: `They were not smarter. They were not more experienced. They were better coached — and you didn't know that was the difference until after you lost. Bramwell closes it before the next interview. Not after.`,
+    },
+    {
+      q: `"I haven't interviewed in years. I don't know who I am in a room anymore."`,
+      a: `Twelve years at one company. Made redundant. First real interview in a decade. You haven't lost your capability — you've just never had to perform it under this kind of pressure before. Bramwell is built for exactly this. Privately. Specifically. Before the panel ever sees you.`,
+    },
+    {
+      q: `"I need to explain a career gap without it becoming the whole interview."`,
+      a: `The gap is not the problem. The moment you apologise for it is. Bramwell trains you to own it — to deliver it as evidence of exactly the kind of person they want to hire. You won't dread the question. You'll use it.`,
     },
   ];
   return (
     <section className="border-t border-border bg-background py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6 md:px-10">
-        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          Who is this for?
-        </p>
-        <h2 className="mt-4 max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-          Built for the moment{" "}
-          <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: "var(--gradient-gold)" }}
-          >
-            you're in.
+      <div className="mx-auto max-w-4xl px-6 md:px-10">
+        <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+          You know your stuff.
+          <br />
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
+            You just freeze under pressure.
           </span>
         </h2>
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {cards.map(({ Icon, title, body }) => (
-            <div
-              key={title}
-              className="rounded-2xl border border-border bg-foreground/[0.02] p-7 transition hover:border-foreground/20 hover:bg-foreground/[0.04]"
-            >
-              <div
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border"
-                style={{ color: "var(--primary)" }}
-              >
-                <Icon size={20} />
-              </div>
-              <h3 className="mt-5 text-xl font-semibold tracking-tight">
-                {title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {body}
+        <div className="mt-12 divide-y divide-border border-y border-border">
+          {items.map((p) => (
+            <details key={p.q} className="group py-6">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-base font-medium tracking-tight md:text-lg">
+                <span>{p.q}</span>
+                <span className="mt-1 text-muted-foreground transition group-open:rotate-45">+</span>
+              </summary>
+              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground md:text-base">
+                {p.a}
               </p>
-            </div>
+            </details>
           ))}
         </div>
       </div>
@@ -217,82 +317,58 @@ function WhoFor() {
   );
 }
 
-function Problem() {
-  return (
-    <section className="border-t border-border bg-background py-24 md:py-32">
-      <div className="mx-auto max-w-4xl px-6 md:px-10">
-        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          The gap
-        </p>
-        <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-          You're brilliant on paper. But the room only hears the{" "}
-          <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: "var(--gradient-gold)" }}
-          >
-            first ninety seconds.
-          </span>
-        </h2>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Most coaching is generic, expensive, and gone the moment you hang up.
-          Bramwell listens, asks the questions you'll actually face, and
-          rehearses with you until the answer lives in your voice — not on a
-          script.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-/* ───────────── How it works ───────────── */
+/* ───────────── How It Works ───────────── */
 function HowItWorks() {
   const steps = [
     {
       n: "01",
-      title: "Take the free diagnostic",
-      body: "Five minutes with Bramwell. Hear your communication type, your three biggest gaps, and your Readiness Score. No login, no card.",
+      title: "Take the Free Diagnostic",
+      body: `Five minutes. No login. No card. Bramwell listens to how you speak, identifies your three biggest gaps, and produces your Readiness Score. You will hear things about the way you come across that no one in your life has had the courage to say. Most people find it uncomfortable. All of them say it was the most useful five minutes they spent on this.`,
+      cta: { label: "Take the Diagnostic →", href: "/diagnostic?autostart=1" },
     },
     {
       n: "02",
-      title: "Choose your pathway",
-      body: "Graduate Sprint, Career Comeback, Interview Confidence Sprint, or Executive Communication Sprint. Built for your specific situation and level.",
+      title: "Choose Your Pathway",
+      body: `This is not a one-size-fits-all programme. It is built for the exact moment you are in. The Graduate. The Comeback. The Confidence. The Executive. The Club. Each one knows your situation, your level, and the specific questions that panel is likely to ask. The wrong pathway wastes your time. The right one changes the outcome.`,
     },
     {
       n: "03",
-      title: "Practice with Bramwell",
-      body: "Live two-way voice coaching. You speak. Bramwell listens. Coaches the single most important fix. You retry. Bramwell does not move on until the answer is genuinely ready.",
+      title: "Practice Until It's Unshakeable",
+      body: `Live, two-way voice coaching. You speak. Bramwell listens. It coaches the single most important fix. You retry. It does not move on until the answer is genuinely ready. Not rehearsed. Not scripted. Owned. The goal is not to sound coached. The goal is to sound like the most capable version of yourself, under the exact conditions that used to make you forget who that was.`,
     },
   ];
   return (
-    <section
-      id="how"
-      className="relative border-t border-border py-24 md:py-32"
-      style={{ background: "var(--gradient-hero)" }}
-    >
+    <section id="how" className="relative border-t border-border py-24 md:py-32" style={{ background: "var(--gradient-hero)" }}>
       <div className="mx-auto max-w-6xl px-6 md:px-10">
-        <div className="mb-16 max-w-2xl">
-          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-            How it works
-          </p>
-          <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+        <div className="mb-16 max-w-3xl">
+          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
             Three steps between you and the room.
+            <br />
+            <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
+              The only step that matters is the one you take tonight.
+            </span>
           </h2>
         </div>
         <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
           {steps.map((s) => (
-            <div key={s.n} className="bg-background p-8 md:p-10">
-              <div
-                className="text-sm font-medium tracking-[0.2em]"
-                style={{ color: "var(--primary)" }}
-              >
+            <div key={s.n} className="flex flex-col bg-background p-8 md:p-10">
+              <div className="text-sm font-medium tracking-[0.2em]" style={{ color: "var(--primary)" }}>
                 {s.n}
               </div>
-              <h3 className="mt-6 text-xl font-semibold tracking-tight">
-                {s.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {s.body}
-              </p>
+              <h3 className="mt-6 text-xl font-semibold tracking-tight">{s.title}</h3>
+              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+              {s.cta && (
+                <a
+                  href={s.cta.href}
+                  className="mt-6 inline-flex h-10 w-fit items-center justify-center rounded-full px-5 text-sm font-semibold transition hover:opacity-95"
+                  style={{
+                    background: "var(--gradient-gold)",
+                    color: "var(--primary-foreground)",
+                  }}
+                >
+                  {s.cta.label}
+                </a>
+              )}
             </div>
           ))}
         </div>
@@ -302,86 +378,134 @@ function HowItWorks() {
 }
 
 /* ───────────── Pathways ───────────── */
+type Pathway = {
+  name: string;
+  price: string;
+  headline: string;
+  body: string;
+  emotional?: string;
+  priceLine: string;
+  cta: string;
+  href: string;
+  featured?: boolean;
+};
+
 function Pathways() {
-  const pathways = [
+  const pathways: Pathway[] = [
     {
       name: "The Graduate",
-      for: "First serious interview",
-      price: "$99 AUD",
-      cadence: "one-time",
-      blurb: "Land the role that sets the next ten years in motion.",
+      price: "$99 AUD, one-time",
+      headline: "First serious interview. The one that sets the next ten years in motion.",
+      body: `You've applied to dozens of roles. You've had interviews. You've lost them and received feedback so vague it told you nothing. Here is what they won't tell you: you are not losing because of your CV. You are losing because every other finalist sounds like a professional and you still sound like someone hoping they'll give you a chance. Bramwell fixes that. The same framework used by candidates who walked into rooms with no directly relevant experience and left with the offer. Not because they were the most qualified. Because they were the best prepared.`,
+      emotional: "The role you get in the next six months will shape the decade that follows.",
+      priceLine: "$99. One pathway. The room that starts it all.",
+      cta: "Start the Graduate Pathway →",
+      href: "/pricing",
     },
     {
       name: "The Comeback",
-      for: "Returning to work",
-      price: "$199 AUD",
-      cadence: "one-time",
-      blurb: "Rebuild fluency, authority, and presence on your own terms.",
+      price: "$199 AUD, one-time",
+      headline: "Redundant after years in one place. Returning from a gap. Back in the market for the first time in a long time.",
+      body: `You have more experience than most people interviewing for this role. You also haven't done this in years — maybe a decade — and that asymmetry is loud in the room before you've said a word. The gap question is coming. The "why now?" is coming. The panel forming a quiet opinion about whether you're still current — that's coming too. Bramwell prepares you for every one of them. Not with scripts. With answers so specifically, undeniably yours that the panel stops registering the gap and starts registering the person.`,
+      emotional: "You are more capable than you currently sound. That ends here.",
+      priceLine: "$199. One pathway. Back in the room — on your terms.",
+      cta: "Start the Comeback Pathway →",
+      href: "/pricing",
     },
     {
       name: "The Confidence",
-      for: "Mid-career pivot",
-      price: "$249 AUD",
-      cadence: "one-time",
-      blurb: "Translate what you've already done into the language of the next role.",
+      price: "$249 AUD, one-time",
+      headline: "You've done the work. You keep losing the room to people who shouldn't be beating you.",
+      body: `Eight, ten, twelve years of real output. Going for the next level — or into a new industry — and the panels keep choosing someone with the exact title they advertised for, even when your track record is objectively stronger. The problem is not your experience. The problem is that your experience is still speaking the language of your last role. The panel is hearing the old version of you — not the one ready for what's next. Bramwell translates. It rebuilds your narrative in the language of the role you want, drills you until it sounds native, and calibrates the register of authority that gets people promoted.`,
+      priceLine: "$249. One pivot. Your career, on the terms you set.",
+      cta: "Start the Confidence Pathway →",
+      href: "/pricing",
     },
     {
       name: "The Executive",
-      for: "Board rooms & C-suite",
-      price: "$499 AUD",
-      cadence: "one-time",
-      blurb: "Calibrate every sentence for stakes measured in millions.",
+      price: "$499 AUD, one-time",
+      headline: "Board rooms. C-suite. The conversation where every sentence is worth millions.",
+      body: `You have run rooms. You have hired hundreds of people. You know exactly how a panel thinks. And if you are honest with yourself: right now you are more uncertain about this conversation than you have been about anything in twenty years. Because the stakes are real. Because you cannot practice with anyone who knows you. Because you cannot let anyone in your world see you need to prepare. Bramwell is the only coach that will never tell a soul. Private. Precise. Calibrated to the register of the room where you are not a candidate — you are a decision. The coaching infrastructure that existed only for people who could afford $5,000 an engagement. Available to you right now, tonight, without a referral.`,
+      priceLine: "$499. One engagement. The room that changes everything.",
+      cta: "Start the Executive Pathway →",
+      href: "/pricing",
     },
     {
       name: "The Club",
-      for: "Always-on access",
-      price: "$79 AUD",
-      cadence: "per month",
-      blurb: "Bramwell stays with you — for every interview, every pitch, every year.",
+      price: "$79 AUD per month",
+      headline: "For the professional who knows the interview never really ends.",
+      body: `Promotions. Board presentations. Investor pitches. The internal panel. The conversation that gets you the budget. The one that lands the client. The professionals who consistently win these moments do not perform better under pressure. They practice more than everyone around them suspects. Bramwell stays with you — for every conversation, every room, every year.`,
+      priceLine: "$79/month. Unlimited access. Permanent edge.",
+      cta: "Join The Club →",
+      href: "/pricing",
+      featured: true,
     },
   ];
   return (
-    <section className="border-t border-border bg-background py-24 md:py-32">
+    <section id="pathways" className="border-t border-border bg-background py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
-        <div className="mb-14 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-xl">
-            <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-              Five pathways
-            </p>
-            <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-              Coaching tuned to the moment you're in.
-            </h2>
-          </div>
-          <a
-            href="/pricing"
-            className="inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium transition hover:bg-foreground/10"
-          >
-            Compare pathways →
-          </a>
-        </div>
+        <h2 className="max-w-4xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+          The coaching is calibrated to the moment you're in.
+          <br />
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
+            Not the moment someone else is in.
+          </span>
+        </h2>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {pathways.map((p, i) => (
-            <div
+        <div className="mt-14 grid gap-6 md:grid-cols-2">
+          {pathways.map((p) => (
+            <article
               key={p.name}
-              className={`group rounded-2xl border border-border bg-foreground/[0.02] p-7 transition hover:border-foreground/20 hover:bg-foreground/[0.04] ${
-                i === pathways.length - 1 ? "lg:col-span-1 md:col-span-2" : ""
+              className={`relative flex flex-col rounded-2xl border p-8 transition ${
+                p.featured
+                  ? "md:col-span-2"
+                  : "border-border bg-foreground/[0.02] hover:border-foreground/20 hover:bg-foreground/[0.04]"
               }`}
+              style={
+                p.featured
+                  ? {
+                      borderColor: "oklch(0.78 0.13 78 / 0.5)",
+                      background: "oklch(0.78 0.13 78 / 0.06)",
+                      boxShadow: "var(--shadow-elegant)",
+                    }
+                  : undefined
+              }
             >
-              <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                {p.for}
-              </p>
-              <h3 className="mt-3 text-2xl font-semibold tracking-tight">
-                {p.name}
-              </h3>
-              <div className="mt-3 flex items-baseline gap-1.5">
-                <span className="text-xl font-semibold tracking-tight">{p.price}</span>
-                <span className="text-xs text-muted-foreground">{p.cadence}</span>
+              {p.featured && (
+                <span
+                  className="absolute -top-3 left-8 inline-flex items-center rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]"
+                  style={{
+                    background: "var(--gradient-gold)",
+                    color: "var(--primary-foreground)",
+                  }}
+                >
+                  Most Popular
+                </span>
+              )}
+              <div className="flex flex-wrap items-baseline justify-between gap-3">
+                <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">{p.name}</h3>
+                <span className="text-sm font-medium text-muted-foreground">{p.price}</span>
               </div>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                {p.blurb}
+              <p className="mt-4 text-base font-medium leading-snug tracking-tight text-foreground md:text-lg">
+                {p.headline}
               </p>
-            </div>
+              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+              {p.emotional && (
+                <p className="mt-5 text-sm italic text-foreground/80">{p.emotional}</p>
+              )}
+              <p className="mt-5 text-sm font-medium text-foreground">{p.priceLine}</p>
+              <a
+                href={p.href}
+                className="mt-6 inline-flex h-11 w-fit items-center justify-center rounded-full px-6 text-sm font-semibold transition hover:opacity-95"
+                style={{
+                  background: "var(--gradient-gold)",
+                  color: "var(--primary-foreground)",
+                  boxShadow: p.featured ? "var(--shadow-elegant)" : undefined,
+                }}
+              >
+                {p.cta}
+              </a>
+            </article>
           ))}
         </div>
       </div>
@@ -391,117 +515,51 @@ function Pathways() {
 
 /* ───────────── Testimonials ───────────── */
 function Testimonials() {
-  return TestimonialsImpl();
-}
-
-function AlwaysOn() {
-  return (
-    <section className="border-t border-border bg-background py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6 md:px-10">
-        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          The always-on coach
-        </p>
-        <h2 className="mt-4 max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-          Courses teach you once.{" "}
-          <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: "var(--gradient-gold)" }}
-          >
-            Bramwell trains you daily.
-          </span>
-        </h2>
-
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-foreground/[0.02] p-7 transition hover:border-foreground/20 hover:bg-foreground/[0.04]">
-            <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-              The Intensive
-            </p>
-            <h3 className="mt-3 text-2xl font-semibold tracking-tight">
-              One moment. Coached until ready.
-            </h3>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Sprint for the interview, the promotion, the media appearance,
-              the board presentation. We rehearse it until the answer lives
-              in your voice.
-            </p>
-          </div>
-          <div
-            className="rounded-2xl border p-7 transition"
-            style={{
-              borderColor: "oklch(0.78 0.13 78 / 0.35)",
-              background: "oklch(0.78 0.13 78 / 0.06)",
-            }}
-          >
-            <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-              The Club — $79 AUD / month
-            </p>
-            <h3 className="mt-3 text-2xl font-semibold tracking-tight">
-              Your always-on coach. For life.
-            </h3>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              After the intensive, Bramwell stays with you. New job intro.
-              Performance review. Pay rise conversation. Media interview.
-              Every high-stakes moment. One coach. For life.
-            </p>
-          </div>
-        </div>
-
-        <blockquote
-          className="mt-12 border-l-2 pl-6 text-lg italic leading-relaxed text-foreground/90 md:text-xl"
-          style={{ borderColor: "var(--primary)" }}
-        >
-          "You do not rise to the occasion. You fall to the level of your
-          rehearsal. Bramwell makes rehearsal part of your life."
-        </blockquote>
-      </div>
-    </section>
-  );
-}
-
-function TestimonialsImpl() {
   const quotes = [
     {
-      q: "I walked in knowing exactly how I sounded. That changed everything.",
+      q: `"I walked in knowing exactly how I sounded. That changed everything."`,
       a: "Director, FTSE 100 — promotion panel",
     },
     {
-      q: "It's the only coach that's there at 11pm the night before.",
-      a: "Senior PM — Series B fintech",
+      q: `"It's the only coach that's there at 11pm the night before. That's the only time I needed it."`,
+      a: "Senior PM, Series B Fintech",
     },
     {
-      q: "Within two sessions my answers stopped wandering. I got the offer.",
+      q: `"Within two sessions my answers stopped wandering. I got the offer. I'd spent eight months getting nowhere."`,
       a: "Returning to work after maternity leave",
+    },
+    {
+      q: `"I hadn't interviewed in eleven years. I thought I'd lost it. Turns out I just needed to practice out loud once — with something that actually pushed back."`,
+      a: "Operations Director, made redundant after 14 years",
+    },
+    {
+      q: `"There were three of us on the final shortlist. All of us were qualified. I was the only one who knew exactly what I was going to say and exactly how I was going to say it."`,
+      a: "Senior candidate, final round offer",
     },
   ];
   return (
-    <section
-      className="relative border-t border-border py-24 md:py-32"
-      style={{ background: "var(--gradient-hero)" }}
-    >
+    <section className="relative border-t border-border py-24 md:py-32" style={{ background: "var(--gradient-hero)" }}>
       <div className="mx-auto max-w-6xl px-6 md:px-10">
-        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          What people say
-        </p>
-        <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-          The conversations that change careers.
+        <h2 className="max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+          The room, after{" "}
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
+            Bramwell.
+          </span>
         </h2>
-
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {quotes.map((t, i) => (
             <figure
               key={i}
               className="flex h-full flex-col rounded-2xl border border-border bg-background/60 p-8 backdrop-blur"
             >
-              <div
-                className="text-3xl leading-none"
-                style={{ color: "var(--primary)" }}
-              >
+              <div className="text-3xl leading-none" style={{ color: "var(--primary)" }}>
                 "
               </div>
-              <blockquote className="mt-3 flex-1 text-lg font-medium leading-snug tracking-tight">
+              <blockquote className="mt-3 flex-1 text-base font-medium leading-snug tracking-tight md:text-lg">
                 {t.q}
               </blockquote>
-              <figcaption className="mt-6 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              <hr className="my-5 border-border" />
+              <figcaption className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
                 {t.a}
               </figcaption>
             </figure>
@@ -516,31 +574,40 @@ function TestimonialsImpl() {
 function FAQ() {
   const faqs = [
     {
-      q: "Is this an AI, a human coach, or both?",
-      a: "Bramwell is a private AI coach with the calibre of a senior executive communications partner. It listens, asks, and responds in real time — available the moment you need it.",
+      q: "Is this an AI or a human coach?",
+      a: `Bramwell is an AI coach engineered to the standard of a senior executive communications partner — not a chatbot recycling tips from a careers blog. It listens to your voice in real time, finds the specific thing costing you the room, and coaches that one thing until it is fixed. Then it moves to the next. It is also available at 11pm, carries no other clients into the session with it, and will never make you feel embarrassed for needing to prepare. That last part matters more than people expect.`,
     },
     {
       q: "How long is a session?",
-      a: "Sessions are timed to your pathway — typically 15 to 30 minutes. Enough to rehearse the hardest questions without losing your voice.",
+      a: `15 to 30 minutes, depending on your pathway. Long enough to work on the questions that terrify you. Short enough that you will actually do it the night before — instead of just telling yourself you will.`,
     },
     {
       q: "Is my data private?",
-      a: "Yes. Your CV, your job spec, and your recordings are stored privately to your account and never used to train public models.",
+      a: `Completely. Your CV, your target role, your voice recordings — private to your account, never used to train public models, never seen by anyone. This is the one place you can sound terrible before you sound brilliant. That is entirely the point.`,
     },
     {
-      q: "What if I'm not in the UK?",
-      a: "Bramwell works wherever the conversation matters. Native English coaching, available globally.",
+      q: "I'm not in Australia. Does this work for me?",
+      a: `Bramwell coaches in native English and works globally. The methodology is calibrated for any room where English is the language of the decision and presence is the thing they are hiring for.`,
+    },
+    {
+      q: "What if I try it and it doesn't work?",
+      a: `Take the free diagnostic first. Five minutes. No card. You will hear your Readiness Score and your three biggest gaps — things most people have never had named for them before. If that five minutes isn't the most useful feedback you've received on how you come across, don't go further. Most people go further.`,
+    },
+    {
+      q: "Is this better than just using ChatGPT to prep?",
+      a: `ChatGPT can write you an answer. It cannot hear you deliver it. The gap between the answer that reads well on a screen and the answer that lands in a room is not a content problem. It is a delivery problem — cadence, conviction, the register of someone who owns the answer rather than reciting it. Bramwell coaches the delivery. That is the part that costs people the room.`,
+    },
+    {
+      q: "Can I use this the night before an interview?",
+      a: `That is exactly what it is designed for. You do not need weeks of preparation. You need one session where you practice the questions that are likely to come, hear what is not landing, fix it, and walk into the room knowing exactly how you sound. Most candidates do their best preparation after the interview, on the drive home. Bramwell does it the night before.`,
     },
   ];
   return (
     <section className="border-t border-border bg-background py-24 md:py-32">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[1fr_2fr] md:px-10">
         <div>
-          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-            FAQ
-          </p>
-          <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Questions worth asking.
+          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            The questions worth asking before you walk in.
           </h2>
         </div>
         <div className="divide-y divide-border border-y border-border">
@@ -548,13 +615,9 @@ function FAQ() {
             <details key={f.q} className="group py-6">
               <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-base font-medium tracking-tight">
                 {f.q}
-                <span className="mt-0.5 text-muted-foreground transition group-open:rotate-45">
-                  +
-                </span>
+                <span className="mt-0.5 text-muted-foreground transition group-open:rotate-45">+</span>
               </summary>
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                {f.a}
-              </p>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">{f.a}</p>
             </details>
           ))}
         </div>
@@ -577,20 +640,23 @@ function FinalCTA() {
       />
       <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
         <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-          Sound as capable
+          Everyone who lost that role was qualified.
           <br />
-          <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: "var(--gradient-gold)" }}
-          >
-            as you already are.
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
+            The one who got it knew exactly how they sounded.
           </span>
         </h2>
-        <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-          Take the free 5-minute diagnostic. Hear where you stand. Then decide.
-        </p>
+        <div className="mx-auto mt-8 max-w-2xl space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p>
+            {`The free diagnostic is five minutes. No card. No login. It will tell you exactly what is costing you the room — and what it takes to fix it before the panel sees you.`}
+          </p>
+          <p>
+            {`The preparation that gets people chosen. Available to you right now, for nothing, for five minutes, before you decide anything else.`}
+          </p>
+          <p>The interview is coming. The question is which version of you walks into it.</p>
+        </div>
         <a
-          href="/diagnostic"
+          href="/diagnostic?autostart=1"
           className="mt-10 inline-flex h-12 items-center justify-center gap-2 rounded-full px-8 text-sm font-semibold transition hover:opacity-95"
           style={{
             background: "var(--gradient-gold)",
@@ -598,9 +664,14 @@ function FinalCTA() {
             boxShadow: "var(--shadow-elegant)",
           }}
         >
-          Take the test
-          <span>→</span>
+          Take the Free Diagnostic →
         </a>
+        <p className="mt-6 text-xs text-muted-foreground/80 md:text-sm">
+          5 minutes. No credit card. No login. Just the truth about where you stand.
+        </p>
+        <p className="mt-4 text-xs italic text-muted-foreground/70 md:text-sm">
+          The coaches who charge $5,000 for this are booked for six weeks. Bramwell is open right now.
+        </p>
       </div>
     </section>
   );
@@ -609,26 +680,44 @@ function FinalCTA() {
 /* ───────────── Footer ───────────── */
 function Footer() {
   return (
-    <footer className="border-t border-border bg-background py-12">
-      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 md:flex-row md:items-center md:px-10">
-        <div className="flex items-baseline gap-1.5">
-          <span className="text-base font-semibold tracking-tight">Bramwell</span>
-          <span
-            className="text-base font-light tracking-tight"
-            style={{ color: "var(--primary)" }}
-          >
-            AI
-          </span>
+    <footer className="border-t border-border bg-background py-16">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-[1.5fr_1fr_1fr] md:px-10">
+        <div>
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-lg font-semibold tracking-tight">Bramwell</span>
+            <span className="text-lg font-light tracking-tight" style={{ color: "var(--primary)" }}>
+              AI
+            </span>
+          </div>
+          <p className="mt-4 max-w-sm text-xs leading-relaxed text-muted-foreground">
+            Your data is private. Your voice recordings are yours. Bramwell never uses your sessions to train public models.
+          </p>
         </div>
-        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-          <a href="/diagnostic" className="transition-colors hover:text-foreground">Free diagnostic</a>
-          <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
-          <a href="/login" className="transition-colors hover:text-foreground">Sign in</a>
-          <a href="/signup" className="transition-colors hover:text-foreground">Sign up</a>
-        </nav>
-        <p className="text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Bramwell AI. All rights reserved.
-        </p>
+
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">Bramwell</p>
+          <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
+            <a href="/diagnostic?autostart=1" className="transition-colors hover:text-foreground">Free Diagnostic</a>
+            <a href="#pathways" className="transition-colors hover:text-foreground">Pathways</a>
+            <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
+            <a href="/login" className="transition-colors hover:text-foreground">Sign In</a>
+            <a href="/signup" className="transition-colors hover:text-foreground">Sign Up</a>
+          </nav>
+        </div>
+
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">Pathways</p>
+          <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
+            <a href="/pricing" className="transition-colors hover:text-foreground">The Graduate</a>
+            <a href="/pricing" className="transition-colors hover:text-foreground">The Comeback</a>
+            <a href="/pricing" className="transition-colors hover:text-foreground">The Confidence</a>
+            <a href="/pricing" className="transition-colors hover:text-foreground">The Executive</a>
+            <a href="/pricing" className="transition-colors hover:text-foreground">The Club</a>
+          </nav>
+        </div>
+      </div>
+      <div className="mx-auto mt-12 max-w-7xl px-6 md:px-10">
+        <p className="text-xs text-muted-foreground">© 2026 Bramwell AI. All rights reserved.</p>
       </div>
     </footer>
   );
