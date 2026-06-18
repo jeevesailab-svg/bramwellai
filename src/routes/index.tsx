@@ -100,10 +100,11 @@ function Hero() {
         </div>
 
         <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-          Know exactly how you sound before the{" "}
+          Know exactly how you sound{" "}
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>
-            room decides for you.
-          </span>
+            before
+          </span>{" "}
+          the room decides for you.
         </h1>
 
         <p className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
