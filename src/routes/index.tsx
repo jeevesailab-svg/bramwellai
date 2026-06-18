@@ -80,6 +80,14 @@ function Hero() {
         style={{ background: "var(--gradient-gold)" }}
       />
       <div className="relative z-10 mx-auto max-w-5xl px-6 pb-28 pt-12 text-center md:px-10 md:pb-40 md:pt-20">
+        <div
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em]"
+          style={{ color: "var(--primary)" }}
+        >
+          <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--primary)" }} />
+          Free 5-minute diagnostic · No login · No card
+        </div>
+
         <p
           className="mx-auto mb-8 text-xs font-medium uppercase tracking-[0.22em] md:text-sm"
           style={{
@@ -96,12 +104,12 @@ function Hero() {
           Everyone in that room prepared.
           <br />
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
-            Only one of them prepared with this.
+            Only one of them prepared with Bramwell.
           </span>
         </h1>
 
         <p className="mx-auto mt-8 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Live voice coaching. Real pressure. The version of you the panel remembers.
+          Live voice coaching that listens to how you actually sound. Real-time feedback on the answers that decide whether you get chosen.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
@@ -114,7 +122,7 @@ function Hero() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Start the Free Diagnostic
+            Get Your Readiness Score — Free
             <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
           <a href="#how" className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
