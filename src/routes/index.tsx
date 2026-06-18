@@ -81,7 +81,7 @@ function Hero() {
       />
       <div className="relative z-10 mx-auto max-w-5xl px-6 pb-28 pt-12 text-center md:px-10 md:pb-40 md:pt-20">
         <p
-          className="mx-auto mb-8 max-w-3xl text-xs font-medium uppercase tracking-[0.22em] md:text-sm"
+          className="mx-auto mb-8 text-xs font-medium uppercase tracking-[0.22em] md:text-sm"
           style={{
             backgroundImage: "var(--gradient-gold)",
             WebkitBackgroundClip: "text",
@@ -89,7 +89,7 @@ function Hero() {
             color: "transparent",
           }}
         >
-          The private coaching system used by candidates who get chosen — when the shortlist comes down to three.
+          Private coaching for the interviews that matter
         </p>
 
         <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
@@ -100,8 +100,8 @@ function Hero() {
           </span>
         </h1>
 
-        <p className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-          {`Bramwell is the coaching system that changes the outcome when it's close. Live voice sessions. Real pressure. The exact framework that takes capable people and makes them the one the panel keeps thinking about after everyone else leaves the room.`}
+        <p className="mx-auto mt-8 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
+          Live voice coaching. Real pressure. The version of you the panel remembers.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
@@ -114,7 +114,7 @@ function Hero() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            {`Find Out What's Costing You the Room — Free, 5 Minutes`}
+            Start the Free Diagnostic
             <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
           <a href="#how" className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
@@ -122,8 +122,8 @@ function Hero() {
           </a>
         </div>
 
-        <p className="mx-auto mt-6 max-w-xl text-xs text-muted-foreground/80 md:text-sm">
-          No credit card. No login. Just the truth about what's standing between you and the offer.
+        <p className="mx-auto mt-6 text-xs text-muted-foreground/80 md:text-sm">
+          5 minutes · No login · No card
         </p>
       </div>
     </section>
@@ -135,18 +135,15 @@ function Stats() {
   const stats = [
     {
       value: "340",
-      label:
-        "People competing for the role you just applied for. Most qualified. All preparing. Almost none preparing like this.",
+      label: "Candidates competing for the role you just applied for.",
     },
     {
       value: "$5,000",
-      label:
-        "What a session with the coaches who built this methodology costs. Per session. If you can get a referral.",
+      label: "Per session with the coaches who built this methodology.",
     },
     {
       value: "$199",
-      label:
-        "What it costs you — tonight — with no referral, no waitlist, and no one who needs to know.",
+      label: "What it costs you. Tonight. No waitlist.",
     },
   ];
   return (
@@ -185,19 +182,10 @@ function SecretWeapon() {
         </h2>
         <div className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
           <p>
-            {`The athletes you watch on Saturday — they have coaches. The executives signing your offer letter — they have coaches. The candidates who consistently get chosen, across industries, across decades, across every kind of room — they had something working on their performance that the other finalists couldn't see and didn't know existed.`}
+            {`Athletes have coaches. Executives have coaches. The candidates who consistently get chosen had something the other finalists didn't know existed.`}
           </p>
           <p>
-            {`The preparation you could buy, if you knew who to call and could afford the $3,000 to $5,000 per engagement, has always been there. It has just never been available to the people who actually needed it.`}
-          </p>
-          <p>
-            {`Every other candidate walking into your interview has practiced. They've rehearsed in the mirror. Run through questions in the shower. Asked a friend to grill them over dinner. They will walk in prepared.`}
-          </p>
-          <p>
-            {`You will walk in prepared at a level they cannot see, cannot match, and will not know existed — until the panel calls your name instead of theirs.`}
-          </p>
-          <p>
-            {`Bramwell is that layer. Not an approximation of it. Not inspired by it. Built on the same live-voice, real-time correction, answer-specific calibration that has always existed at the top of the market — available to you tonight, before the panel ever sees you.`}
+            {`Bramwell is that layer — live voice, real-time correction, answer-specific calibration. Built on what's always existed at the top of the market. Available to you tonight, before the panel ever sees you.`}
           </p>
         </div>
 
@@ -229,25 +217,17 @@ function ValueDislocation() {
         </h2>
         <div className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
           <p>
-            {`The executive communications coaches who work at this level — the ones with real frameworks, real-time voice feedback, and decades reading what panels actually respond to — charge $3,000 to $5,000 per engagement. That is one session. One. Booked weeks in advance. Unavailable the night before.`}
-          </p>
-          <p>
-            {`They spent careers on the inside of the rooms you're trying to get into. They know what the panel is looking for before the panel knows. And they have always been accessible only to the people who least needed the help.`}
+            {`Executive coaches charge $3,000–$5,000 per session. Booked weeks out. Unavailable the night before. Accessible only to the people who least needed the help.`}
           </p>
           <p className="font-medium text-foreground">That changes here.</p>
           <p>
-            {`Bramwell is built on the same principles that coaching at that level runs on — live voice, real-time correction, answer-specific calibration, pressure rehearsal until the response is owned rather than recited. Not approximated. Not inspired by. Built on.`}
+            {`You're not paying $199 for an app. You're paying for the preparation people with the right networks have always had — and everyone else has been locked out of.`}
           </p>
-          <p className="font-medium text-foreground">You are not paying $199 for an app.</p>
           <p>
-            {`You are paying $199 for the preparation that people with access to the right networks have always had — and that everyone else has always been locked out of.`}
+            {`The interview is in three days. The $5,000 coaches are booked for six weeks. `}
+            <span className="font-medium text-foreground">Bramwell is open right now.</span>
           </p>
-          <p>The interview is in three days. The coaches who charge $5,000 are booked for six weeks.</p>
-          <p className="font-medium text-foreground">Bramwell is open right now.</p>
         </div>
-        <p className="mt-10 text-sm italic text-muted-foreground/80">
-          This is the coaching that existed only for people who could afford not to need it. Until now.
-        </p>
       </div>
     </section>
   );
