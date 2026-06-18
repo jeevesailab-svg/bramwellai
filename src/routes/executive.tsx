@@ -43,7 +43,7 @@ function ExecutivePage() {
             <GoldText>Now you're the one being interviewed.</GoldText>
           </>
         }
-        subhead="You know what a panel is looking for. What you can't do is practice with anyone who knows you. Bramwell is the only preparation that happens entirely in private — available the night before, with no referral and no record."
+        subhead="You know what panels look for. What you can't do is practise with anyone who knows you. Bramwell is private executive prep — available tonight, no referral, no record, no one notified."
         primaryCta={PRIMARY}
         secondary={SECONDARY}
       />
@@ -51,21 +51,19 @@ function ExecutivePage() {
       <section className="border-t border-border bg-background py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-            The stakes have never been higher.
+            The stakes are higher than ever.
             <br />
-            <GoldText>The preparation options have never been worse.</GoldText>
+            <GoldText>The preparation options are worse than ever.</GoldText>
           </h2>
           <div className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
             <p>
-              You can't practice with a colleague — they'll know you're looking. You can't work with a coach in your network —
-              word gets back. At your level, needing to prepare is the thing no one is supposed to see.
+              Practise with a colleague and they know you're looking. Hire a coach in your network and word gets back. At your level, needing to prepare is the one thing no one is supposed to see.
             </p>
             <p>
-              So you rehearse alone. And then somewhere in the first ten minutes, something doesn't land the way it should. The
-              panel notices. They always notice.
+              So you rehearse alone. And in the first ten minutes, something doesn't land. The panel notices. They always notice.
             </p>
             <p className="font-medium text-foreground">
-              Bramwell is the preparation that happens in private. No record. No referral. The night before. On your terms.
+              Bramwell is the prep no one sees. No record. No referral. Tonight, if you need it.
             </p>
           </div>
         </div>
@@ -112,12 +110,11 @@ function ExecutivePage() {
               </svg>
             </div>
             <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-              The one thing that cannot leak.
+              The one thing that cannot get out.
             </h2>
             <div className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground md:text-lg">
               <p>
-                Your CV is private to your account. Your voice recordings are stored securely and never used to train public
-                models. Your sessions are not visible to your organisation, your recruiter, or anyone in your network.
+                Your CV is private to your account. Your voice recordings are encrypted and never used to train public models. Your sessions are invisible to your organisation, your recruiter, and anyone in your network.
               </p>
               <p className="font-medium text-foreground">Bramwell does not know anyone you know.</p>
               <p className="italic text-muted-foreground/80">That is the point.</p>
@@ -165,8 +162,8 @@ function ExecutivePage() {
 
       <FinalPricingCTA
         title="The Executive Pathway. $499 AUD."
-        highlight="The room that changes everything."
-        body="The preparation infrastructure that existed only for people who could afford $5,000 an engagement — available tonight, privately, without a referral."
+        highlight="The interview that changes the next decade."
+        body="The preparation that used to cost $5,000 an engagement — available tonight, privately, without a referral. One payment. No record."
         primary={PRIMARY}
         secondary={SECONDARY}
         note="No login required to begin. Your account is private. Nothing is shared."

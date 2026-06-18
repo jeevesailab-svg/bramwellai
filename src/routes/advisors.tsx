@@ -41,16 +41,16 @@ function AdvisorsPage() {
             <GoldText>Bramwell can.</GoldText>
           </>
         }
-        subhead="The private voice coach that's there when you can't be — the night before, at 11pm, for the student who needs it most and won't ask for help."
+        subhead="A private voice coach for every student on your caseload. Available 11pm Sunday before Monday's interview. No booking, no waitlist, no extra advisor hours."
         primaryCta={{ label: "Get Early Access for Your Institution", href: "#access" }}
         secondary={{ label: "See how it works", href: "#how" }}
       />
 
       <StatsBar
         stats={[
-          { value: "30%", label: "Of 2025 graduates found work in their field. Not for lack of qualifications. For lack of communication." },
-          { value: "53%", label: "Of employers say graduates lack the communication skills the job requires. It's fixable." },
-          { value: "300–1,000", label: "Students on the average advisor caseload. You can't coach every one of them the night before. Bramwell can." },
+          { value: "30%", label: "Of 2025 graduates work in their field. The gap is communication, not qualification." },
+          { value: "53%", label: "Of employers say graduates can't communicate at the level the job requires." },
+          { value: "300–1,000", label: "Students per advisor. Bramwell scales the coaching you can't." },
         ]}
       />
 
@@ -58,7 +58,7 @@ function AdvisorsPage() {
       <section className="border-t border-border bg-background py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-            You know this moment.
+            You've seen this student.
           </h2>
           <div className="mt-10 divide-y divide-border border-y border-border">
             {[
@@ -73,10 +73,9 @@ function AdvisorsPage() {
             ))}
           </div>
           <div className="mt-10 space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
-            <p>You can coach them. You can run mock interviews until Friday afternoon.</p>
+            <p>You coach them all week. You run mocks until Friday afternoon.</p>
             <p>
-              But you can't be there Saturday morning when the anxiety spikes. You can't scale yourself to every student in the
-              forty-eight hours that decide the outcome.
+              You can't be there Sunday night when the panic hits. You can't be in every student's headphones in the forty-eight hours that decide the outcome.
             </p>
             <p className="font-medium text-foreground">Bramwell can.</p>
           </div>
@@ -153,9 +152,9 @@ function AdvisorsPage() {
       />
 
       <FinalPricingCTA
-        title="Institutional access."
-        highlight="Coming soon."
-        body="Bulk access, student referral codes, and outcome tracking for employability teams is in development. Get in touch for early access — or send a student straight to the free diagnostic today."
+        title="Institutional early access."
+        highlight="Now open to a small group."
+        body="Bulk access, referral codes, and outcome reporting for employability teams. Request early access — or send a student to the free diagnostic today."
         primary={{ label: "Request Institutional Access", href: "mailto:hello@bramwellai.com?subject=Institutional%20access" }}
         secondary={{ label: "Try the Free Diagnostic", href: "/diagnostic?autostart=1" }}
       />

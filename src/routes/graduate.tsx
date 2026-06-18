@@ -45,7 +45,7 @@ function GraduatePage() {
             <GoldText>Ninety seconds to prove it.</GoldText>
           </>
         }
-        subhead="The graduates who get hired don't have better CVs. They have better voices. Bramwell makes you sound as capable as you already are — before the panel decides you don't."
+        subhead="The graduates who get hired don't have better degrees. They sound more ready. Bramwell drills you on the exact questions you'll face — out loud, under pressure — until you do too."
         primaryCta={PRIMARY}
         secondary={SECONDARY}
       />
@@ -53,19 +53,17 @@ function GraduatePage() {
       <section className="border-t border-border bg-background py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-            They're not rejecting your qualifications.
+            They're not rejecting your CV.
             <br />
-            <GoldText>They're rejecting how you sound when you talk about them.</GoldText>
+            <GoldText>They're rejecting how you sound on the day.</GoldText>
           </h2>
           <div className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
             <p>
-              You know your degree. You know the internship. You know what you did and why it matters. But in the room, under
-              pressure, it comes out rushed. Vague. Junior-sounding.
+              You know the degree. You know the internship. You know why you're a fit. But under pressure it comes out rushed, vague, junior.
             </p>
-            <p className="font-medium text-foreground">That's not a you problem. That's a preparation problem.</p>
+            <p className="font-medium text-foreground">That's a preparation problem, not a you problem.</p>
             <p>
-              The one who gets the role sounds like they've already done the job. Bramwell fixes the sound. Before the panel
-              ever hears it.
+              The candidate who wins sounds like they've already done the job. Bramwell builds that sound — before the panel hears the real one.
             </p>
           </div>
         </div>
@@ -110,9 +108,9 @@ function GraduatePage() {
 
       <StatsBar
         stats={[
-          { value: "340", label: "People applied for the last graduate role at the company you want. Most have the same degree. One sounds like they were born for it." },
-          { value: "5 min", label: "The free diagnostic. No card. You'll know exactly where you stand." },
-          { value: "$99", label: "The Graduate Pathway. One time. The room that starts everything." },
+          { value: "340", label: "Applicants per graduate role. Same degree. One sounds ready." },
+          { value: "5 min", label: "Free diagnostic. No card. Your Readiness Score on the spot." },
+          { value: "$99", label: "One-time. No subscription. The interview that starts your career." },
         ]}
       />
 
@@ -132,11 +130,11 @@ function GraduatePage() {
 
       <FinalPricingCTA
         title="The Graduate Pathway. $99 AUD."
-        highlight="The room that starts everything."
-        body="One focused pathway. No subscription. Start with the free diagnostic, or go straight in."
+        highlight="The interview that starts your career."
+        body="Live voice coaching on the questions you'll actually face. One payment. No subscription."
         primary={PRIMARY}
         secondary={SECONDARY}
-        urgency="The interview is coming. The question is which version of you walks into it."
+        urgency="Your interview is coming. Walk in prepared, or walk in hoping."
       />
 
       <SiteFooter />

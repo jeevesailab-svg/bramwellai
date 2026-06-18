@@ -43,7 +43,7 @@ function ReturnerPage() {
             <GoldText>The panel doesn't know that yet.</GoldText>
           </>
         }
-        subhead="The gap question is coming. How you answer it decides whether they see the break — or the person who came back. Bramwell prepares you for every moment that could trip you up, before the room does."
+        subhead="The gap question is coming in the first two minutes. Answer it wrong and the rest of the interview is recovery. Bramwell drills the answer until it owns the question instead of apologising for it."
         primaryCta={PRIMARY}
         secondary={SECONDARY}
       />
@@ -57,17 +57,14 @@ function ReturnerPage() {
           </h2>
           <div className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
             <p>
-              You know what you did during the break. You know it was the right decision. You know your capability didn't
-              disappear.
+              You know what you did during the break. You know it was the right call. Your capability didn't disappear.
             </p>
             <p>
-              But under the weight of the question, something shifts. The explanation runs long. You minimise what you did. An
-              apology slips in that you didn't plan to give and can't take back.
+              But under the question, something shifts. The answer runs long. You minimise. An apology slips in you didn't plan to give.
             </p>
             <p className="font-medium text-foreground">The panel notices.</p>
             <p>
-              Bramwell changes that — with a structure that makes the gap part of your story, not a hole in it. Delivered out
-              loud, until it's unshakeable.
+              Bramwell rebuilds the answer so the gap becomes part of your story, not a hole in it — drilled out loud until it's unshakeable.
             </p>
           </div>
         </div>
@@ -126,11 +123,11 @@ function ReturnerPage() {
 
       <FinalPricingCTA
         title="The Comeback Pathway. $199 AUD."
-        highlight="Back in the room — on your terms."
-        body="The gap question owned. The apology removed. The version of you the panel needs to hear."
+        highlight="The gap, owned. The apology, gone."
+        body="Live voice coaching on the questions every returner gets — until you answer them without flinching. One payment. No subscription."
         primary={PRIMARY}
         secondary={SECONDARY}
-        urgency="The interview is coming. The question is which version of you walks into it."
+        urgency="The interview is coming. The gap question will be in the first two minutes."
       />
 
       <SiteFooter />

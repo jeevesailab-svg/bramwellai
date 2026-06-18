@@ -43,7 +43,7 @@ function RedundantPage() {
             <GoldText>Now explain it in sixty seconds.</GoldText>
           </>
         }
-        subhead="You have more capability than most people in this process. You also haven't done this in years — and that gap is loud in the room before you've said a word. Bramwell prepares you for every question that's coming."
+        subhead="You haven't interviewed in years. The panel will ask why you left in your first sixty seconds. Bramwell drills the answer — and every follow-up — until it lands without apology."
         primaryCta={PRIMARY}
         secondary={SECONDARY}
       />
@@ -51,21 +51,19 @@ function RedundantPage() {
       <section className="border-t border-border bg-background py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-            The gap on your CV isn't the problem.
+            The redundancy isn't the problem.
             <br />
             <GoldText>How you talk about it is.</GoldText>
           </h2>
           <div className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
             <p>
-              The decision was made by someone in a spreadsheet. It had nothing to do with your capability. But in a room with a
-              panel who doesn't know you, that distinction doesn't exist yet.
+              It was a spreadsheet decision. It had nothing to do with your capability. But the panel doesn't know that yet — and they'll decide in the first answer you give.
             </p>
             <p>
-              You have sixty seconds to answer "tell us about your situation" without sounding defensive, without over-explaining,
-              and without letting the gap become the story they remember.
+              Sixty seconds to answer "what happened?" without sounding defensive, without over-explaining, without letting the redundancy become the story they remember.
             </p>
             <p className="font-medium text-foreground">
-              Bramwell fixes the gap answer — and the "why now?" and the follow-ups — before the panel decides for you.
+              Bramwell builds the answer — and the "why now?" and every follow-up — until it sounds inevitable, not apologetic.
             </p>
           </div>
         </div>
@@ -124,11 +122,11 @@ function RedundantPage() {
 
       <FinalPricingCTA
         title="The Comeback Pathway. $199 AUD."
-        highlight="Back in the room — on your terms."
-        body="One focused pathway built for the specific moment you're in. No subscription."
+        highlight="Back in the market. On the front foot."
+        body="Live voice coaching on the redundancy question, the gap, the follow-ups. One payment. No subscription."
         primary={PRIMARY}
         secondary={SECONDARY}
-        urgency="The interview is coming. The question is which version of you walks into it."
+        urgency="Your next interview is the one that ends the gap. Or extends it."
       />
 
       <SiteFooter />
