@@ -103,15 +103,11 @@ function Hero() {
         </p>
 
         <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-          Everyone in that room prepared.
-          <br />
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
-            Only one of them prepared with Bramwell.
-          </span>
+          The answers that get people chosen.
         </h1>
 
         <p className="mx-auto mt-8 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Live voice coaching that gets you chosen.
+          Live voice coaching built on $5,000 executive-coach methodology.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
