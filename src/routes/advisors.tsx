@@ -17,7 +17,7 @@ export const Route = createFileRoute("/advisors")({
       {
         name: "description",
         content:
-          "The private voice coach for your students — available at 11pm the night before, for every student on your caseload. Institutional early access for employability teams.",
+          "The private voice coach for your students — available at 11pm the night before. Institutional early access for employability teams.",
       },
       { property: "og:title", content: "Bramwell AI for Career Advisors" },
       {
@@ -43,7 +43,7 @@ function AdvisorsPage() {
             <GoldText>Bramwell can.</GoldText>
           </>
         }
-        subhead="Give every student on your caseload a private voice coach — free for your first 50. Available 11pm Sunday before Monday's interview. No booking, no waitlist, no extra advisor hours."
+        subhead="Give every student a private voice coach — free for your first 50. Available 11pm Sunday before Monday's interview. No booking, no waitlist, no extra advisor hours."
         primaryCta={{ label: "Claim Your Free 50-Student Pilot", href: "#access" }}
         secondary={{ label: "See how it works", href: "#advisor-how" }}
       />

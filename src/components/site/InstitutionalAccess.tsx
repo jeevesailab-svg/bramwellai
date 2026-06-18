@@ -59,7 +59,7 @@ export function InstitutionalAccess() {
     const subject = `Your Bramwell pilot referral link — ${parsed.data.institution}`;
     const body =
       `Hi,\n\nYou're in. Here's your private referral link for the Bramwell free 50-student pilot:\n\n${url}\n\n` +
-      `Share this link with up to 50 students on your caseload. They get the full Readiness Diagnostic free — no signup, no login wall.\n\n` +
+      `Share this link with up to 50 students. They get the full Readiness Diagnostic free — no signup, no login wall.\n\n` +
       `We'll send a cohort report (anonymised) once 10+ students complete it.\n\n— Bramwell`;
     const mailto = `mailto:${encodeURIComponent(parsed.data.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     // Use a hidden anchor so popup blockers don't intercept.
