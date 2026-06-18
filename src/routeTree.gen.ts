@@ -14,6 +14,7 @@ import { Route as ReturnerRouteImport } from './routes/returner'
 import { Route as RedundantRouteImport } from './routes/redundant'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PortalRouteImport } from './routes/portal'
+import { Route as PivotRouteImport } from './routes/pivot'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as GraduateRouteImport } from './routes/graduate'
 import { Route as DiagnosticRouteImport } from './routes/diagnostic'
@@ -54,6 +55,11 @@ const PricingRoute = PricingRouteImport.update({
 const PortalRoute = PortalRouteImport.update({
   id: '/portal',
   path: '/portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PivotRoute = PivotRouteImport.update({
+  id: '/pivot',
+  path: '/pivot',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -149,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/diagnostic': typeof DiagnosticRouteWithChildren
   '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
+  '/pivot': typeof PivotRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/redundant': typeof RedundantRoute
@@ -172,6 +179,7 @@ export interface FileRoutesByTo {
   '/diagnostic': typeof DiagnosticRouteWithChildren
   '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
+  '/pivot': typeof PivotRoute
   '/pricing': typeof PricingRoute
   '/redundant': typeof RedundantRoute
   '/returner': typeof ReturnerRoute
@@ -195,6 +203,7 @@ export interface FileRoutesById {
   '/diagnostic': typeof DiagnosticRouteWithChildren
   '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
+  '/pivot': typeof PivotRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/redundant': typeof RedundantRoute
@@ -220,6 +229,7 @@ export interface FileRouteTypes {
     | '/diagnostic'
     | '/graduate'
     | '/login'
+    | '/pivot'
     | '/portal'
     | '/pricing'
     | '/redundant'
@@ -243,6 +253,7 @@ export interface FileRouteTypes {
     | '/diagnostic'
     | '/graduate'
     | '/login'
+    | '/pivot'
     | '/pricing'
     | '/redundant'
     | '/returner'
@@ -265,6 +276,7 @@ export interface FileRouteTypes {
     | '/diagnostic'
     | '/graduate'
     | '/login'
+    | '/pivot'
     | '/portal'
     | '/pricing'
     | '/redundant'
@@ -289,6 +301,7 @@ export interface RootRouteChildren {
   DiagnosticRoute: typeof DiagnosticRouteWithChildren
   GraduateRoute: typeof GraduateRoute
   LoginRoute: typeof LoginRoute
+  PivotRoute: typeof PivotRoute
   PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
   RedundantRoute: typeof RedundantRoute
@@ -337,6 +350,13 @@ declare module '@tanstack/react-router' {
       path: '/portal'
       fullPath: '/portal'
       preLoaderRoute: typeof PortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pivot': {
+      id: '/pivot'
+      path: '/pivot'
+      fullPath: '/pivot'
+      preLoaderRoute: typeof PivotRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -488,6 +508,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiagnosticRoute: DiagnosticRouteWithChildren,
   GraduateRoute: GraduateRoute,
   LoginRoute: LoginRoute,
+  PivotRoute: PivotRoute,
   PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,
   RedundantRoute: RedundantRoute,
