@@ -27,6 +27,7 @@ import { Route as PortalSetupRouteImport } from './routes/portal.setup'
 import { Route as PortalCoachRouteImport } from './routes/portal.coach'
 import { Route as DiagnosticResultRouteImport } from './routes/diagnostic.result'
 import { Route as ApiPublicQuizLeadRouteImport } from './routes/api/public/quiz-lead'
+import { Route as ApiPublicKlaviyoEventRouteImport } from './routes/api/public/klaviyo-event'
 import { Route as ApiPublicDiagnosticTokenRouteImport } from './routes/api/public/diagnostic-token'
 import { Route as ApiPublicDiagnosticResultRouteImport } from './routes/api/public/diagnostic-result'
 import { Route as ApiPublicDiagnosticIncompleteRouteImport } from './routes/api/public/diagnostic-incomplete'
@@ -123,6 +124,11 @@ const ApiPublicQuizLeadRoute = ApiPublicQuizLeadRouteImport.update({
   path: '/api/public/quiz-lead',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicKlaviyoEventRoute = ApiPublicKlaviyoEventRouteImport.update({
+  id: '/api/public/klaviyo-event',
+  path: '/api/public/klaviyo-event',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicDiagnosticTokenRoute =
   ApiPublicDiagnosticTokenRouteImport.update({
     id: '/api/public/diagnostic-token',
@@ -176,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/api/public/diagnostic-incomplete': typeof ApiPublicDiagnosticIncompleteRoute
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
+  '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
@@ -200,6 +207,7 @@ export interface FileRoutesByTo {
   '/api/public/diagnostic-incomplete': typeof ApiPublicDiagnosticIncompleteRoute
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
+  '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
@@ -226,6 +234,7 @@ export interface FileRoutesById {
   '/api/public/diagnostic-incomplete': typeof ApiPublicDiagnosticIncompleteRoute
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
+  '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
@@ -253,6 +262,7 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-incomplete'
     | '/api/public/diagnostic-result'
     | '/api/public/diagnostic-token'
+    | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
     | '/api/public/payments/webhook'
   fileRoutesByTo: FileRoutesByTo
@@ -277,6 +287,7 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-incomplete'
     | '/api/public/diagnostic-result'
     | '/api/public/diagnostic-token'
+    | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
     | '/api/public/payments/webhook'
   id:
@@ -302,6 +313,7 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-incomplete'
     | '/api/public/diagnostic-result'
     | '/api/public/diagnostic-token'
+    | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
     | '/api/public/payments/webhook'
   fileRoutesById: FileRoutesById
@@ -324,6 +336,7 @@ export interface RootRouteChildren {
   ApiPublicDiagnosticIncompleteRoute: typeof ApiPublicDiagnosticIncompleteRoute
   ApiPublicDiagnosticResultRoute: typeof ApiPublicDiagnosticResultRoute
   ApiPublicDiagnosticTokenRoute: typeof ApiPublicDiagnosticTokenRoute
+  ApiPublicKlaviyoEventRoute: typeof ApiPublicKlaviyoEventRoute
   ApiPublicQuizLeadRoute: typeof ApiPublicQuizLeadRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
 }
@@ -456,6 +469,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicQuizLeadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/klaviyo-event': {
+      id: '/api/public/klaviyo-event'
+      path: '/api/public/klaviyo-event'
+      fullPath: '/api/public/klaviyo-event'
+      preLoaderRoute: typeof ApiPublicKlaviyoEventRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/diagnostic-token': {
       id: '/api/public/diagnostic-token'
       path: '/api/public/diagnostic-token'
@@ -539,19 +559,10 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicDiagnosticIncompleteRoute: ApiPublicDiagnosticIncompleteRoute,
   ApiPublicDiagnosticResultRoute: ApiPublicDiagnosticResultRoute,
   ApiPublicDiagnosticTokenRoute: ApiPublicDiagnosticTokenRoute,
+  ApiPublicKlaviyoEventRoute: ApiPublicKlaviyoEventRoute,
   ApiPublicQuizLeadRoute: ApiPublicQuizLeadRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
