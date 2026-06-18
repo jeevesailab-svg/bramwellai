@@ -742,6 +742,7 @@ function Footer() {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">Bramwell</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
             <a href="/diagnostic?autostart=1" className="transition-colors hover:text-foreground">Free Diagnostic</a>
+            <a href="/the-7-questions" className="transition-colors hover:text-foreground">The 7 Questions (Free Guide)</a>
             <a href="#pathways" className="transition-colors hover:text-foreground">Pathways</a>
             <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
             <a href="/login" className="transition-colors hover:text-foreground">Sign In</a>
