@@ -103,15 +103,18 @@ function Hero() {
         </p>
 
         <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-          Everyone in that room prepared.
+          You could see the answer in your head.
           <br />
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
-            Only one of them prepared with Bramwell.
+            And then you opened your mouth.
           </span>
         </h1>
 
-        <p className="mx-auto mt-8 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Live voice coaching that listens to how you actually sound. Real-time feedback on the answers that decide whether you get chosen.
+        <p className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
+          You heard yourself talking and couldn't stop. You watched their faces and knew — while it was still happening — that you were losing them. There is no delete button.
+        </p>
+        <p className="mx-auto mt-4 max-w-2xl text-balance text-base leading-relaxed text-foreground/90 md:text-lg">
+          Bramwell is the only thing that talks back. Live voice, real pressure, in time to fix it before the room.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
@@ -197,6 +200,9 @@ function SecretWeapon() {
           <p>
             {`Bramwell is that layer — live voice, real-time correction, answer-specific calibration. Built on what's always existed at the top of the market. Available to you tonight, before the panel ever sees you.`}
           </p>
+          <p className="font-medium text-foreground">
+            {`Unlike other skills, interviews are almost impossible to practice. They're rare, high-stakes, and the one place you need feedback is the one place no one gives it. YouTube doesn't talk back. Courses don't talk back. A friend over coffee can't push you to the place that breaks you. Bramwell can.`}
+          </p>
         </div>
 
         <blockquote
@@ -266,20 +272,20 @@ function ValueDislocation() {
 function PainAccordion() {
   const items = [
     {
-      q: `"I ramble and lose the point I was trying to make."`,
-      a: `That is not nerves. That is the absence of structure. Bramwell installs PREP — a framework that locks any answer into place in under 60 seconds. You hit the point before you lose the room. The panel follows. Every time.`,
+      q: `"I can hear myself talking and I can't stop."`,
+      a: `That's not nerves. That's the absence of structure. Bramwell installs PREP — a framework that locks any answer into place in under 60 seconds. You hit the point before you lose the room. The panel follows. Every time.`,
     },
     {
-      q: `"I freeze. My mind goes blank. I can hear myself falling apart."`,
+      q: `"I could see the answer in my head. Nothing came out."`,
       a: `Freezing is a familiarity problem, not a capability problem. Bramwell drills you on the questions you dread most — out loud, under pressure, on repeat — until familiar is the only thing they feel. You cannot freeze on a question you've answered fifty times.`,
     },
     {
-      q: `"I walk out replaying what I should have said."`,
-      a: `The answer you thought of on the drive home was your best one. It was also too late. Bramwell runs you through the hardest moments the night before — out loud — so the room hears your best take, not your second draft.`,
+      q: `"I thought of the perfect answer on the drive home."`,
+      a: `That answer was your best one. It was also too late. Bramwell runs you through the hardest moments the night before — out loud — so the room hears your best take, not your second draft.`,
     },
     {
-      q: `"I know I'm capable. I just can't sell myself."`,
-      a: `You do not have a capability problem. You have a translation problem. Bramwell mines your CV for the moments that prove your level, then drills you on delivering them in the language of the role you actually want. The evidence was always there. Now it lands.`,
+      q: `"I've done the work. Why can't I just say that?"`,
+      a: `You don't have a capability problem. You have a translation problem. Bramwell mines your CV for the moments that prove your level, then drills you on delivering them in the language of the role you actually want. The evidence was always there. Now it lands.`,
     },
     {
       q: `"I sound less senior than I am."`,
@@ -290,8 +296,8 @@ function PainAccordion() {
       a: `They were not smarter. They were not more experienced. They were better coached — and you didn't know that was the difference until after you lost. Bramwell closes it before the next interview. Not after.`,
     },
     {
-      q: `"I haven't interviewed in years. I don't know who I am in a room anymore."`,
-      a: `Twelve years at one company. Made redundant. First real interview in a decade. You haven't lost your capability — you've just never had to perform it under this kind of pressure before. Bramwell is built for exactly this. Privately. Specifically. Before the panel ever sees you.`,
+      q: `"I've tried YouTube. Courses. Mock interviews with friends. I'm still the same in the room."`,
+      a: `Because none of them talk back. Interviews are infrequent, high-stakes, and the one place real feedback is rare. You can't fix a live performance problem by watching someone else. Bramwell is the first thing that pushes back in real time, on your actual answer, in your actual voice — until the version that walks in is the version you knew you had.`,
     },
     {
       q: `"I need to explain a career gap without it becoming the whole interview."`,
@@ -302,10 +308,10 @@ function PainAccordion() {
     <section className="border-t border-border bg-background py-24 md:py-32">
       <div className="mx-auto max-w-4xl px-6 md:px-10">
         <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-          You know your stuff.
+          You've done the work.
           <br />
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
-            You just freeze under pressure.
+            Why can't you just say that?
           </span>
         </h2>
         <div className="mt-12 divide-y divide-border border-y border-border">
