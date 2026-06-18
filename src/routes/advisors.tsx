@@ -34,6 +34,7 @@ function AdvisorsPage() {
       <SiteNav ctaLabel="Get Early Access" ctaHref="#access" />
       <PageHero
         pathway="advisors"
+        badge="Free pilot — first 50 students"
         eyebrow="For career advisors and employability teams"
         headline={
           <>
@@ -42,8 +43,8 @@ function AdvisorsPage() {
             <GoldText>Bramwell can.</GoldText>
           </>
         }
-        subhead="A private voice coach for every student on your caseload. Available 11pm Sunday before Monday's interview. No booking, no waitlist, no extra advisor hours."
-        primaryCta={{ label: "Get Early Access for Your Institution", href: "#access" }}
+        subhead="Give every student on your caseload a private voice coach — free for your first 50. Available 11pm Sunday before Monday's interview. No booking, no waitlist, no extra advisor hours."
+        primaryCta={{ label: "Claim Your Free 50-Student Pilot", href: "#access" }}
         secondary={{ label: "See how it works", href: "#advisor-how" }}
       />
 
