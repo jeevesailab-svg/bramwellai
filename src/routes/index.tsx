@@ -321,6 +321,31 @@ function PainAccordion() {
             </details>
           ))}
         </div>
+        <div className="mt-12 rounded-2xl border border-border bg-background p-6 md:p-8">
+          <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p
+                className="text-[11px] font-semibold uppercase tracking-[0.22em]"
+                style={{ color: "var(--primary)" }}
+              >
+                Free guide · No card
+              </p>
+              <p className="mt-2 text-base font-medium text-foreground md:text-lg">
+                The 7 questions every panel asks — and what they're really testing.
+              </p>
+            </div>
+            <a
+              href="/the-7-questions"
+              className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition hover:opacity-95"
+              style={{
+                background: "var(--gradient-gold)",
+                color: "var(--primary-foreground)",
+              }}
+            >
+              Get the Free Guide →
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
