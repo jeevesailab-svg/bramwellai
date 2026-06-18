@@ -35,7 +35,7 @@ function PivotPage() {
     <main className="min-h-screen bg-background text-foreground">
       <SiteNav ctaLabel={PRIMARY.label} ctaHref={PRIMARY.href} />
       <PageHero
-        eyebrow="For experienced professionals who keep losing the room"
+        eyebrow="For experienced professionals making a career pivot"
         headline={
           <>
             Twelve years of proof.
@@ -43,7 +43,7 @@ function PivotPage() {
             <GoldText>Hiring for two years of the right title.</GoldText>
           </>
         }
-        subhead="You're more qualified than the person they're about to hire. You just can't make them feel it yet. Bramwell translates what you've done into the language of the role you want — and drills you until it sounds native."
+        subhead="You're more capable than the person they're about to hire. They can't see it because you're describing your career in the wrong language. Bramwell rewrites it in theirs — and drills it until it sounds native."
         primaryCta={PRIMARY}
         secondary={SECONDARY}
       />
@@ -57,17 +57,13 @@ function PivotPage() {
           </h2>
           <div className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
             <p>
-              You've done the work. The track record is objectively stronger than most candidates in this process. But when the
-              panel asks you to walk them through your background, what they hear is someone who was excellent — somewhere
-              else, doing something else.
+              You've done the work. Your track record is stronger than most candidates in this process. But when the panel hears it, they hear someone who was excellent somewhere else, doing something else.
             </p>
             <p>
-              The register is off. The examples are from the wrong world. You're losing to people with the exact title and half
-              your ability.
+              Wrong register. Wrong examples. You're losing to candidates with the right title and half the ability.
             </p>
             <p className="font-medium text-foreground">
-              Bramwell rebuilds your narrative in the language of the role you want — and drills you until it sounds like you've
-              been saying it for years.
+              Bramwell rebuilds the narrative in the language of the role — and drills it until it sounds like you've been saying it for years.
             </p>
           </div>
         </div>
@@ -126,11 +122,11 @@ function PivotPage() {
 
       <FinalPricingCTA
         title="The Confidence Pathway. $249 AUD."
-        highlight="Your career, on the terms you set."
-        body="One focused pathway built for experienced candidates who need to sound as capable as they are — in the language of the room they're trying to enter."
+        highlight="The pivot, in the language they hire in."
+        body="Live voice coaching that translates twelve years of proof into the role you actually want. One payment. No subscription."
         primary={PRIMARY}
         secondary={SECONDARY}
-        urgency="The interview is coming. The question is which version of you walks into it."
+        urgency="The shortlist is being built right now. The candidate who sounds native to the role wins."
       />
 
       <SiteFooter />
