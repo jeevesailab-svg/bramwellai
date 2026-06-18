@@ -181,7 +181,7 @@ function SevenQuestionsPage() {
                 </p>
               ) : null}
               <p className="mt-3 text-[11px] text-muted-foreground/70">
-                Read it instantly below. We'll email you the PDF copy. No spam.
+                Unlocks the full guide on this page. No spam.
               </p>
             </form>
           ) : (
@@ -193,8 +193,8 @@ function SevenQuestionsPage() {
                 ✓ Sent to {email}
               </p>
               <p className="mt-3 text-sm text-muted-foreground">
-                The PDF is on its way to your inbox. The full guide is also unlocked below — start
-                reading now.
+                The full guide is unlocked below — start reading now. Bookmark this page to come
+                back anytime.
               </p>
             </div>
           )}
@@ -240,7 +240,7 @@ function SevenQuestionsPage() {
                   Enter your email above to unlock all 7.
                 </p>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  Instant access. PDF copy emailed.
+                  Instant access. Read it right here.
                 </p>
               </div>
             </div>
