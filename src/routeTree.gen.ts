@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as The7QuestionsRouteImport } from './routes/the-7-questions'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ReturnerRouteImport } from './routes/returner'
 import { Route as RedundantRouteImport } from './routes/redundant'
@@ -34,6 +35,11 @@ import { Route as ApiPublicDiagnosticIncompleteRouteImport } from './routes/api/
 import { Route as ApiPublicDiagnosticEmailRouteImport } from './routes/api/public/diagnostic-email'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 
+const The7QuestionsRoute = The7QuestionsRouteImport.update({
+  id: '/the-7-questions',
+  path: '/the-7-questions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
@@ -174,6 +180,7 @@ export interface FileRoutesByFullPath {
   '/redundant': typeof RedundantRoute
   '/returner': typeof ReturnerRoute
   '/signup': typeof SignupRoute
+  '/the-7-questions': typeof The7QuestionsRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
@@ -199,6 +206,7 @@ export interface FileRoutesByTo {
   '/redundant': typeof RedundantRoute
   '/returner': typeof ReturnerRoute
   '/signup': typeof SignupRoute
+  '/the-7-questions': typeof The7QuestionsRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
@@ -226,6 +234,7 @@ export interface FileRoutesById {
   '/redundant': typeof RedundantRoute
   '/returner': typeof ReturnerRoute
   '/signup': typeof SignupRoute
+  '/the-7-questions': typeof The7QuestionsRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
@@ -254,6 +263,7 @@ export interface FileRouteTypes {
     | '/redundant'
     | '/returner'
     | '/signup'
+    | '/the-7-questions'
     | '/diagnostic/result'
     | '/portal/coach'
     | '/portal/setup'
@@ -279,6 +289,7 @@ export interface FileRouteTypes {
     | '/redundant'
     | '/returner'
     | '/signup'
+    | '/the-7-questions'
     | '/diagnostic/result'
     | '/portal/coach'
     | '/portal/setup'
@@ -305,6 +316,7 @@ export interface FileRouteTypes {
     | '/redundant'
     | '/returner'
     | '/signup'
+    | '/the-7-questions'
     | '/diagnostic/result'
     | '/portal/coach'
     | '/portal/setup'
@@ -332,6 +344,7 @@ export interface RootRouteChildren {
   RedundantRoute: typeof RedundantRoute
   ReturnerRoute: typeof ReturnerRoute
   SignupRoute: typeof SignupRoute
+  The7QuestionsRoute: typeof The7QuestionsRoute
   ApiPublicDiagnosticEmailRoute: typeof ApiPublicDiagnosticEmailRoute
   ApiPublicDiagnosticIncompleteRoute: typeof ApiPublicDiagnosticIncompleteRoute
   ApiPublicDiagnosticResultRoute: typeof ApiPublicDiagnosticResultRoute
@@ -343,6 +356,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/the-7-questions': {
+      id: '/the-7-questions'
+      path: '/the-7-questions'
+      fullPath: '/the-7-questions'
+      preLoaderRoute: typeof The7QuestionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -555,6 +575,7 @@ const rootRouteChildren: RootRouteChildren = {
   RedundantRoute: RedundantRoute,
   ReturnerRoute: ReturnerRoute,
   SignupRoute: SignupRoute,
+  The7QuestionsRoute: The7QuestionsRoute,
   ApiPublicDiagnosticEmailRoute: ApiPublicDiagnosticEmailRoute,
   ApiPublicDiagnosticIncompleteRoute: ApiPublicDiagnosticIncompleteRoute,
   ApiPublicDiagnosticResultRoute: ApiPublicDiagnosticResultRoute,

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { StickyMobileCTA } from "@/components/site/StickyMobileCTA";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -35,6 +36,7 @@ function Index() {
       <FAQ />
       <FinalCTA />
       <Footer />
+      <StickyMobileCTA />
     </main>
   );
 }
@@ -236,6 +238,25 @@ function ValueDislocation() {
             <span className="font-medium text-foreground">Bramwell is open right now.</span>
           </p>
         </div>
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a
+            href="/pricing"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition hover:opacity-95"
+            style={{
+              background: "var(--gradient-gold)",
+              color: "var(--primary-foreground)",
+              boxShadow: "var(--shadow-elegant)",
+            }}
+          >
+            See Pricing →
+          </a>
+          <a
+            href="/diagnostic?autostart=1"
+            className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+          >
+            Or take the free 5-minute diagnostic first
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -299,6 +320,31 @@ function PainAccordion() {
               </p>
             </details>
           ))}
+        </div>
+        <div className="mt-12 rounded-2xl border border-border bg-background p-6 md:p-8">
+          <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p
+                className="text-[11px] font-semibold uppercase tracking-[0.22em]"
+                style={{ color: "var(--primary)" }}
+              >
+                Free guide · No card
+              </p>
+              <p className="mt-2 text-base font-medium text-foreground md:text-lg">
+                The 7 questions every panel asks — and what they're really testing.
+              </p>
+            </div>
+            <a
+              href="/the-7-questions"
+              className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition hover:opacity-95"
+              style={{
+                background: "var(--gradient-gold)",
+                color: "var(--primary-foreground)",
+              }}
+            >
+              Get the Free Guide →
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -657,6 +703,16 @@ function FinalCTA() {
         <p className="mt-6 text-xs text-muted-foreground/80 md:text-sm">
           5 minutes. No credit card. No login. Just the truth about where you stand.
         </p>
+        <p className="mt-4 text-xs text-muted-foreground/80 md:text-sm">
+          Not ready to speak yet?{" "}
+          <a
+            href="/the-7-questions"
+            className="underline-offset-4 hover:text-foreground hover:underline"
+            style={{ color: "var(--primary)" }}
+          >
+            Read the 7 questions every panel asks →
+          </a>
+        </p>
         <p className="mt-4 text-xs italic text-muted-foreground/70 md:text-sm">
           The coaches who charge $5,000 for this are booked for six weeks. Bramwell is open right now.
         </p>
@@ -686,6 +742,7 @@ function Footer() {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">Bramwell</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
             <a href="/diagnostic?autostart=1" className="transition-colors hover:text-foreground">Free Diagnostic</a>
+            <a href="/the-7-questions" className="transition-colors hover:text-foreground">The 7 Questions (Free Guide)</a>
             <a href="#pathways" className="transition-colors hover:text-foreground">Pathways</a>
             <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
             <a href="/login" className="transition-colors hover:text-foreground">Sign In</a>
