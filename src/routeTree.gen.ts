@@ -13,6 +13,7 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as GraduateRouteImport } from './routes/graduate'
 import { Route as DiagnosticRouteImport } from './routes/diagnostic'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AdvisorsRouteImport } from './routes/advisors'
@@ -46,6 +47,11 @@ const PortalRoute = PortalRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GraduateRoute = GraduateRouteImport.update({
+  id: '/graduate',
+  path: '/graduate',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiagnosticRoute = DiagnosticRouteImport.update({
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
   '/diagnostic': typeof DiagnosticRouteWithChildren
+  '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByTo {
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
   '/diagnostic': typeof DiagnosticRouteWithChildren
+  '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
@@ -169,6 +177,7 @@ export interface FileRoutesById {
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
   '/diagnostic': typeof DiagnosticRouteWithChildren
+  '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
@@ -191,6 +200,7 @@ export interface FileRouteTypes {
     | '/advisors'
     | '/dashboard'
     | '/diagnostic'
+    | '/graduate'
     | '/login'
     | '/portal'
     | '/pricing'
@@ -211,6 +221,7 @@ export interface FileRouteTypes {
     | '/advisors'
     | '/dashboard'
     | '/diagnostic'
+    | '/graduate'
     | '/login'
     | '/pricing'
     | '/signup'
@@ -230,6 +241,7 @@ export interface FileRouteTypes {
     | '/advisors'
     | '/dashboard'
     | '/diagnostic'
+    | '/graduate'
     | '/login'
     | '/portal'
     | '/pricing'
@@ -251,6 +263,7 @@ export interface RootRouteChildren {
   AdvisorsRoute: typeof AdvisorsRoute
   DashboardRoute: typeof DashboardRoute
   DiagnosticRoute: typeof DiagnosticRouteWithChildren
+  GraduateRoute: typeof GraduateRoute
   LoginRoute: typeof LoginRoute
   PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
@@ -291,6 +304,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/graduate': {
+      id: '/graduate'
+      path: '/graduate'
+      fullPath: '/graduate'
+      preLoaderRoute: typeof GraduateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/diagnostic': {
@@ -426,6 +446,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdvisorsRoute: AdvisorsRoute,
   DashboardRoute: DashboardRoute,
   DiagnosticRoute: DiagnosticRouteWithChildren,
+  GraduateRoute: GraduateRoute,
   LoginRoute: LoginRoute,
   PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,
