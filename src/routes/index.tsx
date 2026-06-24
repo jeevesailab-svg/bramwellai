@@ -773,6 +773,18 @@ function FAQ() {
       q: "Is this only for interviews?",
       a: `No. Interviews are the first use case because they are urgent and high-stakes. But Bramwell is built for career-defining communication: promotions, pay rises, board conversations, media training, investor pitches, performance reviews and any room where how you speak changes the outcome.`,
     },
+    {
+      q: "What if I'm not based in Australia?",
+      a: `Bramwell is available globally. Native English coaching, wherever the conversation matters.`,
+    },
+    {
+      q: "How is this different from just using ChatGPT?",
+      a: `ChatGPT gives you a script. A script works until the interviewer goes off-piste — which they always do. Bramwell coaches you in a live two-way voice conversation, drills you on the exact moments you'll face, and doesn't move on until the answer is genuinely ready. You don't memorise an answer. You own it.`,
+    },
+    {
+      q: "Can I use this the night before an interview?",
+      a: `That's exactly what it's built for. No booking required. No waiting for a coach to be available. Bramwell is there at 11pm the night before — which is when you actually need it.`,
+    },
   ];
   return (
     <section className="border-t border-border bg-background py-24 md:py-32">
