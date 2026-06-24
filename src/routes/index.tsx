@@ -824,6 +824,9 @@ function FinalCTA() {
         <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
           Take the free 5-minute diagnostic and hear what your answers are really signalling — before the panel, before the pressure, before it costs you the opportunity.
         </p>
+        <p className="mx-auto mt-8 max-w-2xl text-base font-medium leading-relaxed text-foreground md:text-lg">
+          The candidates who make the final shortlist don't find Bramwell after the interview.
+        </p>
         <a
           href="/diagnostic?autostart=1"
           className="mt-10 inline-flex h-12 items-center justify-center gap-2 rounded-full px-8 text-sm font-semibold transition hover:opacity-95"
