@@ -79,7 +79,7 @@ function Nav() {
           boxShadow: "var(--shadow-elegant)",
         }}
       >
-        Get Your Free Readiness Score →
+        Take the free diagnostic →
       </a>
     </header>
   );
@@ -126,7 +126,7 @@ function Hero() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Find out what's costing you the room — free, 5 minutes
+            Take the free diagnostic
             <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
         </div>
@@ -281,7 +281,7 @@ function EliteCoach() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Get Your Free Readiness Score →
+            Take the free diagnostic →
           </a>
         </div>
       </div>
