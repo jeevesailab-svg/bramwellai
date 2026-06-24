@@ -199,6 +199,21 @@ function DiagnosticPage() {
     return () => clearInterval(tick);
   }, [phase, conversation]);
 
+  // Safety net: if we enter "wrapping" but the agent never fires the
+  // submitDiagnostic client tool (call dropped, agent ended without invoking
+  // the tool, websocket 1006, etc.), forward the user to the result page
+  // anyway after a short grace window so they're never stuck on "preparing…".
+  useEffect(() => {
+    if (phase !== "wrapping") return;
+    const sid = sessionIdRef.current;
+    if (!sid) return;
+    const timeout = setTimeout(() => {
+      if (submittedRef.current) return;
+      window.location.assign(`/diagnostic/result?id=${sid}&incomplete=1`);
+    }, 8000);
+    return () => clearTimeout(timeout);
+  }, [phase]);
+
   const startDiagnostic = useCallback(async () => {
     setErrorMsg(null);
     setPhase("connecting");
