@@ -104,7 +104,7 @@ function formatType(type: string): string {
 }
 
 function DiagnosticResultPage() {
-  const { id } = Route.useSearch();
+  const { id, incomplete } = Route.useSearch();
   const [state, setState] = useState<
     | { kind: "loading" }
     | { kind: "error"; message: string }
@@ -179,13 +179,39 @@ function DiagnosticResultPage() {
           )}
           {state.kind === "error" && (
             <div className="py-24 text-center">
-              <p className="text-sm text-destructive">{state.message}</p>
-              <Link
-                to="/diagnostic"
-                className="mt-6 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium transition hover:bg-foreground/10"
-              >
-                Take the diagnostic
-              </Link>
+              {incomplete === "1" ? (
+                <>
+                  <p className="mx-auto max-w-md text-base text-foreground/90">
+                    Your call ended before Bramwell could finalise your
+                    Readiness Score.
+                  </p>
+                  <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
+                    This usually means the conversation was too short.
+                    Give it another five minutes — answer one question the way
+                    you normally would, and Bramwell will score you on the spot.
+                  </p>
+                  <Link
+                    to="/diagnostic"
+                    className="mt-8 inline-flex h-12 items-center justify-center rounded-full px-8 text-sm font-semibold transition hover:opacity-95"
+                    style={{
+                      background: "var(--gradient-gold)",
+                      color: "var(--primary-foreground)",
+                    }}
+                  >
+                    Try the diagnostic again
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <p className="text-sm text-destructive">{state.message}</p>
+                  <Link
+                    to="/diagnostic"
+                    className="mt-6 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium transition hover:bg-foreground/10"
+                  >
+                    Take the diagnostic
+                  </Link>
+                </>
+              )}
             </div>
           )}
           {state.kind === "ready" && <ResultBody result={state.result} />}
