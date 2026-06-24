@@ -33,16 +33,13 @@ export function PainChecklist() {
   return (
     <section className="border-t border-border bg-background py-24 md:py-32">
       <div className="mx-auto max-w-4xl px-6 md:px-10">
-        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          Sound familiar?
-        </p>
-        <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-          You know your stuff. You just cannot get it out{" "}
+        <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+          Your brain raced ahead of your mouth.{" "}
           <span
             className="bg-clip-text text-transparent"
             style={{ backgroundImage: "var(--gradient-gold)" }}
           >
-            under pressure.
+            Again.
           </span>
         </h2>
 
