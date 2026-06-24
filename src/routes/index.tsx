@@ -565,9 +565,7 @@ function Pathways() {
       price: "$79 AUD per month",
       headline: "For professionals who know the interview never really ends.",
       body: [
-        "Promotion panels. Pay rises. Board updates. Investor conversations. Client pitches. Media interviews. Internal influence. Difficult conversations.",
-        "The people who consistently win these moments are not naturally better under pressure. They practise before the room.",
-        "The Club gives you ongoing access to Bramwell for every career-defining conversation ahead.",
+        "Your career doesn't stop between interviews. Neither does Bramwell. One subscription. Every conversation, every pitch, every year — for as long as you want to keep winning rooms.",
       ],
       cta: "Join The Club →",
       href: "/pricing",
