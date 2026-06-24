@@ -95,6 +95,7 @@ function DiagnosticPage() {
     "intro",
   );
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [rateLimited, setRateLimited] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(SESSION_LIMIT_MS / 1000);
   const transcriptRef = useRef<string[]>([]);
   const sessionIdRef = useRef<string | null>(null);
@@ -218,6 +219,7 @@ function DiagnosticPage() {
 
   const startDiagnostic = useCallback(async () => {
     setErrorMsg(null);
+    setRateLimited(false);
     setPhase("connecting");
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -227,6 +229,12 @@ function DiagnosticPage() {
       });
       if (!res.ok) {
         const body = (await res.json().catch(() => ({}))) as { error?: string };
+        if (res.status === 429) {
+          setRateLimited(true);
+          setErrorMsg(body?.error ?? "You've used your free diagnostics for today.");
+          setPhase("error");
+          return;
+        }
         throw new Error(body?.error ?? `Could not start (${res.status})`);
       }
       const { token, sessionId, agentId, authMode } = (await res.json()) as {
@@ -415,13 +423,42 @@ function DiagnosticPage() {
 
             {phase === "error" && (
               <>
-                <p className="text-sm text-destructive">{errorMsg}</p>
-                <button
-                  onClick={startDiagnostic}
-                  className="mt-6 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium transition hover:bg-foreground/10"
-                >
-                  Try again
-                </button>
+                {rateLimited ? (
+                  <>
+                    <p className="text-base font-medium text-foreground">
+                      You've used your free diagnostic for today.
+                    </p>
+                    <p className="mt-3 text-sm text-muted-foreground">
+                      The free version is a five-minute snapshot. To keep
+                      going — rehearse real questions, get specific
+                      feedback, and actually move your Readiness Score —
+                      pick a Bramwell pathway.
+                    </p>
+                    <Link
+                      to="/pricing"
+                      className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full text-sm font-semibold transition hover:opacity-95"
+                      style={{
+                        background: "var(--gradient-gold)",
+                        color: "var(--primary-foreground)",
+                      }}
+                    >
+                      See coaching pathways →
+                    </Link>
+                    <p className="mt-4 text-xs text-muted-foreground">
+                      Free diagnostics reset every 24 hours.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-sm text-destructive">{errorMsg}</p>
+                    <button
+                      onClick={startDiagnostic}
+                      className="mt-6 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium transition hover:bg-foreground/10"
+                    >
+                      Try again
+                    </button>
+                  </>
+                )}
               </>
             )}
           </div>
