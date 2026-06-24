@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 export function StickyMobileCTA({
-  label = "Take the Free Diagnostic",
+  label = "Take the free diagnostic",
   href = "/diagnostic",
   search,
 }: {

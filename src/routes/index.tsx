@@ -106,16 +106,9 @@ function Hero() {
           </span>
         </h1>
 
-        <div className="mx-auto mt-8 max-w-2xl space-y-4 text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
+        <div className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
           <p>
-            You knew the answer. Then you opened your mouth — and the words that came out weren't the ones you had.
-          </p>
-          <p>You didn't get the job. You already know why.</p>
-          <p className="font-medium text-foreground">
-            That's not a confidence problem. It's a practice problem. And it's fixable tonight.
-          </p>
-          <p>
-            Bramwell listens to how you actually sound, scores your Readiness, and fixes the one habit standing between you and the offer.
+            Bramwell coaches you out loud — on the exact questions you'll face, in real time, until the right answer lives in your voice. Not on a script. Available the night before. No booking. No $400/session coach. No ChatGPT answer that falls apart the moment they go off-script.
           </p>
         </div>
 
@@ -134,8 +127,8 @@ function Hero() {
           </a>
         </div>
 
-        <p className="mx-auto mt-6 text-xs text-muted-foreground/80 md:text-sm">
-          No card. No login. Just the truth about where you stand.
+        <p className="mx-auto mt-6 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 md:text-sm">
+          5 minutes · No login · No credit card · Hear exactly what is holding you back
         </p>
       </div>
     </section>
@@ -190,7 +183,7 @@ function WrongWay() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Take the Free Diagnostic →
+            Take the free diagnostic →
           </a>
         </div>
       </div>
@@ -347,7 +340,7 @@ function FreeDiagnostic() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Take the Free Diagnostic →
+            Take the free diagnostic →
           </a>
         </div>
       </div>
@@ -407,14 +400,14 @@ function HowItWorks() {
   const steps = [
     {
       n: "01",
-      title: "Speak your answer out loud",
-      body: `Start with the free diagnostic or choose your pathway. Bramwell gives you a real interview-style prompt. You answer naturally, out loud, the way you would in the room.`,
-      cta: { label: "Take the Diagnostic →", href: "/diagnostic?autostart=1" },
+      title: "Run the free diagnostic",
+      body: `Five minutes with Bramwell. You'll hear your communication style, your three biggest gaps, and a Readiness Score — a clear benchmark of where you stand right now versus where you need to be. No login. No credit card. No pitch call after.`,
+      cta: { label: "Take the free diagnostic →", href: "/diagnostic?autostart=1" },
     },
     {
       n: "02",
-      title: "Get your Readiness Score",
-      body: `Bramwell analyses your answer for clarity, structure, confidence, seniority, relevance and impact. You see what is working, what is weak and what could cost you the opportunity.`,
+      title: "Choose your pathway",
+      body: `Graduate Sprint, Career Comeback, Interview Confidence, or Executive Communication. Each pathway is built for your exact situation — not a template that fits everyone and changes no one.`,
     },
     {
       n: "03",
@@ -572,9 +565,7 @@ function Pathways() {
       price: "$79 AUD per month",
       headline: "For professionals who know the interview never really ends.",
       body: [
-        "Promotion panels. Pay rises. Board updates. Investor conversations. Client pitches. Media interviews. Internal influence. Difficult conversations.",
-        "The people who consistently win these moments are not naturally better under pressure. They practise before the room.",
-        "The Club gives you ongoing access to Bramwell for every career-defining conversation ahead.",
+        "Your career doesn't stop between interviews. Neither does Bramwell. One subscription. Every conversation, every pitch, every year — for as long as you want to keep winning rooms.",
       ],
       cta: "Join The Club →",
       href: "/pricing",
@@ -590,6 +581,9 @@ function Pathways() {
             room you are walking into.
           </span>
         </h2>
+        <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground md:text-base">
+          A private communications coach charges $400–600 per session. They're booked weeks out. They're not available the night before.
+        </p>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {pathways.map((p) => (
@@ -644,6 +638,11 @@ function Pathways() {
               >
                 {p.cta}
               </a>
+              {p.featured && (
+                <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+                  Most members who start on a one-time pathway move to The Club within 60 days. Because the conversations don't stop.
+                </p>
+              )}
             </article>
           ))}
         </div>
@@ -774,6 +773,18 @@ function FAQ() {
       q: "Is this only for interviews?",
       a: `No. Interviews are the first use case because they are urgent and high-stakes. But Bramwell is built for career-defining communication: promotions, pay rises, board conversations, media training, investor pitches, performance reviews and any room where how you speak changes the outcome.`,
     },
+    {
+      q: "What if I'm not based in Australia?",
+      a: `Bramwell is available globally. Native English coaching, wherever the conversation matters.`,
+    },
+    {
+      q: "How is this different from just using ChatGPT?",
+      a: `ChatGPT gives you a script. A script works until the interviewer goes off-piste — which they always do. Bramwell coaches you in a live two-way voice conversation, drills you on the exact moments you'll face, and doesn't move on until the answer is genuinely ready. You don't memorise an answer. You own it.`,
+    },
+    {
+      q: "Can I use this the night before an interview?",
+      a: `That's exactly what it's built for. No booking required. No waiting for a coach to be available. Bramwell is there at 11pm the night before — which is when you actually need it.`,
+    },
   ];
   return (
     <section className="border-t border-border bg-background py-24 md:py-32">
@@ -824,6 +835,9 @@ function FinalCTA() {
         </h2>
         <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
           Take the free 5-minute diagnostic and hear what your answers are really signalling — before the panel, before the pressure, before it costs you the opportunity.
+        </p>
+        <p className="mx-auto mt-8 max-w-2xl text-base font-medium leading-relaxed text-foreground md:text-lg">
+          The candidates who make the final shortlist don't find Bramwell after the interview.
         </p>
         <a
           href="/diagnostic?autostart=1"

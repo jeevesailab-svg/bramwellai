@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { CtaWithCapture, type Pathway } from "./CtaWithCapture";
 
-export function SiteNav({ ctaLabel = "Take the Free Diagnostic", ctaHref = "/diagnostic?autostart=1" }: { ctaLabel?: string; ctaHref?: string }) {
+export function SiteNav({ ctaLabel = "Take the free diagnostic", ctaHref = "/diagnostic?autostart=1" }: { ctaLabel?: string; ctaHref?: string }) {
   return (
     <header className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
       <a href="/" className="flex items-baseline gap-1.5">
