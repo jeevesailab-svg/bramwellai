@@ -143,7 +143,7 @@ function DiagnosticPage() {
   const conversation = useConversation({
     onConnect: () => setPhase("live"),
     onDisconnect: () => {
-      setPhase((p) => (p === "wrapping" ? "wrapping" : "intro"));
+      setPhase((p) => (p === "wrapping" ? "wrapping" : "wrapping"));
       // Fallback: if the agent ended the call without invoking submitDiagnostic,
       // flag the session so we can follow up manually instead of losing the lead.
       const sid = sessionIdRef.current;
