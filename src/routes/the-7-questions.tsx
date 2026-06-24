@@ -122,7 +122,7 @@ function SevenQuestionsPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <SiteNav ctaLabel="Take the Free Diagnostic" ctaHref="/diagnostic?autostart=1" />
+      <SiteNav ctaLabel="Take the free diagnostic" ctaHref="/diagnostic?autostart=1" />
 
       <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
         <div
@@ -278,7 +278,7 @@ function SevenQuestionsPage() {
                 boxShadow: "var(--shadow-elegant)",
               }}
             >
-              Take the Free Diagnostic →
+              Take the free diagnostic →
             </Link>
             <p className="mt-4 text-xs text-muted-foreground/80">
               5 minutes · No card · No login
