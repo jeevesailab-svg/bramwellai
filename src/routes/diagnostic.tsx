@@ -41,6 +41,9 @@ type SubmitInput = {
   communication_type?: string;
   readiness_score?: number;
   gaps?: string[];
+  gap_1?: string;
+  gap_2?: string;
+  gap_3?: string;
   career_moment?: string;
   first_name?: string;
   email?: string;
@@ -106,14 +109,21 @@ function DiagnosticPage() {
       const sessionId = sessionIdRef.current;
       if (!sessionId) return "Missing session";
 
+      // Accept either `gaps: string[]` or individual `gap_1/2/3` fields
+      // (depends on how the ElevenLabs agent's client tool is configured).
+      const normalizedGaps: string[] = Array.isArray(input.gaps)
+        ? input.gaps.filter((g): g is string => typeof g === "string" && g.trim().length > 0)
+        : [input.gap_1, input.gap_2, input.gap_3].filter(
+            (g): g is string => typeof g === "string" && g.trim().length > 0,
+          );
+
       const required =
         typeof input.communication_type === "string" &&
         typeof input.readiness_score === "number" &&
-        Array.isArray(input.gaps) &&
-        input.gaps.length > 0;
+        normalizedGaps.length > 0;
       if (!required) return "Missing required fields";
 
-      const pathway = routePathway(input);
+      const pathway = routePathway({ ...input, gaps: normalizedGaps });
       submittedRef.current = true;
       try {
         await fetch("/api/public/diagnostic-result", {
@@ -125,7 +135,7 @@ function DiagnosticPage() {
             email: input.email,
             communication_type: input.communication_type,
             readiness_score: input.readiness_score,
-            gaps: input.gaps,
+            gaps: normalizedGaps,
             career_moment: input.career_moment ?? "",
             recommended_pathway: pathway.key,
             recommended_pathway_name: pathway.name,
