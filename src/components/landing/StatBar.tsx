@@ -1,8 +1,8 @@
 export function StatBar() {
   const stats = [
-    { value: "93%", label: "of candidates experience interview anxiety" },
-    { value: "340", label: "average applicants per job posting" },
-    { value: "$15,000", label: "cost of sounding less senior than you are" },
+    { value: "$400", label: "per session with a private communications coach — if you can get one booked" },
+    { value: "340", label: "average applicants competing for the same role" },
+    { value: "$15,000", label: "estimated career cost of sounding less senior than you are" },
   ];
   return (
     <section
