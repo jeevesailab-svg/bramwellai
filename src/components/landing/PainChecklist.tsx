@@ -66,6 +66,23 @@ export function PainChecklist() {
             </details>
           ))}
         </div>
+
+        <div className="mt-12 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          <a
+            href="/diagnostic?autostart=1"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition hover:opacity-95"
+            style={{
+              background: "var(--gradient-gold)",
+              color: "var(--primary-foreground)",
+              boxShadow: "var(--shadow-elegant)",
+            }}
+          >
+            Take the free diagnostic →
+          </a>
+          <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80">
+            5 minutes · No login · No card
+          </span>
+        </div>
       </div>
     </section>
   );
