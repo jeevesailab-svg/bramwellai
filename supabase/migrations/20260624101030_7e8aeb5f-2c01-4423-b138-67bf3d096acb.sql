@@ -1,0 +1,1 @@
+DELETE FROM public.diagnostic_sessions WHERE created_at > now() - interval '24 hours';
