@@ -5,6 +5,7 @@ export const Route = createFileRoute("/diagnostic/result")({
   component: DiagnosticResultPage,
   validateSearch: (search: Record<string, unknown>) => ({
     id: typeof search.id === "string" ? search.id : "",
+    incomplete: search.incomplete === "1" ? "1" : undefined,
   }),
   head: () => ({
     meta: [
