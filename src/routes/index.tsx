@@ -581,6 +581,9 @@ function Pathways() {
             room you are walking into.
           </span>
         </h2>
+        <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground md:text-base">
+          A private communications coach charges $400–600 per session. They're booked weeks out. They're not available the night before.
+        </p>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {pathways.map((p) => (
@@ -635,6 +638,11 @@ function Pathways() {
               >
                 {p.cta}
               </a>
+              {p.featured && (
+                <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+                  Most members who start on a one-time pathway move to The Club within 60 days. Because the conversations don't stop.
+                </p>
+              )}
             </article>
           ))}
         </div>
