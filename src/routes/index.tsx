@@ -758,14 +758,6 @@ function FAQ() {
       a: `Bramwell is an AI communication and interview coach. It helps you practise out loud, analyses how your answers land and gives you specific coaching to improve.`,
     },
     {
-      q: "Is this better than using ChatGPT?",
-      a: `ChatGPT can help you write an answer. Bramwell helps you perform it. That means it focuses on how you sound out loud — your structure, clarity, confidence, seniority, pace and whether the answer actually lands.`,
-    },
-    {
-      q: "Can I use it the night before an interview?",
-      a: `Yes. Bramwell is built for the moment most people realise they need help — when the interview is close and the stakes are real.`,
-    },
-    {
       q: "Is my data private?",
       a: `Your sessions are private. Your voice recordings are yours. Bramwell does not use your private sessions to train public models.`,
     },
@@ -852,10 +844,10 @@ function FinalCTA() {
             boxShadow: "var(--shadow-elegant)",
           }}
         >
-          Get Your Free Readiness Score →
+          Take the free diagnostic →
         </a>
-        <p className="mt-6 text-xs text-muted-foreground/80 md:text-sm">
-          5 minutes. No login. No credit card.
+        <p className="mt-6 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 md:text-sm">
+          5 minutes · No login · No credit card · Hear exactly what is holding you back
         </p>
         <p className="mt-4 text-xs text-muted-foreground/80 md:text-sm">
           Or{" "}
