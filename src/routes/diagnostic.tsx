@@ -143,7 +143,7 @@ function DiagnosticPage() {
   const conversation = useConversation({
     onConnect: () => setPhase("live"),
     onDisconnect: () => {
-      setPhase((p) => (p === "wrapping" ? "wrapping" : "intro"));
+      setPhase((p) => (p === "wrapping" ? "wrapping" : "wrapping"));
       // Fallback: if the agent ended the call without invoking submitDiagnostic,
       // flag the session so we can follow up manually instead of losing the lead.
       const sid = sessionIdRef.current;
@@ -198,6 +198,21 @@ function DiagnosticPage() {
     }, 1000);
     return () => clearInterval(tick);
   }, [phase, conversation]);
+
+  // Safety net: if we enter "wrapping" but the agent never fires the
+  // submitDiagnostic client tool (call dropped, agent ended without invoking
+  // the tool, websocket 1006, etc.), forward the user to the result page
+  // anyway after a short grace window so they're never stuck on "preparing…".
+  useEffect(() => {
+    if (phase !== "wrapping") return;
+    const sid = sessionIdRef.current;
+    if (!sid) return;
+    const timeout = setTimeout(() => {
+      if (submittedRef.current) return;
+      window.location.assign(`/diagnostic/result?id=${sid}&incomplete=1`);
+    }, 8000);
+    return () => clearTimeout(timeout);
+  }, [phase]);
 
   const startDiagnostic = useCallback(async () => {
     setErrorMsg(null);
@@ -367,9 +382,29 @@ function DiagnosticPage() {
             )}
 
             {phase === "wrapping" && (
-              <p className="text-sm text-muted-foreground">
-                Bramwell is preparing your Readiness Score…
-              </p>
+              <>
+                <p className="text-sm text-muted-foreground">
+                  Bramwell is preparing your Readiness Score…
+                </p>
+                <p className="mt-2 text-xs text-muted-foreground/70">
+                  This usually takes a few seconds. If nothing happens, use the button below.
+                </p>
+                <button
+                  onClick={() => {
+                    const sid = sessionIdRef.current;
+                    if (sid) {
+                      window.location.assign(
+                        `/diagnostic/result?id=${sid}&incomplete=1`,
+                      );
+                    } else {
+                      window.location.assign("/diagnostic?autostart=1");
+                    }
+                  }}
+                  className="mt-6 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium transition hover:bg-foreground/10"
+                >
+                  Take me to my result →
+                </button>
+              </>
             )}
 
             {phase === "error" && (
