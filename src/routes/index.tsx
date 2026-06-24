@@ -400,14 +400,14 @@ function HowItWorks() {
   const steps = [
     {
       n: "01",
-      title: "Speak your answer out loud",
-      body: `Start with the free diagnostic or choose your pathway. Bramwell gives you a real interview-style prompt. You answer naturally, out loud, the way you would in the room.`,
-      cta: { label: "Take the Diagnostic →", href: "/diagnostic?autostart=1" },
+      title: "Run the free diagnostic",
+      body: `Five minutes with Bramwell. You'll hear your communication style, your three biggest gaps, and a Readiness Score — a clear benchmark of where you stand right now versus where you need to be. No login. No credit card. No pitch call after.`,
+      cta: { label: "Take the free diagnostic →", href: "/diagnostic?autostart=1" },
     },
     {
       n: "02",
-      title: "Get your Readiness Score",
-      body: `Bramwell analyses your answer for clarity, structure, confidence, seniority, relevance and impact. You see what is working, what is weak and what could cost you the opportunity.`,
+      title: "Choose your pathway",
+      body: `Graduate Sprint, Career Comeback, Interview Confidence, or Executive Communication. Each pathway is built for your exact situation — not a template that fits everyone and changes no one.`,
     },
     {
       n: "03",
