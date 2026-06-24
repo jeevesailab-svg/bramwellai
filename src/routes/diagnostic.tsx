@@ -205,7 +205,9 @@ function DiagnosticPage() {
   // anyway after a short grace window so they're never stuck on "preparing…".
   useEffect(() => {
     if (phase !== "wrapping") return;
-    const sid = sessionIdRef.current;
+    const sid =
+      sessionIdRef.current ??
+      window.sessionStorage.getItem("bramwell-diagnostic-session-id");
     if (!sid) return;
     const timeout = setTimeout(() => {
       if (submittedRef.current) return;
@@ -234,6 +236,7 @@ function DiagnosticPage() {
         authMode?: "token" | "public-agent";
       };
       sessionIdRef.current = sessionId;
+      window.sessionStorage.setItem("bramwell-diagnostic-session-id", sessionId);
       transcriptRef.current = [];
       submittedRef.current = false;
 
@@ -391,13 +394,16 @@ function DiagnosticPage() {
                 </p>
                 <button
                   onClick={() => {
-                    const sid = sessionIdRef.current;
+                    const sid =
+                      sessionIdRef.current ??
+                      window.sessionStorage.getItem("bramwell-diagnostic-session-id");
                     if (sid) {
                       window.location.assign(
                         `/diagnostic/result?id=${sid}&incomplete=1`,
                       );
                     } else {
-                      window.location.assign("/diagnostic?autostart=1");
+                      setErrorMsg("We could not find this diagnostic session. Please start again.");
+                      setPhase("error");
                     }
                   }}
                   className="mt-6 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium transition hover:bg-foreground/10"
