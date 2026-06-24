@@ -106,16 +106,9 @@ function Hero() {
           </span>
         </h1>
 
-        <div className="mx-auto mt-8 max-w-2xl space-y-4 text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
+        <div className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
           <p>
-            You knew the answer. Then you opened your mouth — and the words that came out weren't the ones you had.
-          </p>
-          <p>You didn't get the job. You already know why.</p>
-          <p className="font-medium text-foreground">
-            That's not a confidence problem. It's a practice problem. And it's fixable tonight.
-          </p>
-          <p>
-            Bramwell listens to how you actually sound, scores your Readiness, and fixes the one habit standing between you and the offer.
+            Bramwell coaches you out loud — on the exact questions you'll face, in real time, until the right answer lives in your voice. Not on a script. Available the night before. No booking. No $400/session coach. No ChatGPT answer that falls apart the moment they go off-script.
           </p>
         </div>
 
@@ -134,8 +127,8 @@ function Hero() {
           </a>
         </div>
 
-        <p className="mx-auto mt-6 text-xs text-muted-foreground/80 md:text-sm">
-          No card. No login. Just the truth about where you stand.
+        <p className="mx-auto mt-6 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 md:text-sm">
+          5 minutes · No login · No credit card · Hear exactly what is holding you back
         </p>
       </div>
     </section>
@@ -190,7 +183,7 @@ function WrongWay() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Take the Free Diagnostic →
+            Take the free diagnostic →
           </a>
         </div>
       </div>
@@ -347,7 +340,7 @@ function FreeDiagnostic() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Take the Free Diagnostic →
+            Take the free diagnostic →
           </a>
         </div>
       </div>
