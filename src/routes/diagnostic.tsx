@@ -36,14 +36,15 @@ const PATHWAY = {
 type PathwayKey = keyof typeof PATHWAY;
 
 const SESSION_LIMIT_MS = 5 * 60 * 1000;
-const RESULT_NAV_MIN_DELAY_MS = 15000;
-const RESULT_NAV_SILENCE_MS = 4000;
-const RESULT_NAV_HARD_CAP_MS = 90000;
+const RESULT_NAV_MIN_DELAY_MS = 45000;
+const RESULT_NAV_SILENCE_MS = 10000;
+const RESULT_NAV_HARD_CAP_MS = 120000;
 
 type ConversationHandle = {
   endSession: () => unknown;
   sendContextualUpdate?: (text: string) => unknown;
   isSpeaking?: boolean;
+  status?: string;
 };
 
 type SubmitInput = {
@@ -57,6 +58,10 @@ type SubmitInput = {
   first_name?: string;
   email?: string;
 };
+
+function diagnosticResultCacheKey(sessionId: string) {
+  return `bramwell-diagnostic-result:${sessionId}`;
+}
 
 function normalizeReadinessScore(value: SubmitInput["readiness_score"]): number | null {
   const score =
@@ -161,7 +166,7 @@ function DiagnosticPage() {
       submittedRef.current = true;
       resultSubmittedAtRef.current = Date.now();
       try {
-        await fetch("/api/public/diagnostic-result", {
+        const res = await fetch("/api/public/diagnostic-result", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -178,11 +183,30 @@ function DiagnosticPage() {
             transcript: transcriptRef.current.join("\n"),
           }),
         });
+        if (!res.ok) throw new Error(`Result save failed (${res.status})`);
+        window.sessionStorage.setItem(
+          diagnosticResultCacheKey(sessionId),
+          JSON.stringify({
+            id: sessionId,
+            first_name: input.first_name ?? null,
+            has_email: Boolean(input.email),
+            communication_type: input.communication_type,
+            readiness_score: readinessScore,
+            gaps: normalizedGaps,
+            career_moment: input.career_moment || null,
+            recommended_pathway: pathway.key,
+            recommended_pathway_name: pathway.name,
+            recommended_price: pathway.price,
+          }),
+        );
       } catch (e) {
+        submittedRef.current = false;
+        resultSubmittedAtRef.current = null;
         console.error("[diagnostic] result POST failed", e);
+        return "Could not save result";
       }
-      // Defer navigation until Bramwell finishes speaking so the agent's
-      // closing feedback doesn't get cut off mid-sentence.
+      // Save the result, but do not flip the UI or end the call here — the
+      // client tool can fire while Bramwell is still speaking the feedback.
       setPendingNavigateId(sessionId);
       return "Result captured";
     }, []);
@@ -214,8 +238,6 @@ function DiagnosticPage() {
       });
       return "Ignored: session not ready";
     }
-    intentionallyEndingRef.current = true;
-    setPhase("wrapping");
     return submitResult(input);
   }, [submitResult]);
 
@@ -235,6 +257,13 @@ function DiagnosticPage() {
       const sid = sessionIdRef.current;
 
       if (intentional) {
+        if (submittedRef.current && sid) {
+          setPendingNavigateId(sid);
+          window.setTimeout(() => {
+            window.location.assign(`/diagnostic/result?id=${sid}`);
+          }, 800);
+          return;
+        }
         if (!submittedRef.current) setPhase("wrapping");
         // Fallback: if the user ended the call or the timer expired without the
         // agent invoking submitDiagnostic, flag the session instead of losing it.
@@ -264,6 +293,7 @@ function DiagnosticPage() {
     },
     onError: (message, context) => {
       console.error("[diagnostic] conversation error", message, context);
+      if (submittedRef.current || pendingNavigateId) return;
       setErrorMsg("Connection lost. Please try again.");
       setPhase("error");
     },
@@ -307,6 +337,25 @@ function DiagnosticPage() {
     conversationRef.current = conversation;
   }, [conversation]);
 
+  useEffect(() => {
+    const ignoreMalformedElevenLabsError = (event: PromiseRejectionEvent) => {
+      const message =
+        event.reason instanceof Error
+          ? event.reason.message
+          : typeof event.reason === "string"
+            ? event.reason
+            : "";
+      if (message === "Cannot read properties of undefined (reading 'error_type')") {
+        event.preventDefault();
+        console.warn("[diagnostic] ignored malformed ElevenLabs error event");
+      }
+    };
+    window.addEventListener("unhandledrejection", ignoreMalformedElevenLabsError);
+    return () => {
+      window.removeEventListener("unhandledrejection", ignoreMalformedElevenLabsError);
+    };
+  }, []);
+
   // Five-minute hard cap
   useEffect(() => {
     if (phase !== "live") return;
@@ -330,6 +379,7 @@ function DiagnosticPage() {
       }
       if (left <= 0) {
         clearInterval(tick);
+        if (submittedRef.current) return;
         intentionallyEndingRef.current = true;
         setPhase("wrapping");
       }
@@ -372,6 +422,12 @@ function DiagnosticPage() {
       const hasWaitedLongEnough = elapsed >= RESULT_NAV_MIN_DELAY_MS;
       const hasTrailingSilence = now - lastAgentSpeechAt >= RESULT_NAV_SILENCE_MS;
       const isSpeaking = Boolean(conversationRef.current?.isSpeaking);
+      const isDisconnected = conversationRef.current?.status === "disconnected";
+
+      if (isDisconnected) {
+        window.location.assign(target);
+        return;
+      }
 
       if (isSpeaking) {
         notSpeakingSince = null;
@@ -382,11 +438,6 @@ function DiagnosticPage() {
       const hasContinuousSilence = now - notSpeakingSince >= RESULT_NAV_SILENCE_MS;
 
       if (hasWaitedLongEnough && hasTrailingSilence && hasContinuousSilence) {
-        try {
-          void conversationRef.current?.endSession();
-        } catch {
-          /* noop */
-        }
         window.location.assign(target);
       }
     };
@@ -601,8 +652,9 @@ function DiagnosticPage() {
                       sessionIdRef.current ??
                       window.sessionStorage.getItem("bramwell-diagnostic-session-id");
                     if (sid) {
+                      const isComplete = submittedRef.current || pendingNavigateId === sid;
                       window.location.assign(
-                        `/diagnostic/result?id=${sid}&incomplete=1`,
+                        `/diagnostic/result?id=${sid}${isComplete ? "" : "&incomplete=1"}`,
                       );
                     } else {
                       setErrorMsg("We could not find this diagnostic session. Please start again.");
