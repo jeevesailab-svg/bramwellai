@@ -185,8 +185,29 @@ function DiagnosticPage() {
     },
     clientTools: {
       submitDiagnostic: async (params: SubmitInput) => {
+        // Guard: ignore tool calls that fire before the session is actually live
+        // (ElevenLabs occasionally invokes registered client tools on widget
+        // init / reconnect handshakes with empty params — we must not treat
+        // those as a real result submission).
+        const sid = sessionIdRef.current;
+        const input = params ?? {};
+        const hasPayload =
+          typeof input.communication_type === "string" &&
+          typeof input.readiness_score === "number" &&
+          (Array.isArray(input.gaps)
+            ? input.gaps.some((g) => typeof g === "string" && g.trim().length > 0)
+            : [input.gap_1, input.gap_2, input.gap_3].some(
+                (g) => typeof g === "string" && g.trim().length > 0,
+              ));
+        if (!sid || !hasPayload) {
+          console.warn("[diagnostic] ignoring premature submitDiagnostic call", {
+            hasSession: Boolean(sid),
+            hasPayload,
+          });
+          return "Ignored: session not ready";
+        }
         setPhase("wrapping");
-        return submitResult(params ?? {});
+        return submitResult(input);
       },
     },
   });
