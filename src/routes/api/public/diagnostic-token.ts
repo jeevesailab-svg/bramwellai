@@ -59,6 +59,24 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
           const txt = await res.text();
           console.error("ElevenLabs diagnostic signed-url error:", res.status, txt);
 
+          if (/missing_permissions/i.test(txt)) {
+            const { data: row, error: insertErr } = await supabaseAdmin
+              .from("diagnostic_sessions")
+              .insert({ ip_address: ip })
+              .select("id")
+              .single();
+            if (insertErr || !row) {
+              console.error("diagnostic-token: insert failed", insertErr);
+              return Response.json({ error: "Server error" }, { status: 500 });
+            }
+
+            return Response.json({
+              agentId,
+              sessionId: row.id,
+              authMode: "public-agent-websocket",
+            });
+          }
+
           return Response.json(
             { error: "Could not start diagnostic" },
             { status: 502 },

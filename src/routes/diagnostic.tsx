@@ -309,8 +309,9 @@ function DiagnosticPage() {
       }
       const { signedUrl, sessionId, authMode } = (await res.json()) as {
         signedUrl?: string;
+        agentId?: string;
         sessionId: string;
-        authMode?: "signed-url";
+        authMode?: "signed-url" | "public-agent-websocket";
       };
       sessionIdRef.current = sessionId;
       window.sessionStorage.setItem("bramwell-diagnostic-session-id", sessionId);
@@ -320,6 +321,11 @@ function DiagnosticPage() {
       if (authMode === "signed-url" && signedUrl) {
         await conversation.startSession({
           signedUrl,
+          connectionType: "websocket",
+        });
+      } else if (authMode === "public-agent-websocket" && agentId) {
+        await conversation.startSession({
+          agentId,
           connectionType: "websocket",
         });
       } else {
