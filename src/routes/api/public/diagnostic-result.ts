@@ -43,6 +43,73 @@ const MetricsSchema = z
   })
   .partial();
 
+const PATHWAY = {
+  graduate: { name: "Graduate Interview Sprint", price: "$99 AUD" },
+  comeback: { name: "Career Comeback Sprint", price: "$199 AUD" },
+  confidence: { name: "Interview Confidence Sprint", price: "$249 AUD" },
+  executive: { name: "Executive Communication Sprint", price: "$499 AUD" },
+  club: { name: "Career Confidence Club", price: "$79 AUD / month" },
+} as const;
+
+type CommunicationType =
+  | "invisible_achiever"
+  | "over_explainer"
+  | "under_seller"
+  | "rambler"
+  | "apologiser"
+  | "next_level_leader";
+
+type PathwayKey = keyof typeof PATHWAY;
+
+function normalizeCommunicationType(value: unknown): CommunicationType | null {
+  if (typeof value !== "string") return null;
+  const normalized = value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+
+  const aliases: Record<string, CommunicationType> = {
+    invisible_achiever: "invisible_achiever",
+    invisible_achievers: "invisible_achiever",
+    over_explainer: "over_explainer",
+    overexplainer: "over_explainer",
+    under_seller: "under_seller",
+    underseller: "under_seller",
+    rambler: "rambler",
+    apologiser: "apologiser",
+    apologizer: "apologiser",
+    next_level_leader: "next_level_leader",
+    nextlevelleader: "next_level_leader",
+  };
+
+  return aliases[normalized] ?? null;
+}
+
+function routePathway(input: {
+  communication_type: CommunicationType;
+  readiness_score: number;
+  career_moment?: string;
+}): { key: PathwayKey; name: string; price: string } {
+  const moment = (input.career_moment ?? "").toLowerCase();
+  const type = input.communication_type;
+  const score = input.readiness_score;
+
+  if (/(executive|board|c-?suite|cxo|director)/.test(moment)) {
+    return { key: "executive", ...PATHWAY.executive };
+  }
+  if (/(graduate|student|university|college)/.test(moment)) {
+    return { key: "graduate", ...PATHWAY.graduate };
+  }
+  if (/(redundan|career gap|career break|return to work|maternity)/.test(moment)) {
+    return { key: "comeback", ...PATHWAY.comeback };
+  }
+  if (score >= 80 || type === "next_level_leader") return { key: "club", ...PATHWAY.club };
+  if (score < 40) return { key: "graduate", ...PATHWAY.graduate };
+  if (type === "apologiser") return { key: "comeback", ...PATHWAY.comeback };
+  return { key: "confidence", ...PATHWAY.confidence };
+}
+
 const Schema = z.object({
   sessionId: z.string().uuid(),
   first_name: z.string().min(1).max(80).optional(),
@@ -70,6 +137,44 @@ const Schema = z.object({
   transcript: z.string().max(50000).optional().default(""),
   metrics: MetricsSchema.optional(),
 });
+
+function normalizePayload(payload: unknown): unknown {
+  if (!payload || Array.isArray(payload) || typeof payload !== "object") return payload;
+  const input = payload as Record<string, unknown>;
+  const communicationType = normalizeCommunicationType(input.communication_type);
+  const score =
+    typeof input.readiness_score === "number"
+      ? Math.round(input.readiness_score)
+      : typeof input.readiness_score === "string"
+        ? Number.parseInt(input.readiness_score, 10)
+        : Number.NaN;
+
+  const careerMoment = typeof input.career_moment === "string" ? input.career_moment : "";
+  const computedPathway =
+    communicationType && Number.isFinite(score)
+      ? routePathway({
+          communication_type: communicationType,
+          readiness_score: Math.max(0, Math.min(100, score)),
+          career_moment: careerMoment,
+        })
+      : null;
+
+  const rawGaps = Array.isArray(input.gaps)
+    ? input.gaps
+    : [input.gap_1, input.gap_2, input.gap_3].filter(Boolean);
+
+  return {
+    ...input,
+    sessionId: input.sessionId ?? input.session_id,
+    communication_type: communicationType ?? input.communication_type,
+    readiness_score: Number.isFinite(score) ? Math.max(0, Math.min(100, score)) : input.readiness_score,
+    gaps: rawGaps,
+    career_moment: careerMoment,
+    recommended_pathway: computedPathway?.key ?? input.recommended_pathway,
+    recommended_pathway_name: computedPathway?.name ?? input.recommended_pathway_name,
+    recommended_price: computedPathway?.price ?? input.recommended_price,
+  };
+}
 
 export const Route = createFileRoute("/api/public/diagnostic-result")({
   server: {
@@ -117,8 +222,9 @@ export const Route = createFileRoute("/api/public/diagnostic-result")({
         } catch {
           return Response.json({ error: "Invalid JSON" }, { status: 400 });
         }
-        const parsed = Schema.safeParse(payload);
+        const parsed = Schema.safeParse(normalizePayload(payload));
         if (!parsed.success) {
+          console.error("diagnostic-result invalid input", parsed.error.flatten());
           return Response.json({ error: "Invalid input" }, { status: 400 });
         }
         const d = parsed.data;
