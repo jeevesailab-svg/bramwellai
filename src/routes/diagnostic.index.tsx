@@ -548,8 +548,8 @@ function DiagnosticPage() {
     : "/diagnostic";
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
+    <main className="relative flex min-h-screen flex-col bg-background text-foreground">
+      <header className="relative z-10 mx-auto flex w-full max-w-7xl items-center px-6 py-6 md:px-10">
         <Link to="/" className="flex items-baseline gap-1.5">
           <span className="text-xl font-semibold tracking-tight">Bramwell</span>
           <span
@@ -559,58 +559,63 @@ function DiagnosticPage() {
             AI
           </span>
         </Link>
-        <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-          <Link to="/" className="transition-colors hover:text-foreground">Home</Link>
-          <Link to="/pricing" className="transition-colors hover:text-foreground">Pricing</Link>
-          <Link to="/login" className="transition-colors hover:text-foreground">Sign in</Link>
-        </nav>
       </header>
 
       <section
-        className="relative overflow-hidden pb-20 pt-12 md:pb-28 md:pt-20"
+        className="relative flex flex-1 items-center overflow-hidden px-6 py-16 md:px-10"
         style={{ background: "var(--gradient-hero)" }}
       >
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 rounded-full opacity-25 blur-3xl"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20 blur-3xl"
           style={{ background: "var(--gradient-gold)" }}
         />
-        <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
-          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-            Free voice diagnostic
-          </p>
-          <h1 className="mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            Your free Bramwell diagnostic
-          </h1>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-            Bramwell will ask you one question, listen to your answer, and give
-            you your communication type, your three biggest gaps, and your
-            Readiness Score. Five minutes. No login, no card.
-          </p>
-
-          <div className="mx-auto mt-10 max-w-xl rounded-2xl border border-border bg-foreground/[0.03] p-8 backdrop-blur">
-            {phase === "intro" && (
-              <>
-                <p className="text-sm text-muted-foreground">
-                  When you're ready, allow microphone access. Bramwell will
-                  greet you and ask: <em>"Tell me about yourself."</em>
-                </p>
+        <div className="relative mx-auto w-full max-w-3xl text-center">
+          {phase === "intro" && (
+            <>
+              <p
+                className="text-[12px] font-medium uppercase text-muted-foreground"
+                style={{ letterSpacing: "0.22em" }}
+              >
+                Bramwell Voice Diagnostic
+              </p>
+              <h1
+                className="mt-6 text-balance font-extrabold tracking-tight text-white"
+                style={{
+                  fontSize: "clamp(48px, 8vw, 96px)",
+                  lineHeight: 1.05,
+                  fontWeight: 800,
+                }}
+              >
+                You're losing rooms you should be winning. Find out exactly why.
+              </h1>
+              <p className="mx-auto mt-8 max-w-[480px] text-[18px] leading-relaxed text-muted-foreground">
+                Bramwell listens to one answer and tells you your communication
+                type, your three biggest gaps, and your Readiness Score out of
+                100. No scripts. No preparation. Just the truth about how you
+                come across under pressure.
+              </p>
+              <div className="mt-10 flex justify-center">
                 <button
                   onClick={startDiagnostic}
-                  className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full text-sm font-semibold transition hover:opacity-95"
-                  style={{
-                    background: "var(--gradient-gold)",
-                    color: "var(--primary-foreground)",
-                  }}
+                  className="group inline-flex h-14 items-center justify-center gap-2 rounded-full bg-white px-9 text-base font-semibold text-neutral-900 shadow-lg transition hover:bg-neutral-100"
                 >
-                  Start the diagnostic
+                  Find out what's costing you
+                  <span className="transition-transform group-hover:translate-x-0.5">→</span>
                 </button>
-                <p className="mt-4 text-xs text-muted-foreground">
-                  Five-minute limit · Private by design
-                </p>
-              </>
-            )}
+              </div>
+              <p className="mt-6 text-xs text-muted-foreground">
+                Three minutes. No login, no card.
+              </p>
+              <p className="mx-auto mt-2 max-w-xl text-xs text-muted-foreground/80">
+                Built on 40+ years of communication research and the frameworks
+                used by the world's leading executive coaches.
+              </p>
+            </>
+          )}
 
+          {phase !== "intro" && (
+          <div className="mx-auto max-w-xl rounded-2xl border border-border bg-foreground/[0.03] p-8 backdrop-blur">
             {phase === "connecting" && (
               <p className="text-sm text-muted-foreground">
                 Connecting Bramwell…
@@ -712,25 +717,9 @@ function DiagnosticPage() {
               </>
             )}
           </div>
+          )}
         </div>
       </section>
-
-      <footer className="border-t border-border bg-background py-12">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 md:flex-row md:items-center md:px-10">
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-base font-semibold tracking-tight">Bramwell</span>
-            <span
-              className="text-base font-light tracking-tight"
-              style={{ color: "var(--primary)" }}
-            >
-              AI
-            </span>
-          </div>
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Bramwell AI. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </main>
   );
 }
