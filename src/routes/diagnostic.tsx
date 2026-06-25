@@ -39,7 +39,7 @@ const SESSION_LIMIT_MS = 5 * 60 * 1000;
 
 type SubmitInput = {
   communication_type?: string;
-  readiness_score?: number;
+  readiness_score?: number | string;
   gaps?: string[];
   gap_1?: string;
   gap_2?: string;
@@ -49,12 +49,23 @@ type SubmitInput = {
   email?: string;
 };
 
+function normalizeReadinessScore(value: SubmitInput["readiness_score"]): number | null {
+  const score =
+    typeof value === "number"
+      ? value
+      : typeof value === "string"
+        ? Number.parseInt(value, 10)
+        : Number.NaN;
+  if (!Number.isFinite(score)) return null;
+  return Math.max(0, Math.min(100, Math.round(score)));
+}
+
 function routePathway(
   input: SubmitInput,
 ): { key: PathwayKey; name: string; price: string } {
   const moment = (input.career_moment ?? "").toLowerCase();
   const type = (input.communication_type ?? "").toLowerCase();
-  const score = input.readiness_score ?? 0;
+  const score = normalizeReadinessScore(input.readiness_score) ?? 0;
 
   // Career-moment overrides win.
   if (/(executive|board|c-?suite|cxo|director)/.test(moment)) {
@@ -124,13 +135,14 @@ function DiagnosticPage() {
             (g): g is string => typeof g === "string" && g.trim().length > 0,
           );
 
+      const readinessScore = normalizeReadinessScore(input.readiness_score);
       const required =
         typeof input.communication_type === "string" &&
-        typeof input.readiness_score === "number" &&
+        readinessScore !== null &&
         normalizedGaps.length > 0;
       if (!required) return "Missing required fields";
 
-      const pathway = routePathway({ ...input, gaps: normalizedGaps });
+      const pathway = routePathway({ ...input, gaps: normalizedGaps, readiness_score: readinessScore });
       submittedRef.current = true;
       try {
         await fetch("/api/public/diagnostic-result", {
@@ -141,7 +153,7 @@ function DiagnosticPage() {
             first_name: input.first_name,
             email: input.email,
             communication_type: input.communication_type,
-            readiness_score: input.readiness_score,
+            readiness_score: readinessScore,
             gaps: normalizedGaps,
             career_moment: input.career_moment ?? "",
             recommended_pathway: pathway.key,
@@ -168,8 +180,7 @@ function DiagnosticPage() {
     const hasPayload =
       typeof input.communication_type === "string" &&
       input.communication_type.trim().length > 0 &&
-      typeof input.readiness_score === "number" &&
-      Number.isFinite(input.readiness_score) &&
+      normalizeReadinessScore(input.readiness_score) !== null &&
       (Array.isArray(input.gaps)
         ? input.gaps.some((g) => typeof g === "string" && g.trim().length > 0)
         : [input.gap_1, input.gap_2, input.gap_3].some(
@@ -195,11 +206,11 @@ function DiagnosticPage() {
       setPhase("live");
     },
     onDisconnect: (details) => {
+      console.warn("[diagnostic] conversation disconnected", details);
       const intentional =
         intentionallyEndingRef.current ||
         submittedRef.current ||
-        phaseRef.current === "wrapping" ||
-        details?.reason === "agent";
+        phaseRef.current === "wrapping";
       const sid = sessionIdRef.current;
 
       if (intentional) {
@@ -217,7 +228,7 @@ function DiagnosticPage() {
       }
 
       if (phaseRef.current === "connecting" || phaseRef.current === "live") {
-        setErrorMsg("Bramwell disconnected before the diagnostic finished. Please start again.");
+        setErrorMsg("Bramwell connected, then ended before sending your score. Please start again.");
         setPhase("error");
         return;
       }
@@ -234,6 +245,9 @@ function DiagnosticPage() {
       console.error("[diagnostic] conversation error", message, context);
       setErrorMsg("Connection lost. Please try again.");
       setPhase("error");
+    },
+    onUnhandledClientToolCall: (toolCall) => {
+      console.warn("[diagnostic] unhandled client tool call", toolCall);
     },
     onMessage: (msg) => {
       const m = msg as unknown as { type?: string; [k: string]: unknown };
@@ -334,6 +348,7 @@ function DiagnosticPage() {
         await conversation.startSession({
           conversationToken: token,
           connectionType: "webrtc",
+          dynamicVariables: { user_first_name: "there" },
         });
       } else {
         throw new Error("Could not start diagnostic");
