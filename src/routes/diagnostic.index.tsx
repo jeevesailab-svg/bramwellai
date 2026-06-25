@@ -91,6 +91,14 @@ function diagnosticResultCacheKey(sessionId: string) {
   return `bramwell-diagnostic-result:${sessionId}`;
 }
 
+async function fetchSavedDiagnosticResult(sessionId: string): Promise<"ready" | "incomplete" | "missing"> {
+  const res = await fetch(`/api/public/diagnostic-result?id=${encodeURIComponent(sessionId)}`);
+  if (res.status === 404) return "missing";
+  if (!res.ok) return "incomplete";
+  const json = (await res.json().catch(() => ({}))) as { result?: unknown; incomplete?: boolean };
+  return json.result ? "ready" : "incomplete";
+}
+
 function normalizeReadinessScore(value: SubmitInput["readiness_score"]): number | null {
   const score =
     typeof value === "number"
@@ -167,6 +175,7 @@ function DiagnosticPage() {
   const timeWarningSentRef = useRef(false);
   const resultSubmittedAtRef = useRef<number | null>(null);
   const lastAgentResponseAtRef = useRef<number | null>(null);
+  const resultReadyRef = useRef(false);
 
   useEffect(() => {
     phaseRef.current = phase;
@@ -201,6 +210,7 @@ function DiagnosticPage() {
       };
       const pathway = routePathway(normalizedInput);
       submittedRef.current = true;
+      resultReadyRef.current = true;
       resultSubmittedAtRef.current = Date.now();
       try {
         const res = await fetch("/api/public/diagnostic-result", {
@@ -292,6 +302,7 @@ function DiagnosticPage() {
       const intentional =
         intentionallyEndingRef.current ||
         submittedRef.current ||
+        resultReadyRef.current ||
         phaseRef.current === "wrapping";
       const sid = sessionIdRef.current;
 
@@ -317,7 +328,16 @@ function DiagnosticPage() {
       }
 
       if (phaseRef.current === "connecting" || phaseRef.current === "live") {
-        setErrorMsg("Bramwell connected, then ended before sending your score. Please start again.");
+        // With an ElevenLabs webhook/server tool, the result is saved directly
+        // to the backend, so the browser may never receive a client-tool event.
+        // Move into the result-waiting state instead of showing an immediate
+        // failure while the webhook is still arriving.
+        if (sid) {
+          setPhase("wrapping");
+          setPendingNavigateId(sid);
+          return;
+        }
+        setErrorMsg("Bramwell disconnected before the diagnostic started. Please start again.");
         setPhase("error");
         return;
       }
@@ -345,9 +365,7 @@ function DiagnosticPage() {
         transcriptRef.current.push(`You: ${m.message}`);
       } else if (typeof m?.message === "string" && m.role === "agent") {
         transcriptRef.current.push(`Bramwell: ${m.message}`);
-        if (submittedRef.current) {
-          lastAgentResponseAtRef.current = Date.now();
-        }
+        lastAgentResponseAtRef.current = Date.now();
       } else if (m?.type === "user_transcript") {
         const t = (m as { user_transcription_event?: { user_transcript?: string } })
           .user_transcription_event?.user_transcript;
@@ -357,9 +375,7 @@ function DiagnosticPage() {
           .agent_response_event?.agent_response;
         if (t) {
           transcriptRef.current.push(`Bramwell: ${t}`);
-          if (submittedRef.current) {
-            lastAgentResponseAtRef.current = Date.now();
-          }
+          lastAgentResponseAtRef.current = Date.now();
         }
       }
     },
@@ -443,17 +459,48 @@ function DiagnosticPage() {
     return () => clearTimeout(timeout);
   }, [phase, pendingNavigateId]);
 
-  // Once submitDiagnostic has fired and we've persisted the result, wait for
-  // Bramwell to actually stop speaking before navigating away, otherwise his
-  // closing feedback is cut off mid-sentence as the result page loads.
+  // Server/webhook tools save the score without calling the browser. Poll the
+  // current session so the UI can move forward as soon as the backend result
+  // exists, even if no client-tool callback fires.
+  useEffect(() => {
+    if (!currentSessionId || (phase !== "live" && phase !== "wrapping")) return;
+    let cancelled = false;
+
+    const checkForWebhookResult = async () => {
+      if (cancelled || resultReadyRef.current) return;
+      const status = await fetchSavedDiagnosticResult(currentSessionId);
+      if (cancelled || status !== "ready") return;
+
+      resultReadyRef.current = true;
+      submittedRef.current = true;
+      resultSubmittedAtRef.current ??= Date.now();
+      setResultReadyId(currentSessionId);
+      setPendingNavigateId(currentSessionId);
+      setPhase("wrapping");
+    };
+
+    const poll = window.setInterval(() => void checkForWebhookResult(), 1500);
+    void checkForWebhookResult();
+    return () => {
+      cancelled = true;
+      window.clearInterval(poll);
+    };
+  }, [currentSessionId, phase]);
+
+  // Once a result is expected, wait for it to exist in the backend before
+  // navigating. This supports both client tools and ElevenLabs webhook/server
+  // tools. If the webhook never lands, the result page will show the retry
+  // state instead of a generic Not found.
   useEffect(() => {
     if (!pendingNavigateId) return;
     const target = `/diagnostic/result?id=${pendingNavigateId}`;
+    const incompleteTarget = `/diagnostic/result?id=${pendingNavigateId}&incomplete=1`;
     let cancelled = false;
     const submittedAt = resultSubmittedAtRef.current ?? Date.now();
     let notSpeakingSince: number | null = null;
+    let resultIsReady = Boolean(resultReadyId);
 
-    const check = () => {
+    const check = async () => {
       if (cancelled) return;
       const now = Date.now();
       const elapsed = now - submittedAt;
@@ -463,8 +510,18 @@ function DiagnosticPage() {
       const isSpeaking = Boolean(conversationRef.current?.isSpeaking);
       const isDisconnected = conversationRef.current?.status === "disconnected";
 
+      if (!resultIsReady) {
+        resultIsReady = (await fetchSavedDiagnosticResult(pendingNavigateId)) === "ready";
+      }
+
       if (isDisconnected) {
-        window.location.assign(target);
+        if (resultIsReady) {
+          window.location.assign(target);
+          return;
+        }
+        if (elapsed >= RESULT_NAV_HARD_CAP_MS) {
+          window.location.assign(incompleteTarget);
+        }
         return;
       }
 
@@ -476,18 +533,18 @@ function DiagnosticPage() {
       notSpeakingSince ??= now;
       const hasContinuousSilence = now - notSpeakingSince >= RESULT_NAV_SILENCE_MS;
 
-      if (hasWaitedLongEnough && hasTrailingSilence && hasContinuousSilence) {
+      if (resultIsReady && hasWaitedLongEnough && hasTrailingSilence && hasContinuousSilence) {
         window.location.assign(target);
       }
     };
 
-    const poll = setInterval(check, 200);
-    check();
+    const poll = setInterval(() => void check(), 1000);
+    void check();
 
     // Hard safety cap so users are never stranded if isSpeaking never flips.
     const hardTimeout = setTimeout(() => {
       if (cancelled) return;
-      window.location.assign(target);
+      window.location.assign(resultIsReady ? target : incompleteTarget);
     }, RESULT_NAV_HARD_CAP_MS);
 
     return () => {
@@ -495,7 +552,7 @@ function DiagnosticPage() {
       clearInterval(poll);
       clearTimeout(hardTimeout);
     };
-  }, [pendingNavigateId]);
+  }, [pendingNavigateId, resultReadyId]);
 
   const startDiagnostic = useCallback(async () => {
     setErrorMsg(null);
@@ -507,6 +564,7 @@ function DiagnosticPage() {
     setCurrentSessionId(null);
     setResultReadyId(null);
     setPendingNavigateId(null);
+    resultReadyRef.current = false;
     setSecondsLeft(SESSION_LIMIT_MS / 1000);
     sessionStartedAtRef.current = null;
     timeWarningSentRef.current = false;

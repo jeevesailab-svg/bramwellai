@@ -140,7 +140,15 @@ const Schema = z.object({
 
 function normalizePayload(payload: unknown): unknown {
   if (!payload || Array.isArray(payload) || typeof payload !== "object") return payload;
-  const input = payload as Record<string, unknown>;
+  const envelope = payload as Record<string, unknown>;
+  const input =
+    envelope.parameters && typeof envelope.parameters === "object" && !Array.isArray(envelope.parameters)
+      ? (envelope.parameters as Record<string, unknown>)
+      : envelope.data && typeof envelope.data === "object" && !Array.isArray(envelope.data)
+        ? (envelope.data as Record<string, unknown>)
+        : envelope.payload && typeof envelope.payload === "object" && !Array.isArray(envelope.payload)
+          ? (envelope.payload as Record<string, unknown>)
+          : envelope;
   const communicationType = normalizeCommunicationType(input.communication_type);
   const score =
     typeof input.readiness_score === "number"
@@ -161,7 +169,23 @@ function normalizePayload(payload: unknown): unknown {
 
   const rawGaps = Array.isArray(input.gaps)
     ? input.gaps
-    : [input.gap_1, input.gap_2, input.gap_3].filter(Boolean);
+    : typeof input.gaps === "string"
+      ? input.gaps
+          .split(/\n|;|\|/)
+          .map((gap) => gap.trim())
+          .filter(Boolean)
+      : [input.gap_1, input.gap_2, input.gap_3].filter(Boolean);
+
+  const metrics =
+    typeof input.metrics === "string"
+      ? (() => {
+          try {
+            return JSON.parse(input.metrics);
+          } catch {
+            return undefined;
+          }
+        })()
+      : input.metrics;
 
   return {
     ...input,
@@ -173,6 +197,7 @@ function normalizePayload(payload: unknown): unknown {
     recommended_pathway: computedPathway?.key ?? input.recommended_pathway,
     recommended_pathway_name: computedPathway?.name ?? input.recommended_pathway_name,
     recommended_price: computedPathway?.price ?? input.recommended_price,
+    metrics,
   };
 }
 
