@@ -150,7 +150,7 @@ function DiagnosticResultPage() {
   const { id, incomplete } = Route.useSearch();
   const [state, setState] = useState<
     | { kind: "loading" }
-    | { kind: "error"; message: string }
+    | { kind: "error"; message: string; incomplete?: boolean }
     | { kind: "ready"; result: Result }
   >({ kind: "loading" });
 
@@ -176,7 +176,22 @@ function DiagnosticResultPage() {
           };
           throw new Error(body?.error ?? `Failed (${res.status})`);
         }
-        const json = (await res.json()) as { result: Result };
+        const json = (await res.json()) as { result?: Result; incomplete?: boolean };
+        if (json.incomplete || !json.result) {
+          const cached = readCachedResult(id);
+          if (cached) {
+            if (active) setState({ kind: "ready", result: cached });
+            return;
+          }
+          if (active)
+            setState({
+              kind: "error",
+              incomplete: true,
+              message:
+                "Your call ended before Bramwell finalised your score.",
+            });
+          return;
+        }
         if (active) setState({ kind: "ready", result: json.result });
       } catch (e) {
         const cached = readCachedResult(id);
@@ -232,7 +247,7 @@ function DiagnosticResultPage() {
           )}
           {state.kind === "error" && (
             <div className="py-24 text-center">
-              {incomplete === "1" ? (
+              {incomplete === "1" || state.incomplete ? (
                 <>
                   <p className="mx-auto max-w-md text-base text-foreground/90">
                     Your call ended before Bramwell could finalise your

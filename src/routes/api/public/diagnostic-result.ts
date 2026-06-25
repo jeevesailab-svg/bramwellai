@@ -95,8 +95,14 @@ export const Route = createFileRoute("/api/public/diagnostic-result")({
           console.error("diagnostic-result GET failed", error);
           return Response.json({ error: "Server error" }, { status: 500 });
         }
-        if (!data || !data.completed_at) {
+        if (!data) {
           return Response.json({ error: "Not found" }, { status: 404 });
+        }
+        if (!data.completed_at) {
+          // Row exists but the agent never submitted a result. Surface this
+          // distinctly so the result page can show the "try again" state
+          // instead of a generic 404.
+          return Response.json({ incomplete: true }, { status: 200 });
         }
         const { email, ...safe } = data;
         return Response.json({
