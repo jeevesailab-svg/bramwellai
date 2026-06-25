@@ -163,9 +163,12 @@ function DiagnosticPage() {
       hasConnectedRef.current = true;
       setPhase("live");
     },
-    onDisconnect: () => {
+    onDisconnect: (details) => {
       const intentional =
-        intentionallyEndingRef.current || submittedRef.current || phaseRef.current === "wrapping";
+        intentionallyEndingRef.current ||
+        submittedRef.current ||
+        phaseRef.current === "wrapping" ||
+        details?.reason === "agent";
       const sid = sessionIdRef.current;
 
       if (intentional) {
@@ -196,8 +199,8 @@ function DiagnosticPage() {
         }).catch(() => undefined);
       }
     },
-    onError: (err) => {
-      console.error("[diagnostic] conversation error", err);
+    onError: (message, context) => {
+      console.error("[diagnostic] conversation error", message, context);
       setErrorMsg("Connection lost. Please try again.");
       setPhase("error");
     },
@@ -307,20 +310,20 @@ function DiagnosticPage() {
         }
         throw new Error(body?.error ?? `Could not start (${res.status})`);
       }
-      const { signedUrl, sessionId, authMode } = (await res.json()) as {
-        signedUrl?: string;
+      const { token, sessionId, authMode } = (await res.json()) as {
+        token?: string;
         sessionId: string;
-        authMode?: "signed-url";
+        authMode?: "conversation-token";
       };
       sessionIdRef.current = sessionId;
       window.sessionStorage.setItem("bramwell-diagnostic-session-id", sessionId);
       transcriptRef.current = [];
       submittedRef.current = false;
 
-      if (authMode === "signed-url" && signedUrl) {
+      if (authMode === "conversation-token" && token) {
         await conversation.startSession({
-          signedUrl,
-          connectionType: "websocket",
+          conversationToken: token,
+          connectionType: "webrtc",
         });
       } else {
         throw new Error("Could not start diagnostic");
