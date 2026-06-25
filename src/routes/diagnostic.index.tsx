@@ -91,6 +91,14 @@ function diagnosticResultCacheKey(sessionId: string) {
   return `bramwell-diagnostic-result:${sessionId}`;
 }
 
+async function fetchSavedDiagnosticResult(sessionId: string): Promise<"ready" | "incomplete" | "missing"> {
+  const res = await fetch(`/api/public/diagnostic-result?id=${encodeURIComponent(sessionId)}`);
+  if (res.status === 404) return "missing";
+  if (!res.ok) return "incomplete";
+  const json = (await res.json().catch(() => ({}))) as { result?: unknown; incomplete?: boolean };
+  return json.result ? "ready" : "incomplete";
+}
+
 function normalizeReadinessScore(value: SubmitInput["readiness_score"]): number | null {
   const score =
     typeof value === "number"
@@ -317,7 +325,16 @@ function DiagnosticPage() {
       }
 
       if (phaseRef.current === "connecting" || phaseRef.current === "live") {
-        setErrorMsg("Bramwell connected, then ended before sending your score. Please start again.");
+        // With an ElevenLabs webhook/server tool, the result is saved directly
+        // to the backend, so the browser may never receive a client-tool event.
+        // Move into the result-waiting state instead of showing an immediate
+        // failure while the webhook is still arriving.
+        if (sid) {
+          setPhase("wrapping");
+          setPendingNavigateId(sid);
+          return;
+        }
+        setErrorMsg("Bramwell disconnected before the diagnostic started. Please start again.");
         setPhase("error");
         return;
       }
@@ -443,17 +460,20 @@ function DiagnosticPage() {
     return () => clearTimeout(timeout);
   }, [phase, pendingNavigateId]);
 
-  // Once submitDiagnostic has fired and we've persisted the result, wait for
-  // Bramwell to actually stop speaking before navigating away, otherwise his
-  // closing feedback is cut off mid-sentence as the result page loads.
+  // Once a result is expected, wait for it to exist in the backend before
+  // navigating. This supports both client tools and ElevenLabs webhook/server
+  // tools. If the webhook never lands, the result page will show the retry
+  // state instead of a generic Not found.
   useEffect(() => {
     if (!pendingNavigateId) return;
     const target = `/diagnostic/result?id=${pendingNavigateId}`;
+    const incompleteTarget = `/diagnostic/result?id=${pendingNavigateId}&incomplete=1`;
     let cancelled = false;
     const submittedAt = resultSubmittedAtRef.current ?? Date.now();
     let notSpeakingSince: number | null = null;
+    let resultIsReady = Boolean(resultReadyId);
 
-    const check = () => {
+    const check = async () => {
       if (cancelled) return;
       const now = Date.now();
       const elapsed = now - submittedAt;
@@ -463,8 +483,18 @@ function DiagnosticPage() {
       const isSpeaking = Boolean(conversationRef.current?.isSpeaking);
       const isDisconnected = conversationRef.current?.status === "disconnected";
 
+      if (!resultIsReady) {
+        resultIsReady = (await fetchSavedDiagnosticResult(pendingNavigateId)) === "ready";
+      }
+
       if (isDisconnected) {
-        window.location.assign(target);
+        if (resultIsReady) {
+          window.location.assign(target);
+          return;
+        }
+        if (elapsed >= RESULT_NAV_HARD_CAP_MS) {
+          window.location.assign(incompleteTarget);
+        }
         return;
       }
 
@@ -476,18 +506,18 @@ function DiagnosticPage() {
       notSpeakingSince ??= now;
       const hasContinuousSilence = now - notSpeakingSince >= RESULT_NAV_SILENCE_MS;
 
-      if (hasWaitedLongEnough && hasTrailingSilence && hasContinuousSilence) {
+      if (resultIsReady && hasWaitedLongEnough && hasTrailingSilence && hasContinuousSilence) {
         window.location.assign(target);
       }
     };
 
-    const poll = setInterval(check, 200);
-    check();
+    const poll = setInterval(() => void check(), 1000);
+    void check();
 
     // Hard safety cap so users are never stranded if isSpeaking never flips.
     const hardTimeout = setTimeout(() => {
       if (cancelled) return;
-      window.location.assign(target);
+      window.location.assign(resultIsReady ? target : incompleteTarget);
     }, RESULT_NAV_HARD_CAP_MS);
 
     return () => {
@@ -495,7 +525,7 @@ function DiagnosticPage() {
       clearInterval(poll);
       clearTimeout(hardTimeout);
     };
-  }, [pendingNavigateId]);
+  }, [pendingNavigateId, resultReadyId]);
 
   const startDiagnostic = useCallback(async () => {
     setErrorMsg(null);
