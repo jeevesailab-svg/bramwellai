@@ -131,7 +131,6 @@ function DiagnosticPage() {
   const sessionStartedAtRef = useRef<number | null>(null);
   const timeWarningSentRef = useRef(false);
   const resultSubmittedAtRef = useRef<number | null>(null);
-  const postSubmitAgentSpokeRef = useRef(false);
   const lastAgentResponseAtRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -161,7 +160,6 @@ function DiagnosticPage() {
       const pathway = routePathway({ ...input, gaps: normalizedGaps, readiness_score: readinessScore });
       submittedRef.current = true;
       resultSubmittedAtRef.current = Date.now();
-      postSubmitAgentSpokeRef.current = false;
       try {
         await fetch("/api/public/diagnostic-result", {
           method: "POST",
@@ -279,7 +277,6 @@ function DiagnosticPage() {
       } else if (typeof m?.message === "string" && m.role === "agent") {
         transcriptRef.current.push(`Bramwell: ${m.message}`);
         if (submittedRef.current) {
-          postSubmitAgentSpokeRef.current = true;
           lastAgentResponseAtRef.current = Date.now();
         }
       } else if (m?.type === "user_transcript") {
@@ -292,7 +289,6 @@ function DiagnosticPage() {
         if (t) {
           transcriptRef.current.push(`Bramwell: ${t}`);
           if (submittedRef.current) {
-            postSubmitAgentSpokeRef.current = true;
             lastAgentResponseAtRef.current = Date.now();
           }
         }
@@ -417,7 +413,6 @@ function DiagnosticPage() {
     sessionStartedAtRef.current = null;
     timeWarningSentRef.current = false;
     resultSubmittedAtRef.current = null;
-    postSubmitAgentSpokeRef.current = false;
     lastAgentResponseAtRef.current = null;
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
