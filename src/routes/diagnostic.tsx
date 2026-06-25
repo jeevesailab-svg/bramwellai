@@ -158,6 +158,37 @@ function DiagnosticPage() {
       return "Result captured";
     }, []);
 
+  const handleDiagnosticToolCall = useCallback(async (params: SubmitInput) => {
+    // Guard: ignore tool calls that fire before the session is actually live
+    // (ElevenLabs occasionally invokes registered client tools on widget
+    // init / reconnect handshakes with empty params — we must not treat
+    // those as a real result submission).
+    const sid = sessionIdRef.current;
+    const input = params ?? {};
+    const hasPayload =
+      typeof input.communication_type === "string" &&
+      input.communication_type.trim().length > 0 &&
+      typeof input.readiness_score === "number" &&
+      Number.isFinite(input.readiness_score) &&
+      (Array.isArray(input.gaps)
+        ? input.gaps.some((g) => typeof g === "string" && g.trim().length > 0)
+        : [input.gap_1, input.gap_2, input.gap_3].some(
+            (g) => typeof g === "string" && g.trim().length > 0,
+          ));
+    const sessionLive = hasConnectedRef.current && phaseRef.current === "live";
+    if (!sid || !hasPayload || !sessionLive) {
+      console.warn("[diagnostic] ignoring premature diagnostic tool call", {
+        hasSession: Boolean(sid),
+        hasPayload,
+        sessionLive,
+      });
+      return "Ignored: session not ready";
+    }
+    intentionallyEndingRef.current = true;
+    setPhase("wrapping");
+    return submitResult(input);
+  }, [submitResult]);
+
   const conversation = useConversation({
     onConnect: () => {
       hasConnectedRef.current = true;
@@ -206,7 +237,11 @@ function DiagnosticPage() {
     },
     onMessage: (msg) => {
       const m = msg as unknown as { type?: string; [k: string]: unknown };
-      if (m?.type === "user_transcript") {
+      if (typeof m?.message === "string" && m.role === "user") {
+        transcriptRef.current.push(`You: ${m.message}`);
+      } else if (typeof m?.message === "string" && m.role === "agent") {
+        transcriptRef.current.push(`Bramwell: ${m.message}`);
+      } else if (m?.type === "user_transcript") {
         const t = (m as { user_transcription_event?: { user_transcript?: string } })
           .user_transcription_event?.user_transcript;
         if (t) transcriptRef.current.push(`You: ${t}`);
@@ -217,36 +252,11 @@ function DiagnosticPage() {
       }
     },
     clientTools: {
-      submitDiagnostic: async (params: SubmitInput) => {
-        // Guard: ignore tool calls that fire before the session is actually live
-        // (ElevenLabs occasionally invokes registered client tools on widget
-        // init / reconnect handshakes with empty params — we must not treat
-        // those as a real result submission).
-        const sid = sessionIdRef.current;
-        const input = params ?? {};
-        const hasPayload =
-          typeof input.communication_type === "string" &&
-          input.communication_type.trim().length > 0 &&
-          typeof input.readiness_score === "number" &&
-          Number.isFinite(input.readiness_score) &&
-          (Array.isArray(input.gaps)
-            ? input.gaps.some((g) => typeof g === "string" && g.trim().length > 0)
-            : [input.gap_1, input.gap_2, input.gap_3].some(
-                (g) => typeof g === "string" && g.trim().length > 0,
-              ));
-        const sessionLive = hasConnectedRef.current && phaseRef.current === "live";
-        if (!sid || !hasPayload || !sessionLive) {
-          console.warn("[diagnostic] ignoring premature submitDiagnostic call", {
-            hasSession: Boolean(sid),
-            hasPayload,
-            sessionLive,
-          });
-          return "Ignored: session not ready";
-        }
-        intentionallyEndingRef.current = true;
-        setPhase("wrapping");
-        return submitResult(input);
-      },
+      submitDiagnostic: handleDiagnosticToolCall,
+      submit_diagnostic: handleDiagnosticToolCall,
+      submitDiagnosticResult: handleDiagnosticToolCall,
+      saveDiagnosticResult: handleDiagnosticToolCall,
+      completeDiagnostic: handleDiagnosticToolCall,
     },
   });
 
