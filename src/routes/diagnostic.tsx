@@ -362,6 +362,7 @@ function DiagnosticPage() {
     const target = `/diagnostic/result?id=${pendingNavigateId}`;
     let cancelled = false;
     const submittedAt = resultSubmittedAtRef.current ?? Date.now();
+    let notSpeakingSince: number | null = null;
 
     const check = () => {
       if (cancelled) return;
@@ -370,12 +371,17 @@ function DiagnosticPage() {
       const lastAgentSpeechAt = lastAgentResponseAtRef.current ?? submittedAt;
       const hasWaitedLongEnough = elapsed >= RESULT_NAV_MIN_DELAY_MS;
       const hasTrailingSilence = now - lastAgentSpeechAt >= RESULT_NAV_SILENCE_MS;
+      const isSpeaking = Boolean(conversationRef.current?.isSpeaking);
 
-      if (
-        hasWaitedLongEnough &&
-        hasTrailingSilence &&
-        !conversationRef.current?.isSpeaking
-      ) {
+      if (isSpeaking) {
+        notSpeakingSince = null;
+        return;
+      }
+
+      notSpeakingSince ??= now;
+      const hasContinuousSilence = now - notSpeakingSince >= RESULT_NAV_SILENCE_MS;
+
+      if (hasWaitedLongEnough && hasTrailingSilence && hasContinuousSilence) {
         try {
           void conversationRef.current?.endSession();
         } catch {
