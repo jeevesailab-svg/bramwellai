@@ -307,9 +307,8 @@ function DiagnosticPage() {
         }
         throw new Error(body?.error ?? `Could not start (${res.status})`);
       }
-      const { signedUrl, sessionId, agentId, authMode } = (await res.json()) as {
+      const { signedUrl, sessionId, authMode } = (await res.json()) as {
         signedUrl?: string;
-        agentId: string;
         sessionId: string;
         authMode?: "signed-url";
       };
