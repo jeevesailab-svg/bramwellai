@@ -175,6 +175,7 @@ function DiagnosticPage() {
   const timeWarningSentRef = useRef(false);
   const resultSubmittedAtRef = useRef<number | null>(null);
   const lastAgentResponseAtRef = useRef<number | null>(null);
+  const resultReadyRef = useRef(false);
 
   useEffect(() => {
     phaseRef.current = phase;
@@ -209,6 +210,7 @@ function DiagnosticPage() {
       };
       const pathway = routePathway(normalizedInput);
       submittedRef.current = true;
+      resultReadyRef.current = true;
       resultSubmittedAtRef.current = Date.now();
       try {
         const res = await fetch("/api/public/diagnostic-result", {
@@ -300,6 +302,7 @@ function DiagnosticPage() {
       const intentional =
         intentionallyEndingRef.current ||
         submittedRef.current ||
+        resultReadyRef.current ||
         phaseRef.current === "wrapping";
       const sid = sessionIdRef.current;
 
@@ -362,9 +365,7 @@ function DiagnosticPage() {
         transcriptRef.current.push(`You: ${m.message}`);
       } else if (typeof m?.message === "string" && m.role === "agent") {
         transcriptRef.current.push(`Bramwell: ${m.message}`);
-        if (submittedRef.current) {
-          lastAgentResponseAtRef.current = Date.now();
-        }
+        lastAgentResponseAtRef.current = Date.now();
       } else if (m?.type === "user_transcript") {
         const t = (m as { user_transcription_event?: { user_transcript?: string } })
           .user_transcription_event?.user_transcript;
@@ -374,9 +375,7 @@ function DiagnosticPage() {
           .agent_response_event?.agent_response;
         if (t) {
           transcriptRef.current.push(`Bramwell: ${t}`);
-          if (submittedRef.current) {
-            lastAgentResponseAtRef.current = Date.now();
-          }
+          lastAgentResponseAtRef.current = Date.now();
         }
       }
     },
@@ -460,6 +459,34 @@ function DiagnosticPage() {
     return () => clearTimeout(timeout);
   }, [phase, pendingNavigateId]);
 
+  // Server/webhook tools save the score without calling the browser. Poll the
+  // current session so the UI can move forward as soon as the backend result
+  // exists, even if no client-tool callback fires.
+  useEffect(() => {
+    if (!currentSessionId || (phase !== "live" && phase !== "wrapping")) return;
+    let cancelled = false;
+
+    const checkForWebhookResult = async () => {
+      if (cancelled || resultReadyRef.current) return;
+      const status = await fetchSavedDiagnosticResult(currentSessionId);
+      if (cancelled || status !== "ready") return;
+
+      resultReadyRef.current = true;
+      submittedRef.current = true;
+      resultSubmittedAtRef.current ??= Date.now();
+      setResultReadyId(currentSessionId);
+      setPendingNavigateId(currentSessionId);
+      setPhase("wrapping");
+    };
+
+    const poll = window.setInterval(() => void checkForWebhookResult(), 1500);
+    void checkForWebhookResult();
+    return () => {
+      cancelled = true;
+      window.clearInterval(poll);
+    };
+  }, [currentSessionId, phase]);
+
   // Once a result is expected, wait for it to exist in the backend before
   // navigating. This supports both client tools and ElevenLabs webhook/server
   // tools. If the webhook never lands, the result page will show the retry
@@ -537,6 +564,7 @@ function DiagnosticPage() {
     setCurrentSessionId(null);
     setResultReadyId(null);
     setPendingNavigateId(null);
+    resultReadyRef.current = false;
     setSecondsLeft(SESSION_LIMIT_MS / 1000);
     sessionStartedAtRef.current = null;
     timeWarningSentRef.current = false;
