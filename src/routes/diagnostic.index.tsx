@@ -9,7 +9,7 @@ export const Route = createFileRoute("/diagnostic/")({
   }),
   head: () => ({
     meta: [
-      { title: "Free Bramwell Diagnostic — Hear how you really sound" },
+      { title: "Free Bramwell Diagnostic. Hear how you really sound" },
       {
         name: "description",
         content:
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/diagnostic/")({
   }),
 });
 
-// Pathway routing — mirrors src/routes/pricing.tsx keys.
+// Pathway routing, mirrors src/routes/pricing.tsx keys.
 const PATHWAY = {
   graduate: { name: "Graduate Interview Sprint", price: "$99 AUD" },
   comeback: { name: "Career Comeback Sprint", price: "$199 AUD" },
@@ -207,7 +207,7 @@ function DiagnosticPage() {
         console.error("[diagnostic] result POST failed", e);
         return "Could not save result";
       }
-      // Save the result, but do not flip the UI or end the call here — the
+      // Save the result, but do not flip the UI or end the call here, the
       // client tool can fire while Bramwell is still speaking the feedback.
       setResultReadyId(sessionId);
       setPendingNavigateId(sessionId);
@@ -217,7 +217,7 @@ function DiagnosticPage() {
   const handleDiagnosticToolCall = useCallback(async (params: SubmitInput) => {
     // Guard: ignore tool calls that fire before the session is actually live
     // (ElevenLabs occasionally invokes registered client tools on widget
-    // init / reconnect handshakes with empty params — we must not treat
+    // init / reconnect handshakes with empty params, we must not treat
     // those as a real result submission).
     const sid = sessionIdRef.current;
     const input = params ?? {};
@@ -408,7 +408,7 @@ function DiagnosticPage() {
   }, [phase, pendingNavigateId]);
 
   // Once submitDiagnostic has fired and we've persisted the result, wait for
-  // Bramwell to actually stop speaking before navigating away — otherwise his
+  // Bramwell to actually stop speaking before navigating away, otherwise his
   // closing feedback is cut off mid-sentence as the result page loads.
   useEffect(() => {
     if (!pendingNavigateId) return;
@@ -599,7 +599,7 @@ function DiagnosticPage() {
               <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-relaxed text-muted-foreground">
                 One question. One honest answer. Bramwell gives you your
                 communication type, your three biggest gaps, and your
-                Readiness Score — in under three minutes.
+                Readiness Score, in under three minutes.
               </p>
               <div className="mt-8 flex justify-center">
                 <button
@@ -665,7 +665,7 @@ function DiagnosticPage() {
                 </p>
                 <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
                   Trained on <span className="font-semibold text-white">10,000+ hours</span> of
-                  high-stakes interviews, pitches and board briefings — analysed against the
+                  high-stakes interviews, pitches and board briefings, analysed against the
                   frameworks of <span className="font-semibold text-white">Mehrabian, Cuddy,
                   Goleman and Carnegie</span>. Bramwell hears what interviewers and boards hear,
                   and tells you what they won't.
@@ -745,8 +745,8 @@ function DiagnosticPage() {
                     </p>
                     <p className="mt-3 text-sm text-muted-foreground">
                       The free version is a five-minute snapshot. To keep
-                      going — rehearse real questions, get specific
-                      feedback, and actually move your Readiness Score —
+                      going: rehearse real questions, get specific
+                      feedback, and actually move your Readiness Score,
                       pick a Bramwell pathway.
                     </p>
                     <Link

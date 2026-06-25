@@ -23,7 +23,7 @@ async function fireKlaviyo(args: {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: args.email,
-        eventName: `Started Diagnostic — ${PATHWAY_LABELS[args.pathway]}`,
+        eventName: `Started Diagnostic, ${PATHWAY_LABELS[args.pathway]}`,
         pathway: args.pathway,
         source: args.source,
         properties: { cta_label: args.ctaLabel },

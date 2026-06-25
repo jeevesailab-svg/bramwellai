@@ -103,7 +103,7 @@ export const Route = createFileRoute("/api/public/diagnostic-email")({
                     metric: {
                       data: {
                         type: "metric",
-                        attributes: { name: `Completed Diagnostic — ${pretty}` },
+                        attributes: { name: `Completed Diagnostic, ${pretty}` },
                       },
                     },
                     profile: {

@@ -61,7 +61,7 @@ function PortalLayout() {
         return;
       }
 
-      // Pathway welcome banner — show after successful checkout, or any time
+      // Pathway welcome banner, show after successful checkout, or any time
       // the user has not yet seen it.
       const justPaid = checkout === "success";
       const shouldShow = justPaid || row?.welcome_shown === false;

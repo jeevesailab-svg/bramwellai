@@ -13,16 +13,16 @@ export const Route = createFileRoute("/advisors")({
   component: AdvisorsPage,
   head: () => ({
     meta: [
-      { title: "Bramwell AI for Career Advisors — The coach in the room when you can't be" },
+      { title: "Bramwell AI for Career Advisors, The coach in the room when you can't be" },
       {
         name: "description",
         content:
-          "The private voice coach for your students — available at 11pm the night before. Institutional early access for employability teams.",
+          "The private voice coach for your students, available at 11pm the night before. Institutional early access for employability teams.",
       },
       { property: "og:title", content: "Bramwell AI for Career Advisors" },
       {
         property: "og:description",
-        content: "The private voice coach that's there when you can't be — the night before, for the student who needs it most.",
+        content: "The private voice coach that's there when you can't be, the night before, for the student who needs it most.",
       },
     ],
   }),
@@ -34,7 +34,7 @@ function AdvisorsPage() {
       <SiteNav ctaLabel="Get Early Access" ctaHref="#access" />
       <PageHero
         pathway="advisors"
-        badge="Free pilot — first 50 students"
+        badge="Free pilot, first 50 students"
         eyebrow="For career advisors and employability teams"
         headline={
           <>
@@ -43,7 +43,7 @@ function AdvisorsPage() {
             <GoldText>Bramwell can.</GoldText>
           </>
         }
-        subhead="Give every student a private voice coach — free for your first 50. Available 11pm Sunday before Monday's interview. No booking, no waitlist, no extra advisor hours."
+        subhead="Give every student a private voice coach, free for your first 50. Available 11pm Sunday before Monday's interview. No booking, no waitlist, no extra advisor hours."
         primaryCta={{ label: "Claim Your Free 50-Student Pilot", href: "#access" }}
         secondary={{ label: "See how it works", href: "#advisor-how" }}
       />
@@ -56,7 +56,7 @@ function AdvisorsPage() {
         ]}
       />
 
-      {/* Pain — stacked list */}
+      {/* Pain, stacked list */}
       <section className="border-t border-border bg-background py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
@@ -64,10 +64,10 @@ function AdvisorsPage() {
           </h2>
           <div className="mt-10 divide-y divide-border border-y border-border">
             {[
-              "The student who practiced every answer with you — then froze when the panel asked a follow-up.",
+              "The student who practiced every answer with you, then froze when the panel asked a follow-up.",
               "The one who knows their CV cold but speaks in a register ten years younger than the role.",
               "The mature-age returner who came to every session and still apologises for the gap.",
-              "The graduate who is more qualified than half the shortlist — and sounds the least confident in the room.",
+              "The graduate who is more qualified than half the shortlist, and sounds the least confident in the room.",
             ].map((line) => (
               <p key={line} className="py-5 text-base leading-relaxed text-muted-foreground md:text-lg">
                 {line}
@@ -93,8 +93,8 @@ function AdvisorsPage() {
           <div className="grid gap-10 md:grid-cols-3">
             {[
               {
-                t: "Live voice — not text prompts",
-                b: "Bramwell listens to how they actually sound. Real-time feedback on cadence, structure, conviction. The delivery problems that cost them the room — fixed before the panel hears them.",
+                t: "Live voice, not text prompts",
+                b: "Bramwell listens to how they actually sound. Real-time feedback on cadence, structure, conviction. The delivery problems that cost them the room, fixed before the panel hears them.",
               },
               {
                 t: "Available the moment they need it",
@@ -102,7 +102,7 @@ function AdvisorsPage() {
               },
               {
                 t: "Calibrated to their situation",
-                b: "The graduate. The returner. The pivot. Each pathway is built for a specific moment — not a generic interview module.",
+                b: "The graduate. The returner. The pivot. Each pathway is built for a specific moment, not a generic interview module.",
               },
             ].map((f) => (
               <div key={f.t} className="border-t border-border pt-6">
@@ -122,7 +122,7 @@ function AdvisorsPage() {
           </h2>
           <div className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
             <p>
-              Your KPIs — GOS results, QS employability ranking, field-aligned employment — live or die in a room you aren't in
+              Your KPIs, GOS results, QS employability ranking, field-aligned employment, live or die in a room you aren't in
               and can't enter.
             </p>
             <p className="font-medium text-foreground">What you can control is what your students walk in with.</p>
@@ -137,7 +137,7 @@ function AdvisorsPage() {
           >
             {`"It's the only coach that's there at 11pm the night before. That's the only time I needed it."`}
             <footer className="mt-3 text-xs font-normal not-italic uppercase tracking-[0.18em] text-muted-foreground">
-              — Senior PM, Series B Fintech · former graduate student
+             , Senior PM, Series B Fintech · former graduate student
             </footer>
           </blockquote>
         </div>
@@ -149,7 +149,7 @@ function AdvisorsPage() {
         highlight="Transformative to use."
         steps={[
           { n: "01", t: "Share a link", b: "No institutional login. No IT integration. No procurement. You refer it. They use it." },
-          { n: "02", t: "Free 5-minute diagnostic", b: "Students hear their Readiness Score and their three biggest gaps — in their own voice, by something that isn't you." },
+          { n: "02", t: "Free 5-minute diagnostic", b: "Students hear their Readiness Score and their three biggest gaps, in their own voice, by something that isn't you." },
           { n: "03", t: "Practice until it's owned", b: "Live two-way voice coaching on the exact questions their panel is likely to ask. Bramwell doesn't move on until the answer is ready." },
         ]}
       />

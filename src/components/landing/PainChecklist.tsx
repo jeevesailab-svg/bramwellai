@@ -1,7 +1,7 @@
 const PAINS = [
   {
     q: "I ramble and lose the point I was trying to make",
-    a: "Bramwell gives you PREP — a framework that structures any answer in under 60 seconds. You'll land the point before you lose the thread.",
+    a: "Bramwell gives you PREP, a framework that structures any answer in under 60 seconds. You'll land the point before you lose the thread.",
   },
   {
     q: "I freeze when the pressure is on",
@@ -9,7 +9,7 @@ const PAINS = [
   },
   {
     q: "I walk out replaying what I should have said",
-    a: "Bramwell rehearses you the night before, out loud, on the exact moments you'll face. The room hears your best take — not your second draft on the drive home.",
+    a: "Bramwell rehearses you the night before, out loud, on the exact moments you'll face. The room hears your best take, not your second draft on the drive home.",
   },
   {
     q: "I know I am capable but I cannot sell myself",
@@ -17,15 +17,15 @@ const PAINS = [
   },
   {
     q: "I sound less senior than I am",
-    a: "Bramwell calibrates your cadence, vocabulary, and conviction in real time — until the way you sound matches the work you've actually done.",
+    a: "Bramwell calibrates your cadence, vocabulary, and conviction in real time, until the way you sound matches the work you've actually done.",
   },
   {
     q: "I have watched less qualified people get roles I deserved",
-    a: "They weren't better. They were better rehearsed. Bramwell closes that gap before the next interview — not after you've lost it.",
+    a: "They weren't better. They were better rehearsed. Bramwell closes that gap before the next interview, not after you've lost it.",
   },
   {
     q: "People tell me I come across as boring or hard to read",
-    a: "Bramwell works on the specific signals that make someone magnetic in conversation — pace, energy, warmth, and the ability to hold a room. You'll hear the difference within two sessions.",
+    a: "Bramwell works on the specific signals that make someone magnetic in conversation, pace, energy, warmth, and the ability to hold a room. You'll hear the difference within two sessions.",
   },
 ];
 

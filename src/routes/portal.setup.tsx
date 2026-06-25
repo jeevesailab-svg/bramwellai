@@ -7,7 +7,7 @@ export const Route = createFileRoute("/portal/setup")({
   component: PortalSetupPage,
   head: () => ({
     meta: [
-      { title: "Coaching setup — Bramwell AI" },
+      { title: "Coaching setup, Bramwell AI" },
       {
         name: "description",
         content:
@@ -139,14 +139,14 @@ function PortalSetupPage() {
         />
         <div className="relative mx-auto max-w-3xl px-6 pb-16 pt-14 text-center md:px-10 md:pt-20">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-            Step 1 of 2 — Coaching setup
+            Step 1 of 2, Coaching setup
           </p>
           <h1 className="text-balance text-3xl font-semibold leading-tight md:text-5xl">
             Give Bramwell the two things it needs to coach you.
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-balance text-base text-muted-foreground md:text-lg">
             Your CV and the job description for the role you're going for. Bramwell uses them to
-            ask the questions you'll actually be asked — in the language of the role.
+            ask the questions you'll actually be asked, in the language of the role.
           </p>
         </div>
       </section>
@@ -175,7 +175,7 @@ function PortalSetupPage() {
 
           <Card
             title="The job description"
-            subtitle="Paste the full posting — Bramwell mines it for the exact phrases interviewers will use."
+            subtitle="Paste the full posting, Bramwell mines it for the exact phrases interviewers will use."
             ready={jdReady}
           >
             <textarea
@@ -209,7 +209,7 @@ function PortalSetupPage() {
               className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition hover:opacity-90 disabled:opacity-50"
               style={{ background: "var(--gradient-gold)" }}
             >
-              {saving ? "Saving…" : savedAt ? "Saved — update" : "Save and continue"}
+              {saving ? "Saving…" : savedAt ? "Saved, update" : "Save and continue"}
             </button>
           </div>
 

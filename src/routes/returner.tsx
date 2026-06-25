@@ -13,21 +13,21 @@ export const Route = createFileRoute("/returner")({
   component: ReturnerPage,
   head: () => ({
     meta: [
-      { title: "The Comeback Pathway — Returning From a Career Gap — Bramwell AI" },
+      { title: "The Comeback Pathway, Returning From a Career Gap, Bramwell AI" },
       {
         name: "description",
         content: "Private voice coaching for professionals returning from a career gap. Own the gap. $199.",
       },
-      { property: "og:title", content: "Returning from a career gap — Bramwell AI" },
+      { property: "og:title", content: "Returning from a career gap, Bramwell AI" },
       {
         property: "og:description",
-        content: "The gap question is coming. How you answer it decides whether they see the break — or the person who came back.",
+        content: "The gap question is coming. How you answer it decides whether they see the break, or the person who came back.",
       },
     ],
   }),
 });
 
-const PRIMARY = { label: "Start the Comeback Pathway — $199", href: "/pricing?pathway=comeback" };
+const PRIMARY = { label: "Start the Comeback Pathway, $199", href: "/pricing?pathway=comeback" };
 const SECONDARY = { label: "Free diagnostic first →", href: "/diagnostic?autostart=1" };
 
 function ReturnerPage() {
@@ -65,7 +65,7 @@ function ReturnerPage() {
             </p>
             <p className="font-medium text-foreground">The panel notices.</p>
             <p>
-              Bramwell rebuilds the answer so the gap becomes part of your story, not a hole in it — drilled out loud until it's unshakeable.
+              Bramwell rebuilds the answer so the gap becomes part of your story, not a hole in it, drilled out loud until it's unshakeable.
             </p>
           </div>
         </div>
@@ -77,23 +77,23 @@ function ReturnerPage() {
         items={[
           {
             q: `"I don't know how to explain the gap without it sounding like nothing."`,
-            a: `What you did was real. The language you're using frames it as absence. Bramwell rebuilds the answer in terms of agency, capability, and readiness — what you were doing, not what you weren't.`,
+            a: `What you did was real. The language you're using frames it as absence. Bramwell rebuilds the answer in terms of agency, capability, and readiness, what you were doing, not what you weren't.`,
           },
           {
             q: `"I'm worried they'll think I'm out of touch."`,
-            a: `That perception forms in the first ninety seconds — mostly from voice. Bramwell calibrates register, confidence, pace. By the time they form the perception, it will be the wrong one.`,
+            a: `That perception forms in the first ninety seconds, mostly from voice. Bramwell calibrates register, confidence, pace. By the time they form the perception, it will be the wrong one.`,
           },
           {
             q: `"I keep apologising without meaning to."`,
-            a: `The apology is structural — built into how most people answer that question. Bramwell finds it and removes it.`,
+            a: `The apology is structural, built into how most people answer that question. Bramwell finds it and removes it.`,
           },
           {
             q: `"I have to justify myself before we've even talked about the role."`,
             a: `The gap question should take sixty seconds, transition cleanly, and open into the conversation about what you can do. Bramwell builds that structure until it's automatic.`,
           },
           {
-            q: `"I'm not sure how to talk about what I actually did — it wasn't work."`,
-            a: `Caring for a parent, raising children, managing a health situation — these require exactly what senior employers say they want: resilience, prioritisation, decision-making under pressure. Bramwell translates it into the language the panel responds to.`,
+            q: `"I'm not sure how to talk about what I actually did, it wasn't work."`,
+            a: `Caring for a parent, raising children, managing a health situation, these require exactly what senior employers say they want: resilience, prioritisation, decision-making under pressure. Bramwell translates it into the language the panel responds to.`,
           },
         ]}
       />
@@ -102,8 +102,8 @@ function ReturnerPage() {
         title="One pathway."
         highlight="Built for coming back clean."
         steps={[
-          { n: "01", t: "Free diagnostic", b: "Bramwell listens to how you're currently telling your story — including the gap — and identifies exactly where it's costing you." },
-          { n: "02", t: "The Comeback Pathway", b: "Live voice coaching on the gap, the 'why now?', the 'are you up to date?' — coached until your answer owns the question instead of apologising for it." },
+          { n: "01", t: "Free diagnostic", b: "Bramwell listens to how you're currently telling your story, including the gap, and identifies exactly where it's costing you." },
+          { n: "02", t: "The Comeback Pathway", b: "Live voice coaching on the gap, the 'why now?', the 'are you up to date?', coached until your answer owns the question instead of apologising for it." },
           { n: "03", t: "Walk in telling the right story", b: "Not the one where you left and came back. The one where you made a decision, kept your head, and are exactly who they're looking for." },
         ]}
       />
@@ -116,7 +116,7 @@ function ReturnerPage() {
           >
             {`"Within two sessions my answers stopped wandering. I got the offer. I'd spent eight months getting nowhere."`}
             <footer className="mt-3 text-xs font-normal not-italic uppercase tracking-[0.18em] text-muted-foreground">
-              — Returning to work after maternity leave
+             , Returning to work after maternity leave
             </footer>
           </blockquote>
         </div>
@@ -126,7 +126,7 @@ function ReturnerPage() {
         pathway="returner"
         title="The Comeback Pathway. $199 AUD."
         highlight="The gap, owned. The apology, gone."
-        body="Live voice coaching on the questions every returner gets — until you answer them without flinching. One payment. No subscription."
+        body="Live voice coaching on the questions every returner gets, until you answer them without flinching. One payment. No subscription."
         primary={PRIMARY}
         secondary={SECONDARY}
         urgency="The interview is coming. The gap question will be in the first two minutes."

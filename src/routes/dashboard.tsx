@@ -6,7 +6,7 @@ export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
   head: () => ({
     meta: [
-      { title: "Your dashboard — Bramwell AI" },
+      { title: "Your dashboard, Bramwell AI" },
       {
         name: "description",
         content: "Track your sessions, Readiness Score, and next steps.",
@@ -148,7 +148,7 @@ function Dashboard() {
 
           <Card
             label="Latest readiness score"
-            value={scores.length ? `${scores[scores.length - 1]}` : "—"}
+            value={scores.length ? `${scores[scores.length - 1]}` : ", "}
           >
             {scores.length > 1 ? (
               <Sparkline values={scores} />
@@ -166,7 +166,7 @@ function Dashboard() {
                 ? "Expired"
                 : user?.access_expires_at
                 ? new Date(user.access_expires_at).toLocaleDateString()
-                : "—"
+                : ", "
             }
           >
             <p className="mt-3 text-xs text-muted-foreground">
@@ -293,7 +293,7 @@ function Dashboard() {
                       className="shrink-0 text-base font-semibold tabular-nums"
                       style={{ color: "var(--primary)" }}
                     >
-                      {s.readiness_score_end ?? "—"}
+                      {s.readiness_score_end ?? ", "}
                     </div>
                   </div>
                 ))}

@@ -16,7 +16,7 @@ export function StatBar() {
       value: "73%",
       unit: null,
       label:
-        "of hiring decisions are influenced by communication style — before qualifications are even considered",
+        "of hiring decisions are influenced by communication style, before qualifications are even considered",
     },
   ];
   return (

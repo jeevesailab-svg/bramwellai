@@ -14,22 +14,22 @@ export const Route = createFileRoute("/graduate")({
   component: GraduatePage,
   head: () => ({
     meta: [
-      { title: "The Graduate Pathway — Bramwell AI" },
+      { title: "The Graduate Pathway, Bramwell AI" },
       {
         name: "description",
         content:
           "You spent four years becoming qualified. You have ninety seconds to prove it. Private voice coaching for your first serious interview. $99.",
       },
-      { property: "og:title", content: "The Graduate Pathway — Bramwell AI" },
+      { property: "og:title", content: "The Graduate Pathway, Bramwell AI" },
       {
         property: "og:description",
-        content: "Private voice coaching that makes you sound as capable as you already are — before the panel decides you don't.",
+        content: "Private voice coaching that makes you sound as capable as you already are, before the panel decides you don't.",
       },
     ],
   }),
 });
 
-const PRIMARY = { label: "Start the Graduate Pathway — $99", href: "/pricing?pathway=graduate" };
+const PRIMARY = { label: "Start the Graduate Pathway, $99", href: "/pricing?pathway=graduate" };
 const SECONDARY = { label: "Free diagnostic first →", href: "/diagnostic?autostart=1" };
 
 function GraduatePage() {
@@ -46,7 +46,7 @@ function GraduatePage() {
             <GoldText>Ninety seconds to prove it.</GoldText>
           </>
         }
-        subhead="The graduates who get hired don't have better degrees. They sound more ready. Bramwell drills you on the exact questions you'll face — out loud, under pressure — until you do too."
+        subhead="The graduates who get hired don't have better degrees. They sound more ready. Bramwell drills you on the exact questions you'll face, out loud, under pressure, until you do too."
         primaryCta={PRIMARY}
         secondary={SECONDARY}
       />
@@ -64,7 +64,7 @@ function GraduatePage() {
             </p>
             <p className="font-medium text-foreground">That's a preparation problem, not a you problem.</p>
             <p>
-              The candidate who wins sounds like they've already done the job. Bramwell builds that sound — before the panel hears the real one.
+              The candidate who wins sounds like they've already done the job. Bramwell builds that sound, before the panel hears the real one.
             </p>
           </div>
         </div>
@@ -76,7 +76,7 @@ function GraduatePage() {
         items={[
           {
             q: `"I don't have enough experience to sound confident."`,
-            a: `You have more than you think — you're framing it wrong. Bramwell mines what you've actually done and drills you on delivering it in the language of the role.`,
+            a: `You have more than you think, you're framing it wrong. Bramwell mines what you've actually done and drills you on delivering it in the language of the role.`,
           },
           {
             q: `"They're going to ask something I can't answer."`,
@@ -84,7 +84,7 @@ function GraduatePage() {
           },
           {
             q: `"I freeze when there's silence after my answer."`,
-            a: `Silence usually means the panel is writing. Bramwell trains you on what happens after you speak — the follow-ups, the probes — until silence stops feeling like a verdict.`,
+            a: `Silence usually means the panel is writing. Bramwell trains you on what happens after you speak, the follow-ups, the probes, until silence stops feeling like a verdict.`,
           },
           {
             q: `"I ramble through 'tell me about yourself.'"`,
@@ -92,7 +92,7 @@ function GraduatePage() {
           },
           {
             q: `"I don't know how to make my degree sound relevant."`,
-            a: `Translation from academic to professional is a skill. Most graduates never learn it. Bramwell teaches it — specifically, in your words, for the role you're applying for.`,
+            a: `Translation from academic to professional is a skill. Most graduates never learn it. Bramwell teaches it, specifically, in your words, for the role you're applying for.`,
           },
         ]}
       />
@@ -123,7 +123,7 @@ function GraduatePage() {
           >
             {`"I walked in knowing exactly how I sounded. That changed everything."`}
             <footer className="mt-3 text-xs font-normal not-italic uppercase tracking-[0.18em] text-muted-foreground">
-              — Director, FTSE 100 · on her first senior panel
+             , Director, FTSE 100 · on her first senior panel
             </footer>
           </blockquote>
         </div>

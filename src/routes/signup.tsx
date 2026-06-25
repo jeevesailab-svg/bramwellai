@@ -8,7 +8,7 @@ export const Route = createFileRoute("/signup")({
   component: SignupPage,
   head: () => ({
     meta: [
-      { title: "Create your account — Bramwell AI" },
+      { title: "Create your account, Bramwell AI" },
       { name: "description", content: "Start coaching with Bramwell AI in under a minute." },
     ],
   }),

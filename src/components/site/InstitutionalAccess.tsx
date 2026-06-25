@@ -56,11 +56,11 @@ export function InstitutionalAccess() {
 
     // Fire the referral email automatically (mailto opens user's client pre-filled).
     const url = `${origin}/diagnostic?ref=${code}&inst=${encodeURIComponent(parsed.data.institution.slice(0, 60))}&autostart=1`;
-    const subject = `Your Bramwell pilot referral link — ${parsed.data.institution}`;
+    const subject = `Your Bramwell pilot referral link, ${parsed.data.institution}`;
     const body =
       `Hi,\n\nYou're in. Here's your private referral link for the Bramwell free 50-student pilot:\n\n${url}\n\n` +
-      `Share this link with up to 50 students. They get the full Readiness Diagnostic free — no signup, no login wall.\n\n` +
-      `We'll send a cohort report (anonymised) once 10+ students complete it.\n\n— Bramwell`;
+      `Share this link with up to 50 students. They get the full Readiness Diagnostic free, no signup, no login wall.\n\n` +
+      `We'll send a cohort report (anonymised) once 10+ students complete it.\n\n,  Bramwell`;
     const mailto = `mailto:${encodeURIComponent(parsed.data.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     // Use a hidden anchor so popup blockers don't intercept.
     if (typeof window !== "undefined") {
@@ -100,7 +100,7 @@ export function InstitutionalAccess() {
           style={{ color: "var(--primary)" }}
         >
           <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--primary)" }} />
-          Free pilot — early access
+          Free pilot, early access
         </div>
         <h2 className="text-balance text-3xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
           50 students. Free.
@@ -109,7 +109,7 @@ export function InstitutionalAccess() {
         </h2>
         <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
           The first 50 students from your institution get the full Bramwell Readiness Diagnostic
-          free. No login wall, no IT integration. Enter your details — we send the referral link to
+          free. No login wall, no IT integration. Enter your details, we send the referral link to
           your inbox the moment you submit.
         </p>
 
