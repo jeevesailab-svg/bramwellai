@@ -36,9 +36,9 @@ const PATHWAY = {
 type PathwayKey = keyof typeof PATHWAY;
 
 const SESSION_LIMIT_MS = 5 * 60 * 1000;
-const RESULT_NAV_MIN_DELAY_MS = 8000;
-const RESULT_NAV_SILENCE_MS = 2500;
-const RESULT_NAV_HARD_CAP_MS = 60000;
+const RESULT_NAV_MIN_DELAY_MS = 15000;
+const RESULT_NAV_SILENCE_MS = 4000;
+const RESULT_NAV_HARD_CAP_MS = 90000;
 
 type ConversationHandle = {
   endSession: () => unknown;
