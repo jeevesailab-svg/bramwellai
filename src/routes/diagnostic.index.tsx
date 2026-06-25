@@ -597,9 +597,7 @@ function DiagnosticPage() {
                 You're losing rooms you should be winning. Find out exactly why.
               </h1>
               <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-relaxed text-muted-foreground">
-                One question. One honest answer. Bramwell gives you your
-                communication type, your three biggest gaps, and your
-                Readiness Score, in under three minutes.
+                One question. One honest answer. Most people are surprised by what they hear.
               </p>
               <div className="mt-8 flex justify-center">
                 <button
