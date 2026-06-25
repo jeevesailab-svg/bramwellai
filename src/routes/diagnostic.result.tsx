@@ -66,15 +66,15 @@ const STRIPE: Record<PathwayKey, string> = {
 const TYPE_DESCRIPTIONS: Record<string, string> = {
   rambler:
     "You have strong ideas — they just come out in the wrong order under pressure.",
-  "under-seller":
+  under_seller:
     "You have done impressive things. You just do not say so.",
-  "over-explainer":
+  over_explainer:
     "You give the room everything when it only needed one thing.",
   apologiser:
     "You shrink when you should stand. Your voice asks for permission instead of commanding attention.",
-  "invisible achiever":
+  invisible_achiever:
     "You deliver at the highest level. Nobody outside your immediate team knows it.",
-  "next-level leader":
+  next_level_leader:
     "You communicate well. You just need sharper edges.",
 };
 
@@ -122,19 +122,23 @@ function readCachedResult(id: string): Result | null {
 }
 
 function describeType(type: string): string {
-  const key = type.toLowerCase().replace(/^the\s+/, "").trim();
+  const key = normalizeTypeKey(type);
   return (
     TYPE_DESCRIPTIONS[key] ??
     "Your communication has a clear pattern — and a clear way to sharpen it."
   );
 }
 
-function formatType(type: string): string {
-  const cleaned = type
+function normalizeTypeKey(type: string): string {
+  return type
+    .toLowerCase()
     .replace(/^the\s+/i, "")
-    .replace(/[_-]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+    .trim()
+    .replace(/[\s-]+/g, "_");
+}
+
+function formatType(type: string): string {
+  const cleaned = normalizeTypeKey(type).replace(/_/g, " ");
   const titled = cleaned
     .split(" ")
     .map((w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w))
