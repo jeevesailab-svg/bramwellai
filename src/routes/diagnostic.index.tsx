@@ -602,6 +602,22 @@ function DiagnosticPage() {
                 100. No scripts. No preparation. Just the truth about how you
                 come across under pressure.
               </p>
+              <div className="mx-auto mt-8 max-w-xl rounded-2xl border border-border bg-foreground/[0.03] px-5 py-4 text-left backdrop-blur">
+                <p
+                  className="text-[10px] font-semibold uppercase"
+                  style={{ letterSpacing: "0.24em", color: "var(--primary)" }}
+                >
+                  The science behind Bramwell
+                </p>
+                <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
+                  Trained on <span className="font-semibold text-white">10,000+ hours</span> of high-stakes
+                  interviews, board pitches and executive briefings — analysed against the
+                  communication frameworks of <span className="font-semibold text-white">Mehrabian, Cuddy,
+                  Goleman and Carnegie</span>, and the behavioural patterns used by the world's top
+                  executive coaches. Bramwell hears what interviewers, boards and clients hear —
+                  and tells you what they won't.
+                </p>
+              </div>
               <div className="mt-10 flex justify-center">
                 <button
                   onClick={startDiagnostic}
