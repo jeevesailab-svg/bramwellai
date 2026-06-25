@@ -492,10 +492,11 @@ function DiagnosticPage() {
         }
         throw new Error(body?.error ?? `Could not start (${res.status})`);
       }
-      const { token, sessionId, authMode } = (await res.json()) as {
+      const { token, signedUrl, sessionId, authMode } = (await res.json()) as {
         token?: string;
+        signedUrl?: string;
         sessionId: string;
-        authMode?: "conversation-token";
+        authMode?: "conversation-token" | "signed-url";
       };
       sessionIdRef.current = sessionId;
       setCurrentSessionId(sessionId);
@@ -503,7 +504,13 @@ function DiagnosticPage() {
       transcriptRef.current = [];
       submittedRef.current = false;
 
-      if (authMode === "conversation-token" && token) {
+      if (authMode === "signed-url" && signedUrl) {
+        await conversation.startSession({
+          signedUrl,
+          connectionType: "websocket",
+          dynamicVariables: { user_first_name: "there" },
+        });
+      } else if (authMode === "conversation-token" && token) {
         await conversation.startSession({
           conversationToken: token,
           connectionType: "webrtc",
