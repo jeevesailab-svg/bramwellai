@@ -90,6 +90,21 @@ const PATHWAY_OUTCOMES: Record<PathwayKey, string[]> = {
   ],
 };
 
+function diagnosticResultCacheKey(sessionId: string) {
+  return `bramwell-diagnostic-result:${sessionId}`;
+}
+
+function readCachedResult(id: string): Result | null {
+  try {
+    const raw = window.sessionStorage.getItem(diagnosticResultCacheKey(id));
+    if (!raw) return null;
+    const result = JSON.parse(raw) as Result;
+    return result?.id === id ? result : null;
+  } catch {
+    return null;
+  }
+}
+
 function describeType(type: string): string {
   const key = type.toLowerCase().replace(/^the\s+/, "").trim();
   return (
@@ -123,6 +138,11 @@ function DiagnosticResultPage() {
           `/api/public/diagnostic-result?id=${encodeURIComponent(id)}`,
         );
         if (!res.ok) {
+          const cached = readCachedResult(id);
+          if (cached) {
+            if (active) setState({ kind: "ready", result: cached });
+            return;
+          }
           const body = (await res.json().catch(() => ({}))) as {
             error?: string;
           };
@@ -131,6 +151,11 @@ function DiagnosticResultPage() {
         const json = (await res.json()) as { result: Result };
         if (active) setState({ kind: "ready", result: json.result });
       } catch (e) {
+        const cached = readCachedResult(id);
+        if (cached) {
+          if (active) setState({ kind: "ready", result: cached });
+          return;
+        }
         if (active)
           setState({
             kind: "error",

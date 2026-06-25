@@ -59,6 +59,10 @@ type SubmitInput = {
   email?: string;
 };
 
+function diagnosticResultCacheKey(sessionId: string) {
+  return `bramwell-diagnostic-result:${sessionId}`;
+}
+
 function normalizeReadinessScore(value: SubmitInput["readiness_score"]): number | null {
   const score =
     typeof value === "number"
@@ -180,6 +184,21 @@ function DiagnosticPage() {
           }),
         });
         if (!res.ok) throw new Error(`Result save failed (${res.status})`);
+        window.sessionStorage.setItem(
+          diagnosticResultCacheKey(sessionId),
+          JSON.stringify({
+            id: sessionId,
+            first_name: input.first_name ?? null,
+            has_email: Boolean(input.email),
+            communication_type: input.communication_type,
+            readiness_score: readinessScore,
+            gaps: normalizedGaps,
+            career_moment: input.career_moment || null,
+            recommended_pathway: pathway.key,
+            recommended_pathway_name: pathway.name,
+            recommended_price: pathway.price,
+          }),
+        );
       } catch (e) {
         submittedRef.current = false;
         resultSubmittedAtRef.current = null;
