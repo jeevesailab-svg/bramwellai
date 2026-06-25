@@ -68,7 +68,7 @@ export const Route = createFileRoute("/api/public/quiz-lead")({
               }),
             });
             const bodyText = await zapRes.text().catch(() => "");
-            // Server-side logging only — never expose to the client
+            // Server-side logging only, never expose to the client
             console.log("Zapier webhook response", {
               status: zapRes.status,
               ok: zapRes.ok,

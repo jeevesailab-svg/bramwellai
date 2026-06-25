@@ -39,9 +39,9 @@ async function sendReceiptEmail(opts: {
     <h1 style="font-size:22px;margin:0 0 16px;">You're in. Welcome to Bramwell.</h1>
     <p style="font-size:15px;line-height:1.6;margin:0 0 16px;">${greeting}</p>
     <p style="font-size:15px;line-height:1.6;margin:0 0 16px;">${opts.pathwayWelcome}</p>
-    <p style="font-size:15px;line-height:1.6;margin:0 0 24px;">Your purchase: <strong>${opts.productName}</strong> — ${opts.currency.toUpperCase()} $${amount}.</p>
+    <p style="font-size:15px;line-height:1.6;margin:0 0 24px;">Your purchase: <strong>${opts.productName}</strong>, ${opts.currency.toUpperCase()} $${amount}.</p>
     <a href="${portalUrl}" style="display:inline-block;background:#0a0a0a;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;">Open your portal →</a>
-    <p style="font-size:13px;line-height:1.6;margin:32px 0 0;color:#666;">Reply to this email if anything is off — a real human reads it.</p>
+    <p style="font-size:13px;line-height:1.6;margin:32px 0 0;color:#666;">Reply to this email if anything is off, a real human reads it.</p>
     <p style="font-size:12px;color:#999;margin-top:32px;">Bramwell AI</p>
   </body></html>`;
 
@@ -55,7 +55,7 @@ async function sendReceiptEmail(opts: {
     body: JSON.stringify({
       from,
       to: [opts.to],
-      subject: `Welcome to Bramwell — your ${opts.productName} is ready`,
+      subject: `Welcome to Bramwell, your ${opts.productName} is ready`,
       html,
     }),
   });

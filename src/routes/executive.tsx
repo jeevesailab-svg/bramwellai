@@ -13,21 +13,21 @@ export const Route = createFileRoute("/executive")({
   component: ExecutivePage,
   head: () => ({
     meta: [
-      { title: "The Executive Pathway — Private Interview Coaching — Bramwell AI" },
+      { title: "The Executive Pathway, Private Interview Coaching, Bramwell AI" },
       {
         name: "description",
         content: "Private executive interview preparation. No referral. No record. Available tonight. $499.",
       },
-      { property: "og:title", content: "The Executive Pathway — Bramwell AI" },
+      { property: "og:title", content: "The Executive Pathway, Bramwell AI" },
       {
         property: "og:description",
-        content: "The only preparation that happens entirely in private — and the only coach available the night before, with no referral and no record.",
+        content: "The only preparation that happens entirely in private, and the only coach available the night before, with no referral and no record.",
       },
     ],
   }),
 });
 
-const PRIMARY = { label: "Start the Executive Pathway — $499", href: "/pricing?pathway=executive" };
+const PRIMARY = { label: "Start the Executive Pathway, $499", href: "/pricing?pathway=executive" };
 const SECONDARY = { label: "Free diagnostic first →", href: "/diagnostic?autostart=1" };
 
 function ExecutivePage() {
@@ -44,7 +44,7 @@ function ExecutivePage() {
             <GoldText>Now you're the one being interviewed.</GoldText>
           </>
         }
-        subhead="You know what panels look for. What you can't do is practise with anyone who knows you. Bramwell is private executive prep — available tonight, no referral, no record, no one notified."
+        subhead="You know what panels look for. What you can't do is practise with anyone who knows you. Bramwell is private executive prep, available tonight, no referral, no record, no one notified."
         primaryCta={PRIMARY}
         secondary={SECONDARY}
       />
@@ -76,15 +76,15 @@ function ExecutivePage() {
         items={[
           {
             q: `"I can't let anyone in my network know I'm in the market."`,
-            a: `No referral, no institutional access, no connection to your network. Your name, your sessions, your recordings — private to your account. The preparation happens entirely outside the world that knows you.`,
+            a: `No referral, no institutional access, no connection to your network. Your name, your sessions, your recordings, private to your account. The preparation happens entirely outside the world that knows you.`,
           },
           {
             q: `"I know how to lead a room. I'm not sure how to be led through one."`,
-            a: `The interview room inverts everything you're used to. Bramwell coaches the executive interview dynamic — how to hold authority as the candidate, control pace, handle challenge without losing composure.`,
+            a: `The interview room inverts everything you're used to. Bramwell coaches the executive interview dynamic, how to hold authority as the candidate, control pace, handle challenge without losing composure.`,
           },
           {
             q: `"I haven't formally interviewed in fifteen years. The format has changed."`,
-            a: `Competency-based panels. Values-based questioning. Board presentations. Bramwell runs current executive formats — what they're really testing, and how to answer in the register that confirms you belong.`,
+            a: `Competency-based panels. Values-based questioning. Board presentations. Bramwell runs current executive formats, what they're really testing, and how to answer in the register that confirms you belong.`,
           },
           {
             q: `"My answers are good. I'm not sure they're landing the way I intend."`,
@@ -92,12 +92,12 @@ function ExecutivePage() {
           },
           {
             q: `"It's a board appointment. Different conversation entirely."`,
-            a: `Board-level interviews aren't about competency — they're about character, judgement, and fit. Bramwell calibrates to the specific room, including board-level appointments where what they're really deciding is whether you're the right person to trust.`,
+            a: `Board-level interviews aren't about competency, they're about character, judgement, and fit. Bramwell calibrates to the specific room, including board-level appointments where what they're really deciding is whether you're the right person to trust.`,
           },
         ]}
       />
 
-      {/* Privacy — distinct block */}
+      {/* Privacy, distinct block */}
       <section className="border-t border-border bg-background py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <div
@@ -128,13 +128,13 @@ function ExecutivePage() {
         title="Preparation at the level the role demands."
         highlight="Entirely on your terms."
         steps={[
-          { n: "01", t: "Start directly — no referral", b: "No waitlist, no intake form, no institutional process. Your preparation begins the moment you decide it does." },
-          { n: "02", t: "The Executive Pathway", b: "Live voice coaching calibrated for the executive interview — board register, competency frameworks, values-based questions, moments of challenge." },
+          { n: "01", t: "Start directly, no referral", b: "No waitlist, no intake form, no institutional process. Your preparation begins the moment you decide it does." },
+          { n: "02", t: "The Executive Pathway", b: "Live voice coaching calibrated for the executive interview, board register, competency frameworks, values-based questions, moments of challenge." },
           { n: "03", t: "Walk in as the decision", b: "Not the candidate. The decision. Certain, precise, entirely ready." },
         ]}
       />
 
-      {/* Proof — quote + value contrast */}
+      {/* Proof, quote + value contrast */}
       <section className="border-t border-border py-24" style={{ background: "var(--gradient-hero)" }}>
         <div className="mx-auto max-w-4xl px-6 text-center md:px-10">
           <blockquote className="text-2xl italic leading-relaxed text-foreground/90 md:text-3xl">
@@ -165,7 +165,7 @@ function ExecutivePage() {
         pathway="executive"
         title="The Executive Pathway. $499 AUD."
         highlight="The interview that changes the next decade."
-        body="The preparation that used to cost $5,000 an engagement — available tonight, privately, without a referral. One payment. No record."
+        body="The preparation that used to cost $5,000 an engagement, available tonight, privately, without a referral. One payment. No record."
         primary={PRIMARY}
         secondary={SECONDARY}
         note="No login required to begin. Your account is private. Nothing is shared."

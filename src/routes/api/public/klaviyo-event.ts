@@ -52,7 +52,7 @@ export const Route = createFileRoute("/api/public/klaviyo-event")({
         }
         const { email, eventName, pathway, source, properties } = parsed.data;
 
-        // Klaviyo requires a profile identifier — skip silently if no email captured
+        // Klaviyo requires a profile identifier, skip silently if no email captured
         if (!email) {
           return Response.json(
             { ok: true, skipped: "no_email" },

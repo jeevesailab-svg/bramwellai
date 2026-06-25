@@ -7,15 +7,15 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Bramwell AI — The AI communication coach for career-defining conversations" },
+      { title: "Bramwell AI, The AI communication coach for career-defining conversations" },
       {
         name: "description",
         content:
-          "Practise out loud. Get your Readiness Score. Fix the answers, habits and blind spots that could cost you the role. Free 5-minute diagnostic — no login, no card.",
+          "Practise out loud. Get your Readiness Score. Fix the answers, habits and blind spots that could cost you the role. Free 5-minute diagnostic, no login, no card.",
       },
       {
         property: "og:title",
-        content: "Bramwell AI — Know exactly how you sound before the room decides for you",
+        content: "Bramwell AI, Know exactly how you sound before the room decides for you",
       },
       {
         property: "og:description",
@@ -112,7 +112,7 @@ function Hero() {
 
         <div className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
           <p>
-            Bramwell coaches you out loud — on the exact questions you'll face, in real time, until the right answer lives in your voice. Not on a script. Available the night before. No booking. No $400/session coach. No ChatGPT answer that falls apart the moment they go off-script.
+            Bramwell coaches you out loud, on the exact questions you'll face, in real time, until the right answer lives in your voice. Not on a script. Available the night before. No booking. No $400/session coach. No ChatGPT answer that falls apart the moment they go off-script.
           </p>
         </div>
 
@@ -165,7 +165,7 @@ function WrongWay() {
           </p>
           <p className="font-medium text-foreground">Bramwell changes that.</p>
           <p>
-            You speak your answers out loud. Bramwell listens. It shows you what the panel hears — then coaches you until the answer is sharper, clearer and ready.
+            You speak your answers out loud. Bramwell listens. It shows you what the panel hears, then coaches you until the answer is sharper, clearer and ready.
           </p>
           <p>
             Not scripted.
@@ -269,7 +269,7 @@ function EliteCoach() {
             <li>A private Readiness Score.</li>
             <li>Available tonight.</li>
           </ul>
-          <p>The coaching layer that used to sit at the top of the market — now available before the room sees you.</p>
+          <p>The coaching layer that used to sit at the top of the market, now available before the room sees you.</p>
         </div>
         <div className="mt-10">
           <a
@@ -331,7 +331,7 @@ function FreeDiagnostic() {
             No awkward human judgement.
           </p>
           <p className="font-medium text-foreground">
-            Just the truth about how you are coming across — while there is still time to fix it.
+            Just the truth about how you are coming across, while there is still time to fix it.
           </p>
         </div>
         <div className="mt-10">
@@ -405,18 +405,18 @@ function HowItWorks() {
     {
       n: "01",
       title: "Run the free diagnostic",
-      body: `Five minutes with Bramwell. You'll hear your communication style, your three biggest gaps, and a Readiness Score — a clear benchmark of where you stand right now versus where you need to be. No login. No credit card. No pitch call after.`,
+      body: `Five minutes with Bramwell. You'll hear your communication style, your three biggest gaps, and a Readiness Score, a clear benchmark of where you stand right now versus where you need to be. No login. No credit card. No pitch call after.`,
       cta: { label: "Take the free diagnostic →", href: "/diagnostic?autostart=1" },
     },
     {
       n: "02",
       title: "Choose your pathway",
-      body: `Graduate Sprint, Career Comeback, Interview Confidence, or Executive Communication. Each pathway is built for your exact situation — not a template that fits everyone and changes no one.`,
+      body: `Graduate Sprint, Career Comeback, Interview Confidence, or Executive Communication. Each pathway is built for your exact situation, not a template that fits everyone and changes no one.`,
     },
     {
       n: "03",
       title: "Fix the one thing that matters most",
-      body: `Bramwell does not overwhelm you with generic feedback. It gives you the most important fix first. You retry. It listens again. You improve again. The loop continues until the answer sounds ready — not memorised. Owned.`,
+      body: `Bramwell does not overwhelm you with generic feedback. It gives you the most important fix first. You retry. It listens again. You improve again. The loop continues until the answer sounds ready, not memorised. Owned.`,
     },
   ];
   return (
@@ -516,10 +516,10 @@ function Pathways() {
     {
       name: "The Graduate",
       price: "$99 AUD one-time",
-      headline: "For your first serious interviews — the ones that shape the next decade.",
+      headline: "For your first serious interviews, the ones that shape the next decade.",
       body: [
         "You may have potential, but the room needs to hear readiness.",
-        "Bramwell helps you answer like someone who understands the role, the company and the standard expected — not like someone hoping to be given a chance.",
+        "Bramwell helps you answer like someone who understands the role, the company and the standard expected, not like someone hoping to be given a chance.",
         "You will practise the questions graduates actually get asked, build stronger examples and learn how to sound clear, prepared and employable.",
       ],
       cta: "Start The Graduate Pathway →",
@@ -534,7 +534,7 @@ function Pathways() {
         "You have experience. But if you sound uncertain, outdated or apologetic, the panel may quietly question whether you are ready.",
         "Bramwell helps you turn your story into a clear, current and confident narrative.",
         "The gap does not become the whole interview. The redundancy does not define you. The time away does not weaken your value.",
-        "You walk in knowing how to explain it — and move the room back to what you bring.",
+        "You walk in knowing how to explain it, and move the room back to what you bring.",
       ],
       cta: "Start The Comeback Pathway →",
       href: "/pricing",
@@ -558,7 +558,7 @@ function Pathways() {
       headline: "For senior appointments, board conversations, C-suite panels and high-stakes leadership opportunities.",
       body: [
         "At this level, everyone has experience. The difference is judgement, authority, clarity and presence.",
-        "Bramwell helps you sharpen your leadership narrative, strategic value, commercial impact and executive register — privately.",
+        "Bramwell helps you sharpen your leadership narrative, strategic value, commercial impact and executive register, privately.",
         "No one needs to know you are preparing. But the room will know you did.",
       ],
       cta: "Start The Executive Pathway →",
@@ -569,7 +569,7 @@ function Pathways() {
       price: "$79 AUD per month",
       headline: "For professionals who know the interview never really ends.",
       body: [
-        "Your career doesn't stop between interviews. Neither does Bramwell. One subscription. Every conversation, every pitch, every year — for as long as you want to keep winning rooms.",
+        "Your career doesn't stop between interviews. Neither does Bramwell. One subscription. Every conversation, every pitch, every year, for as long as you want to keep winning rooms.",
       ],
       cta: "Join The Club →",
       href: "/pricing",
@@ -711,7 +711,7 @@ function SevenQuestions() {
           Not ready to speak yet?
         </p>
         <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-          The 7 Questions Every Panel Asks —{" "}
+          The 7 Questions Every Panel Asks , {" "}
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>
             And What They Are Really Testing.
           </span>
@@ -775,11 +775,11 @@ function FAQ() {
     },
     {
       q: "How is this different from just using ChatGPT?",
-      a: `ChatGPT gives you a script. A script works until the interviewer goes off-piste — which they always do. Bramwell coaches you in a live two-way voice conversation, drills you on the exact moments you'll face, and doesn't move on until the answer is genuinely ready. You don't memorise an answer. You own it.`,
+      a: `ChatGPT gives you a script. A script works until the interviewer goes off-piste, which they always do. Bramwell coaches you in a live two-way voice conversation, drills you on the exact moments you'll face, and doesn't move on until the answer is genuinely ready. You don't memorise an answer. You own it.`,
     },
     {
       q: "Can I use this the night before an interview?",
-      a: `That's exactly what it's built for. No booking required. No waiting for a coach to be available. Bramwell is there at 11pm the night before — which is when you actually need it.`,
+      a: `That's exactly what it's built for. No booking required. No waiting for a coach to be available. Bramwell is there at 11pm the night before, which is when you actually need it.`,
     },
   ];
   return (
@@ -830,7 +830,7 @@ function FinalCTA() {
           </span>
         </h2>
         <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          Take the free 5-minute diagnostic and hear what your answers are really signalling — before the panel, before the pressure, before it costs you the opportunity.
+          Take the free 5-minute diagnostic and hear what your answers are really signalling, before the panel, before the pressure, before it costs you the opportunity.
         </p>
         <p className="mx-auto mt-8 max-w-2xl text-base font-medium leading-relaxed text-foreground md:text-lg">
           The candidates who make the final shortlist don't find Bramwell after the interview.

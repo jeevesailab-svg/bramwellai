@@ -14,14 +14,14 @@ const QUESTIONS = [
   {
     n: "02",
     q: "Why this role? Why us?",
-    test: "Whether you've done the work — or you're spraying applications.",
+    test: "Whether you've done the work, or you're spraying applications.",
     answer:
       "Name something specific they did in the last six months that you have a view on. Connect it to a problem you've solved. Generic praise (\"great culture\", \"market leader\") signals you applied to twenty others.",
   },
   {
     n: "03",
     q: "What's your biggest weakness?",
-    test: "Self-awareness. Not your weakness — your relationship to it.",
+    test: "Self-awareness. Not your weakness, your relationship to it.",
     answer:
       "Pick a real one that isn't load-bearing for the role. Name it, name the impact it had once, name what you actively do about it now. Never \"I'm a perfectionist.\" They've heard it 400 times.",
   },
@@ -37,7 +37,7 @@ const QUESTIONS = [
     q: "Walk me through a difficult stakeholder.",
     test: "Whether you can disagree without being defensive.",
     answer:
-      "Name the tension without naming the person. Show you sought to understand their position before pushing yours. Land on what you both learned. Never make them the villain — it tells the panel exactly how you'll talk about them in six months.",
+      "Name the tension without naming the person. Show you sought to understand their position before pushing yours. Land on what you both learned. Never make them the villain, it tells the panel exactly how you'll talk about them in six months.",
   },
   {
     n: "06",
@@ -49,7 +49,7 @@ const QUESTIONS = [
   {
     n: "07",
     q: "Do you have any questions for us?",
-    test: "Whether you treat this as a two-way decision — or you're just hoping to be picked.",
+    test: "Whether you treat this as a two-way decision, or you're just hoping to be picked.",
     answer:
       "Ask one question that proves you understand the role's hardest problem, one that probes how they actually work (decision-making, not perks), and one that signals you're already imagining yourself in it. \"No questions, I think you've covered everything\" loses you the room in the final 90 seconds.",
   },
@@ -59,7 +59,7 @@ export const Route = createFileRoute("/the-7-questions")({
   component: SevenQuestionsPage,
   head: () => ({
     meta: [
-      { title: "The 7 Questions That Decide Every Interview — Bramwell AI" },
+      { title: "The 7 Questions That Decide Every Interview, Bramwell AI" },
       {
         name: "description",
         content:
@@ -69,7 +69,7 @@ export const Route = createFileRoute("/the-7-questions")({
       {
         property: "og:description",
         content:
-          "What the panel is actually testing — and the answer framework that gets people chosen. Free guide from Bramwell AI.",
+          "What the panel is actually testing, and the answer framework that gets people chosen. Free guide from Bramwell AI.",
       },
     ],
   }),
@@ -146,7 +146,7 @@ function SevenQuestionsPage() {
           </h1>
 
           <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Every panel — junior, senior, executive — circles the same seven questions. Lose any
+            Every panel, junior, senior, executive, circles the same seven questions. Lose any
             one of them and you lose the room. Get the breakdown of what each is really testing and
             the framework-built answer that lands.
           </p>
@@ -193,7 +193,7 @@ function SevenQuestionsPage() {
                 ✓ Sent to {email}
               </p>
               <p className="mt-3 text-sm text-muted-foreground">
-                The full guide is unlocked below — start reading now. Bookmark this page to come
+                The full guide is unlocked below, start reading now. Bookmark this page to come
                 back anytime.
               </p>
             </div>
@@ -220,11 +220,11 @@ function SevenQuestionsPage() {
                   </h2>
                   <div className="mt-5 space-y-4 text-sm leading-relaxed text-muted-foreground md:text-base">
                     <p>
-                      <span className="font-semibold text-foreground">What they're testing — </span>
+                      <span className="font-semibold text-foreground">What they're testing, </span>
                       {item.test}
                     </p>
                     <p>
-                      <span className="font-semibold text-foreground">How to land it — </span>
+                      <span className="font-semibold text-foreground">How to land it, </span>
                       {item.answer}
                     </p>
                   </div>
@@ -266,7 +266,7 @@ function SevenQuestionsPage() {
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
               Take the free 5-minute voice diagnostic. Bramwell listens to how you actually deliver
-              these answers — and tells you what the panel will hear before they do.
+              these answers, and tells you what the panel will hear before they do.
             </p>
             <Link
               to="/diagnostic"

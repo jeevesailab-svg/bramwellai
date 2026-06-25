@@ -13,7 +13,7 @@ export const Route = createFileRoute("/diagnostic/result")({
       {
         name: "description",
         content:
-          "Your communication type, three biggest gaps, and Readiness Score — and the Bramwell pathway built for you.",
+          "Your communication type, three biggest gaps, and Readiness Score, and the Bramwell pathway built for you.",
       },
     ],
   }),
@@ -65,7 +65,7 @@ const STRIPE: Record<PathwayKey, string> = {
 
 const TYPE_DESCRIPTIONS: Record<string, string> = {
   rambler:
-    "You have strong ideas — they just come out in the wrong order under pressure.",
+    "You have strong ideas, they just come out in the wrong order under pressure.",
   under_seller:
     "You have done impressive things. You just do not say so.",
   over_explainer:
@@ -101,7 +101,7 @@ const PATHWAY_OUTCOMES: Record<PathwayKey, string[]> = {
   ],
   club: [
     "You are always ready for the next high-stakes moment.",
-    "Every conversation — interview, negotiation, presentation — feels like home ground.",
+    "Every conversation, interview, negotiation, presentation, feels like home ground.",
     "Bramwell stays with you for every interview, every pitch, every year.",
   ],
 };
@@ -125,7 +125,7 @@ function describeType(type: string): string {
   const key = normalizeTypeKey(type);
   return (
     TYPE_DESCRIPTIONS[key] ??
-    "Your communication has a clear pattern — and a clear way to sharpen it."
+    "Your communication has a clear pattern, and a clear way to sharpen it."
   );
 }
 
@@ -240,7 +240,7 @@ function DiagnosticResultPage() {
                   </p>
                   <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
                     This usually means the conversation was too short.
-                    Give it another five minutes — answer one question the way
+                    Give it another five minutes, answer one question the way
                     you normally would, and Bramwell will score you on the spot.
                   </p>
                   <Link
@@ -299,7 +299,7 @@ function ResultBody({ result }: { result: Result }) {
 
   return (
     <div className="space-y-12">
-      {/* SECTION 1 — Score */}
+      {/* SECTION 1, Score */}
       <section className="text-center">
         <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
           Your result
@@ -319,15 +319,15 @@ function ResultBody({ result }: { result: Result }) {
           Your Communication Readiness Score
         </p>
         <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-foreground/80">
-          How ready you are to walk into your next high-stakes conversation —
-          interview, pitch, board room — and land it.
+          How ready you are to walk into your next high-stakes conversation , 
+          interview, pitch, board room, and land it.
         </p>
         <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
-          This is your starting point — not your ceiling.
+          This is your starting point, not your ceiling.
         </p>
       </section>
 
-      {/* SECTION 2 — Type */}
+      {/* SECTION 2, Type */}
       <section className="rounded-2xl border border-border bg-foreground/[0.03] p-8 text-center backdrop-blur">
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
           Your communication type
@@ -343,7 +343,7 @@ function ResultBody({ result }: { result: Result }) {
         </p>
       </section>
 
-      {/* SECTION 3 — Behavioural report (gated) */}
+      {/* SECTION 3, Behavioural report (gated) */}
       <BehaviouralReport
         sessionId={result.id}
         initiallyUnlocked={result.has_email}
@@ -351,7 +351,7 @@ function ResultBody({ result }: { result: Result }) {
         metrics={result.metrics ?? null}
       />
 
-      {/* SECTION 4 — What changes */}
+      {/* SECTION 4, What changes */}
       <section>
         <h2 className="text-center text-2xl font-semibold tracking-tight md:text-3xl">
           What changes after your {result.recommended_pathway_name}
@@ -373,7 +373,7 @@ function ResultBody({ result }: { result: Result }) {
         </ul>
       </section>
 
-      {/* SECTION 5 — CTA */}
+      {/* SECTION 5, CTA */}
       <section className="text-center">
         <a
           href={stripeHref}
@@ -396,8 +396,8 @@ function ResultBody({ result }: { result: Result }) {
           }
         >
           {isStubStripe
-            ? `${result.recommended_pathway_name} — coming soon`
-            : `Start my ${result.recommended_pathway_name} — ${result.recommended_price}`}
+            ? `${result.recommended_pathway_name}, coming soon`
+            : `Start my ${result.recommended_pathway_name}, ${result.recommended_price}`}
         </a>
         <div className="mt-4">
           <Link
@@ -439,8 +439,8 @@ function BehaviouralReport({
         </h2>
         {!unlocked && (
           <p className="mx-auto mt-3 max-w-lg text-sm text-muted-foreground">
-            Your full behavioural report — every "um", every long pause, every
-            hedge, your top three gaps — sent to your inbox and unlocked right
+            Your full behavioural report, every "um", every long pause, every
+            hedge, your top three gaps, sent to your inbox and unlocked right
             here.
           </p>
         )}
@@ -495,7 +495,7 @@ function ReportContent({
           primary={
             metrics?.filler_words?.total != null
               ? String(metrics.filler_words.total)
-              : "—"
+              : ", "
           }
           unit="used"
           detail={
@@ -512,7 +512,7 @@ function ReportContent({
           primary={
             metrics?.pace?.words_per_minute != null
               ? String(Math.round(metrics.pace.words_per_minute))
-              : "—"
+              : ", "
           }
           unit="words / min"
           detail={
@@ -528,7 +528,7 @@ function ReportContent({
           primary={
             metrics?.hedging?.total != null
               ? String(metrics.hedging.total)
-              : "—"
+              : ", "
           }
           unit="hedge phrases"
           detail={
@@ -537,7 +537,7 @@ function ReportContent({
                   .slice(0, 3)
                   .map((s) => `"${s}"`)
                   .join("  ·  ")
-              : 'Language that shrinks your authority — "I think", "sorry", "just".'
+              : 'Language that shrinks your authority, "I think", "sorry", "just".'
           }
         />
         <MetricCard
@@ -545,7 +545,7 @@ function ReportContent({
           primary={
             metrics?.structure?.time_to_point_sec != null
               ? `${metrics.structure.time_to_point_sec.toFixed(1)}s`
-              : "—"
+              : ", "
           }
           unit="to your point"
           detail={
@@ -553,7 +553,7 @@ function ReportContent({
               ? metrics.structure.led_with_point
                 ? "You led with the point. Rambling under control."
                 : "You buried the point. Rambling index high."
-              : "Did you lead with the answer — or bury it?"
+              : "Did you lead with the answer, or bury it?"
           }
         />
       </div>
@@ -585,8 +585,8 @@ function ReportContent({
 
       {unlocked && !hasMetrics && (
         <p className="text-center text-xs text-muted-foreground">
-          Your full behavioural breakdown — filler words, pace, pauses, hedging
-          and structure — is on its way to your inbox.
+          Your full behavioural breakdown, filler words, pace, pauses, hedging
+          and structure, is on its way to your inbox.
         </p>
       )}
     </div>

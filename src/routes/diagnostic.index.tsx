@@ -25,7 +25,7 @@ export const Route = createFileRoute("/diagnostic/")({
   }),
 });
 
-// Pathway routing — mirrors src/routes/pricing.tsx keys.
+// Pathway routing, mirrors src/routes/pricing.tsx keys.
 const PATHWAY = {
   graduate: { name: "Graduate Interview Sprint", price: "$99 AUD" },
   comeback: { name: "Career Comeback Sprint", price: "$199 AUD" },
@@ -207,7 +207,7 @@ function DiagnosticPage() {
         console.error("[diagnostic] result POST failed", e);
         return "Could not save result";
       }
-      // Save the result, but do not flip the UI or end the call here — the
+      // Save the result, but do not flip the UI or end the call here, the
       // client tool can fire while Bramwell is still speaking the feedback.
       setResultReadyId(sessionId);
       setPendingNavigateId(sessionId);
@@ -217,7 +217,7 @@ function DiagnosticPage() {
   const handleDiagnosticToolCall = useCallback(async (params: SubmitInput) => {
     // Guard: ignore tool calls that fire before the session is actually live
     // (ElevenLabs occasionally invokes registered client tools on widget
-    // init / reconnect handshakes with empty params — we must not treat
+    // init / reconnect handshakes with empty params, we must not treat
     // those as a real result submission).
     const sid = sessionIdRef.current;
     const input = params ?? {};
@@ -408,7 +408,7 @@ function DiagnosticPage() {
   }, [phase, pendingNavigateId]);
 
   // Once submitDiagnostic has fired and we've persisted the result, wait for
-  // Bramwell to actually stop speaking before navigating away — otherwise his
+  // Bramwell to actually stop speaking before navigating away, otherwise his
   // closing feedback is cut off mid-sentence as the result page loads.
   useEffect(() => {
     if (!pendingNavigateId) return;

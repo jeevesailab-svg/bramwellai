@@ -13,12 +13,12 @@ export const Route = createFileRoute("/redundant")({
   component: RedundantPage,
   head: () => ({
     meta: [
-      { title: "The Comeback Pathway — After Redundancy — Bramwell AI" },
+      { title: "The Comeback Pathway, After Redundancy, Bramwell AI" },
       {
         name: "description",
         content: "Private voice coaching for professionals back in the market after redundancy. Own the gap. $199.",
       },
-      { property: "og:title", content: "The Comeback Pathway — Bramwell AI" },
+      { property: "og:title", content: "The Comeback Pathway, Bramwell AI" },
       {
         property: "og:description",
         content: "You haven't lost your capability. You've lost the fluency. Bramwell restores it before the panel ever sees you.",
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/redundant")({
   }),
 });
 
-const PRIMARY = { label: "Start the Comeback Pathway — $199", href: "/pricing?pathway=comeback" };
+const PRIMARY = { label: "Start the Comeback Pathway, $199", href: "/pricing?pathway=comeback" };
 const SECONDARY = { label: "Free diagnostic first →", href: "/diagnostic?autostart=1" };
 
 function RedundantPage() {
@@ -44,7 +44,7 @@ function RedundantPage() {
             <GoldText>Now explain it in sixty seconds.</GoldText>
           </>
         }
-        subhead="You haven't interviewed in years. The panel will ask why you left in your first sixty seconds. Bramwell drills the answer — and every follow-up — until it lands without apology."
+        subhead="You haven't interviewed in years. The panel will ask why you left in your first sixty seconds. Bramwell drills the answer, and every follow-up, until it lands without apology."
         primaryCta={PRIMARY}
         secondary={SECONDARY}
       />
@@ -58,13 +58,13 @@ function RedundantPage() {
           </h2>
           <div className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
             <p>
-              It was a spreadsheet decision. It had nothing to do with your capability. But the panel doesn't know that yet — and they'll decide in the first answer you give.
+              It was a spreadsheet decision. It had nothing to do with your capability. But the panel doesn't know that yet, and they'll decide in the first answer you give.
             </p>
             <p>
               Sixty seconds to answer "what happened?" without sounding defensive, without over-explaining, without letting the redundancy become the story they remember.
             </p>
             <p className="font-medium text-foreground">
-              Bramwell builds the answer — and the "why now?" and every follow-up — until it sounds inevitable, not apologetic.
+              Bramwell builds the answer, and the "why now?" and every follow-up, until it sounds inevitable, not apologetic.
             </p>
           </div>
         </div>
@@ -80,19 +80,19 @@ function RedundantPage() {
           },
           {
             q: `"I haven't interviewed in eight years. I don't remember how to do this."`,
-            a: `You haven't lost the capability. You've lost the fluency. Different problem, different fix. Bramwell restores the fluency — out loud, under real pressure.`,
+            a: `You haven't lost the capability. You've lost the fluency. Different problem, different fix. Bramwell restores the fluency, out loud, under real pressure.`,
           },
           {
             q: `"I feel like damaged goods and I'm worried the panel can sense it."`,
-            a: `They can — but only when it leaks into the voice. Bramwell silences the hedge words, the over-explanation, the unnecessary apology. What remains is two decades of proven output.`,
+            a: `They can, but only when it leaks into the voice. Bramwell silences the hedge words, the over-explanation, the unnecessary apology. What remains is two decades of proven output.`,
           },
           {
             q: `"I freeze on follow-up questions."`,
-            a: `Probing feels hostile when you haven't prepared. Bramwell runs the follow-ups until your answers hold under pressure. They won't catch you — they'll run out of things to ask.`,
+            a: `Probing feels hostile when you haven't prepared. Bramwell runs the follow-ups until your answers hold under pressure. They won't catch you, they'll run out of things to ask.`,
           },
           {
             q: `"I keep rehearsing but I still sound scripted."`,
-            a: `Scripted sounds scripted because it is. Bramwell drills the underlying structure until the words are yours — delivered differently every time, landing the same way every time.`,
+            a: `Scripted sounds scripted because it is. Bramwell drills the underlying structure until the words are yours, delivered differently every time, landing the same way every time.`,
           },
         ]}
       />
@@ -102,7 +102,7 @@ function RedundantPage() {
         highlight="Built for coming back."
         steps={[
           { n: "01", t: "Free diagnostic", b: "Bramwell identifies the patterns in your delivery you can't hear yourself. Your Readiness Score tells you exactly where you stand." },
-          { n: "02", t: "The Comeback Pathway", b: "Live voice coaching on the gap question, the 'why now?', the follow-ups. The moments where years out of the market become visible — and how to close them." },
+          { n: "02", t: "The Comeback Pathway", b: "Live voice coaching on the gap question, the 'why now?', the follow-ups. The moments where years out of the market become visible, and how to close them." },
           { n: "03", t: "Walk back in as the person you are", b: "Not the person who lost a job to a spreadsheet. The one with two decades of output the panel hasn't seen yet." },
         ]}
       />
@@ -113,9 +113,9 @@ function RedundantPage() {
             className="border-l-2 pl-6 text-xl italic leading-relaxed text-foreground/90 md:text-2xl"
             style={{ borderColor: "var(--primary)" }}
           >
-            {`"I hadn't interviewed in eleven years. I thought I'd lost it. Turns out I just needed to practice out loud once — with something that actually pushed back."`}
+            {`"I hadn't interviewed in eleven years. I thought I'd lost it. Turns out I just needed to practice out loud once, with something that actually pushed back."`}
             <footer className="mt-3 text-xs font-normal not-italic uppercase tracking-[0.18em] text-muted-foreground">
-              — Operations Director · made redundant after 14 years
+             , Operations Director · made redundant after 14 years
             </footer>
           </blockquote>
         </div>

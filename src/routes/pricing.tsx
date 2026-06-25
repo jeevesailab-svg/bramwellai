@@ -16,13 +16,13 @@ export const Route = createFileRoute("/pricing")({
   }),
   head: () => ({
     meta: [
-      { title: "Pricing — Bramwell AI" },
+      { title: "Pricing, Bramwell AI" },
       {
         name: "description",
         content:
           "Five coaching pathways for every career moment. Pick the one that meets you where you are.",
       },
-      { property: "og:title", content: "Pricing — Bramwell AI" },
+      { property: "og:title", content: "Pricing, Bramwell AI" },
       {
         property: "og:description",
         content: "Five coaching pathways for every career moment.",
@@ -62,7 +62,7 @@ const PATHWAYS: Pathway[] = [
     sessions: "Unlimited sessions",
     highlight: true,
     blurb:
-      "Every interview. Every pitch. Every year. Bramwell stays with you — the moment you need it, whatever the stakes.",
+      "Every interview. Every pitch. Every year. Bramwell stays with you, the moment you need it, whatever the stakes.",
     includes: [
       "Unlimited live voice sessions",
       "Full story-bank & history",
@@ -124,7 +124,7 @@ const PATHWAYS: Pathway[] = [
     cadence: "one-time",
     sessions: "8 sessions · 30 min",
     blurb:
-      "For leaders where every word carries commercial weight. Bramwell calibrates your authority, cadence, and conviction — until the room reads you as the most senior person in it.",
+      "For leaders where every word carries commercial weight. Bramwell calibrates your authority, cadence, and conviction, until the room reads you as the most senior person in it.",
     includes: [
       "Everything in The Confidence",
       "Board-level question banks",
@@ -274,7 +274,7 @@ function PricingPage() {
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
             Five Bramwell pathways. Each one tuned to the moment you're standing in.
-            Take the free diagnostic first — we'll recommend the right fit.
+            Take the free diagnostic first, we'll recommend the right fit.
           </p>
           <Link
             to="/diagnostic"

@@ -10,7 +10,7 @@ export const Route = createFileRoute("/portal/coach")({
   component: PortalCoachPage,
   head: () => ({
     meta: [
-      { title: "Coaching — Bramwell AI" },
+      { title: "Coaching, Bramwell AI" },
       {
         name: "description",
         content:
@@ -190,7 +190,7 @@ function PortalCoachPage() {
     await conversation.endSession();
   }, [conversation]);
 
-  // Persist session on disconnect — guarded so it only runs once per session
+  // Persist session on disconnect, guarded so it only runs once per session
   const persistedRef = useRef(false);
   async function handleSessionEnded() {
     if (persistedRef.current) return;

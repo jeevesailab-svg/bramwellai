@@ -7,7 +7,7 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
   head: () => ({
     meta: [
-      { title: "Sign in — Bramwell AI" },
+      { title: "Sign in, Bramwell AI" },
       { name: "description", content: "Sign in to your Bramwell AI coaching account." },
     ],
   }),
