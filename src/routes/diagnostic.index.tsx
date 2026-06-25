@@ -521,7 +521,7 @@ function DiagnosticPage() {
   }, [conversation]);
 
   // Auto-start when coming from the hero CTA with ?autostart=1
-  const search = useSearch({ from: "/diagnostic" });
+  const search = useSearch({ from: "/diagnostic/" });
   const autoStartedRef = useRef(false);
   useEffect(() => {
     if (search.autostart === "1" && phase === "intro" && !autoStartedRef.current) {
