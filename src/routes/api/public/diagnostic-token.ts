@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const MAX_PER_IP_PER_DAY = 3;
 
@@ -17,15 +16,17 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const ip = clientIp(request);
 
-        // Per-IP rate limit: 3 diagnostic sessions per 24h
+        // Per-IP quota: count completed diagnostics only. Failed, disconnected,
+        // or incomplete test starts should not block another attempt.
         const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
         const { count, error: countErr } = await supabaseAdmin
           .from("diagnostic_sessions")
           .select("id", { count: "exact", head: true })
           .eq("ip_address", ip)
-          .gte("created_at", since);
+          .gte("completed_at", since);
         if (countErr) {
           console.error("diagnostic-token: count failed", countErr);
           return Response.json({ error: "Server error" }, { status: 500 });
