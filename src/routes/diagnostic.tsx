@@ -36,6 +36,15 @@ const PATHWAY = {
 type PathwayKey = keyof typeof PATHWAY;
 
 const SESSION_LIMIT_MS = 5 * 60 * 1000;
+const RESULT_NAV_MIN_DELAY_MS = 15000;
+const RESULT_NAV_SILENCE_MS = 4000;
+const RESULT_NAV_HARD_CAP_MS = 90000;
+
+type ConversationHandle = {
+  endSession: () => unknown;
+  sendContextualUpdate?: (text: string) => unknown;
+  isSpeaking?: boolean;
+};
 
 type SubmitInput = {
   communication_type?: string;
@@ -118,6 +127,11 @@ function DiagnosticPage() {
   const hasConnectedRef = useRef(false);
   const intentionallyEndingRef = useRef(false);
   const [pendingNavigateId, setPendingNavigateId] = useState<string | null>(null);
+  const conversationRef = useRef<ConversationHandle | null>(null);
+  const sessionStartedAtRef = useRef<number | null>(null);
+  const timeWarningSentRef = useRef(false);
+  const resultSubmittedAtRef = useRef<number | null>(null);
+  const lastAgentResponseAtRef = useRef<number | null>(null);
 
   useEffect(() => {
     phaseRef.current = phase;
@@ -145,6 +159,7 @@ function DiagnosticPage() {
 
       const pathway = routePathway({ ...input, gaps: normalizedGaps, readiness_score: readinessScore });
       submittedRef.current = true;
+      resultSubmittedAtRef.current = Date.now();
       try {
         await fetch("/api/public/diagnostic-result", {
           method: "POST",
@@ -188,7 +203,9 @@ function DiagnosticPage() {
         : [input.gap_1, input.gap_2, input.gap_3].some(
             (g) => typeof g === "string" && g.trim().length > 0,
           ));
-    const sessionLive = hasConnectedRef.current && phaseRef.current === "live";
+    const sessionLive =
+      hasConnectedRef.current &&
+      (phaseRef.current === "live" || phaseRef.current === "wrapping");
     if (!sid || !hasPayload || !sessionLive) {
       console.warn("[diagnostic] ignoring premature diagnostic tool call", {
         hasSession: Boolean(sid),
@@ -205,6 +222,8 @@ function DiagnosticPage() {
   const conversation = useConversation({
     onConnect: () => {
       hasConnectedRef.current = true;
+      sessionStartedAtRef.current = Date.now();
+      setSecondsLeft(SESSION_LIMIT_MS / 1000);
       setPhase("live");
     },
     onDisconnect: (details) => {
@@ -257,6 +276,9 @@ function DiagnosticPage() {
         transcriptRef.current.push(`You: ${m.message}`);
       } else if (typeof m?.message === "string" && m.role === "agent") {
         transcriptRef.current.push(`Bramwell: ${m.message}`);
+        if (submittedRef.current) {
+          lastAgentResponseAtRef.current = Date.now();
+        }
       } else if (m?.type === "user_transcript") {
         const t = (m as { user_transcription_event?: { user_transcript?: string } })
           .user_transcription_event?.user_transcript;
@@ -264,7 +286,12 @@ function DiagnosticPage() {
       } else if (m?.type === "agent_response") {
         const t = (m as { agent_response_event?: { agent_response?: string } })
           .agent_response_event?.agent_response;
-        if (t) transcriptRef.current.push(`Bramwell: ${t}`);
+        if (t) {
+          transcriptRef.current.push(`Bramwell: ${t}`);
+          if (submittedRef.current) {
+            lastAgentResponseAtRef.current = Date.now();
+          }
+        }
       }
     },
     clientTools: {
@@ -276,25 +303,39 @@ function DiagnosticPage() {
     },
   });
 
+  useEffect(() => {
+    conversationRef.current = conversation;
+  }, [conversation]);
+
   // Five-minute hard cap
   useEffect(() => {
     if (phase !== "live") return;
-    const startedAt = Date.now();
+    if (!sessionStartedAtRef.current) sessionStartedAtRef.current = Date.now();
     const tick = setInterval(() => {
+      const startedAt = sessionStartedAtRef.current ?? Date.now();
       const left = Math.max(
         0,
-        Math.round((SESSION_LIMIT_MS - (Date.now() - startedAt)) / 1000),
+        Math.ceil((SESSION_LIMIT_MS - (Date.now() - startedAt)) / 1000),
       );
-      setSecondsLeft(left);
+      setSecondsLeft((current) => Math.min(current, left));
+      if (left <= 15 && !timeWarningSentRef.current && !submittedRef.current) {
+        timeWarningSentRef.current = true;
+        try {
+          void conversationRef.current?.sendContextualUpdate?.(
+            "The five-minute diagnostic is ending. Stop asking questions now, give concise final feedback, and call submitDiagnostic with the final result.",
+          );
+        } catch {
+          /* noop */
+        }
+      }
       if (left <= 0) {
         clearInterval(tick);
         intentionallyEndingRef.current = true;
-        void Promise.resolve(conversation.endSession()).catch(() => undefined);
         setPhase("wrapping");
       }
-    }, 1000);
+    }, 250);
     return () => clearInterval(tick);
-  }, [phase, conversation]);
+  }, [phase]);
 
   // Safety net: if we enter "wrapping" but the agent never fires the
   // submitDiagnostic client tool (call dropped, agent ended without invoking
@@ -307,11 +348,11 @@ function DiagnosticPage() {
       window.sessionStorage.getItem("bramwell-diagnostic-session-id");
     if (!sid) return;
     const timeout = setTimeout(() => {
-      if (submittedRef.current) return;
+      if (submittedRef.current || pendingNavigateId) return;
       window.location.assign(`/diagnostic/result?id=${sid}&incomplete=1`);
-    }, 8000);
+    }, 45000);
     return () => clearTimeout(timeout);
-  }, [phase]);
+  }, [phase, pendingNavigateId]);
 
   // Once submitDiagnostic has fired and we've persisted the result, wait for
   // Bramwell to actually stop speaking before navigating away — otherwise his
@@ -320,26 +361,33 @@ function DiagnosticPage() {
     if (!pendingNavigateId) return;
     const target = `/diagnostic/result?id=${pendingNavigateId}`;
     let cancelled = false;
-    let silenceTimer: ReturnType<typeof setTimeout> | null = null;
+    const submittedAt = resultSubmittedAtRef.current ?? Date.now();
+    let notSpeakingSince: number | null = null;
 
     const check = () => {
       if (cancelled) return;
-      if (!conversation.isSpeaking) {
-        if (silenceTimer) return;
-        // Require ~1.2s of continuous silence so we don't navigate during a
-        // brief pause between sentences.
-        silenceTimer = setTimeout(() => {
-          if (cancelled) return;
-          try {
-            void conversation.endSession();
-          } catch {
-            /* noop */
-          }
-          window.location.assign(target);
-        }, 1200);
-      } else if (silenceTimer) {
-        clearTimeout(silenceTimer);
-        silenceTimer = null;
+      const now = Date.now();
+      const elapsed = now - submittedAt;
+      const lastAgentSpeechAt = lastAgentResponseAtRef.current ?? submittedAt;
+      const hasWaitedLongEnough = elapsed >= RESULT_NAV_MIN_DELAY_MS;
+      const hasTrailingSilence = now - lastAgentSpeechAt >= RESULT_NAV_SILENCE_MS;
+      const isSpeaking = Boolean(conversationRef.current?.isSpeaking);
+
+      if (isSpeaking) {
+        notSpeakingSince = null;
+        return;
+      }
+
+      notSpeakingSince ??= now;
+      const hasContinuousSilence = now - notSpeakingSince >= RESULT_NAV_SILENCE_MS;
+
+      if (hasWaitedLongEnough && hasTrailingSilence && hasContinuousSilence) {
+        try {
+          void conversationRef.current?.endSession();
+        } catch {
+          /* noop */
+        }
+        window.location.assign(target);
       }
     };
 
@@ -350,15 +398,14 @@ function DiagnosticPage() {
     const hardTimeout = setTimeout(() => {
       if (cancelled) return;
       window.location.assign(target);
-    }, 20000);
+    }, RESULT_NAV_HARD_CAP_MS);
 
     return () => {
       cancelled = true;
       clearInterval(poll);
-      if (silenceTimer) clearTimeout(silenceTimer);
       clearTimeout(hardTimeout);
     };
-  }, [pendingNavigateId, conversation]);
+  }, [pendingNavigateId]);
 
   const startDiagnostic = useCallback(async () => {
     setErrorMsg(null);
@@ -367,6 +414,12 @@ function DiagnosticPage() {
     hasConnectedRef.current = false;
     intentionallyEndingRef.current = false;
     submittedRef.current = false;
+    setPendingNavigateId(null);
+    setSecondsLeft(SESSION_LIMIT_MS / 1000);
+    sessionStartedAtRef.current = null;
+    timeWarningSentRef.current = false;
+    resultSubmittedAtRef.current = null;
+    lastAgentResponseAtRef.current = null;
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
 
