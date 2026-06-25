@@ -51,13 +51,53 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
           );
         }
 
-        const res = await fetch(
+        const signedUrlRes = await fetch(
+          `https://api.elevenlabs.io/v1/convai/conversation/get-signed-url?agent_id=${agentId}`,
+          { headers: { "xi-api-key": apiKey } },
+        );
+        if (signedUrlRes.ok) {
+          const { signed_url } = (await signedUrlRes.json()) as { signed_url?: string };
+          if (signed_url) {
+            const { data: row, error: insertErr } = await supabaseAdmin
+              .from("diagnostic_sessions")
+              .insert({ ip_address: ip })
+              .select("id")
+              .single();
+            if (insertErr || !row) {
+              console.error("diagnostic-token: insert failed", insertErr);
+              return Response.json({ error: "Server error" }, { status: 500 });
+            }
+
+            return Response.json({
+              signedUrl: signed_url,
+              agentId,
+              sessionId: row.id,
+              authMode: "signed-url",
+            });
+          }
+        } else {
+          const txt = await signedUrlRes.text();
+          console.error("ElevenLabs diagnostic signed-url error:", signedUrlRes.status, txt);
+
+          if (/missing_permissions/i.test(txt)) {
+            return Response.json(
+              {
+                error:
+                  "Bramwell is not authorized yet. Please reconnect Maria's ElevenLabs with Conversational AI write permission enabled, then try again.",
+              },
+              { status: 502 },
+            );
+          }
+        }
+
+        // Fallback for accounts where signed URLs are temporarily unavailable.
+        const tokenRes = await fetch(
           `https://api.elevenlabs.io/v1/convai/conversation/token?agent_id=${agentId}`,
           { headers: { "xi-api-key": apiKey } },
         );
-        if (!res.ok) {
-          const txt = await res.text();
-          console.error("ElevenLabs diagnostic token error:", res.status, txt);
+        if (!tokenRes.ok) {
+          const txt = await tokenRes.text();
+          console.error("ElevenLabs diagnostic token error:", tokenRes.status, txt);
 
           if (/missing_permissions/i.test(txt)) {
             return Response.json(
@@ -74,7 +114,7 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
             { status: 502 },
           );
         }
-        const { token } = (await res.json()) as { token?: string };
+        const { token } = (await tokenRes.json()) as { token?: string };
         if (!token) {
           console.error("diagnostic-token: missing ElevenLabs conversation token");
           return Response.json(
