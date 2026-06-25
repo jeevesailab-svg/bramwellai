@@ -573,12 +573,19 @@ function DiagnosticPage() {
         <div className="relative mx-auto w-full max-w-3xl text-center">
           {phase === "intro" && (
             <>
-              <p
-                className="text-[12px] font-medium uppercase text-muted-foreground"
-                style={{ letterSpacing: "0.22em" }}
-              >
-                Bramwell Voice Diagnostic
-              </p>
+              <div className="flex justify-center">
+                <span
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-foreground/[0.04] px-3 py-1.5 text-[11px] font-medium uppercase text-muted-foreground backdrop-blur"
+                  style={{ letterSpacing: "0.22em" }}
+                >
+                  <span
+                    aria-hidden
+                    className="inline-block h-1.5 w-1.5 animate-pulse rounded-full"
+                    style={{ background: "var(--primary)" }}
+                  />
+                  Bramwell Voice Diagnostic · Live
+                </span>
+              </div>
               <h1
                 className="mt-6 text-balance font-extrabold tracking-tight text-white"
                 style={{
@@ -604,13 +611,59 @@ function DiagnosticPage() {
                   <span className="transition-transform group-hover:translate-x-0.5">→</span>
                 </button>
               </div>
-              <p className="mt-6 text-xs text-muted-foreground">
-                Three minutes. No login, no card.
+              <p className="mt-5 text-xs font-medium text-white/90">
+                Instant result · Free · No credit card
               </p>
-              <p className="mx-auto mt-2 max-w-xl text-xs text-muted-foreground/80">
-                Built on 40+ years of communication research and the frameworks
-                used by the world's leading executive coaches.
-              </p>
+
+              <ul className="mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+                {[
+                  {
+                    title: "3 minutes",
+                    body: "One question. One honest answer.",
+                    icon: (
+                      <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2 2M9 2h6" /></svg>
+                    ),
+                  },
+                  {
+                    title: "Private by default",
+                    body: "No login, no card. Audio deleted after analysis.",
+                    icon: (
+                      <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 1 1 8 0v4" /></svg>
+                    ),
+                  },
+                  {
+                    title: "Research-backed",
+                    body: "40+ years of communication science.",
+                    icon: (
+                      <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l9 4-9 4-9-4 9-4z" /><path d="M21 10v5M6 9v5a6 6 0 0 0 12 0V9" /></svg>
+                    ),
+                  },
+                ].map((item) => (
+                  <li
+                    key={item.title}
+                    className="flex items-start gap-3 rounded-xl border border-border bg-foreground/[0.03] px-4 py-3 text-left backdrop-blur"
+                  >
+                    <span
+                      className="mt-0.5 inline-flex h-7 w-7 flex-none items-center justify-center rounded-full"
+                      style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
+                    >
+                      {item.icon}
+                    </span>
+                    <span className="flex flex-col">
+                      <span className="text-sm font-semibold text-white">{item.title}</span>
+                      <span className="text-xs leading-snug text-muted-foreground">{item.body}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mx-auto mt-8 flex max-w-2xl flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px] uppercase text-muted-foreground/70" style={{ letterSpacing: "0.18em" }}>
+                <span>Built with executive coaches</span>
+                <span aria-hidden>·</span>
+                <span>Trusted by leaders preparing for boards, pitches & interviews</span>
+                <span aria-hidden>·</span>
+                <span>GDPR-safe</span>
+              </div>
             </>
           )}
 
