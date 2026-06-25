@@ -195,11 +195,11 @@ function DiagnosticPage() {
       setPhase("live");
     },
     onDisconnect: (details) => {
+      console.warn("[diagnostic] conversation disconnected", details);
       const intentional =
         intentionallyEndingRef.current ||
         submittedRef.current ||
-        phaseRef.current === "wrapping" ||
-        details?.reason === "agent";
+        phaseRef.current === "wrapping";
       const sid = sessionIdRef.current;
 
       if (intentional) {
@@ -217,7 +217,7 @@ function DiagnosticPage() {
       }
 
       if (phaseRef.current === "connecting" || phaseRef.current === "live") {
-        setErrorMsg("Bramwell disconnected before the diagnostic finished. Please start again.");
+        setErrorMsg("Bramwell connected, then ended before sending your score. Please start again.");
         setPhase("error");
         return;
       }
@@ -234,6 +234,9 @@ function DiagnosticPage() {
       console.error("[diagnostic] conversation error", message, context);
       setErrorMsg("Connection lost. Please try again.");
       setPhase("error");
+    },
+    onUnhandledClientToolCall: (toolCall) => {
+      console.warn("[diagnostic] unhandled client tool call", toolCall);
     },
     onMessage: (msg) => {
       const m = msg as unknown as { type?: string; [k: string]: unknown };
