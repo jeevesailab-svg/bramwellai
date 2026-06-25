@@ -103,6 +103,13 @@ function DiagnosticPage() {
   const transcriptRef = useRef<string[]>([]);
   const sessionIdRef = useRef<string | null>(null);
   const submittedRef = useRef(false);
+  const phaseRef = useRef(phase);
+  const hasConnectedRef = useRef(false);
+  const intentionallyEndingRef = useRef(false);
+
+  useEffect(() => {
+    phaseRef.current = phase;
+  }, [phase]);
 
   const submitResult = useCallback(async (input: SubmitInput) => {
       if (submittedRef.current) return "Already submitted";
@@ -152,12 +159,35 @@ function DiagnosticPage() {
     }, []);
 
   const conversation = useConversation({
-    onConnect: () => setPhase("live"),
+    onConnect: () => {
+      hasConnectedRef.current = true;
+      setPhase("live");
+    },
     onDisconnect: () => {
-      setPhase((p) => (p === "wrapping" ? "wrapping" : "wrapping"));
-      // Fallback: if the agent ended the call without invoking submitDiagnostic,
-      // flag the session so we can follow up manually instead of losing the lead.
+      const intentional =
+        intentionallyEndingRef.current || submittedRef.current || phaseRef.current === "wrapping";
       const sid = sessionIdRef.current;
+
+      if (intentional) {
+        if (!submittedRef.current) setPhase("wrapping");
+        // Fallback: if the user ended the call or the timer expired without the
+        // agent invoking submitDiagnostic, flag the session instead of losing it.
+        if (sid && !submittedRef.current) {
+          void fetch("/api/public/diagnostic-incomplete", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sessionId: sid }),
+          }).catch(() => undefined);
+        }
+        return;
+      }
+
+      if (phaseRef.current === "connecting" || phaseRef.current === "live") {
+        setErrorMsg("Bramwell disconnected before the diagnostic finished. Please start again.");
+        setPhase("error");
+        return;
+      }
+
       if (sid && !submittedRef.current) {
         void fetch("/api/public/diagnostic-incomplete", {
           method: "POST",
@@ -193,19 +223,24 @@ function DiagnosticPage() {
         const input = params ?? {};
         const hasPayload =
           typeof input.communication_type === "string" &&
+          input.communication_type.trim().length > 0 &&
           typeof input.readiness_score === "number" &&
+          Number.isFinite(input.readiness_score) &&
           (Array.isArray(input.gaps)
             ? input.gaps.some((g) => typeof g === "string" && g.trim().length > 0)
             : [input.gap_1, input.gap_2, input.gap_3].some(
                 (g) => typeof g === "string" && g.trim().length > 0,
               ));
-        if (!sid || !hasPayload) {
+        const sessionLive = hasConnectedRef.current && phaseRef.current === "live";
+        if (!sid || !hasPayload || !sessionLive) {
           console.warn("[diagnostic] ignoring premature submitDiagnostic call", {
             hasSession: Boolean(sid),
             hasPayload,
+            sessionLive,
           });
           return "Ignored: session not ready";
         }
+        intentionallyEndingRef.current = true;
         setPhase("wrapping");
         return submitResult(input);
       },
@@ -224,6 +259,7 @@ function DiagnosticPage() {
       setSecondsLeft(left);
       if (left <= 0) {
         clearInterval(tick);
+        intentionallyEndingRef.current = true;
         void Promise.resolve(conversation.endSession()).catch(() => undefined);
         setPhase("wrapping");
       }
@@ -252,6 +288,9 @@ function DiagnosticPage() {
     setErrorMsg(null);
     setRateLimited(false);
     setPhase("connecting");
+    hasConnectedRef.current = false;
+    intentionallyEndingRef.current = false;
+    submittedRef.current = false;
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
 
@@ -311,6 +350,7 @@ function DiagnosticPage() {
   }, [search.autostart, phase, startDiagnostic]);
 
   const endEarly = useCallback(async () => {
+    intentionallyEndingRef.current = true;
     try {
       await conversation.endSession();
     } catch {
