@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-const MAX_PER_IP_PER_DAY = 3;
+const MAX_PER_IP_PER_DAY = 25;
 
 function clientIp(request: Request): string {
   const xff = request.headers.get("x-forwarded-for");
