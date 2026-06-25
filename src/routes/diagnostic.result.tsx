@@ -114,8 +114,16 @@ function describeType(type: string): string {
 }
 
 function formatType(type: string): string {
-  const cleaned = type.replace(/^the\s+/i, "").trim();
-  return `The ${cleaned.charAt(0).toUpperCase()}${cleaned.slice(1)}`;
+  const cleaned = type
+    .replace(/^the\s+/i, "")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const titled = cleaned
+    .split(" ")
+    .map((w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w))
+    .join(" ");
+  return `The ${titled}`;
 }
 
 function DiagnosticResultPage() {
