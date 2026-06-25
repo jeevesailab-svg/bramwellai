@@ -313,6 +313,53 @@ function DiagnosticPage() {
     return () => clearTimeout(timeout);
   }, [phase]);
 
+  // Once submitDiagnostic has fired and we've persisted the result, wait for
+  // Bramwell to actually stop speaking before navigating away — otherwise his
+  // closing feedback is cut off mid-sentence as the result page loads.
+  useEffect(() => {
+    if (!pendingNavigateId) return;
+    const target = `/diagnostic/result?id=${pendingNavigateId}`;
+    let cancelled = false;
+    let silenceTimer: ReturnType<typeof setTimeout> | null = null;
+
+    const check = () => {
+      if (cancelled) return;
+      if (!conversation.isSpeaking) {
+        if (silenceTimer) return;
+        // Require ~1.2s of continuous silence so we don't navigate during a
+        // brief pause between sentences.
+        silenceTimer = setTimeout(() => {
+          if (cancelled) return;
+          try {
+            void conversation.endSession();
+          } catch {
+            /* noop */
+          }
+          window.location.assign(target);
+        }, 1200);
+      } else if (silenceTimer) {
+        clearTimeout(silenceTimer);
+        silenceTimer = null;
+      }
+    };
+
+    const poll = setInterval(check, 200);
+    check();
+
+    // Hard safety cap so users are never stranded if isSpeaking never flips.
+    const hardTimeout = setTimeout(() => {
+      if (cancelled) return;
+      window.location.assign(target);
+    }, 20000);
+
+    return () => {
+      cancelled = true;
+      clearInterval(poll);
+      if (silenceTimer) clearTimeout(silenceTimer);
+      clearTimeout(hardTimeout);
+    };
+  }, [pendingNavigateId, conversation]);
+
   const startDiagnostic = useCallback(async () => {
     setErrorMsg(null);
     setRateLimited(false);
