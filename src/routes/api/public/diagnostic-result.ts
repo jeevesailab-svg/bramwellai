@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
-import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const Schema = z.object({
   sessionId: z.string().uuid(),
@@ -26,9 +25,13 @@ export const Route = createFileRoute("/api/public/diagnostic-result")({
   server: {
     handlers: {
       GET: async ({ request }) => {
+        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const url = new URL(request.url);
-        const id = url.searchParams.get("id");
+        const id = url.searchParams.get("id") ?? url.searchParams.get("sessionId");
         if (!id || !/^[0-9a-f-]{36}$/i.test(id)) {
+          if (request.headers.get("accept")?.includes("text/html")) {
+            return Response.redirect(new URL("/diagnostic", url.origin), 302);
+          }
           return Response.json({ error: "Invalid id" }, { status: 400 });
         }
         const { data, error } = await supabaseAdmin
@@ -51,6 +54,7 @@ export const Route = createFileRoute("/api/public/diagnostic-result")({
         });
       },
       POST: async ({ request }) => {
+        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         let payload: unknown;
         try {
           payload = await request.json();

@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 export const Route = createFileRoute("/api/public/diagnostic-incomplete")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         let sessionId: string | undefined;
         try {
           const body = (await request.json()) as { sessionId?: string };
