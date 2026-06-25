@@ -26,6 +26,7 @@ export type Database = {
           gaps: Json | null
           id: string
           ip_address: string
+          metrics: Json | null
           needs_followup: boolean
           readiness_score: number | null
           recommended_pathway: string | null
@@ -44,6 +45,7 @@ export type Database = {
           gaps?: Json | null
           id?: string
           ip_address: string
+          metrics?: Json | null
           needs_followup?: boolean
           readiness_score?: number | null
           recommended_pathway?: string | null
@@ -62,6 +64,7 @@ export type Database = {
           gaps?: Json | null
           id?: string
           ip_address?: string
+          metrics?: Json | null
           needs_followup?: boolean
           readiness_score?: number | null
           recommended_pathway?: string | null

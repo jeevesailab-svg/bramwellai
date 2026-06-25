@@ -37,6 +37,22 @@ type Result = {
   recommended_pathway: PathwayKey;
   recommended_pathway_name: string;
   recommended_price: string;
+  metrics?: Metrics | null;
+};
+
+type Metrics = {
+  filler_words?: { total?: number; top?: { word: string; count: number }[] };
+  pace?: {
+    words_per_minute?: number;
+    longest_pause_sec?: number;
+    long_pauses_count?: number;
+  };
+  hedging?: { total?: number; samples?: string[] };
+  structure?: {
+    time_to_point_sec?: number;
+    led_with_point?: boolean;
+    ramble_score?: number;
+  };
 };
 
 const STRIPE: Record<PathwayKey, string> = {
@@ -284,16 +300,25 @@ function ResultBody({ result }: { result: Result }) {
         <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
           Your result
         </p>
-        <p
-          className="mt-6 bg-clip-text text-[7rem] font-semibold leading-none tracking-tight text-transparent md:text-[10rem]"
-          style={{ backgroundImage: "var(--gradient-gold)" }}
-        >
-          {result.readiness_score}
+        <div className="mt-6 flex items-baseline justify-center gap-2">
+          <span
+            className="bg-clip-text text-[7rem] font-semibold leading-none tracking-tight text-transparent md:text-[10rem]"
+            style={{ backgroundImage: "var(--gradient-gold)" }}
+          >
+            {result.readiness_score}
+          </span>
+          <span className="text-3xl font-light text-muted-foreground md:text-4xl">
+            /100
+          </span>
+        </div>
+        <p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted-foreground">
+          Your Communication Readiness Score
         </p>
-        <p className="mt-2 text-sm uppercase tracking-[0.2em] text-muted-foreground">
-          Your Readiness Score
+        <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-foreground/80">
+          How ready you are to walk into your next high-stakes conversation —
+          interview, pitch, board room — and land it.
         </p>
-        <p className="mx-auto mt-4 max-w-md text-base text-muted-foreground">
+        <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
           This is your starting point — not your ceiling.
         </p>
       </section>
@@ -314,31 +339,13 @@ function ResultBody({ result }: { result: Result }) {
         </p>
       </section>
 
-      {/* SECTION 3 — Gaps */}
-      <section>
-        <h2 className="text-center text-2xl font-semibold tracking-tight md:text-3xl">
-          What is holding you back
-        </h2>
-        <ul className="mt-6 grid gap-4">
-          {result.gaps.slice(0, 3).map((gap, i) => (
-            <li
-              key={i}
-              className="flex gap-4 rounded-xl border border-border bg-foreground/[0.03] p-5 backdrop-blur"
-            >
-              <span
-                className="mt-0.5 inline-flex h-7 w-7 flex-none items-center justify-center rounded-full text-xs font-semibold"
-                style={{
-                  background: "var(--gradient-gold)",
-                  color: "var(--primary-foreground)",
-                }}
-              >
-                {i + 1}
-              </span>
-              <p className="text-sm leading-relaxed text-foreground/90">{gap}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {/* SECTION 3 — Behavioural report (gated) */}
+      <BehaviouralReport
+        sessionId={result.id}
+        initiallyUnlocked={result.has_email}
+        gaps={result.gaps}
+        metrics={result.metrics ?? null}
+      />
 
       {/* SECTION 4 — What changes */}
       <section>
@@ -400,14 +407,225 @@ function ResultBody({ result }: { result: Result }) {
           30 day money back guarantee if your score does not improve
         </p>
       </section>
-
-      {/* SECTION 6 — Email capture */}
-      {!result.has_email && <EmailCapture sessionId={result.id} />}
     </div>
   );
 }
 
-function EmailCapture({ sessionId }: { sessionId: string }) {
+function BehaviouralReport({
+  sessionId,
+  initiallyUnlocked,
+  gaps,
+  metrics,
+}: {
+  sessionId: string;
+  initiallyUnlocked: boolean;
+  gaps: string[];
+  metrics: Metrics | null;
+}) {
+  const [unlocked, setUnlocked] = useState(initiallyUnlocked);
+
+  return (
+    <section>
+      <div className="text-center">
+        <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+          Your detailed report
+        </p>
+        <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">
+          {unlocked ? "What's holding you back" : "See what's holding you back"}
+        </h2>
+        {!unlocked && (
+          <p className="mx-auto mt-3 max-w-lg text-sm text-muted-foreground">
+            Your full behavioural report — every "um", every long pause, every
+            hedge, your top three gaps — sent to your inbox and unlocked right
+            here.
+          </p>
+        )}
+      </div>
+
+      <div className="relative mt-8">
+        <div
+          className={
+            unlocked
+              ? ""
+              : "pointer-events-none select-none blur-md transition"
+          }
+          aria-hidden={!unlocked}
+        >
+          <ReportContent gaps={gaps} metrics={metrics} unlocked={unlocked} />
+        </div>
+
+        {!unlocked && (
+          <div className="absolute inset-0 flex items-center justify-center p-4">
+            <UnlockCard
+              sessionId={sessionId}
+              onUnlocked={() => setUnlocked(true)}
+            />
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function ReportContent({
+  gaps,
+  metrics,
+  unlocked,
+}: {
+  gaps: string[];
+  metrics: Metrics | null;
+  unlocked: boolean;
+}) {
+  const hasMetrics =
+    !!metrics &&
+    (metrics.filler_words ||
+      metrics.pace ||
+      metrics.hedging ||
+      metrics.structure);
+
+  return (
+    <div className="space-y-6">
+      <div className="grid gap-4 md:grid-cols-2">
+        <MetricCard
+          label="Filler words"
+          primary={
+            metrics?.filler_words?.total != null
+              ? String(metrics.filler_words.total)
+              : "—"
+          }
+          unit="used"
+          detail={
+            metrics?.filler_words?.top?.length
+              ? metrics.filler_words.top
+                  .slice(0, 3)
+                  .map((t) => `"${t.word}" ×${t.count}`)
+                  .join("  ·  ")
+              : 'Every "um", "like", "you know" counted.'
+          }
+        />
+        <MetricCard
+          label="Pace & pauses"
+          primary={
+            metrics?.pace?.words_per_minute != null
+              ? String(Math.round(metrics.pace.words_per_minute))
+              : "—"
+          }
+          unit="words / min"
+          detail={
+            metrics?.pace
+              ? `${metrics.pace.long_pauses_count ?? 0} long pauses · longest ${
+                  metrics.pace.longest_pause_sec?.toFixed(1) ?? "0"
+                }s`
+              : "Your speaking pace and where you stalled."
+          }
+        />
+        <MetricCard
+          label="Hedging & apologising"
+          primary={
+            metrics?.hedging?.total != null
+              ? String(metrics.hedging.total)
+              : "—"
+          }
+          unit="hedge phrases"
+          detail={
+            metrics?.hedging?.samples?.length
+              ? metrics.hedging.samples
+                  .slice(0, 3)
+                  .map((s) => `"${s}"`)
+                  .join("  ·  ")
+              : 'Language that shrinks your authority — "I think", "sorry", "just".'
+          }
+        />
+        <MetricCard
+          label="Answer structure"
+          primary={
+            metrics?.structure?.time_to_point_sec != null
+              ? `${metrics.structure.time_to_point_sec.toFixed(1)}s`
+              : "—"
+          }
+          unit="to your point"
+          detail={
+            metrics?.structure
+              ? metrics.structure.led_with_point
+                ? "You led with the point. Rambling under control."
+                : "You buried the point. Rambling index high."
+              : "Did you lead with the answer — or bury it?"
+          }
+        />
+      </div>
+
+      <div>
+        <h3 className="text-center text-base font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          Your three biggest gaps
+        </h3>
+        <ul className="mt-4 grid gap-3">
+          {gaps.slice(0, 3).map((gap, i) => (
+            <li
+              key={i}
+              className="flex gap-4 rounded-xl border border-border bg-foreground/[0.03] p-5 backdrop-blur"
+            >
+              <span
+                className="mt-0.5 inline-flex h-7 w-7 flex-none items-center justify-center rounded-full text-xs font-semibold"
+                style={{
+                  background: "var(--gradient-gold)",
+                  color: "var(--primary-foreground)",
+                }}
+              >
+                {i + 1}
+              </span>
+              <p className="text-sm leading-relaxed text-foreground/90">{gap}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {unlocked && !hasMetrics && (
+        <p className="text-center text-xs text-muted-foreground">
+          Your full behavioural breakdown — filler words, pace, pauses, hedging
+          and structure — is on its way to your inbox.
+        </p>
+      )}
+    </div>
+  );
+}
+
+function MetricCard({
+  label,
+  primary,
+  unit,
+  detail,
+}: {
+  label: string;
+  primary: string;
+  unit: string;
+  detail: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-border bg-foreground/[0.03] p-6 backdrop-blur">
+      <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+        {label}
+      </p>
+      <div className="mt-3 flex items-baseline gap-2">
+        <span
+          className="bg-clip-text text-4xl font-semibold tracking-tight text-transparent"
+          style={{ backgroundImage: "var(--gradient-gold)" }}
+        >
+          {primary}
+        </span>
+        <span className="text-xs text-muted-foreground">{unit}</span>
+      </div>
+      <p className="mt-3 text-sm leading-relaxed text-foreground/80">{detail}</p>
+    </div>
+  );
+}
+
+function UnlockCard({
+  sessionId,
+  onUnlocked,
+}: {
+  sessionId: string;
+  onUnlocked: () => void;
+}) {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [state, setState] = useState<"idle" | "submitting" | "done" | "error">(
@@ -434,31 +652,27 @@ function EmailCapture({ sessionId }: { sessionId: string }) {
         throw new Error(body?.error ?? "Could not save your email");
       }
       setState("done");
+      onUnlocked();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
       setState("error");
     }
   };
 
-  if (state === "done") {
-    return (
-      <section className="rounded-2xl border border-border bg-foreground/[0.03] p-8 text-center backdrop-blur">
-        <p className="text-base font-medium">Sent. Check your inbox.</p>
-        <p className="mt-2 text-sm text-muted-foreground">
-          We'll also send you practice tips for tonight.
-        </p>
-      </section>
-    );
-  }
-
   return (
-    <section className="rounded-2xl border border-border bg-foreground/[0.03] p-8 backdrop-blur">
-      <h3 className="text-center text-xl font-semibold tracking-tight">
-        Want us to send you your results?
+    <div
+      className="w-full max-w-md rounded-2xl border border-border bg-background/95 p-6 shadow-2xl backdrop-blur"
+      style={{ boxShadow: "var(--shadow-elegant)" }}
+    >
+      <h3 className="text-center text-lg font-semibold tracking-tight">
+        Unlock your full report
       </h3>
+      <p className="mx-auto mt-2 max-w-xs text-center text-xs text-muted-foreground">
+        We'll email a copy and reveal the breakdown on this page.
+      </p>
       <form
         onSubmit={onSubmit}
-        className="mx-auto mt-5 flex max-w-md flex-col gap-3"
+        className="mt-5 flex flex-col gap-3"
       >
         <input
           type="text"
@@ -490,13 +704,10 @@ function EmailCapture({ sessionId }: { sessionId: string }) {
             color: "var(--primary-foreground)",
           }}
         >
-          {state === "submitting" ? "Sending…" : "Send my results"}
+          {state === "submitting" ? "Unlocking…" : "Send my report & unlock"}
         </button>
         {error && <p className="text-center text-xs text-destructive">{error}</p>}
-        <p className="text-center text-xs text-muted-foreground">
-          We will also send you practice tips for tonight.
-        </p>
       </form>
-    </section>
+    </div>
   );
 }
