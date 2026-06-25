@@ -455,7 +455,7 @@ function BehaviouralReport({
         </div>
 
         {!unlocked && (
-          <div className="absolute inset-0 flex items-center justify-center p-4">
+          <div className="absolute inset-x-0 top-0 flex justify-center p-4">
             <UnlockCard
               sessionId={sessionId}
               onUnlocked={() => setUnlocked(true)}
