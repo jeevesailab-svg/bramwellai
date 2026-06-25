@@ -117,6 +117,7 @@ function DiagnosticPage() {
   const phaseRef = useRef(phase);
   const hasConnectedRef = useRef(false);
   const intentionallyEndingRef = useRef(false);
+  const [pendingNavigateId, setPendingNavigateId] = useState<string | null>(null);
 
   useEffect(() => {
     phaseRef.current = phase;
@@ -165,8 +166,9 @@ function DiagnosticPage() {
       } catch (e) {
         console.error("[diagnostic] result POST failed", e);
       }
-      // Score screen route is built in the next step.
-      window.location.assign(`/diagnostic/result?id=${sessionId}`);
+      // Defer navigation until Bramwell finishes speaking so the agent's
+      // closing feedback doesn't get cut off mid-sentence.
+      setPendingNavigateId(sessionId);
       return "Result captured";
     }, []);
 
