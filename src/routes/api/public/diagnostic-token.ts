@@ -60,21 +60,13 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
           console.error("ElevenLabs diagnostic signed-url error:", res.status, txt);
 
           if (/missing_permissions/i.test(txt)) {
-            const { data: row, error: insertErr } = await supabaseAdmin
-              .from("diagnostic_sessions")
-              .insert({ ip_address: ip })
-              .select("id")
-              .single();
-            if (insertErr || !row) {
-              console.error("diagnostic-token: insert failed", insertErr);
-              return Response.json({ error: "Server error" }, { status: 500 });
-            }
-
-            return Response.json({
-              agentId,
-              sessionId: row.id,
-              authMode: "public-agent-websocket",
-            });
+            return Response.json(
+              {
+                error:
+                  "Bramwell is not authorized yet. Please reconnect Maria's ElevenLabs with Conversational AI write permission enabled, then try again.",
+              },
+              { status: 502 },
+            );
           }
 
           return Response.json(
