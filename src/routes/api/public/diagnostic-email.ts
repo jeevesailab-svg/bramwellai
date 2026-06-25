@@ -32,12 +32,50 @@ export const Route = createFileRoute("/api/public/diagnostic-email")({
           })
           .eq("id", d.sessionId)
           .select(
-            "first_name, email, communication_type, readiness_score, gaps, career_moment, recommended_pathway, recommended_pathway_name, recommended_price",
+            "first_name, email, communication_type, readiness_score, gaps, career_moment, recommended_pathway, recommended_pathway_name, recommended_price, metrics",
           )
           .maybeSingle();
         if (updErr || !row) {
           console.error("diagnostic-email update failed", updErr);
           return Response.json({ error: "Database error" }, { status: 500 });
+        }
+
+        // Send the readiness report directly via Resend (connector gateway).
+        const lovableKey = process.env.LOVABLE_API_KEY;
+        const resendKey = process.env.RESEND_API_KEY;
+        if (lovableKey && resendKey) {
+          try {
+            const html = renderReportEmail(row);
+            const sendRes = await fetch(
+              "https://connector-gateway.lovable.dev/resend/emails",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${lovableKey}`,
+                  "X-Connection-Api-Key": resendKey,
+                },
+                body: JSON.stringify({
+                  from: "Bramwell <onboarding@resend.dev>",
+                  to: [row.email],
+                  subject: `Your Bramwell Readiness Score: ${row.readiness_score}/100`,
+                  html,
+                }),
+              },
+            );
+            if (!sendRes.ok) {
+              console.warn(
+                "Resend send failed",
+                sendRes.status,
+                await sendRes.text(),
+              );
+            }
+          } catch (sendErr) {
+            const msg = sendErr instanceof Error ? sendErr.message : String(sendErr);
+            console.warn("Resend send threw", msg);
+          }
+        } else {
+          console.warn("Skipping Resend send, missing LOVABLE_API_KEY or RESEND_API_KEY");
         }
 
         const zapUrl = process.env.ZAPIER_QUIZ_WEBHOOK_URL;
