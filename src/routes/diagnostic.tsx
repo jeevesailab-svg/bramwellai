@@ -307,26 +307,26 @@ function DiagnosticPage() {
         }
         throw new Error(body?.error ?? `Could not start (${res.status})`);
       }
-      const { token, sessionId, agentId, authMode } = (await res.json()) as {
-        token?: string;
-        agentId: string;
+      const { signedUrl, agentId, sessionId, authMode } = (await res.json()) as {
+        signedUrl?: string;
+        agentId?: string;
         sessionId: string;
-        authMode?: "token" | "public-agent";
+        authMode?: "signed-url" | "public-agent-websocket";
       };
       sessionIdRef.current = sessionId;
       window.sessionStorage.setItem("bramwell-diagnostic-session-id", sessionId);
       transcriptRef.current = [];
       submittedRef.current = false;
 
-      if (authMode === "public-agent") {
+      if (authMode === "signed-url" && signedUrl) {
+        await conversation.startSession({
+          signedUrl,
+          connectionType: "websocket",
+        });
+      } else if (authMode === "public-agent-websocket" && agentId) {
         await conversation.startSession({
           agentId,
-          connectionType: "webrtc",
-        });
-      } else if (token) {
-        await conversation.startSession({
-          conversationToken: token,
-          connectionType: "webrtc",
+          connectionType: "websocket",
         });
       } else {
         throw new Error("Could not start diagnostic");
