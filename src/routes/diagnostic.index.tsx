@@ -9,7 +9,7 @@ export const Route = createFileRoute("/diagnostic/")({
   }),
   head: () => ({
     meta: [
-      { title: "Free Bramwell Diagnostic — Hear how you really sound" },
+      { title: "Free Bramwell Diagnostic. Hear how you really sound" },
       {
         name: "description",
         content:
@@ -599,7 +599,7 @@ function DiagnosticPage() {
               <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-relaxed text-muted-foreground">
                 One question. One honest answer. Bramwell gives you your
                 communication type, your three biggest gaps, and your
-                Readiness Score — in under three minutes.
+                Readiness Score, in under three minutes.
               </p>
               <div className="mt-8 flex justify-center">
                 <button
@@ -665,7 +665,7 @@ function DiagnosticPage() {
                 </p>
                 <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
                   Trained on <span className="font-semibold text-white">10,000+ hours</span> of
-                  high-stakes interviews, pitches and board briefings — analysed against the
+                  high-stakes interviews, pitches and board briefings, analysed against the
                   frameworks of <span className="font-semibold text-white">Mehrabian, Cuddy,
                   Goleman and Carnegie</span>. Bramwell hears what interviewers and boards hear,
                   and tells you what they won't.
@@ -745,8 +745,8 @@ function DiagnosticPage() {
                     </p>
                     <p className="mt-3 text-sm text-muted-foreground">
                       The free version is a five-minute snapshot. To keep
-                      going — rehearse real questions, get specific
-                      feedback, and actually move your Readiness Score —
+                      going: rehearse real questions, get specific
+                      feedback, and actually move your Readiness Score,
                       pick a Bramwell pathway.
                     </p>
                     <Link
