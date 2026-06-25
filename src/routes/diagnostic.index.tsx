@@ -503,18 +503,23 @@ function DiagnosticPage() {
       window.sessionStorage.setItem("bramwell-diagnostic-session-id", sessionId);
       transcriptRef.current = [];
       submittedRef.current = false;
+      const dynamicVariables = {
+        sessionId,
+        session_id: sessionId,
+        user_first_name: "there",
+      };
 
       if (authMode === "signed-url" && signedUrl) {
         await conversation.startSession({
           signedUrl,
           connectionType: "websocket",
-          dynamicVariables: { user_first_name: "there" },
+          dynamicVariables,
         });
       } else if (authMode === "conversation-token" && token) {
         await conversation.startSession({
           conversationToken: token,
           connectionType: "webrtc",
-          dynamicVariables: { user_first_name: "there" },
+          dynamicVariables,
         });
       } else {
         throw new Error("Could not start diagnostic");
