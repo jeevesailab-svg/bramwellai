@@ -52,12 +52,12 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
         }
 
         const res = await fetch(
-          `https://api.elevenlabs.io/v1/convai/conversation/get-signed-url?agent_id=${agentId}`,
+          `https://api.elevenlabs.io/v1/convai/conversation/token?agent_id=${agentId}`,
           { headers: { "xi-api-key": apiKey } },
         );
         if (!res.ok) {
           const txt = await res.text();
-          console.error("ElevenLabs diagnostic signed-url error:", res.status, txt);
+          console.error("ElevenLabs diagnostic token error:", res.status, txt);
 
           if (/missing_permissions/i.test(txt)) {
             return Response.json(
@@ -74,16 +74,16 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
             { status: 502 },
           );
         }
-        const { signed_url: signedUrl } = (await res.json()) as { signed_url?: string };
-        if (!signedUrl) {
-          console.error("diagnostic-token: missing ElevenLabs signed URL");
+        const { token } = (await res.json()) as { token?: string };
+        if (!token) {
+          console.error("diagnostic-token: missing ElevenLabs conversation token");
           return Response.json(
             { error: "Could not start diagnostic" },
             { status: 502 },
           );
         }
 
-        // Record this attempt (counts toward the 24h limit).
+        // Record this attempt so any diagnostic result can be attached to it.
         const { data: row, error: insertErr } = await supabaseAdmin
           .from("diagnostic_sessions")
           .insert({ ip_address: ip })
@@ -94,7 +94,7 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
           return Response.json({ error: "Server error" }, { status: 500 });
         }
 
-        return Response.json({ signedUrl, agentId, sessionId: row.id, authMode: "signed-url" });
+        return Response.json({ token, agentId, sessionId: row.id, authMode: "conversation-token" });
       },
     },
   },
