@@ -37,6 +37,22 @@ type Result = {
   recommended_pathway: PathwayKey;
   recommended_pathway_name: string;
   recommended_price: string;
+  metrics?: Metrics | null;
+};
+
+type Metrics = {
+  filler_words?: { total?: number; top?: { word: string; count: number }[] };
+  pace?: {
+    words_per_minute?: number;
+    longest_pause_sec?: number;
+    long_pauses_count?: number;
+  };
+  hedging?: { total?: number; samples?: string[] };
+  structure?: {
+    time_to_point_sec?: number;
+    led_with_point?: boolean;
+    ramble_score?: number;
+  };
 };
 
 const STRIPE: Record<PathwayKey, string> = {
