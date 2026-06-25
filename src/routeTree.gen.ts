@@ -19,11 +19,11 @@ import { Route as PivotRouteImport } from './routes/pivot'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as GraduateRouteImport } from './routes/graduate'
 import { Route as ExecutiveRouteImport } from './routes/executive'
-import { Route as DiagnosticRouteImport } from './routes/diagnostic'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AdvisorsRouteImport } from './routes/advisors'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PortalIndexRouteImport } from './routes/portal.index'
+import { Route as DiagnosticIndexRouteImport } from './routes/diagnostic.index'
 import { Route as PortalSetupRouteImport } from './routes/portal.setup'
 import { Route as PortalCoachRouteImport } from './routes/portal.coach'
 import { Route as DiagnosticResultRouteImport } from './routes/diagnostic.result'
@@ -85,11 +85,6 @@ const ExecutiveRoute = ExecutiveRouteImport.update({
   path: '/executive',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DiagnosticRoute = DiagnosticRouteImport.update({
-  id: '/diagnostic',
-  path: '/diagnostic',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -110,6 +105,11 @@ const PortalIndexRoute = PortalIndexRouteImport.update({
   path: '/',
   getParentRoute: () => PortalRoute,
 } as any)
+const DiagnosticIndexRoute = DiagnosticIndexRouteImport.update({
+  id: '/diagnostic/',
+  path: '/diagnostic/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortalSetupRoute = PortalSetupRouteImport.update({
   id: '/setup',
   path: '/setup',
@@ -121,9 +121,9 @@ const PortalCoachRoute = PortalCoachRouteImport.update({
   getParentRoute: () => PortalRoute,
 } as any)
 const DiagnosticResultRoute = DiagnosticResultRouteImport.update({
-  id: '/result',
-  path: '/result',
-  getParentRoute: () => DiagnosticRoute,
+  id: '/diagnostic/result',
+  path: '/diagnostic/result',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicQuizLeadRoute = ApiPublicQuizLeadRouteImport.update({
   id: '/api/public/quiz-lead',
@@ -170,7 +170,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
-  '/diagnostic': typeof DiagnosticRouteWithChildren
   '/executive': typeof ExecutiveRoute
   '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
@@ -184,6 +183,7 @@ export interface FileRoutesByFullPath {
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
+  '/diagnostic/': typeof DiagnosticIndexRoute
   '/portal/': typeof PortalIndexRoute
   '/api/public/diagnostic-email': typeof ApiPublicDiagnosticEmailRoute
   '/api/public/diagnostic-incomplete': typeof ApiPublicDiagnosticIncompleteRoute
@@ -197,7 +197,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
-  '/diagnostic': typeof DiagnosticRouteWithChildren
   '/executive': typeof ExecutiveRoute
   '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
@@ -210,6 +209,7 @@ export interface FileRoutesByTo {
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
+  '/diagnostic': typeof DiagnosticIndexRoute
   '/portal': typeof PortalIndexRoute
   '/api/public/diagnostic-email': typeof ApiPublicDiagnosticEmailRoute
   '/api/public/diagnostic-incomplete': typeof ApiPublicDiagnosticIncompleteRoute
@@ -224,7 +224,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
-  '/diagnostic': typeof DiagnosticRouteWithChildren
   '/executive': typeof ExecutiveRoute
   '/graduate': typeof GraduateRoute
   '/login': typeof LoginRoute
@@ -238,6 +237,7 @@ export interface FileRoutesById {
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
+  '/diagnostic/': typeof DiagnosticIndexRoute
   '/portal/': typeof PortalIndexRoute
   '/api/public/diagnostic-email': typeof ApiPublicDiagnosticEmailRoute
   '/api/public/diagnostic-incomplete': typeof ApiPublicDiagnosticIncompleteRoute
@@ -253,7 +253,6 @@ export interface FileRouteTypes {
     | '/'
     | '/advisors'
     | '/dashboard'
-    | '/diagnostic'
     | '/executive'
     | '/graduate'
     | '/login'
@@ -267,6 +266,7 @@ export interface FileRouteTypes {
     | '/diagnostic/result'
     | '/portal/coach'
     | '/portal/setup'
+    | '/diagnostic/'
     | '/portal/'
     | '/api/public/diagnostic-email'
     | '/api/public/diagnostic-incomplete'
@@ -280,7 +280,6 @@ export interface FileRouteTypes {
     | '/'
     | '/advisors'
     | '/dashboard'
-    | '/diagnostic'
     | '/executive'
     | '/graduate'
     | '/login'
@@ -293,6 +292,7 @@ export interface FileRouteTypes {
     | '/diagnostic/result'
     | '/portal/coach'
     | '/portal/setup'
+    | '/diagnostic'
     | '/portal'
     | '/api/public/diagnostic-email'
     | '/api/public/diagnostic-incomplete'
@@ -306,7 +306,6 @@ export interface FileRouteTypes {
     | '/'
     | '/advisors'
     | '/dashboard'
-    | '/diagnostic'
     | '/executive'
     | '/graduate'
     | '/login'
@@ -320,6 +319,7 @@ export interface FileRouteTypes {
     | '/diagnostic/result'
     | '/portal/coach'
     | '/portal/setup'
+    | '/diagnostic/'
     | '/portal/'
     | '/api/public/diagnostic-email'
     | '/api/public/diagnostic-incomplete'
@@ -334,7 +334,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdvisorsRoute: typeof AdvisorsRoute
   DashboardRoute: typeof DashboardRoute
-  DiagnosticRoute: typeof DiagnosticRouteWithChildren
   ExecutiveRoute: typeof ExecutiveRoute
   GraduateRoute: typeof GraduateRoute
   LoginRoute: typeof LoginRoute
@@ -345,6 +344,8 @@ export interface RootRouteChildren {
   ReturnerRoute: typeof ReturnerRoute
   SignupRoute: typeof SignupRoute
   The7QuestionsRoute: typeof The7QuestionsRoute
+  DiagnosticResultRoute: typeof DiagnosticResultRoute
+  DiagnosticIndexRoute: typeof DiagnosticIndexRoute
   ApiPublicDiagnosticEmailRoute: typeof ApiPublicDiagnosticEmailRoute
   ApiPublicDiagnosticIncompleteRoute: typeof ApiPublicDiagnosticIncompleteRoute
   ApiPublicDiagnosticResultRoute: typeof ApiPublicDiagnosticResultRoute
@@ -426,13 +427,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExecutiveRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/diagnostic': {
-      id: '/diagnostic'
-      path: '/diagnostic'
-      fullPath: '/diagnostic'
-      preLoaderRoute: typeof DiagnosticRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -461,6 +455,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalIndexRouteImport
       parentRoute: typeof PortalRoute
     }
+    '/diagnostic/': {
+      id: '/diagnostic/'
+      path: '/diagnostic'
+      fullPath: '/diagnostic/'
+      preLoaderRoute: typeof DiagnosticIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portal/setup': {
       id: '/portal/setup'
       path: '/setup'
@@ -477,10 +478,10 @@ declare module '@tanstack/react-router' {
     }
     '/diagnostic/result': {
       id: '/diagnostic/result'
-      path: '/result'
+      path: '/diagnostic/result'
       fullPath: '/diagnostic/result'
       preLoaderRoute: typeof DiagnosticResultRouteImport
-      parentRoute: typeof DiagnosticRoute
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/quiz-lead': {
       id: '/api/public/quiz-lead'
@@ -534,18 +535,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface DiagnosticRouteChildren {
-  DiagnosticResultRoute: typeof DiagnosticResultRoute
-}
-
-const DiagnosticRouteChildren: DiagnosticRouteChildren = {
-  DiagnosticResultRoute: DiagnosticResultRoute,
-}
-
-const DiagnosticRouteWithChildren = DiagnosticRoute._addFileChildren(
-  DiagnosticRouteChildren,
-)
-
 interface PortalRouteChildren {
   PortalCoachRoute: typeof PortalCoachRoute
   PortalSetupRoute: typeof PortalSetupRoute
@@ -565,7 +554,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdvisorsRoute: AdvisorsRoute,
   DashboardRoute: DashboardRoute,
-  DiagnosticRoute: DiagnosticRouteWithChildren,
   ExecutiveRoute: ExecutiveRoute,
   GraduateRoute: GraduateRoute,
   LoginRoute: LoginRoute,
@@ -576,6 +564,8 @@ const rootRouteChildren: RootRouteChildren = {
   ReturnerRoute: ReturnerRoute,
   SignupRoute: SignupRoute,
   The7QuestionsRoute: The7QuestionsRoute,
+  DiagnosticResultRoute: DiagnosticResultRoute,
+  DiagnosticIndexRoute: DiagnosticIndexRoute,
   ApiPublicDiagnosticEmailRoute: ApiPublicDiagnosticEmailRoute,
   ApiPublicDiagnosticIncompleteRoute: ApiPublicDiagnosticIncompleteRoute,
   ApiPublicDiagnosticResultRoute: ApiPublicDiagnosticResultRoute,

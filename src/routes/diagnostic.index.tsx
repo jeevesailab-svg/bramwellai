@@ -2,7 +2,7 @@ import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-export const Route = createFileRoute("/diagnostic")({
+export const Route = createFileRoute("/diagnostic/")({
   component: DiagnosticRoute,
   validateSearch: (search: Record<string, unknown>) => ({
     autostart: search.autostart === "1" ? "1" : undefined,
@@ -131,6 +131,8 @@ function DiagnosticPage() {
   const phaseRef = useRef(phase);
   const hasConnectedRef = useRef(false);
   const intentionallyEndingRef = useRef(false);
+  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  const [resultReadyId, setResultReadyId] = useState<string | null>(null);
   const [pendingNavigateId, setPendingNavigateId] = useState<string | null>(null);
   const conversationRef = useRef<ConversationHandle | null>(null);
   const sessionStartedAtRef = useRef<number | null>(null);
@@ -207,6 +209,7 @@ function DiagnosticPage() {
       }
       // Save the result, but do not flip the UI or end the call here — the
       // client tool can fire while Bramwell is still speaking the feedback.
+      setResultReadyId(sessionId);
       setPendingNavigateId(sessionId);
       return "Result captured";
     }, []);
@@ -465,6 +468,8 @@ function DiagnosticPage() {
     hasConnectedRef.current = false;
     intentionallyEndingRef.current = false;
     submittedRef.current = false;
+    setCurrentSessionId(null);
+    setResultReadyId(null);
     setPendingNavigateId(null);
     setSecondsLeft(SESSION_LIMIT_MS / 1000);
     sessionStartedAtRef.current = null;
@@ -493,6 +498,7 @@ function DiagnosticPage() {
         authMode?: "conversation-token";
       };
       sessionIdRef.current = sessionId;
+      setCurrentSessionId(sessionId);
       window.sessionStorage.setItem("bramwell-diagnostic-session-id", sessionId);
       transcriptRef.current = [];
       submittedRef.current = false;
@@ -515,7 +521,7 @@ function DiagnosticPage() {
   }, [conversation]);
 
   // Auto-start when coming from the hero CTA with ?autostart=1
-  const search = useSearch({ from: "/diagnostic" });
+  const search = useSearch({ from: "/diagnostic/" });
   const autoStartedRef = useRef(false);
   useEffect(() => {
     if (search.autostart === "1" && phase === "intro" && !autoStartedRef.current) {
@@ -536,6 +542,10 @@ function DiagnosticPage() {
 
   const mm = String(Math.floor(secondsLeft / 60)).padStart(1, "0");
   const ss = String(secondsLeft % 60).padStart(2, "0");
+  const visibleSessionId = resultReadyId ?? pendingNavigateId ?? currentSessionId;
+  const resultHref = visibleSessionId
+    ? `/diagnostic/result?id=${visibleSessionId}${resultReadyId || pendingNavigateId ? "" : "&incomplete=1"}`
+    : "/diagnostic";
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -640,31 +650,24 @@ function DiagnosticPage() {
 
             {phase === "wrapping" && (
               <>
-                <p className="text-sm text-muted-foreground">
-                  Bramwell is preparing your Readiness Score…
-                </p>
+                {resultReadyId || pendingNavigateId ? (
+                  <p className="text-sm text-muted-foreground">
+                    Your Readiness Score is ready.
+                  </p>
+                ) : (
+                  <p className="text-sm text-muted-foreground">
+                    Bramwell is preparing your Readiness Score…
+                  </p>
+                )}
                 <p className="mt-2 text-xs text-muted-foreground/70">
                   This usually takes a few seconds. If nothing happens, use the button below.
                 </p>
-                <button
-                  onClick={() => {
-                    const sid =
-                      sessionIdRef.current ??
-                      window.sessionStorage.getItem("bramwell-diagnostic-session-id");
-                    if (sid) {
-                      const isComplete = submittedRef.current || pendingNavigateId === sid;
-                      window.location.assign(
-                        `/diagnostic/result?id=${sid}${isComplete ? "" : "&incomplete=1"}`,
-                      );
-                    } else {
-                      setErrorMsg("We could not find this diagnostic session. Please start again.");
-                      setPhase("error");
-                    }
-                  }}
+                <a
+                  href={resultHref}
                   className="mt-6 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium transition hover:bg-foreground/10"
                 >
                   Take me to my result →
-                </button>
+                </a>
               </>
             )}
 
