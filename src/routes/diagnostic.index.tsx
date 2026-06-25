@@ -589,36 +589,19 @@ function DiagnosticPage() {
               <h1
                 className="mt-6 text-balance font-extrabold tracking-tight text-white"
                 style={{
-                  fontSize: "clamp(48px, 8vw, 96px)",
-                  lineHeight: 1.05,
+                  fontSize: "clamp(40px, 6.5vw, 76px)",
+                  lineHeight: 1.04,
                   fontWeight: 800,
                 }}
               >
                 You're losing rooms you should be winning. Find out exactly why.
               </h1>
-              <p className="mx-auto mt-8 max-w-[480px] text-[18px] leading-relaxed text-muted-foreground">
-                Bramwell listens to one answer and tells you your communication
-                type, your three biggest gaps, and your Readiness Score out of
-                100. No scripts. No preparation. Just the truth about how you
-                come across under pressure.
+              <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-relaxed text-muted-foreground">
+                One question. One honest answer. Bramwell gives you your
+                communication type, your three biggest gaps, and your
+                Readiness Score — in under three minutes.
               </p>
-              <div className="mx-auto mt-8 max-w-xl rounded-2xl border border-border bg-foreground/[0.03] px-5 py-4 text-left backdrop-blur">
-                <p
-                  className="text-[10px] font-semibold uppercase"
-                  style={{ letterSpacing: "0.24em", color: "var(--primary)" }}
-                >
-                  The science behind Bramwell
-                </p>
-                <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
-                  Trained on <span className="font-semibold text-white">10,000+ hours</span> of high-stakes
-                  interviews, board pitches and executive briefings — analysed against the
-                  communication frameworks of <span className="font-semibold text-white">Mehrabian, Cuddy,
-                  Goleman and Carnegie</span>, and the behavioural patterns used by the world's top
-                  executive coaches. Bramwell hears what interviewers, boards and clients hear —
-                  and tells you what they won't.
-                </p>
-              </div>
-              <div className="mt-10 flex justify-center">
+              <div className="mt-8 flex justify-center">
                 <button
                   onClick={startDiagnostic}
                   className="group inline-flex h-14 items-center justify-center gap-2 rounded-full bg-white px-9 text-base font-semibold text-neutral-900 shadow-lg transition hover:bg-neutral-100"
@@ -627,11 +610,11 @@ function DiagnosticPage() {
                   <span className="transition-transform group-hover:translate-x-0.5">→</span>
                 </button>
               </div>
-              <p className="mt-5 text-xs font-medium text-white/90">
+              <p className="mt-4 text-xs text-muted-foreground">
                 Instant result · Free · No credit card
               </p>
 
-              <ul className="mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+              <ul className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
                 {[
                   {
                     title: "3 minutes",
@@ -673,12 +656,20 @@ function DiagnosticPage() {
                 ))}
               </ul>
 
-              <div className="mx-auto mt-8 flex max-w-2xl flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px] uppercase text-muted-foreground/70" style={{ letterSpacing: "0.18em" }}>
-                <span>Built with executive coaches</span>
-                <span aria-hidden>·</span>
-                <span>Trusted by leaders preparing for boards, pitches & interviews</span>
-                <span aria-hidden>·</span>
-                <span>GDPR-safe</span>
+              <div className="mx-auto mt-10 max-w-xl border-t border-border/60 pt-6">
+                <p
+                  className="text-[10px] font-semibold uppercase"
+                  style={{ letterSpacing: "0.24em", color: "var(--primary)" }}
+                >
+                  The science behind Bramwell
+                </p>
+                <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
+                  Trained on <span className="font-semibold text-white">10,000+ hours</span> of
+                  high-stakes interviews, pitches and board briefings — analysed against the
+                  frameworks of <span className="font-semibold text-white">Mehrabian, Cuddy,
+                  Goleman and Carnegie</span>. Bramwell hears what interviewers and boards hear,
+                  and tells you what they won't.
+                </p>
               </div>
             </>
           )}
