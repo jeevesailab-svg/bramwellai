@@ -52,37 +52,26 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
         }
 
         const res = await fetch(
-          `https://api.elevenlabs.io/v1/convai/conversation/token?agent_id=${agentId}`,
+          `https://api.elevenlabs.io/v1/convai/conversation/get-signed-url?agent_id=${agentId}`,
           { headers: { "xi-api-key": apiKey } },
         );
         if (!res.ok) {
           const txt = await res.text();
-          console.error("ElevenLabs diagnostic token error:", res.status, txt);
-
-          if (/missing_permissions/i.test(txt)) {
-            const { data: row, error: insertErr } = await supabaseAdmin
-              .from("diagnostic_sessions")
-              .insert({ ip_address: ip })
-              .select("id")
-              .single();
-            if (insertErr || !row) {
-              console.error("diagnostic-token: insert failed", insertErr);
-              return Response.json({ error: "Server error" }, { status: 500 });
-            }
-
-            return Response.json({
-              agentId,
-              sessionId: row.id,
-              authMode: "public-agent",
-            });
-          }
+          console.error("ElevenLabs diagnostic signed-url error:", res.status, txt);
 
           return Response.json(
             { error: "Could not start diagnostic" },
             { status: 502 },
           );
         }
-        const { token } = (await res.json()) as { token: string };
+        const { signed_url: signedUrl } = (await res.json()) as { signed_url?: string };
+        if (!signedUrl) {
+          console.error("diagnostic-token: missing ElevenLabs signed URL");
+          return Response.json(
+            { error: "Could not start diagnostic" },
+            { status: 502 },
+          );
+        }
 
         // Record this attempt (counts toward the 24h limit).
         const { data: row, error: insertErr } = await supabaseAdmin
@@ -95,7 +84,7 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
           return Response.json({ error: "Server error" }, { status: 500 });
         }
 
-        return Response.json({ token, agentId, sessionId: row.id });
+        return Response.json({ signedUrl, agentId, sessionId: row.id, authMode: "signed-url" });
       },
     },
   },
