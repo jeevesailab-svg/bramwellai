@@ -48,6 +48,8 @@ type ConversationHandle = {
 };
 
 type SubmitInput = {
+  sessionId?: string;
+  session_id?: string;
   communication_type?: string;
   readiness_score?: number | string;
   gaps?: string[];
@@ -57,7 +59,33 @@ type SubmitInput = {
   career_moment?: string;
   first_name?: string;
   email?: string;
+  metrics?: unknown;
 };
+
+function normalizeCommunicationType(value: unknown): SubmitInput["communication_type"] | null {
+  if (typeof value !== "string") return null;
+  const normalized = value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+
+  const aliases: Record<string, string> = {
+    invisible_achiever: "invisible_achiever",
+    invisible_achievers: "invisible_achiever",
+    over_explainer: "over_explainer",
+    overexplainer: "over_explainer",
+    under_seller: "under_seller",
+    underseller: "under_seller",
+    rambler: "rambler",
+    apologiser: "apologiser",
+    apologizer: "apologiser",
+    next_level_leader: "next_level_leader",
+    nextlevelleader: "next_level_leader",
+  };
+
+  return aliases[normalized] ?? null;
+}
 
 function diagnosticResultCacheKey(sessionId: string) {
   return `bramwell-diagnostic-result:${sessionId}`;
@@ -78,7 +106,7 @@ function routePathway(
   input: SubmitInput,
 ): { key: PathwayKey; name: string; price: string } {
   const moment = (input.career_moment ?? "").toLowerCase();
-  const type = (input.communication_type ?? "").toLowerCase();
+  const type = normalizeCommunicationType(input.communication_type) ?? "";
   const score = normalizeReadinessScore(input.readiness_score) ?? 0;
 
   // Career-moment overrides win.
@@ -158,13 +186,20 @@ function DiagnosticPage() {
           );
 
       const readinessScore = normalizeReadinessScore(input.readiness_score);
+      const communicationType = normalizeCommunicationType(input.communication_type);
       const required =
-        typeof input.communication_type === "string" &&
+        communicationType !== null &&
         readinessScore !== null &&
         normalizedGaps.length > 0;
       if (!required) return "Missing required fields";
 
-      const pathway = routePathway({ ...input, gaps: normalizedGaps, readiness_score: readinessScore });
+      const normalizedInput = {
+        ...input,
+        communication_type: communicationType,
+        gaps: normalizedGaps,
+        readiness_score: readinessScore,
+      };
+      const pathway = routePathway(normalizedInput);
       submittedRef.current = true;
       resultSubmittedAtRef.current = Date.now();
       try {
@@ -175,7 +210,7 @@ function DiagnosticPage() {
             sessionId,
             first_name: input.first_name,
             email: input.email,
-            communication_type: input.communication_type,
+            communication_type: communicationType,
             readiness_score: readinessScore,
             gaps: normalizedGaps,
             career_moment: input.career_moment ?? "",
@@ -183,6 +218,7 @@ function DiagnosticPage() {
             recommended_pathway_name: pathway.name,
             recommended_price: pathway.price,
             transcript: transcriptRef.current.join("\n"),
+            metrics: input.metrics,
           }),
         });
         if (!res.ok) throw new Error(`Result save failed (${res.status})`);
@@ -192,13 +228,14 @@ function DiagnosticPage() {
             id: sessionId,
             first_name: input.first_name ?? null,
             has_email: Boolean(input.email),
-            communication_type: input.communication_type,
+            communication_type: communicationType,
             readiness_score: readinessScore,
             gaps: normalizedGaps,
             career_moment: input.career_moment || null,
             recommended_pathway: pathway.key,
             recommended_pathway_name: pathway.name,
             recommended_price: pathway.price,
+            metrics: input.metrics ?? null,
           }),
         );
       } catch (e) {
@@ -222,8 +259,7 @@ function DiagnosticPage() {
     const sid = sessionIdRef.current;
     const input = params ?? {};
     const hasPayload =
-      typeof input.communication_type === "string" &&
-      input.communication_type.trim().length > 0 &&
+      normalizeCommunicationType(input.communication_type) !== null &&
       normalizeReadinessScore(input.readiness_score) !== null &&
       (Array.isArray(input.gaps)
         ? input.gaps.some((g) => typeof g === "string" && g.trim().length > 0)
