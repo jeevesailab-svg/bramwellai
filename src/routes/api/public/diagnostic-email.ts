@@ -93,9 +93,9 @@ export const Route = createFileRoute("/api/public/diagnostic-email")({
         // Send the readiness report directly via Resend (connector gateway).
         const lovableKey = process.env.LOVABLE_API_KEY;
         const resendKey = process.env.RESEND_API_KEY;
-        if (lovableKey && resendKey) {
+        if (lovableKey && resendKey && row.email) {
           try {
-            const html = renderReportEmail(row);
+            const html = renderReportEmail({ ...row, email: row.email });
             const sendRes = await fetch(
               "https://connector-gateway.lovable.dev/resend/emails",
               {
