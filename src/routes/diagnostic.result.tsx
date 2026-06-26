@@ -354,10 +354,9 @@ function ResultBody({ result }: { result: Result }) {
       </section>
 
       {/* SECTION 2, Type */}
-      <a
-        href={isStubStripe ? "/pricing" : stripeHref}
-        target={isStubStripe ? undefined : "_blank"}
-        rel={isStubStripe ? undefined : "noopener noreferrer"}
+      <Link
+        to="/pricing"
+        search={{ recommended: pathwayKey, resume: pathwayKey }}
         className="block rounded-2xl border border-border bg-foreground/[0.03] p-8 text-center backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.06]"
       >
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
@@ -375,7 +374,7 @@ function ResultBody({ result }: { result: Result }) {
         <p className="mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
           Start my {result.recommended_pathway_name} →
         </p>
-      </a>
+      </Link>
 
       {/* SECTION 3, Behavioural report (gated) */}
       <BehaviouralReport
@@ -409,30 +408,18 @@ function ResultBody({ result }: { result: Result }) {
 
       {/* SECTION 5, CTA */}
       <section className="text-center">
-        <a
-          href={stripeHref}
-          aria-disabled={isStubStripe}
-          target={isStubStripe ? undefined : "_blank"}
-          rel={isStubStripe ? undefined : "noopener noreferrer"}
-          className={`inline-flex h-14 w-full items-center justify-center rounded-full px-8 text-base font-semibold transition md:w-auto ${
-            isStubStripe
-              ? "cursor-not-allowed border border-border bg-foreground/5 text-muted-foreground"
-              : "text-white hover:opacity-95"
-          }`}
-          style={
-            isStubStripe
-              ? undefined
-              : {
-                  background:
-                    "linear-gradient(135deg, hsl(142 76% 36%), hsl(160 84% 39%))",
-                  boxShadow: "var(--shadow-elegant)",
-                }
-          }
+        <Link
+          to="/pricing"
+          search={{ recommended: pathwayKey, resume: pathwayKey }}
+          className="inline-flex h-14 w-full items-center justify-center rounded-full px-8 text-base font-semibold text-white transition hover:opacity-95 md:w-auto"
+          style={{
+            background:
+              "linear-gradient(135deg, hsl(142 76% 36%), hsl(160 84% 39%))",
+            boxShadow: "var(--shadow-elegant)",
+          }}
         >
-          {isStubStripe
-            ? `${result.recommended_pathway_name}, coming soon`
-            : `Start my ${result.recommended_pathway_name}, ${result.recommended_price}`}
-        </a>
+          {`Start my ${result.recommended_pathway_name}, ${result.recommended_price}`}
+        </Link>
         <div className="mt-4">
           <Link
             to="/pricing"
