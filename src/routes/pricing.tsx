@@ -278,13 +278,12 @@ function PricingPage() {
       <section className="relative overflow-hidden pb-20 pt-12 md:pb-28 md:pt-20" style={{ background: "var(--gradient-hero)" }}>
         <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 rounded-full opacity-25 blur-3xl" style={{ background: "var(--gradient-gold)" }} />
         <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
-          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Pricing</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Bramwell AI</p>
           <h1 className="mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            One pathway. The whole career change.
+            Become the most persuasive person in the room.
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-            Five Bramwell pathways. Each one tuned to the moment you're standing in.
-            Take the free diagnostic first, we'll recommend the right fit.
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+            Speak like a born leader. The science is proven. Bramwell builds your credibility, develops trusted relationships, breaks barriers to progress, and propels your influence.
           </p>
           <Link
             to="/diagnostic"
