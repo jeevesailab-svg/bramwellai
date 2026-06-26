@@ -323,6 +323,18 @@ function PricingPage() {
         </p>
       </section>
 
+      <section className="border-t border-border bg-foreground/[0.02] py-16 md:py-20">
+        <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
+          <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>The Bramwell Guarantee</p>
+          <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Value on session one, or your money back.
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground">
+            Run your first session. If Bramwell doesn't identify something specific and actionable about how you communicate, something you hadn't seen yourself, we'll refund you in full. No forms. No questions.
+          </p>
+        </div>
+      </section>
+
       <footer className="border-t border-border bg-background py-12">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 md:flex-row md:items-center md:px-10">
           <div className="flex items-baseline gap-1.5">
