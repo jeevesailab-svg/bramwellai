@@ -451,6 +451,11 @@ function DiagnosticPage() {
         if (submittedRef.current) return;
         intentionallyEndingRef.current = true;
         setPhase("wrapping");
+        try {
+          void conversationRef.current?.endSession();
+        } catch {
+          /* noop */
+        }
       }
     }, 250);
     return () => clearInterval(tick);
@@ -468,10 +473,12 @@ function DiagnosticPage() {
     if (!sid) return;
     const timeout = setTimeout(() => {
       if (submittedRef.current || pendingNavigateId) return;
-      window.location.assign(`/diagnostic/result?id=${sid}&incomplete=1`);
-    }, 45000);
+      void finalizeFromTranscript(sid).finally(() => {
+        window.location.assign(`/diagnostic/result?id=${sid}`);
+      });
+    }, 12000);
     return () => clearTimeout(timeout);
-  }, [phase, pendingNavigateId]);
+  }, [phase, pendingNavigateId, finalizeFromTranscript]);
 
   // Server/webhook tools save the score without calling the browser. Poll the
   // current session so the UI can move forward as soon as the backend result
@@ -534,7 +541,9 @@ function DiagnosticPage() {
           return;
         }
         if (elapsed >= RESULT_NAV_HARD_CAP_MS) {
-          window.location.assign(incompleteTarget);
+          void finalizeFromTranscript(pendingNavigateId).finally(() => {
+            window.location.assign(target);
+          });
         }
         return;
       }
@@ -558,7 +567,13 @@ function DiagnosticPage() {
     // Hard safety cap so users are never stranded if isSpeaking never flips.
     const hardTimeout = setTimeout(() => {
       if (cancelled) return;
-      window.location.assign(resultIsReady ? target : incompleteTarget);
+      if (resultIsReady) {
+        window.location.assign(target);
+        return;
+      }
+      void finalizeFromTranscript(pendingNavigateId).finally(() => {
+        window.location.assign(target);
+      });
     }, RESULT_NAV_HARD_CAP_MS);
 
     return () => {
@@ -566,7 +581,7 @@ function DiagnosticPage() {
       clearInterval(poll);
       clearTimeout(hardTimeout);
     };
-  }, [pendingNavigateId, resultReadyId]);
+  }, [pendingNavigateId, resultReadyId, finalizeFromTranscript]);
 
   const startDiagnostic = useCallback(async () => {
     setErrorMsg(null);
@@ -664,7 +679,7 @@ function DiagnosticPage() {
   const ss = String(secondsLeft % 60).padStart(2, "0");
   const visibleSessionId = resultReadyId ?? pendingNavigateId ?? currentSessionId;
   const resultHref = visibleSessionId
-    ? `/diagnostic/result?id=${visibleSessionId}${resultReadyId || pendingNavigateId ? "" : "&incomplete=1"}`
+    ? `/diagnostic/result?id=${visibleSessionId}`
     : "/diagnostic";
 
   return (
@@ -839,11 +854,11 @@ function DiagnosticPage() {
                   </p>
                 ) : (
                   <p className="text-sm text-muted-foreground">
-                    Bramwell is preparing your Readiness Score…
+                    Bramwell is scoring your answer…
                   </p>
                 )}
                 <p className="mt-2 text-xs text-muted-foreground/70">
-                  This usually takes a few seconds. If nothing happens, use the button below.
+                  This usually takes a few seconds. If the voice handoff misses, Bramwell will score from your transcript.
                 </p>
                 <a
                   href={resultHref}
