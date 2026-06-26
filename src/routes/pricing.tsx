@@ -54,82 +54,92 @@ type Pathway = {
 
 const PATHWAYS: Pathway[] = [
   {
-    key: "club",
-    name: "The Club",
-    forWho: "Always-on access",
-    price: "$79 AUD",
-    cadence: "per month",
-    sessions: "Unlimited sessions",
-    highlight: true,
-    blurb:
-      "Every interview. Every pitch. Every year. Bramwell stays with you, the moment you need it, whatever the stakes.",
-    includes: [
-      "Unlimited live voice sessions",
-      "Full story-bank & history",
-      "Priority feature access",
-      "Cancel anytime",
-    ],
-  },
-  {
     key: "graduate",
-    name: "The Graduate",
-    forWho: "First serious interview",
-    price: "$99 AUD",
+    name: "Graduate Interview Prep",
+    forWho: "Graduates entering the workforce",
+    price: "A$99",
     cadence: "one-time",
-    sessions: "3 sessions · 20 min",
-    blurb: "Land the role that sets the next ten years in motion.",
+    sessions: "3 sessions · 20 mins · use within 14 days",
+    blurb:
+      "You've worked for this. Transform your words to be the person that gets chosen. Your CV got you the interview, now the job goes to whoever commands the room.",
     includes: [
-      "CV + JD context analysis",
-      "Live AI voice rehearsal",
-      "Readiness score after each session",
-      "Homework between sessions",
+      "5-minute AI diagnostic, your exact gaps identified before session one",
+      "3 × 20-min voice coaching sessions built to your role and industry",
+      "Structured frameworks for behavioural and competency questions",
+      "Real-time interruption when your delivery drifts, no empty praise",
+      "Full performance report delivered to your inbox",
     ],
   },
   {
     key: "comeback",
-    name: "The Comeback",
-    forWho: "Returning to work",
-    price: "$199 AUD",
+    name: "Career Comeback Sprint",
+    forWho: "Returning after a break or redundancy",
+    price: "A$199",
     cadence: "one-time",
-    sessions: "5 sessions · 25 min",
-    blurb: "Rebuild fluency, authority, and presence on your own terms.",
+    sessions: "3 sessions · 30 mins · use within 21 days",
+    blurb:
+      "The experience is still there. It just needs to sound like it. Your story, rebuilt for the room you're walking into, no judgement, no generic prep.",
     includes: [
-      "Everything in The Graduate",
-      "Story-bank library of your answers",
-      "Targeted confidence drills",
-      "30-day access window",
+      "Diagnostic that maps your gap and rebuilds your confidence baseline",
+      "3 × 30-min sessions tuned to modern language and your specific story",
+      "Career break narrative coaching, turn the gap into a strength",
+      "Pressure simulation: harder follow-ups when you're getting comfortable",
+      "Full performance report and recommended next session focus",
     ],
   },
   {
     key: "confidence",
-    name: "The Confidence",
-    forWho: "Mid-career pivot",
-    price: "$249 AUD",
+    name: "Interview Confidence Sprint",
+    forWho: "Mid-career with a real interview coming",
+    price: "A$249",
     cadence: "one-time",
-    sessions: "6 sessions · 30 min",
+    sessions: "4 sessions · 30 mins · use within 14 days",
     highlight: true,
-    blurb: "Translate what you've done into the language of the next role.",
+    blurb:
+      "You're the most qualified person in the room. It's time to sound like it. Four sessions designed to close the gap between who you are and how they hear you.",
     includes: [
-      "Everything in The Comeback",
-      "Narrative architecture for pivots",
-      "Salary & negotiation rehearsal",
-      "60-day access window",
+      "Full diagnostic, readiness score, communication type, three specific gaps",
+      "4 × 30-min sessions: diagnose → drill → pressure → perform",
+      "Commercial language coaching, translate impact into numbers that land",
+      "Curveball and pushback simulation, trained for what actually happens",
+      "Before-and-after performance report to track your improvement",
+      "Salary and offer negotiation language coaching",
     ],
   },
   {
     key: "executive",
-    name: "Executive Presence",
-    forWho: "C-suite · Board rooms · High-stakes pitches",
-    price: "$499 AUD",
+    name: "Executive Communication Sprint",
+    forWho: "Senior leaders in high-stakes conversations",
+    price: "A$499",
     cadence: "one-time",
-    sessions: "8 sessions · 30 min",
+    sessions: "3 sessions · 30 mins · precision over volume",
     blurb:
-      "For leaders where every word carries commercial weight. Bramwell calibrates your authority, cadence, and conviction, until the room reads you as the most senior person in it.",
+      "The room already respects your title. Make them respect your thinking. Peer-level coaching: direct, precise, zero filler. Three high-signal sessions.",
     includes: [
-      "Everything in The Confidence",
-      "Board-level question banks",
-      "Stakeholder & investor rehearsal",
-      "90-day access window",
+      "Executive diagnostic, precision readiness mapping for senior conversations",
+      "3 × 30-min peer-level coaching, high-signal feedback only",
+      "Board, CEO, and panel interview simulation",
+      "Strategic narrative coaching, the three-line version of your vision",
+      "Stakeholder influence and buying committee language",
+      "Executive presence: pacing, silence, authority under pressure",
+    ],
+  },
+  {
+    key: "club",
+    name: "Career Confidence Club",
+    forWho: "When high-stakes conversations never stop",
+    price: "A$79",
+    cadence: "per month · cancel anytime",
+    sessions: "Up to 3 sessions per week · 30 mins each",
+    blurb:
+      "Promotions. Pay reviews. Difficult stakeholders. Board presentations. Stay sharp between the moments that matter, so when your moment arrives, you're already ready.",
+    includes: [
+      "Unlimited voice coaching, up to 3 sessions per week",
+      "Monthly re-diagnostic to track your improvement over time",
+      "New scenario library added monthly: negotiations, presentations, stakeholders",
+      "Priority access to new features and session types as they launch",
+      "Community access, share wins, prep together, stay accountable",
+      "20% off any sprint upgrade, any time",
     ],
   },
 ];
@@ -268,13 +278,12 @@ function PricingPage() {
       <section className="relative overflow-hidden pb-20 pt-12 md:pb-28 md:pt-20" style={{ background: "var(--gradient-hero)" }}>
         <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 rounded-full opacity-25 blur-3xl" style={{ background: "var(--gradient-gold)" }} />
         <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
-          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Pricing</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Bramwell AI</p>
           <h1 className="mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            One pathway. The whole career change.
+            Become the most persuasive person in the room.
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-            Five Bramwell pathways. Each one tuned to the moment you're standing in.
-            Take the free diagnostic first, we'll recommend the right fit.
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+            Speak like a born leader. The science is proven. Bramwell builds your credibility, develops trusted relationships, breaks barriers to progress, and propels your influence.
           </p>
           <Link
             to="/diagnostic"
@@ -312,6 +321,18 @@ function PricingPage() {
         <p className="mx-auto mt-12 max-w-2xl px-6 text-center text-xs uppercase tracking-[0.2em] text-muted-foreground">
           Private by design · Cancel anytime · Built for the moments that matter
         </p>
+      </section>
+
+      <section className="border-t border-border bg-foreground/[0.02] py-16 md:py-20">
+        <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
+          <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>The Bramwell Guarantee</p>
+          <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Value on session one, or your money back.
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground">
+            Run your first session. If Bramwell doesn't identify something specific and actionable about how you communicate, something you hadn't seen yourself, we'll refund you in full. No forms. No questions.
+          </p>
+        </div>
       </section>
 
       <footer className="border-t border-border bg-background py-12">
