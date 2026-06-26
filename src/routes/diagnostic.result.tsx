@@ -65,17 +65,26 @@ const STRIPE: Record<PathwayKey, string> = {
 
 const TYPE_DESCRIPTIONS: Record<string, string> = {
   rambler:
-    "You have strong ideas, they just come out in the wrong order under pressure.",
+    "Your ideas are strong. The problem is structure. You'll learn the communication frameworks that senior professionals use to organise their thinking on the spot, so your point arrives clearly, and the room remembers it.",
   under_seller:
-    "You have done impressive things. You just do not say so.",
+    "You've done the work. The gap is between what you've delivered and how you're describing it. You'll learn the system that translates your results into precise, confident language, so what you say in the room reflects what you've actually achieved.",
   over_explainer:
-    "You give the room everything when it only needed one thing.",
+    "You have command of the detail. The challenge is knowing when to use it. You give the room the full picture when they need the headline. We'll train you to lead with your conclusion, hold the detail in reserve, and become the person leadership turns to when they need clarity under pressure.",
   apologiser:
-    "You shrink when you should stand. Your voice asks for permission instead of commanding attention.",
+    "You have the credentials, the experience, and the track record. What needs work is how that comes across under pressure. We'll close the gap between your capability and your delivery, so the room hears your authority from the first sentence.",
   invisible_achiever:
-    "You deliver at the highest level. Nobody outside your immediate team knows it.",
+    "You're operating at a high level. The problem is visibility. You've been focused on the work while others have been focused on being seen doing it. We'll make sure the people who matter know exactly what you're contributing, because impact that isn't communicated doesn't advance a career.",
   next_level_leader:
-    "You communicate well. You just need sharper edges.",
+    "You already present well and hold the room. What we're refining now is the difference between competent and commanding, the precision, the timing, the presence that makes people stop and listen. That's the final edge.",
+};
+
+const TYPE_LABELS: Record<string, string> = {
+  rambler: "Storyteller",
+  under_seller: "Understater",
+  over_explainer: "Deep-Diver",
+  apologiser: "Permission-Seeker",
+  invisible_achiever: "Hidden Operator",
+  next_level_leader: "Unheard Leader",
 };
 
 const PATHWAY_OUTCOMES: Record<PathwayKey, string[]> = {
@@ -139,6 +148,8 @@ function normalizeTypeKey(type: string): string {
 
 function formatType(type: string): string {
   const cleaned = normalizeTypeKey(type).replace(/_/g, " ");
+  const key = normalizeTypeKey(type);
+  if (TYPE_LABELS[key]) return `The ${TYPE_LABELS[key]}`;
   const titled = cleaned
     .split(" ")
     .map((w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w))
@@ -343,7 +354,12 @@ function ResultBody({ result }: { result: Result }) {
       </section>
 
       {/* SECTION 2, Type */}
-      <section className="rounded-2xl border border-border bg-foreground/[0.03] p-8 text-center backdrop-blur">
+      <a
+        href={isStubStripe ? "/pricing" : stripeHref}
+        target={isStubStripe ? undefined : "_blank"}
+        rel={isStubStripe ? undefined : "noopener noreferrer"}
+        className="block rounded-2xl border border-border bg-foreground/[0.03] p-8 text-center backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.06]"
+      >
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
           Your communication type
         </p>
@@ -356,7 +372,10 @@ function ResultBody({ result }: { result: Result }) {
         <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-foreground/90">
           {describeType(result.communication_type)}
         </p>
-      </section>
+        <p className="mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
+          Start my {result.recommended_pathway_name} →
+        </p>
+      </a>
 
       {/* SECTION 3, Behavioural report (gated) */}
       <BehaviouralReport
