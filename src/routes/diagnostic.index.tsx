@@ -515,7 +515,6 @@ function DiagnosticPage() {
   useEffect(() => {
     if (!pendingNavigateId) return;
     const target = `/diagnostic/result?id=${pendingNavigateId}`;
-    const incompleteTarget = `/diagnostic/result?id=${pendingNavigateId}&incomplete=1`;
     let cancelled = false;
     const submittedAt = resultSubmittedAtRef.current ?? Date.now();
     let notSpeakingSince: number | null = null;
