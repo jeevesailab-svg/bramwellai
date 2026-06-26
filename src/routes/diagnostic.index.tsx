@@ -38,7 +38,7 @@ type PathwayKey = keyof typeof PATHWAY;
 const SESSION_LIMIT_MS = 5 * 60 * 1000;
 const RESULT_NAV_MIN_DELAY_MS = 45000;
 const RESULT_NAV_SILENCE_MS = 10000;
-const RESULT_NAV_HARD_CAP_MS = 120000;
+const RESULT_NAV_HARD_CAP_MS = 90000;
 
 type ConversationHandle = {
   endSession: () => unknown;
@@ -290,6 +290,28 @@ function DiagnosticPage() {
     return submitResult(input);
   }, [submitResult]);
 
+  const finalizeFromTranscript = useCallback(async (sessionId: string) => {
+    const res = await fetch("/api/public/diagnostic-incomplete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        sessionId,
+        transcript: transcriptRef.current.join("\n"),
+      }),
+    }).catch(() => null);
+
+    if (!res?.ok) return false;
+    const body = (await res.json().catch(() => ({}))) as { completed?: boolean };
+    if (!body.completed) return false;
+
+    submittedRef.current = true;
+    resultReadyRef.current = true;
+    resultSubmittedAtRef.current ??= Date.now();
+    setResultReadyId(sessionId);
+    setPendingNavigateId(sessionId);
+    return true;
+  }, []);
+
   const conversation = useConversation({
     onConnect: () => {
       hasConnectedRef.current = true;
@@ -318,11 +340,7 @@ function DiagnosticPage() {
         // Fallback: if the user ended the call or the timer expired without the
         // agent invoking submitDiagnostic, flag the session instead of losing it.
         if (sid && !submittedRef.current) {
-          void fetch("/api/public/diagnostic-incomplete", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ sessionId: sid }),
-          }).catch(() => undefined);
+          void finalizeFromTranscript(sid);
         }
         return;
       }
@@ -343,11 +361,7 @@ function DiagnosticPage() {
       }
 
       if (sid && !submittedRef.current) {
-        void fetch("/api/public/diagnostic-incomplete", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sessionId: sid }),
-        }).catch(() => undefined);
+        void finalizeFromTranscript(sid);
       }
     },
     onError: (message, context) => {
