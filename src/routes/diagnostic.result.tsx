@@ -354,7 +354,12 @@ function ResultBody({ result }: { result: Result }) {
       </section>
 
       {/* SECTION 2, Type */}
-      <section className="rounded-2xl border border-border bg-foreground/[0.03] p-8 text-center backdrop-blur">
+      <a
+        href={isStubStripe ? "/pricing" : stripeHref}
+        target={isStubStripe ? undefined : "_blank"}
+        rel={isStubStripe ? undefined : "noopener noreferrer"}
+        className="block rounded-2xl border border-border bg-foreground/[0.03] p-8 text-center backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.06]"
+      >
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
           Your communication type
         </p>
@@ -367,7 +372,10 @@ function ResultBody({ result }: { result: Result }) {
         <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-foreground/90">
           {describeType(result.communication_type)}
         </p>
-      </section>
+        <p className="mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
+          Start my {result.recommended_pathway_name} →
+        </p>
+      </a>
 
       {/* SECTION 3, Behavioural report (gated) */}
       <BehaviouralReport
