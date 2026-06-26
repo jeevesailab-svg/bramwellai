@@ -39,7 +39,9 @@ function extractUserAnswer(transcript: string): string {
     .filter((line) => /^you:/i.test(line))
     .map((line) => line.replace(/^you:\s*/i, "").trim())
     .filter(Boolean);
-  return (userLines.length ? userLines : [transcript]).join(" ").trim();
+  if (userLines.length) return userLines.join(" ").trim();
+  if (/^\s*bramwell:/im.test(transcript)) return "";
+  return transcript.trim();
 }
 
 function routePathway(input: {
