@@ -344,13 +344,6 @@ function ResultBody({ result }: { result: Result }) {
         <p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted-foreground">
           Your Communication Readiness Score
         </p>
-        <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-foreground/80">
-          How ready you are to walk into your next high-stakes conversation , 
-          interview, pitch, board room, and land it.
-        </p>
-        <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
-          This is your starting point, not your ceiling.
-        </p>
       </section>
 
       {/* SECTION 2, Type */}
@@ -366,11 +359,25 @@ function ResultBody({ result }: { result: Result }) {
           className="mt-4 bg-clip-text text-3xl font-semibold tracking-tight text-transparent md:text-4xl"
           style={{ backgroundImage: "var(--gradient-gold)" }}
         >
-          You are {formatType(result.communication_type)}
+          {formatType(result.communication_type)}
         </h2>
-        <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-foreground/90">
-          {describeType(result.communication_type)}
-        </p>
+        {result.gaps && result.gaps.length > 0 && (
+          <ul className="mx-auto mt-6 max-w-lg space-y-2 text-left">
+            {result.gaps.slice(0, 2).map((gap) => (
+              <li
+                key={gap}
+                className="flex gap-3 text-base leading-relaxed text-foreground/90"
+              >
+                <span
+                  aria-hidden
+                  className="mt-2 inline-block h-1.5 w-1.5 flex-none rounded-full"
+                  style={{ background: "var(--primary)" }}
+                />
+                <span>{gap}</span>
+              </li>
+            ))}
+          </ul>
+        )}
         <p className="mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
           Start my {result.recommended_pathway_name} →
         </p>
@@ -418,7 +425,7 @@ function ResultBody({ result }: { result: Result }) {
             boxShadow: "var(--shadow-elegant)",
           }}
         >
-          {`Start my ${result.recommended_pathway_name}, ${result.recommended_price}`}
+          {`Yes, fix this now , ${result.recommended_price}`}
         </Link>
         <div className="mt-4">
           <Link
