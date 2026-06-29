@@ -148,6 +148,31 @@ const PATHWAYS: Pathway[] = [
   },
 ];
 
+function getHeroCopy(score?: number) {
+  if (typeof score === "number" && score <= 50) {
+    return {
+      eyebrow: "Your next move",
+      headline: "Train your speaking skills. Sound like the person you already are.",
+      sub: "Short, focused training to organise your thoughts in real time and speak with authority, no more ideas vanishing mid sentence, no more rooms you should have won slipping away.",
+      cta: "Start training →",
+    };
+  }
+  if (typeof score === "number" && score <= 75) {
+    return {
+      eyebrow: "Your next level",
+      headline: "Persuasion is not getting your way. It is a skill you can learn.",
+      sub: "Influence and persuasion are how the most persuasive person in the room gets the promotion, wins the pitch, and closes the offer. Bramwell trains both, in your own voice.",
+      cta: "Build my edge →",
+    };
+  }
+  return {
+    eyebrow: "Strategic communication",
+    headline: "Build trust. Drive decisions. Lead with influence.",
+    sub: "Learn to persuade, influence and lead conversations so your ideas get heard, your recommendations get backed, and you get the yes you deserve.",
+    cta: "Sharpen my edge →",
+  };
+}
+
 function PricingPage() {
   const { recommended, resume, score } = Route.useSearch();
   const recommendedKey = (
