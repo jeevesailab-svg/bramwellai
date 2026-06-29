@@ -149,10 +149,12 @@ const PATHWAYS: Pathway[] = [
 ];
 
 function PricingPage() {
-  const { recommended, resume } = Route.useSearch();
+  const { recommended, resume, score } = Route.useSearch();
   const recommendedKey = (
     ["graduate", "comeback", "confidence", "executive", "club"] as const
   ).find((k) => k === recommended);
+
+  const hero = getHeroCopy(score);
 
   const pathways = recommendedKey
     ? PATHWAYS.map((p) => ({ ...p, highlight: p.key === recommendedKey }))
