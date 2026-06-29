@@ -284,18 +284,18 @@ function PricingPage() {
       <section className="relative overflow-hidden pb-20 pt-12 md:pb-28 md:pt-20" style={{ background: "var(--gradient-hero)" }}>
         <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 rounded-full opacity-25 blur-3xl" style={{ background: "var(--gradient-gold)" }} />
         <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
-          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Bramwell AI</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">{hero.eyebrow}</p>
           <h1 className="mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            Become the most persuasive person in the room.
+            {hero.headline}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Speak like a born leader. The science is proven. Bramwell builds your credibility, develops trusted relationships, breaks barriers to progress, and propels your influence.
+            {hero.sub}
           </p>
           <Link
             to="/diagnostic"
             className="mt-8 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium backdrop-blur transition hover:bg-foreground/10"
           >
-            Take the free diagnostic →
+            {hero.cta}
           </Link>
         </div>
       </section>
