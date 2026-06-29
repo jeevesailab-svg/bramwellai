@@ -112,7 +112,7 @@ function Hero() {
 
         <div className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
           <p>
-            Bramwell coaches you out loud, on the exact questions you'll face, in real time, until the right answer lives in your voice. Not on a script. Available the night before. No booking. No $400/session coach. No ChatGPT answer that falls apart the moment they go off-script.
+            Bramwell is a high-performance strategic communication coach that will precisely assess how you communicate and tell you exactly what's costing you the room.
           </p>
         </div>
 
@@ -126,7 +126,7 @@ function Hero() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Take the free diagnostic
+            Show me what's costing me the room
             <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
         </div>
