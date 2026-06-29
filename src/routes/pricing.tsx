@@ -13,6 +13,10 @@ export const Route = createFileRoute("/pricing")({
       typeof search.recommended === "string" ? search.recommended : undefined,
     resume:
       typeof search.resume === "string" ? search.resume : undefined,
+    score:
+      typeof search.score === "string" || typeof search.score === "number"
+        ? Number(search.score)
+        : undefined,
   }),
   head: () => ({
     meta: [
@@ -144,11 +148,38 @@ const PATHWAYS: Pathway[] = [
   },
 ];
 
+function getHeroCopy(score?: number) {
+  if (typeof score === "number" && score <= 50) {
+    return {
+      eyebrow: "Your next move",
+      headline: "Train your speaking skills. Sound like the person you already are.",
+      sub: "Short, focused training to organise your thoughts in real time and speak with authority, no more ideas vanishing mid sentence, no more rooms you should have won slipping away.",
+      cta: "Start training →",
+    };
+  }
+  if (typeof score === "number" && score <= 75) {
+    return {
+      eyebrow: "Your next level",
+      headline: "Persuasion is not getting your way. It is a skill you can learn.",
+      sub: "Influence and persuasion are how the most persuasive person in the room gets the promotion, wins the pitch, and closes the offer. Bramwell trains both, in your own voice.",
+      cta: "Build my edge →",
+    };
+  }
+  return {
+    eyebrow: "Strategic communication",
+    headline: "Build trust. Drive decisions. Lead with influence.",
+    sub: "Learn to persuade, influence and lead conversations so your ideas get heard, your recommendations get backed, and you get the yes you deserve.",
+    cta: "Sharpen my edge →",
+  };
+}
+
 function PricingPage() {
-  const { recommended, resume } = Route.useSearch();
+  const { recommended, resume, score } = Route.useSearch();
   const recommendedKey = (
     ["graduate", "comeback", "confidence", "executive", "club"] as const
   ).find((k) => k === recommended);
+
+  const hero = getHeroCopy(score);
 
   const pathways = recommendedKey
     ? PATHWAYS.map((p) => ({ ...p, highlight: p.key === recommendedKey }))
@@ -278,18 +309,18 @@ function PricingPage() {
       <section className="relative overflow-hidden pb-20 pt-12 md:pb-28 md:pt-20" style={{ background: "var(--gradient-hero)" }}>
         <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 rounded-full opacity-25 blur-3xl" style={{ background: "var(--gradient-gold)" }} />
         <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
-          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Bramwell AI</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">{hero.eyebrow}</p>
           <h1 className="mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            Become the most persuasive person in the room.
+            {hero.headline}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Speak like a born leader. The science is proven. Bramwell builds your credibility, develops trusted relationships, breaks barriers to progress, and propels your influence.
+            {hero.sub}
           </p>
           <Link
             to="/diagnostic"
             className="mt-8 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium backdrop-blur transition hover:bg-foreground/10"
           >
-            Take the free diagnostic →
+            {hero.cta}
           </Link>
         </div>
       </section>
