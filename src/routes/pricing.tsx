@@ -13,6 +13,10 @@ export const Route = createFileRoute("/pricing")({
       typeof search.recommended === "string" ? search.recommended : undefined,
     resume:
       typeof search.resume === "string" ? search.resume : undefined,
+    score:
+      typeof search.score === "string" || typeof search.score === "number"
+        ? Number(search.score)
+        : undefined,
   }),
   head: () => ({
     meta: [
