@@ -356,7 +356,7 @@ function ResultBody({ result }: { result: Result }) {
       {/* SECTION 2, Type */}
       <Link
         to="/pricing"
-        search={{ recommended: pathwayKey, resume: pathwayKey }}
+        search={{ recommended: pathwayKey, resume: pathwayKey, score: result.readiness_score }}
         className="block rounded-2xl border border-border bg-foreground/[0.03] p-8 text-center backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.06]"
       >
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
@@ -410,7 +410,7 @@ function ResultBody({ result }: { result: Result }) {
       <section className="text-center">
         <Link
           to="/pricing"
-          search={{ recommended: pathwayKey, resume: pathwayKey }}
+          search={{ recommended: pathwayKey, resume: pathwayKey, score: result.readiness_score }}
           className="inline-flex h-14 w-full items-center justify-center rounded-full px-8 text-base font-semibold text-white transition hover:opacity-95 md:w-auto"
           style={{
             background:
