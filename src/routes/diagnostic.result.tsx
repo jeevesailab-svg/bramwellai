@@ -379,7 +379,7 @@ function ResultBody({ result }: { result: Result }) {
           </ul>
         )}
         <p className="mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
-          Start my {result.recommended_pathway_name} →
+          Start fixing this →
         </p>
       </Link>
 
@@ -413,31 +413,86 @@ function ResultBody({ result }: { result: Result }) {
         </ul>
       </section>
 
-      {/* SECTION 5, CTA */}
-      <section className="text-center">
-        <Link
-          to="/pricing"
-          search={{ recommended: pathwayKey, resume: pathwayKey, score: result.readiness_score }}
-          className="inline-flex h-14 w-full items-center justify-center rounded-full px-8 text-base font-semibold text-white transition hover:opacity-95 md:w-auto"
+      {/* SECTION 5, CTA , high-conversion */}
+      <section className="relative">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-6 rounded-[2rem] opacity-60 blur-2xl"
+          style={{ background: "var(--gradient-gold)" }}
+        />
+        <div
+          className="relative overflow-hidden rounded-3xl border p-8 text-center md:p-10"
           style={{
+            borderColor: "color-mix(in oklab, var(--primary) 40%, transparent)",
             background:
-              "linear-gradient(135deg, hsl(142 76% 36%), hsl(160 84% 39%))",
+              "radial-gradient(120% 100% at 50% 0%, color-mix(in oklab, var(--primary) 14%, transparent) 0%, transparent 70%), var(--background)",
             boxShadow: "var(--shadow-elegant)",
           }}
         >
-          {`Yes, fix this now , ${result.recommended_price}`}
-        </Link>
-        <div className="mt-4">
+          <span
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-foreground/80"
+          >
+            <span
+              aria-hidden
+              className="inline-block h-1.5 w-1.5 animate-pulse rounded-full"
+              style={{ background: "var(--primary)" }}
+            />
+            Recommended for your score
+          </span>
+          <h2 className="mt-5 text-balance text-3xl font-semibold leading-[1.05] tracking-tight md:text-4xl">
+            Start fixing this with{" "}
+            <span
+              className="bg-clip-text text-transparent"
+              style={{ backgroundImage: "var(--gradient-gold)" }}
+            >
+              {result.recommended_pathway_name}
+            </span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-md text-sm text-muted-foreground">
+            Three sessions with Bramwell. Built around the exact gaps in your diagnostic.
+          </p>
+
           <Link
             to="/pricing"
-            className="text-sm text-muted-foreground transition hover:text-foreground"
+            search={{ recommended: pathwayKey, resume: pathwayKey, score: result.readiness_score }}
+            className="group mt-7 inline-flex h-14 w-full items-center justify-center gap-3 rounded-full px-8 text-base font-semibold transition hover:scale-[1.02] active:scale-[0.99] md:w-auto md:min-w-[360px]"
+            style={{
+              background: "var(--gradient-gold)",
+              color: "var(--primary-foreground)",
+              boxShadow:
+                "0 20px 60px -15px color-mix(in oklab, var(--primary) 70%, transparent), 0 0 0 1px color-mix(in oklab, var(--primary) 50%, transparent) inset",
+            }}
           >
-            Learn more about Bramwell →
+            <span>Start fixing this</span>
+            <span className="opacity-70">·</span>
+            <span className="tabular-nums">{result.recommended_price}</span>
+            <span aria-hidden className="transition group-hover:translate-x-1">→</span>
           </Link>
+
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden style={{ color: "var(--primary)" }}>✓</span>
+              30 day guarantee
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden style={{ color: "var(--primary)" }}>✓</span>
+              Begin today
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden style={{ color: "var(--primary)" }}>✓</span>
+              Cancel anytime
+            </span>
+          </div>
+
+          <div className="mt-6">
+            <Link
+              to="/pricing"
+              className="text-xs text-muted-foreground underline-offset-4 transition hover:text-foreground hover:underline"
+            >
+              See all coaching pathways
+            </Link>
+          </div>
         </div>
-        <p className="mt-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-          30 day money back guarantee if your score does not improve
-        </p>
       </section>
     </div>
   );
