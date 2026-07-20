@@ -149,7 +149,7 @@ function AdvisorsPage() {
         highlight="Transformative to use."
         steps={[
           { n: "01", t: "Share a link", b: "No institutional login. No IT integration. No procurement. You refer it. They use it." },
-          { n: "02", t: "Free 5-minute diagnostic", b: "Students hear their Readiness Score and their three biggest gaps, in their own voice, by something that isn't you." },
+          { n: "02", t: "Free voice session", b: "Students hear their Readiness Score and their three biggest gaps, in their own voice, by something that isn't you." },
           { n: "03", t: "Practice until it's owned", b: "Live two-way voice coaching on the exact questions their panel is likely to ask. Bramwell doesn't move on until the answer is ready." },
         ]}
       />

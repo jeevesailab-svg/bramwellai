@@ -67,7 +67,7 @@ const PATHWAYS: Pathway[] = [
     blurb:
       "You've worked for this. Transform your words to be the person that gets chosen. Your CV got you the interview, now the job goes to whoever commands the room.",
     includes: [
-      "5-minute AI diagnostic, your exact gaps identified before session one",
+      "Free AI voice check, your exact gaps identified before session one",
       "3 × 20-min voice coaching sessions built to your role and industry",
       "Structured frameworks for behavioural and competency questions",
       "Real-time interruption when your delivery drifts, no empty praise",
@@ -102,7 +102,7 @@ const PATHWAYS: Pathway[] = [
     blurb:
       "You're the most qualified person in the room. It's time to sound like it. Four sessions designed to close the gap between who you are and how they hear you.",
     includes: [
-      "Full diagnostic, readiness score, communication type, three specific gaps",
+      "Full voice check, readiness score, communication type, three specific gaps",
       "4 × 30-min sessions: diagnose → drill → pressure → perform",
       "Commercial language coaching, translate impact into numbers that land",
       "Curveball and pushback simulation, trained for what actually happens",
@@ -120,7 +120,7 @@ const PATHWAYS: Pathway[] = [
     blurb:
       "The room already respects your title. Make them respect your thinking. Peer-level coaching: direct, precise, zero filler. Three high-signal sessions.",
     includes: [
-      "Executive diagnostic, precision readiness mapping for senior conversations",
+      "Executive voice check, precision readiness mapping for senior conversations",
       "3 × 30-min peer-level coaching, high-signal feedback only",
       "Board, CEO, and panel interview simulation",
       "Strategic narrative coaching, the three-line version of your vision",
@@ -139,7 +139,7 @@ const PATHWAYS: Pathway[] = [
       "Promotions. Pay reviews. Difficult stakeholders. Board presentations. Stay sharp between the moments that matter, so when your moment arrives, you're already ready.",
     includes: [
       "Unlimited voice coaching, up to 3 sessions per week",
-      "Monthly re-diagnostic to track your improvement over time",
+      "Monthly voice check to track your improvement over time",
       "New scenario library added monthly: negotiations, presentations, stakeholders",
       "Priority access to new features and session types as they launch",
       "Community access, share wins, prep together, stay accountable",
@@ -335,10 +335,10 @@ function PricingPage() {
                 color: "var(--primary-foreground)",
               }}
             >
-              Your Bramwell diagnostic match
+              Your Bramwell voice check match
             </span>
             <p className="mt-4 text-sm text-muted-foreground">
-              Based on your diagnostic, we've highlighted your recommended
+              Based on your free session, we've highlighted your recommended
               pathway. You can still pick a different one if it feels closer.
             </p>
           </div>

@@ -122,7 +122,7 @@ function SevenQuestionsPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <SiteNav ctaLabel="Take the free diagnostic" ctaHref="/diagnostic?autostart=1" />
+      <SiteNav ctaLabel="Talk to Bramwell free" ctaHref="/diagnostic?autostart=1" />
 
       <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
         <div
@@ -265,7 +265,7 @@ function SevenQuestionsPage() {
               <GoldText>Hearing yourself answer is another.</GoldText>
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Take the free 5-minute voice diagnostic. Bramwell listens to how you actually deliver
+              Try Bramwell free. He listens to how you actually deliver
               these answers, and tells you what the panel will hear before they do.
             </p>
             <Link
@@ -278,10 +278,10 @@ function SevenQuestionsPage() {
                 boxShadow: "var(--shadow-elegant)",
               }}
             >
-              Take the free diagnostic →
+              Talk to Bramwell free →
             </Link>
             <p className="mt-4 text-xs text-muted-foreground/80">
-              5 minutes · No card · No login
+              No card · No login
             </p>
           </div>
         </section>

@@ -35,7 +35,7 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
           return Response.json(
             {
               error:
-                "You've used your free diagnostics for today. Come back tomorrow or pick a coaching pathway to keep going.",
+                "You've used your free session for today. Come back tomorrow or pick a coaching pathway to keep going.",
             },
             { status: 429 },
           );

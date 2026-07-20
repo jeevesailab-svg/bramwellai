@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { CtaWithCapture, type Pathway } from "./CtaWithCapture";
 
-export function SiteNav({ ctaLabel = "Take the free diagnostic", ctaHref = "/diagnostic?autostart=1" }: { ctaLabel?: string; ctaHref?: string }) {
+export function SiteNav({ ctaLabel = "Talk to Bramwell free", ctaHref = "/diagnostic?autostart=1" }: { ctaLabel?: string; ctaHref?: string }) {
   return (
     <header className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
       <a href="/" className="flex items-baseline gap-1.5">
@@ -115,7 +115,7 @@ export function SiteFooter() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">Bramwell</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
-            <a href="/diagnostic?autostart=1" className="transition-colors hover:text-foreground">Free Diagnostic</a>
+            <a href="/diagnostic?autostart=1" className="transition-colors hover:text-foreground">Try Bramwell Free</a>
             <a href="/#pathways" className="transition-colors hover:text-foreground">Pathways</a>
             <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
             <a href="/login" className="transition-colors hover:text-foreground">Sign In</a>
