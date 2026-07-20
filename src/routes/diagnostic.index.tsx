@@ -608,7 +608,7 @@ function DiagnosticPage() {
         const body = (await res.json().catch(() => ({}))) as { error?: string };
         if (res.status === 429) {
           setRateLimited(true);
-          setErrorMsg(body?.error ?? "You've used your free diagnostics for today.");
+          setErrorMsg(body?.error ?? "You've used your free session for today.");
           setPhase("error");
           return;
         }
