@@ -7,20 +7,20 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Bramwell AI, The AI communication coach for career-defining conversations" },
+      { title: "Bramwell AI, Talk to an AI voice coach free" },
       {
         name: "description",
         content:
-          "Practise out loud. Get your Readiness Score. Fix the answers, habits and blind spots that could cost you the role. Free 5-minute diagnostic, no login, no card.",
+          "Speak out loud, get instant feedback, and fix what is costing you the room. Free voice session, no login, no card.",
       },
       {
         property: "og:title",
-        content: "Bramwell AI, Know exactly how you sound before the room decides for you",
+        content: "Bramwell AI, Talk to an AI voice coach free",
       },
       {
         property: "og:description",
         content:
-          "Live AI voice coaching for interviews, promotions and high-stakes conversations. Free 5-minute Readiness Score.",
+          "Live AI voice coaching for interviews, promotions and high-stakes conversations. Free voice session, no login, no card.",
       },
     ],
   }),
@@ -79,7 +79,7 @@ function Nav() {
           boxShadow: "var(--shadow-elegant)",
         }}
       >
-        Take the free diagnostic →
+        Talk to Bramwell free →
       </a>
     </header>
   );
@@ -100,11 +100,11 @@ function Hero() {
           style={{ color: "var(--primary)" }}
         >
           <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--primary)" }} />
-          Free 5-minute diagnostic · No login · No card
+          Free voice session · No login · No card
         </div>
 
         <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-          Fix the exact habit that's costing you the{" "}
+          Speak with confidence, structure, and influence like the best leaders in the{" "}
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>
             room.
           </span>
@@ -112,7 +112,7 @@ function Hero() {
 
         <div className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
           <p>
-            Bramwell is a high-performance strategic communication coach that will precisely assess how you communicate and tell you exactly what's costing you the room.
+            Bramwell is the AI voice coach that listens to your answers, scores your readiness, and trains you until you own the room.
           </p>
         </div>
 
@@ -126,13 +126,13 @@ function Hero() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Show me what's costing me the room
+            Talk to Bramwell free
             <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
         </div>
 
         <p className="mx-auto mt-6 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 md:text-sm">
-          5 minutes · No login · No credit card · Hear exactly what is holding you back
+          No login · No credit card · Hear exactly what is holding you back
         </p>
       </div>
     </section>
@@ -187,7 +187,7 @@ function WrongWay() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Take the free diagnostic →
+            Talk to Bramwell free →
           </a>
         </div>
       </div>
