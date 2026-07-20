@@ -34,6 +34,7 @@ function Index() {
     <main className="min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
+      <TheSystem />
       <StatBar />
       <PainChecklist />
       <WrongWay />
@@ -79,7 +80,7 @@ function Nav() {
           boxShadow: "var(--shadow-elegant)",
         }}
       >
-        Talk to Bramwell free →
+        Give Bramwell a call →
       </a>
     </header>
   );
@@ -94,26 +95,28 @@ function Hero() {
         className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 rounded-full opacity-30 blur-3xl"
         style={{ background: GOLD }}
       />
-      <div className="relative z-10 mx-auto max-w-5xl px-6 pb-28 pt-12 text-center md:px-10 md:pb-40 md:pt-20">
+      <div className="relative z-10 mx-auto max-w-5xl px-6 pb-24 pt-10 text-center md:px-10 md:pb-32 md:pt-16">
         <div
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em]"
+          className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em]"
           style={{ color: "var(--primary)" }}
         >
           <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--primary)" }} />
-          Free voice session · No login · No card
+          The Bramwell System
         </div>
 
-        <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-          Speak with confidence, structure, and influence like the best leaders in the{" "}
+        <h1 className="mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-[64px]">
+          The proven system to close the gap between how you actually sound and how the room needs you to{" "}
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>
-            room.
+            sound.
           </span>
         </h1>
 
-        <div className="mx-auto mt-8 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-          <p>
-            Bramwell is the AI voice coach that listens to your answers, scores your readiness, and trains you until you own the room.
-          </p>
+        <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground md:text-lg">
+          Diagnose your gaps in five minutes. Learn the four-part formula elite communicators use. Practice live with Bramwell until it is automatic.
+        </p>
+
+        <div className="mt-12 flex justify-center">
+          <CallOrb />
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
@@ -126,13 +129,85 @@ function Hero() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Talk to Bramwell free
+            Give Bramwell a call
             <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
         </div>
 
-        <p className="mx-auto mt-6 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 md:text-sm">
-          No login · No credit card · Hear exactly what is holding you back
+        <p className="mx-auto mt-5 text-[11px] uppercase tracking-[0.22em] text-muted-foreground/70">
+          Free · Live voice · No login · No card
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────── Animated call orb (ElevenLabs / Lovable feel) ───────────── */
+function CallOrb() {
+  return (
+    <a
+      href="/diagnostic?autostart=1"
+      aria-label="Give Bramwell a call"
+      className="group relative flex h-56 w-56 items-center justify-center md:h-72 md:w-72"
+    >
+      <span
+        aria-hidden
+        className="absolute inset-0 rounded-full opacity-40 blur-2xl transition-opacity group-hover:opacity-70"
+        style={{ background: "radial-gradient(circle at 30% 30%, oklch(0.78 0.13 78 / 0.9), oklch(0.55 0.18 260 / 0.4) 60%, transparent 75%)" }}
+      />
+      <span
+        aria-hidden
+        className="absolute inset-6 animate-pulse rounded-full opacity-70"
+        style={{
+          background:
+            "conic-gradient(from 90deg at 50% 50%, oklch(0.88 0.12 88) 0deg, oklch(0.55 0.18 260) 120deg, oklch(0.22 0.04 260) 220deg, oklch(0.88 0.12 88) 360deg)",
+          filter: "blur(6px)",
+        }}
+      />
+      <span
+        aria-hidden
+        className="absolute inset-10 rounded-full border border-white/10 bg-background/40 backdrop-blur-xl"
+      />
+      <span className="relative flex h-16 w-16 items-center justify-center rounded-full text-2xl transition-transform group-hover:scale-105"
+        style={{ background: GOLD, color: "var(--primary-foreground)", boxShadow: "var(--shadow-elegant)" }}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.57 3.6 1 1 0 01-.24 1z"/></svg>
+      </span>
+    </a>
+  );
+}
+
+/* ───────────── The Bramwell System (4 parts) ───────────── */
+function TheSystem() {
+  const parts = [
+    { n: "01", title: "Diagnose", copy: "A five-minute voice call. Hear your gaps out loud." },
+    { n: "02", title: "Formula", copy: "The four-part answer structure the top 1% use under pressure." },
+    { n: "03", title: "Coach", copy: "Live voice reps with Bramwell until it is automatic." },
+    { n: "04", title: "Playbook", copy: "Your saved answers, scores and progress in one place." },
+  ];
+  return (
+    <section className="border-y border-border bg-background py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="mb-12 text-center">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em]" style={{ color: "var(--primary)" }}>
+            The Bramwell System
+          </p>
+          <h2 className="mx-auto mt-4 max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+            Four parts that make you unmissable in the{" "}
+            <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>room.</span>
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          {parts.map((p) => (
+            <div key={p.n} className="group relative flex flex-col gap-3 bg-background p-8 transition-colors hover:bg-muted/30">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">{p.n}</span>
+              <h3 className="text-xl font-semibold tracking-tight">{p.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{p.copy}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mx-auto mt-10 max-w-3xl text-balance text-center text-sm leading-relaxed text-muted-foreground md:text-base">
+          Modelled on how the top 1% of communicators, CEOs, barristers, diplomats and elite founders, structure answers under pressure. You learn the pattern. You practice it live. It becomes automatic.
         </p>
       </div>
     </section>
