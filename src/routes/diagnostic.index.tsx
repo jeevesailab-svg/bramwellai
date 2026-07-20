@@ -9,17 +9,17 @@ export const Route = createFileRoute("/diagnostic/")({
   }),
   head: () => ({
     meta: [
-      { title: "Free Bramwell Diagnostic. Hear how you really sound" },
+      { title: "Try Bramwell Free. Hear how you really sound" },
       {
         name: "description",
         content:
-          "A five-minute live voice diagnostic. Bramwell asks one question, listens, and gives you your communication type, your three biggest gaps, and your Readiness Score.",
+          "A free voice session with Bramwell. Answer one question, get your communication type, your three biggest gaps, and your Readiness Score.",
       },
-      { property: "og:title", content: "Free Bramwell Diagnostic" },
+      { property: "og:title", content: "Try Bramwell Free" },
       {
         property: "og:description",
         content:
-          "Five minutes with Bramwell. One question. Your communication type, three biggest gaps, and Readiness Score.",
+          "One question with Bramwell. Your communication type, three biggest gaps, and Readiness Score. No login, no card.",
       },
     ],
   }),
@@ -717,7 +717,7 @@ function DiagnosticPage() {
                     className="inline-block h-1.5 w-1.5 animate-pulse rounded-full"
                     style={{ background: "var(--primary)" }}
                   />
-                  Bramwell Voice Diagnostic · Live
+                  Free · Live · No card required
                 </span>
               </div>
               <h1
@@ -728,17 +728,17 @@ function DiagnosticPage() {
                   fontWeight: 800,
                 }}
               >
-                You're losing rooms you should be winning. Find out exactly why.
+                Talk to Bramwell. Hear what the room hears.
               </h1>
               <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-relaxed text-muted-foreground">
-                One question. One honest answer. Most people are surprised by what they hear.
+                Answer one question out loud. Bramwell will show you exactly how you sound under pressure.
               </p>
               <div className="mt-8 flex justify-center">
                 <button
                   onClick={startDiagnostic}
                   className="group inline-flex h-14 items-center justify-center gap-2 rounded-full bg-white px-9 text-base font-semibold text-neutral-900 shadow-lg transition hover:bg-neutral-100"
                 >
-                  Find out what's costing you
+                  Start free voice session
                   <span className="transition-transform group-hover:translate-x-0.5">→</span>
                 </button>
               </div>
@@ -873,10 +873,10 @@ function DiagnosticPage() {
                 {rateLimited ? (
                   <>
                     <p className="text-base font-medium text-foreground">
-                      You've used your free diagnostic for today.
+                      You've used your free session for today.
                     </p>
                     <p className="mt-3 text-sm text-muted-foreground">
-                      The free version is a five-minute snapshot. To keep
+                      The free session is a quick snapshot. To keep
                       going: rehearse real questions, get specific
                       feedback, and actually move your Readiness Score,
                       pick a Bramwell pathway.
@@ -892,7 +892,7 @@ function DiagnosticPage() {
                       See coaching pathways →
                     </Link>
                     <p className="mt-4 text-xs text-muted-foreground">
-                      Free diagnostics reset every 24 hours.
+                      Free sessions reset every 24 hours.
                     </p>
                   </>
                 ) : (
