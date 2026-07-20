@@ -77,10 +77,10 @@ export function PainChecklist() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Take the free diagnostic →
+            Talk to Bramwell free →
           </a>
           <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80">
-            5 minutes · No login · No card
+            No login · No card
           </span>
         </div>
       </div>
