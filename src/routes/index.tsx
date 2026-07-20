@@ -281,7 +281,7 @@ function EliteCoach() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Take the free diagnostic →
+            Talk to Bramwell free →
           </a>
         </div>
       </div>
@@ -289,7 +289,7 @@ function EliteCoach() {
   );
 }
 
-/* ───────────── Free diagnostic explainer ───────────── */
+/* ───────────── Free voice session explainer ───────────── */
 function FreeDiagnostic() {
   const gaps = [
     "Whether your answer actually answers the question",
@@ -305,14 +305,14 @@ function FreeDiagnostic() {
     <section className="relative border-t border-border py-24 md:py-32" style={{ background: HERO }}>
       <div className="mx-auto max-w-3xl px-6 md:px-10">
         <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-          The free diagnostic shows you what is{" "}
+          Try Bramwell free and hear what is{" "}
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>
             costing you the room.
           </span>
         </h2>
         <div className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
           <p>
-            In five minutes, Bramwell listens to how you answer under pressure and gives you a Readiness Score.
+            Bramwell listens to how you answer under pressure and gives you a Readiness Score.
           </p>
           <p>It identifies the three biggest gaps in the way you communicate, including:</p>
           <ul className="grid gap-2 sm:grid-cols-2">
@@ -344,7 +344,7 @@ function FreeDiagnostic() {
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Take the free diagnostic →
+            Talk to Bramwell free →
           </a>
         </div>
       </div>
@@ -404,9 +404,9 @@ function HowItWorks() {
   const steps = [
     {
       n: "01",
-      title: "Run the free diagnostic",
-      body: `Five minutes with Bramwell. You'll hear your communication style, your three biggest gaps, and a Readiness Score, a clear benchmark of where you stand right now versus where you need to be. No login. No credit card. No pitch call after.`,
-      cta: { label: "Take the free diagnostic →", href: "/diagnostic?autostart=1" },
+      title: "Talk to Bramwell free",
+      body: `Answer one question out loud. Bramwell gives you your communication style, your three biggest gaps, and a Readiness Score. No login. No credit card. No pitch call after.`,
+      cta: { label: "Try it free →", href: "/diagnostic?autostart=1" },
     },
     {
       n: "02",
@@ -763,7 +763,7 @@ function FAQ() {
     },
     {
       q: "What if I do not know which pathway to choose?",
-      a: `Start with the free diagnostic. Bramwell will show you where you are now and what kind of coaching you need next.`,
+      a: `Start with the free voice session. Bramwell will show you where you are now and what kind of coaching you need next.`,
     },
     {
       q: "Is this only for interviews?",
@@ -830,7 +830,7 @@ function FinalCTA() {
           </span>
         </h2>
         <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          Take the free 5-minute diagnostic and hear what your answers are really signalling, before the panel, before the pressure, before it costs you the opportunity.
+          Try Bramwell free and hear what your answers are really signalling, before the panel, before the pressure, before it costs you the opportunity.
         </p>
         <p className="mx-auto mt-8 max-w-2xl text-base font-medium leading-relaxed text-foreground md:text-lg">
           The candidates who make the final shortlist don't find Bramwell after the interview.
@@ -844,10 +844,10 @@ function FinalCTA() {
             boxShadow: "var(--shadow-elegant)",
           }}
         >
-          Take the free diagnostic →
+          Talk to Bramwell free →
         </a>
         <p className="mt-6 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 md:text-sm">
-          5 minutes · No login · No credit card · Hear exactly what is holding you back
+          No login · No credit card · Hear exactly what is holding you back
         </p>
         <p className="mt-4 text-xs text-muted-foreground/80 md:text-sm">
           Or{" "}
@@ -887,7 +887,7 @@ function Footer() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">Bramwell</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
-            <a href="/diagnostic?autostart=1" className="transition-colors hover:text-foreground">Free Diagnostic</a>
+            <a href="/diagnostic?autostart=1" className="transition-colors hover:text-foreground">Try Bramwell Free</a>
             <a href="/the-7-questions" className="transition-colors hover:text-foreground">The 7 Questions (Free Guide)</a>
             <a href="#pathways" className="transition-colors hover:text-foreground">Pathways</a>
             <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
