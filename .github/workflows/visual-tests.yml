@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   visual:
     name: Playwright visual tests
@@ -25,9 +29,11 @@ jobs:
         run: bunx playwright install --with-deps chromium
 
       - name: Run visual regression tests
+        id: playwright
         run: bun run test:visual
 
       - name: Upload Playwright report
+        id: upload-report
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -37,3 +43,44 @@ jobs:
             test-results
           retention-days: 14
           if-no-files-found: ignore
+
+      - name: Build diff comment
+        if: always() && failure() && github.event_name == 'pull_request'
+        id: diff-comment
+        env:
+          RESULTS_JSON: test-results/results.json
+          ARTIFACT_URL: ${{ steps.upload-report.outputs.artifact-url }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -e
+          node scripts/build-visual-diff-comment.mjs > /tmp/visual-comment.md || true
+          if [ -s /tmp/visual-comment.md ]; then
+            echo "has_body=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "body<<EOF"
+              cat /tmp/visual-comment.md
+              echo
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          else
+            echo "has_body=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Post/update PR comment
+        if: always() && failure() && github.event_name == 'pull_request' && steps.diff-comment.outputs.has_body == 'true'
+        uses: actions/github-script@v7
+        env:
+          COMMENT_BODY: ${{ steps.diff-comment.outputs.body }}
+        with:
+          script: |
+            const marker = '<!-- visual-regression-comment -->';
+            const body = process.env.COMMENT_BODY;
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.pull_request.number;
+            const { data: comments } = await github.rest.issues.listComments({ owner, repo, issue_number, per_page: 100 });
+            const existing = comments.find((c) => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
