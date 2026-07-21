@@ -98,8 +98,9 @@ async function readThemeSnapshot(page: Page) {
 }
 
 for (const route of PUBLIC_ROUTES) {
-  test.describe(`route ${route.path}`, () => {
-    test(`applies light theme tokens (${route.label})`, async ({ page }) => {
+  const tag = route.priority ? "[priority] " : "";
+  test.describe(`${tag}route ${route.path}`, () => {
+    test(`${tag}applies light theme tokens (${route.label})`, async ({ page }) => {
       const resp = await page.goto(route.path, { waitUntil: "domcontentloaded" });
       // Redirects (e.g. /dashboard when unauthed) still land somewhere — we
       // assert whatever renders is in the light theme.
@@ -140,7 +141,7 @@ for (const route of PUBLIC_ROUTES) {
       ).toEqual([]);
     });
 
-    test(`hero screenshot (${route.label})`, async ({ page }) => {
+    test(`${tag}hero screenshot (${route.label})`, async ({ page }) => {
       await page.goto(route.path, { waitUntil: "domcontentloaded" });
       await page.waitForLoadState("networkidle").catch(() => {});
       // Freeze anything animated; hide the sticky mobile CTA on small viewports.

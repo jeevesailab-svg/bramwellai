@@ -24,6 +24,14 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 1800 } },
     },
     {
+      name: "chromium-tablet-portrait",
+      use: { ...devices["iPad (gen 7)"], viewport: { width: 810, height: 1080 } },
+    },
+    {
+      name: "chromium-tablet-landscape",
+      use: { ...devices["iPad (gen 7) landscape"], viewport: { width: 1080, height: 810 } },
+    },
+    {
       name: "chromium-mobile-390",
       use: { ...devices["iPhone 12"], viewport: { width: 390, height: 844 } },
     },

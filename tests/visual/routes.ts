@@ -1,13 +1,18 @@
-// Public, SEO-facing routes we assert stay on the light theme.
+// Public, SEO-facing routes we assert stay on the light theme across every
+// viewport project defined in playwright.config.ts (desktop, tablet portrait,
+// tablet landscape, iPhone 12, iPhone 14 Pro Max).
 // Kept explicit (rather than parsing routeTree.gen.ts) so param/api/underscore
 // routes are trivially excluded and new SEO routes are added intentionally.
-export const PUBLIC_ROUTES: { path: string; label: string }[] = [
-  { path: "/", label: "home" },
-  { path: "/pricing", label: "pricing" },
-  { path: "/login", label: "login" },
-  { path: "/signup", label: "signup" },
-  { path: "/dashboard", label: "dashboard" },
-  { path: "/diagnostic", label: "diagnostic" },
+// `priority: true` routes are the highest-conversion pages — they must render
+// correctly on every viewport; filter with `pnpm test -g "priority"` for a
+// fast smoke run.
+export const PUBLIC_ROUTES: { path: string; label: string; priority?: boolean }[] = [
+  { path: "/", label: "home", priority: true },
+  { path: "/pricing", label: "pricing", priority: true },
+  { path: "/login", label: "login", priority: true },
+  { path: "/signup", label: "signup", priority: true },
+  { path: "/dashboard", label: "dashboard", priority: true },
+  { path: "/diagnostic", label: "diagnostic", priority: true },
   { path: "/advisors", label: "advisors" },
   { path: "/executive", label: "executive" },
   { path: "/graduate", label: "graduate" },
