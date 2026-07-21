@@ -31,3 +31,16 @@ export const DARK_BG_ALLOWLIST = [
   '[data-slot="drawer-overlay"]',
   '[data-radix-popper-content-wrapper]',
 ];
+
+// Tailwind utility classes that hardcode a dark surface. Any occurrence on a
+// non-allowlisted element counts as a theming regression — dark surfaces must
+// flow through semantic tokens (bg-background, bg-card, bg-foreground/…).
+// Anchored with word boundaries so `bg-slate-50` / `bg-gray-100` are safe.
+export const FORBIDDEN_CLASS_PATTERNS: RegExp[] = [
+  /\bbg-black(\/\d+)?\b/,
+  /\bbg-(neutral|zinc|slate|gray|stone)-(8|9)00\b/,
+  /\bbg-(neutral|zinc|slate|gray|stone)-950\b/,
+  /\bbg-\[#0[0-9a-f]{2}[0-9a-f]{3}\]/i, // arbitrary hex starting with 0 (very dark)
+  /\bbg-\[rgb\(\s*[0-3]?\d\s*,\s*[0-3]?\d\s*,\s*[0-3]?\d\s*\)\]/i,
+  /\bdark:bg-/, // dark-mode variants shouldn't paint in light mode; catch stray uses
+];
