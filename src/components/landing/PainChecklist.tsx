@@ -1,3 +1,5 @@
+import { Mic } from "lucide-react";
+
 const PAINS = [
   {
     q: "I ramble and lose the point I was trying to make",
@@ -31,7 +33,7 @@ const PAINS = [
 
 export function PainChecklist() {
   return (
-    <section className="border-t border-border bg-background py-24 md:py-32">
+    <section className="border-t border-border bg-white py-24 md:py-32">
       <div className="mx-auto max-w-4xl px-6 md:px-10">
         <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
           Your brain raced ahead of your mouth.{" "}
@@ -43,7 +45,7 @@ export function PainChecklist() {
           </span>
         </h2>
 
-        <div className="mt-12 divide-y divide-border border-y border-border">
+        <div className="mt-12 divide-y divide-border rounded-3xl border border-border bg-white px-6" style={{ boxShadow: "var(--shadow-soft)" }}>
           {PAINS.map((p) => (
             <details key={p.q} className="group py-5">
               <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-base font-medium tracking-tight md:text-lg">
@@ -70,14 +72,13 @@ export function PainChecklist() {
         <div className="mt-12 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
           <a
             href="/diagnostic?autostart=1"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition hover:opacity-95"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:opacity-95"
             style={{
               background: "var(--gradient-gold)",
-              color: "var(--primary-foreground)",
               boxShadow: "var(--shadow-elegant)",
             }}
           >
-            Talk to Bramwell free →
+            <Mic className="h-4 w-4" strokeWidth={2.5} /> Talk to Bramwell free →
           </a>
           <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80">
             No login · No card
