@@ -32,18 +32,7 @@ const MINT = "var(--gradient-mint)";
 const SUNRISE = "var(--gradient-sunrise)";
 
 function PrimaryCTA({ label = "Talk to Bramwell free", href = "/diagnostic?autostart=1", size = "md" as "md" | "lg" | "sm" }) {
-  const h = size === "lg" ? "h-14 px-9 text-base" : size === "sm" ? "h-10 px-5 text-sm" : "h-12 px-7 text-sm";
-  return (
-    <a
-      href={href}
-      className={`group inline-flex ${h} items-center justify-center gap-2 rounded-full font-semibold text-white transition hover:-translate-y-0.5 hover:opacity-95`}
-      style={{ background: GOLD, boxShadow: "var(--shadow-elegant)" }}
-    >
-      <Mic className="h-4 w-4" strokeWidth={2.5} />
-      {label}
-      <span className="transition-transform group-hover:translate-x-0.5">→</span>
-    </a>
-  );
+  return <CtaButton href={href} size={size}>{label}</CtaButton>;
 }
 
 function Index() {
