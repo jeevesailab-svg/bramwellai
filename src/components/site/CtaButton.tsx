@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Mic } from "lucide-react";
+import { theme } from "@/lib/theme";
 
 type Size = "sm" | "md" | "lg";
 
@@ -30,7 +31,7 @@ export function CtaButton({
 }) {
   const s = SIZE[size];
   const cls = `group inline-flex ${s.h} items-center justify-center rounded-full font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95 ${className}`;
-  const style = { background: "var(--gradient-cta)", boxShadow: "var(--shadow-cta)" } as const;
+  const style = { background: theme.gradients.cta, boxShadow: theme.shadows.cta } as const;
   const inner = (
     <>
       {showIcon ? <Mic className={s.icon} strokeWidth={2.5} /> : null}
