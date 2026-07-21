@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 60" role="img" aria-label="Bramwell.ai">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F26B2E"/>
+      <stop offset="0.5" stop-color="#E43A8E"/>
+      <stop offset="1" stop-color="#6674E8"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="60" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F5C542"/>
+      <stop offset="1" stop-color="#F26B2E"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(4 10)">
+    <path d="M6 4h28a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4H18l-6 6v-6H6a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4z" fill="url(#g)"/>
+    <rect x="17" y="11" width="6" height="12" rx="3" fill="#fff"/>
+    <path d="M13 20a7 7 0 0 0 14 0" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <line x1="20" y1="27" x2="20" y2="31" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
+  <text x="56" y="40" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="30" font-weight="700" fill="#1A1613" letter-spacing="-0.6">Bramwell<tspan fill="url(#gold)">.ai</tspan></text>
+</svg>
