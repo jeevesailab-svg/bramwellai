@@ -21,7 +21,6 @@ import { Route as GraduateRouteImport } from './routes/graduate'
 import { Route as ExecutiveRouteImport } from './routes/executive'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AdvisorsRouteImport } from './routes/advisors'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as PortalIndexRouteImport } from './routes/portal.index'
 import { Route as DiagnosticIndexRouteImport } from './routes/diagnostic.index'
 import { Route as PortalSetupRouteImport } from './routes/portal.setup'
@@ -95,11 +94,6 @@ const AdvisorsRoute = AdvisorsRouteImport.update({
   path: '/advisors',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PortalIndexRoute = PortalIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -167,7 +161,6 @@ const ApiPublicPaymentsWebhookRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
   '/executive': typeof ExecutiveRoute
@@ -194,7 +187,6 @@ export interface FileRoutesByFullPath {
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
   '/executive': typeof ExecutiveRoute
@@ -221,7 +213,6 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
   '/executive': typeof ExecutiveRoute
@@ -250,7 +241,6 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/advisors'
     | '/dashboard'
     | '/executive'
@@ -277,7 +267,6 @@ export interface FileRouteTypes {
     | '/api/public/payments/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/advisors'
     | '/dashboard'
     | '/executive'
@@ -303,7 +292,6 @@ export interface FileRouteTypes {
     | '/api/public/payments/webhook'
   id:
     | '__root__'
-    | '/'
     | '/advisors'
     | '/dashboard'
     | '/executive'
@@ -331,7 +319,6 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AdvisorsRoute: typeof AdvisorsRoute
   DashboardRoute: typeof DashboardRoute
   ExecutiveRoute: typeof ExecutiveRoute
@@ -441,13 +428,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdvisorsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/portal/': {
       id: '/portal/'
       path: '/'
@@ -551,7 +531,6 @@ const PortalRouteWithChildren =
   PortalRoute._addFileChildren(PortalRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AdvisorsRoute: AdvisorsRoute,
   DashboardRoute: DashboardRoute,
   ExecutiveRoute: ExecutiveRoute,
