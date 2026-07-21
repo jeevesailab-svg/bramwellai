@@ -349,7 +349,7 @@ function ResultBody({ result }: { result: Result }) {
       {/* SECTION 2, Type */}
       <Link
         to="/pricing"
-        search={{ recommended: pathwayKey, resume: pathwayKey, score: result.readiness_score }}
+        search={{ recommended: "club", score: result.readiness_score }}
         className="block rounded-2xl border border-border bg-foreground/[0.03] p-8 text-center backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.06]"
       >
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
@@ -379,7 +379,7 @@ function ResultBody({ result }: { result: Result }) {
           </ul>
         )}
         <p className="mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
-          Start fixing this →
+          See coaching options →
         </p>
       </Link>
 
