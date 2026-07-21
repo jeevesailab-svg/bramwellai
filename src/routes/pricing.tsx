@@ -25,12 +25,13 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Five coaching pathways for every career moment. Pick the one that meets you where you are.",
+          "Simple monthly coaching for the moments that matter. Start with the Career Confidence Club, or pick a focused sprint.",
       },
       { property: "og:title", content: "Pricing, Bramwell AI" },
       {
         property: "og:description",
-        content: "Five coaching pathways for every career moment.",
+        content:
+          "Simple monthly coaching for the moments that matter. Start with the Career Confidence Club, or pick a focused sprint.",
       },
     ],
   }),
