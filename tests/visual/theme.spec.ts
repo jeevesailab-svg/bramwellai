@@ -25,6 +25,20 @@ function parseRgb(s: string): { r: number; g: number; b: number; a: number } | n
 
 async function readThemeSnapshot(page: Page) {
   return page.evaluate((allowlist) => {
+    // Chromium reports oklch()-derived computed colors in lab() form. Convert
+    // any CSS color to a normalized rgb() string by painting it into a canvas.
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = 1;
+    const ctx = canvas.getContext("2d")!;
+    const toRgb = (css: string): string => {
+      ctx.clearRect(0, 0, 1, 1);
+      ctx.fillStyle = "#000";
+      ctx.fillStyle = css;
+      ctx.fillRect(0, 0, 1, 1);
+      const [r, g, b, a] = ctx.getImageData(0, 0, 1, 1).data;
+      return `rgba(${r}, ${g}, ${b}, ${a / 255})`;
+    };
+
     const root = document.documentElement;
     const rootStyle = getComputedStyle(root);
     const bodyStyle = getComputedStyle(document.body);
@@ -57,7 +71,7 @@ async function readThemeSnapshot(page: Page) {
       const rect = el.getBoundingClientRect();
       if (rect.width < 40 || rect.height < 40) return;
       if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-      const bg = getComputedStyle(el).backgroundColor;
+      const bg = toRgb(getComputedStyle(el).backgroundColor);
       const m = bg.match(/rgba?\(([^)]+)\)/);
       if (!m) return;
       const [r, g, b, a = 1] = m[1].split(",").map((x) => parseFloat(x.trim()));
@@ -74,8 +88,8 @@ async function readThemeSnapshot(page: Page) {
     });
 
     return {
-      bodyBg: bodyStyle.backgroundColor,
-      bodyColor: bodyStyle.color,
+      bodyBg: toRgb(bodyStyle.backgroundColor),
+      bodyColor: toRgb(bodyStyle.color),
       vars,
       offenders,
       url: location.pathname,
