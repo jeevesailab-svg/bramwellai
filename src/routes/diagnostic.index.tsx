@@ -157,7 +157,7 @@ function DiagnosticRoute() {
 
 function DiagnosticPage() {
   const [phase, setPhase] = useState<"intro" | "connecting" | "live" | "wrapping" | "error">(
-    "intro",
+    "connecting",
   );
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [rateLimited, setRateLimited] = useState(false);
@@ -655,15 +655,14 @@ function DiagnosticPage() {
     }
   }, [conversation]);
 
-  // Auto-start when coming from the hero CTA with ?autostart=1
-  const search = useSearch({ from: "/diagnostic/" });
+  // Always auto-start immediately — no intro page. The CTA opens ElevenLabs directly.
+  useSearch({ from: "/diagnostic/" });
   const autoStartedRef = useRef(false);
   useEffect(() => {
-    if (search.autostart === "1" && phase === "intro" && !autoStartedRef.current) {
-      autoStartedRef.current = true;
-      void startDiagnostic();
-    }
-  }, [search.autostart, phase, startDiagnostic]);
+    if (autoStartedRef.current) return;
+    autoStartedRef.current = true;
+    void startDiagnostic();
+  }, [startDiagnostic]);
 
   const endEarly = useCallback(async () => {
     intentionallyEndingRef.current = true;
