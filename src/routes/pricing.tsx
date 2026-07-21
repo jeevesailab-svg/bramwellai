@@ -188,7 +188,7 @@ function PricingPage() {
     ["graduate", "comeback", "confidence", "executive", "club"] as const
   ).find((k) => k === recommended);
 
-  const hero = getHeroCopy(score);
+  const hero = getHeroCopy(score, recommendedKey);
 
   const pathways = recommendedKey
     ? PATHWAYS.map((p) => ({ ...p, highlight: p.key === recommendedKey }))
