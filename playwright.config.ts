@@ -5,7 +5,13 @@ export default defineConfig({
   snapshotDir: "./tests/visual/__snapshots__",
   fullyParallel: true,
   retries: 0,
-  reporter: [["list"]],
+  reporter: process.env.CI
+    ? [
+        ["list"],
+        ["json", { outputFile: "test-results/results.json" }],
+        ["html", { outputFolder: "playwright-report", open: "never" }],
+      ]
+    : [["list"]],
   use: {
     baseURL: process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:8080",
     ignoreHTTPSErrors: true,
