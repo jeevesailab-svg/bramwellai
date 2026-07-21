@@ -1,7 +1,6 @@
 import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Mic } from "lucide-react";
 import { CtaButton } from "@/components/site/CtaButton";
 
 export const Route = createFileRoute("/diagnostic/")({
