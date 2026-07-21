@@ -48,11 +48,10 @@ function routePathway(input: {
   communication_type: CommunicationType;
   readiness_score: number;
 }): { key: PathwayKey; name: string; price: string } {
-  const { communication_type: type, readiness_score: score } = input;
-  if (score >= 80 || type === "next_level_leader") return { key: "club", ...PATHWAY.club };
-  if (score < 40) return { key: "graduate", ...PATHWAY.graduate };
-  if (type === "apologiser") return { key: "comeback", ...PATHWAY.comeback };
-  return { key: "confidence", ...PATHWAY.confidence };
+  // Simple monthly pricing is the default primary recommendation for every
+  // archetype. Career-moment hints surface in copy, but the purchase path
+  // is the low-friction Career Confidence Club subscription.
+  return { key: "club", ...PATHWAY.club };
 }
 
 function scoreFromTranscript(transcript: string) {
