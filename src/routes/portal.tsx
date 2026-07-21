@@ -121,7 +121,7 @@ function PortalLayout() {
           <button
             onClick={dismissWelcome}
             aria-label="Dismiss"
-            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/15 px-2 py-1 text-xs hover:bg-black/25"
+            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-foreground/15 px-2 py-1 text-xs hover:bg-foreground/25"
           >
             ✕
           </button>
