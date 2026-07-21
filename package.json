@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "test:visual": "playwright test",
     "test:visual:update": "playwright test --update-snapshots",
-    "test:smoke": "playwright test --config=playwright.smoke.config.ts"
+    "test:smoke": "playwright test --config=playwright.smoke.config.ts",
+    "test:a11y": "playwright test --config=playwright.a11y.config.ts"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.42.2",
