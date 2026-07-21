@@ -59,8 +59,8 @@ function Index() {
 /* ───────────── Nav ───────────── */
 function Nav() {
   return (
-    <header className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-10">
-      <a href="/" className="flex items-center">
+    <header className="relative z-20 mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-4 sm:px-6 sm:py-5 md:flex md:justify-between md:px-10">
+      <a href="/" className="flex min-w-0 items-center">
         <BramwellLogo size={32} />
       </a>
       <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
@@ -69,7 +69,10 @@ function Nav() {
         <a href="/pricing" className="hover:text-foreground">Pricing</a>
         <a href="/login" className="hover:text-foreground">Sign in</a>
       </nav>
-      <PrimaryCTA size="sm" />
+      <div className="shrink-0">
+        <span className="hidden sm:inline-flex"><PrimaryCTA size="sm" /></span>
+        <span className="inline-flex sm:hidden"><PrimaryCTA size="sm" label="Try free" /></span>
+      </div>
     </header>
   );
 }
@@ -83,33 +86,35 @@ function Hero() {
       <div aria-hidden className="pointer-events-none absolute -right-24 top-10 h-80 w-80 rounded-full opacity-60 blur-3xl" style={{ background: SUNRISE }} />
       <div aria-hidden className="pointer-events-none absolute bottom-0 left-1/2 h-72 w-[600px] -translate-x-1/2 rounded-full opacity-50 blur-3xl" style={{ background: MINT }} />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 pb-20 pt-8 text-center md:px-10 md:pb-28 md:pt-12">
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/80 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground shadow-sm backdrop-blur">
-          <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--primary)" }} />
-          Your AI voice coach · Live · Free to try
+      <div className="relative z-10 mx-auto max-w-5xl px-4 pb-16 pt-6 text-center sm:px-6 sm:pb-20 sm:pt-8 md:px-10 md:pb-28 md:pt-12">
+        <div className="mx-auto mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-white/80 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground shadow-sm backdrop-blur sm:px-4 sm:text-[11px] sm:tracking-[0.22em]">
+          <Sparkles className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--primary)" }} />
+          <span className="truncate">Your AI voice coach · Live · Free to try</span>
         </div>
 
-        <h1 className="mx-auto max-w-4xl text-balance text-4xl font-bold leading-[1.02] tracking-tight md:text-6xl lg:text-[72px]">
+        <h1 className="mx-auto max-w-4xl text-balance text-[34px] font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-[72px]">
           Speak like the{" "}
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>best in the room.</span>
         </h1>
 
-        <p className="mx-auto mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
+        <p className="mx-auto mt-5 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg md:text-xl">
           Bramwell is your live AI voice coach. Talk to him. Hear what the room hears. Train to sound clear, calm and <strong className="text-foreground">impossible to ignore</strong>.
         </p>
 
-        <div className="mt-10 flex justify-center">
+        <div className="mt-8 flex justify-center sm:mt-10">
           <CallOrb />
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-          <PrimaryCTA size="lg" />
+        <div className="mt-8 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
+          <div className="mx-auto w-full max-w-xs sm:w-auto sm:max-w-none">
+            <PrimaryCTA size="lg" />
+          </div>
           <a href="#learn" className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
             See what you&apos;ll learn ↓
           </a>
         </div>
 
-        <p className="mx-auto mt-5 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+        <p className="mx-auto mt-5 max-w-[280px] text-[10px] uppercase tracking-[0.2em] text-muted-foreground sm:max-w-none sm:text-[11px] sm:tracking-[0.22em]">
           5 min · Live voice · Free · No login · No card
         </p>
       </div>
@@ -122,7 +127,7 @@ function CallOrb() {
     <a
       href="/diagnostic?autostart=1"
       aria-label="Give Bramwell a call"
-      className="group relative flex h-56 w-56 items-center justify-center md:h-64 md:w-64"
+      className="group relative flex h-48 w-48 items-center justify-center sm:h-56 sm:w-56 md:h-64 md:w-64"
     >
       <span
         aria-hidden
