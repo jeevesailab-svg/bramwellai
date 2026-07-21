@@ -1,6 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-const MAX_PER_IP_PER_DAY = 25;
+// Cost controls for ElevenLabs Conversational AI (each signed URL = a paid session).
+// Starts per IP is the primary abuse guard; completions cap reserves free-tier fairness;
+// global starts is a circuit-breaker so a single bad actor / botnet can't drain the account.
+const MAX_STARTS_PER_IP_PER_DAY = 6;
+const MAX_COMPLETED_PER_IP_PER_DAY = 3;
+const MAX_GLOBAL_STARTS_PER_DAY = 500;
 
 function clientIp(request: Request): string {
   const xff = request.headers.get("x-forwarded-for");
@@ -19,23 +24,64 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const ip = clientIp(request);
 
-        // Per-IP quota: count completed diagnostics only. Failed, disconnected,
-        // or incomplete test starts should not block another attempt.
         const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-        const { count, error: countErr } = await supabaseAdmin
+
+        // 1. Per-IP STARTS cap — the real cost guard. Every mint of a signed URL costs
+        //    ElevenLabs credits whether the user completes or not, so we cap attempts.
+        const { count: ipStarts, error: ipStartsErr } = await supabaseAdmin
+          .from("diagnostic_sessions")
+          .select("id", { count: "exact", head: true })
+          .eq("ip_address", ip)
+          .gte("created_at", since);
+        if (ipStartsErr) {
+          console.error("diagnostic-token: ip starts count failed", ipStartsErr);
+          return Response.json({ error: "Server error" }, { status: 500 });
+        }
+        if ((ipStarts ?? 0) >= MAX_STARTS_PER_IP_PER_DAY) {
+          return Response.json(
+            {
+              error:
+                "You've reached today's free session limit. Come back tomorrow or pick a coaching pathway to keep going.",
+            },
+            { status: 429 },
+          );
+        }
+
+        // 2. Per-IP COMPLETIONS cap — one household shouldn't burn many full sessions.
+        const { count: ipCompleted, error: ipDoneErr } = await supabaseAdmin
           .from("diagnostic_sessions")
           .select("id", { count: "exact", head: true })
           .eq("ip_address", ip)
           .gte("completed_at", since);
-        if (countErr) {
-          console.error("diagnostic-token: count failed", countErr);
+        if (ipDoneErr) {
+          console.error("diagnostic-token: ip completed count failed", ipDoneErr);
           return Response.json({ error: "Server error" }, { status: 500 });
         }
-        if ((count ?? 0) >= MAX_PER_IP_PER_DAY) {
+        if ((ipCompleted ?? 0) >= MAX_COMPLETED_PER_IP_PER_DAY) {
           return Response.json(
             {
               error:
-                "You've used your free session for today. Come back tomorrow or pick a coaching pathway to keep going.",
+                "You've used your free diagnostics for today. Pick a coaching pathway to keep going.",
+            },
+            { status: 429 },
+          );
+        }
+
+        // 3. GLOBAL circuit-breaker — hard ceiling on paid sessions per 24h across all users.
+        const { count: globalStarts, error: globalErr } = await supabaseAdmin
+          .from("diagnostic_sessions")
+          .select("id", { count: "exact", head: true })
+          .gte("created_at", since);
+        if (globalErr) {
+          console.error("diagnostic-token: global count failed", globalErr);
+          return Response.json({ error: "Server error" }, { status: 500 });
+        }
+        if ((globalStarts ?? 0) >= MAX_GLOBAL_STARTS_PER_DAY) {
+          console.warn("diagnostic-token: global daily cap reached", { globalStarts });
+          return Response.json(
+            {
+              error:
+                "Bramwell is at capacity today. Please try again tomorrow, or start a coaching pathway now.",
             },
             { status: 429 },
           );
