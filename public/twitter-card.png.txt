@@ -1,2 +1,0 @@
-Twitter/X uses /og-image.png (1200x630, summary_large_image).
-This placeholder exists only to document that the OG image doubles as the Twitter card.
