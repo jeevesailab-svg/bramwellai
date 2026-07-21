@@ -736,8 +736,10 @@ function DiagnosticPage() {
               <div className="mt-8 flex justify-center">
                 <button
                   onClick={startDiagnostic}
-                  className="group inline-flex h-14 items-center justify-center gap-2 rounded-full bg-white px-9 text-base font-semibold text-neutral-900 shadow-lg transition hover:bg-neutral-100"
+                  className="group inline-flex h-14 items-center justify-center gap-3 rounded-full px-9 text-base font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95"
+                  style={{ background: "var(--gradient-cta)", boxShadow: "var(--shadow-cta)" }}
                 >
+                  <Mic className="h-5 w-5" strokeWidth={2.5} />
                   Start free voice session
                   <span className="transition-transform group-hover:translate-x-0.5">→</span>
                 </button>

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
+import { Mic } from "lucide-react";
 import { SiteNav, SiteFooter, GoldText } from "@/components/site/SiteChrome";
 
 const QUESTIONS = [
@@ -277,7 +278,7 @@ function SevenQuestionsPage() {
                 boxShadow: "var(--shadow-cta)",
               }}
             >
-              <MicIcon /> Talk to Bramwell free <span className="transition-transform group-hover:translate-x-0.5">→</span>
+              <Mic className="h-4 w-4" strokeWidth={2.5} /> Talk to Bramwell free <span className="transition-transform group-hover:translate-x-0.5">→</span>
             </Link>
             <p className="mt-4 text-xs text-muted-foreground/80">
               No card · No login
