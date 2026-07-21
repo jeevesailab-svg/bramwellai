@@ -5,16 +5,13 @@ import { test, expect } from "@playwright/test";
 // assertion is on client-side behavior a broken build would visibly break.
 
 test.describe("landing → diagnostic CTA", () => {
-  test("hero primary CTA routes to /diagnostic with autostart", async ({ page }) => {
+  test("hero primary CTA routes to /diagnostic", async ({ page }) => {
     await page.goto("/");
-    // Primary CTA copy is standardized across the site.
+    // Primary CTA copy is standardized across the site. /diagnostic now auto-starts the voice session.
     const cta = page.getByRole("link", { name: /talk to bramwell free/i }).first();
     await expect(cta).toBeVisible();
     await cta.click();
     await expect(page).toHaveURL(/\/diagnostic(\?|$)/);
-    // Autostart search param is what triggers the mic session immediately.
-    await page.waitForTimeout(500);
-    expect(new URL(page.url()).searchParams.get("autostart")).toBe("1");
   });
 
   test("top-nav Pricing link routes to /pricing", async ({ page }) => {
