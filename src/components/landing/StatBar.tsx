@@ -21,16 +21,15 @@ export function StatBar() {
   ];
   return (
     <section
-      className="relative overflow-hidden border-t border-border py-20 md:py-28"
-      style={{ background: "oklch(0.12 0.02 255)" }}
+      className="relative overflow-hidden border-t border-border bg-white py-20 md:py-28"
     >
       {/* subtle ambient glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-60"
+        className="pointer-events-none absolute inset-0 opacity-40"
         style={{
           background:
-            "radial-gradient(60% 50% at 50% 0%, oklch(0.18 0.04 255 / 0.9) 0%, transparent 70%)",
+            "radial-gradient(60% 50% at 50% 0%, oklch(0.95 0.06 340 / 0.7) 0%, transparent 70%)",
         }}
       />
       <div className="relative mx-auto max-w-6xl px-6 md:px-10">
@@ -50,16 +49,16 @@ export function StatBar() {
           />
         </div>
 
-        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border/60 bg-border/60 md:mt-20 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:mt-20 md:grid-cols-3">
           {stats.map((s, i) => (
             <div
               key={s.value}
-              className="group relative flex flex-col justify-between p-8 md:p-10"
-              style={{ background: "oklch(0.12 0.02 255)" }}
+              className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-border bg-white p-8 md:p-10"
+              style={{ boxShadow: "var(--shadow-soft)" }}
             >
               <div
                 aria-hidden
-                className="absolute left-0 top-0 font-semibold leading-none text-foreground/[0.04] md:text-[8rem]"
+                className="absolute left-2 top-2 font-semibold leading-none text-foreground/[0.05] md:text-[8rem]"
                 style={{ fontSize: "6rem" }}
               >
                 0{i + 1}
