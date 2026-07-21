@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import { CtaButton } from "@/components/site/CtaButton";
 
 type Pathway = "graduate" | "comeback" | "returner" | "pivot" | "executive" | "advisors";
 
