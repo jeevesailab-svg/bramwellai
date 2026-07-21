@@ -66,7 +66,8 @@ export const theme = {
   },
   /**
    * Tailwind class fragments for the same tokens. Prefer these in JSX so
-   * pages import the shared vocabulary rather than repeating `bg-[var(--...)]`.
+   * pages import the shared vocabulary rather than repeating arbitrary
+   * `bg-[var(--token)]` fragments inline.
    */
   cx: {
     surface: "bg-background text-foreground",
