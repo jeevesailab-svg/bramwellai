@@ -18,6 +18,7 @@ import { relative, sep } from "node:path";
 
 const RESULTS = process.env.RESULTS_JSON ?? "test-results/results.json";
 const ARTIFACT_URL = process.env.ARTIFACT_URL ?? "";
+const DIFFS_URL = process.env.DIFFS_URL ?? "";
 const REPORT_URL = process.env.REPORT_URL ?? "";
 const RUN_URL = process.env.RUN_URL ?? "";
 
@@ -60,6 +61,7 @@ function buildBody(failures) {
 
   const links = [];
   if (RUN_URL) links.push(`[Workflow run](${RUN_URL})`);
+  if (DIFFS_URL) links.push(`[Download failing diff images](${DIFFS_URL})`);
   if (ARTIFACT_URL) links.push(`[Download \`playwright-report\` artifact](${ARTIFACT_URL})`);
   if (REPORT_URL) links.push(`[Open HTML report](${REPORT_URL})`);
   if (links.length) {

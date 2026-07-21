@@ -37,10 +37,44 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: playwright-report-pr${{ github.event.pull_request.number || 'main' }}-run${{ github.run_number }}
           path: |
             playwright-report
             test-results
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Collect failing diff images
+        if: always() && failure()
+        run: |
+          set -e
+          mkdir -p visual-diffs
+          # Playwright writes -diff.png / -actual.png / -expected.png next to each
+          # failing test's output folder under test-results/. Preserve the folder
+          # structure so reviewers can see which test each triple belongs to.
+          if [ -d test-results ]; then
+            find test-results -type f \( \
+              -name '*-diff.png' -o \
+              -name '*-actual.png' -o \
+              -name '*-expected.png' \
+            \) -print0 | while IFS= read -r -d '' f; do
+              rel="${f#test-results/}"
+              dest="visual-diffs/$rel"
+              mkdir -p "$(dirname "$dest")"
+              cp "$f" "$dest"
+            done
+          fi
+          count=$(find visual-diffs -type f -name '*.png' 2>/dev/null | wc -l | tr -d ' ')
+          echo "Collected $count diff images."
+          echo "diff_count=$count" >> "$GITHUB_ENV"
+
+      - name: Upload failing diff images
+        if: always() && failure() && env.diff_count != '0'
+        id: upload-diffs
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-diffs-pr${{ github.event.pull_request.number || 'main' }}-run${{ github.run_number }}
+          path: visual-diffs
           retention-days: 14
           if-no-files-found: ignore
 
@@ -50,6 +84,7 @@ jobs:
         env:
           RESULTS_JSON: test-results/results.json
           ARTIFACT_URL: ${{ steps.upload-report.outputs.artifact-url }}
+          DIFFS_URL: ${{ steps.upload-diffs.outputs.artifact-url }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           set -e
