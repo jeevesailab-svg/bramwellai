@@ -277,7 +277,19 @@ function DiagnosticPage() {
       });
       return "Ignored: session not ready";
     }
-    return submitResult(input);
+    const result = await submitResult(input);
+    if (result === "Result captured") {
+      // After the result is saved, nudge Bramwell to speak the summary out loud
+      // so the user hears their score and type before the page transitions.
+      try {
+        void conversationRef.current?.sendContextualUpdate?.(
+          "The diagnostic result has been saved. Now give the user a warm, concise 2-sentence summary of their communication type and Readiness Score in plain language, tell them what it means, and say goodbye. Do not ask another question."
+        );
+      } catch {
+        /* noop */
+      }
+    }
+    return result;
   }, [submitResult]);
 
   const finalizeFromTranscript = useCallback(async (sessionId: string) => {
@@ -320,10 +332,10 @@ function DiagnosticPage() {
 
       if (intentional) {
         if (submittedRef.current && sid) {
+          // Do not navigate immediately. Let the pendingNavigateId useEffect
+          // wait until Bramwell finishes his spoken summary before moving
+          // to the result page, so users never get a silent hard cut.
           setPendingNavigateId(sid);
-          window.setTimeout(() => {
-            window.location.assign(`/diagnostic/result?id=${sid}`);
-          }, 800);
           return;
         }
         if (!submittedRef.current) setPhase("wrapping");
