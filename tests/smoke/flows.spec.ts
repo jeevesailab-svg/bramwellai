@@ -5,15 +5,13 @@ import { test, expect } from "@playwright/test";
 // assertion is on client-side behavior a broken build would visibly break.
 
 test.describe("landing → diagnostic CTA", () => {
-  test("hero primary CTA routes to /diagnostic with autostart", async ({ page }) => {
+  test("hero primary CTA routes to /diagnostic", async ({ page }) => {
     await page.goto("/");
-    // Primary CTA copy is standardized across the site.
+    // Primary CTA copy is standardized across the site. /diagnostic now auto-starts the voice session.
     const cta = page.getByRole("link", { name: /talk to bramwell free/i }).first();
     await expect(cta).toBeVisible();
     await cta.click();
     await expect(page).toHaveURL(/\/diagnostic(\?|$)/);
-    // Autostart search param is what triggers the mic session immediately.
-    expect(new URL(page.url()).searchParams.get("autostart")).toBe("1");
   });
 
   test("top-nav Pricing link routes to /pricing", async ({ page }) => {
@@ -45,7 +43,7 @@ test.describe("auth forms render + cross-link", () => {
     await expect(page.getByLabel(/first name/i)).toBeVisible();
     await expect(page.getByLabel(/email/i)).toBeVisible();
     await expect(page.getByLabel(/password/i)).toBeVisible();
-    await expect(page.getByRole("button", { name: /(create|sign up|continue)/i })).toBeEnabled();
+    await expect(page.getByRole("button", { name: /create account|sign up/i })).toBeEnabled();
   });
 
   test("/signup → /login via 'Sign in' cross-link", async ({ page }) => {
@@ -59,14 +57,14 @@ test.describe("auth forms render + cross-link", () => {
     await page.goto("/login");
     await expect(page.getByLabel(/email/i)).toBeVisible();
     await expect(page.getByLabel(/password/i)).toBeVisible();
-    await expect(page.getByRole("button", { name: /(sign in|log in|continue)/i })).toBeEnabled();
-    await page.getByRole("link", { name: /sign up|create account/i }).first().click();
+    await expect(page.getByRole("button", { name: /sign in/i })).toBeEnabled();
+    await page.getByRole("link", { name: /create an account/i }).first().click();
     await expect(page).toHaveURL(/\/signup$/);
   });
 
   test("/login blocks empty submit (HTML5 required)", async ({ page }) => {
     await page.goto("/login");
-    await page.getByRole("button", { name: /(sign in|log in|continue)/i }).first().click();
+    await page.getByRole("button", { name: /sign in/i }).first().click();
     // Required inputs prevent navigation; still on /login.
     await expect(page).toHaveURL(/\/login$/);
     const email = page.getByLabel(/email/i);

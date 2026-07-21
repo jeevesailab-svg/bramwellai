@@ -25,12 +25,13 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Five coaching pathways for every career moment. Pick the one that meets you where you are.",
+          "Simple monthly coaching for the moments that matter. Start with the Career Confidence Club, or pick a focused sprint.",
       },
       { property: "og:title", content: "Pricing, Bramwell AI" },
       {
         property: "og:description",
-        content: "Five coaching pathways for every career moment.",
+        content:
+          "Simple monthly coaching for the moments that matter. Start with the Career Confidence Club, or pick a focused sprint.",
       },
     ],
   }),
@@ -59,20 +60,40 @@ type Pathway = {
 
 const PATHWAYS: Pathway[] = [
   {
-    key: "graduate",
-    name: "Graduate Interview Prep",
-    forWho: "Graduates entering the workforce",
-    price: "A$99",
-    cadence: "one-time",
-    sessions: "3 sessions · 20 mins · use within 14 days",
+    key: "club",
+    name: "Career Confidence Club",
+    forWho: "The simple way to stay ready",
+    price: "A$79",
+    cadence: "per month · cancel anytime",
+    sessions: "Up to 3 sessions per week · 30 mins each",
+    highlight: true,
     blurb:
-      "You've worked for this. Transform your words to be the person that gets chosen. Your CV got you the interview, now the job goes to whoever commands the room.",
+      "Promotions. Pay reviews. Difficult stakeholders. Board presentations. Stay sharp between the moments that matter, so when your moment arrives, you're already ready.",
     includes: [
-      "Free AI voice check, your exact gaps identified before session one",
-      "3 × 20-min voice coaching sessions built to your role and industry",
-      "Structured frameworks for behavioural and competency questions",
-      "Real-time interruption when your delivery drifts, no empty praise",
-      "Full performance report delivered to your inbox",
+      "Unlimited voice coaching, up to 3 sessions per week",
+      "Monthly voice check to track your improvement over time",
+      "New scenario library added monthly: negotiations, presentations, stakeholders",
+      "Priority access to new features and session types as they launch",
+      "Community access, share wins, prep together, stay accountable",
+      "20% off any sprint upgrade, any time",
+    ],
+  },
+  {
+    key: "confidence",
+    name: "Interview Confidence Sprint",
+    forWho: "Mid-career with a real interview coming",
+    price: "A$249",
+    cadence: "one-time",
+    sessions: "4 sessions · 30 mins · use within 14 days",
+    blurb:
+      "You're the most qualified person in the room. It's time to sound like it. Four sessions designed to close the gap between who you are and how they hear you.",
+    includes: [
+      "Full voice check, readiness score, communication type, three specific gaps",
+      "4 × 30-min sessions: diagnose → drill → pressure → perform",
+      "Commercial language coaching, translate impact into numbers that land",
+      "Curveball and pushback simulation, trained for what actually happens",
+      "Before-and-after performance report to track your improvement",
+      "Salary and offer negotiation language coaching",
     ],
   },
   {
@@ -90,25 +111,6 @@ const PATHWAYS: Pathway[] = [
       "Career break narrative coaching, turn the gap into a strength",
       "Pressure simulation: harder follow-ups when you're getting comfortable",
       "Full performance report and recommended next session focus",
-    ],
-  },
-  {
-    key: "confidence",
-    name: "Interview Confidence Sprint",
-    forWho: "Mid-career with a real interview coming",
-    price: "A$249",
-    cadence: "one-time",
-    sessions: "4 sessions · 30 mins · use within 14 days",
-    highlight: true,
-    blurb:
-      "You're the most qualified person in the room. It's time to sound like it. Four sessions designed to close the gap between who you are and how they hear you.",
-    includes: [
-      "Full voice check, readiness score, communication type, three specific gaps",
-      "4 × 30-min sessions: diagnose → drill → pressure → perform",
-      "Commercial language coaching, translate impact into numbers that land",
-      "Curveball and pushback simulation, trained for what actually happens",
-      "Before-and-after performance report to track your improvement",
-      "Salary and offer negotiation language coaching",
     ],
   },
   {
@@ -130,26 +132,33 @@ const PATHWAYS: Pathway[] = [
     ],
   },
   {
-    key: "club",
-    name: "Career Confidence Club",
-    forWho: "When high-stakes conversations never stop",
-    price: "A$79",
-    cadence: "per month · cancel anytime",
-    sessions: "Up to 3 sessions per week · 30 mins each",
+    key: "graduate",
+    name: "Graduate Interview Prep",
+    forWho: "Graduates entering the workforce",
+    price: "A$99",
+    cadence: "one-time",
+    sessions: "3 sessions · 20 mins · use within 14 days",
     blurb:
-      "Promotions. Pay reviews. Difficult stakeholders. Board presentations. Stay sharp between the moments that matter, so when your moment arrives, you're already ready.",
+      "You've worked for this. Transform your words to be the person that gets chosen. Your CV got you the interview, now the job goes to whoever commands the room.",
     includes: [
-      "Unlimited voice coaching, up to 3 sessions per week",
-      "Monthly voice check to track your improvement over time",
-      "New scenario library added monthly: negotiations, presentations, stakeholders",
-      "Priority access to new features and session types as they launch",
-      "Community access, share wins, prep together, stay accountable",
-      "20% off any sprint upgrade, any time",
+      "Free AI voice check, your exact gaps identified before session one",
+      "3 × 20-min voice coaching sessions built to your role and industry",
+      "Structured frameworks for behavioural and competency questions",
+      "Real-time interruption when your delivery drifts, no empty praise",
+      "Full performance report delivered to your inbox",
     ],
   },
 ];
 
-function getHeroCopy(score?: number) {
+function getHeroCopy(score?: number, recommended?: keyof typeof PRICE_IDS) {
+  if (recommended === "club") {
+    return {
+      eyebrow: "Simple monthly coaching",
+      headline: "Stay ready for every room that matters.",
+      sub: "One subscription. Up to 3 voice sessions a week. Monthly progress checks. Every new scenario as it drops. Cancel anytime.",
+      cta: "Join the Club →",
+    };
+  }
   if (typeof score === "number" && score <= 50) {
     return {
       eyebrow: "Your next move",
@@ -167,10 +176,10 @@ function getHeroCopy(score?: number) {
     };
   }
   return {
-    eyebrow: "Strategic communication",
-    headline: "Build trust. Drive decisions. Lead with influence.",
-    sub: "Learn to persuade, influence and lead conversations so your ideas get heard, your recommendations get backed, and you get the yes you deserve.",
-    cta: "Sharpen my edge →",
+    eyebrow: "Simple monthly coaching",
+    headline: "Stay ready for every room that matters.",
+    sub: "One subscription. Up to 3 voice sessions a week. Monthly progress checks. Every new scenario as it drops. Cancel anytime.",
+    cta: "Join the Club →",
   };
 }
 
@@ -180,7 +189,7 @@ function PricingPage() {
     ["graduate", "comeback", "confidence", "executive", "club"] as const
   ).find((k) => k === recommended);
 
-  const hero = getHeroCopy(score);
+  const hero = getHeroCopy(score, recommendedKey);
 
   const pathways = recommendedKey
     ? PATHWAYS.map((p) => ({ ...p, highlight: p.key === recommendedKey }))

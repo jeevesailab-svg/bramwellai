@@ -349,7 +349,7 @@ function ResultBody({ result }: { result: Result }) {
       {/* SECTION 2, Type */}
       <Link
         to="/pricing"
-        search={{ recommended: pathwayKey, resume: pathwayKey, score: result.readiness_score }}
+        search={{ recommended: "club", score: result.readiness_score }}
         className="block rounded-2xl border border-border bg-foreground/[0.03] p-8 text-center backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.06]"
       >
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
@@ -379,7 +379,7 @@ function ResultBody({ result }: { result: Result }) {
           </ul>
         )}
         <p className="mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
-          Start fixing this →
+          See coaching options →
         </p>
       </Link>
 
@@ -437,24 +437,24 @@ function ResultBody({ result }: { result: Result }) {
               className="inline-block h-1.5 w-1.5 animate-pulse rounded-full"
               style={{ background: "var(--primary)" }}
             />
-            Recommended for your score
+            Simple monthly coaching
           </span>
           <h2 className="mt-5 text-balance text-3xl font-semibold leading-[1.05] tracking-tight md:text-4xl">
-            Start fixing this with{" "}
+            Keep Bramwell in your corner for{" "}
             <span
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: "var(--gradient-gold)" }}
             >
-              {result.recommended_pathway_name}
+              A$79/month
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-muted-foreground">
-            Three sessions with Bramwell. Built around the exact gaps in your diagnostic.
+            Unlimited voice coaching, up to 3 sessions a week, monthly progress checks, and every scenario library as it drops. Cancel anytime.
           </p>
 
           <Link
             to="/pricing"
-            search={{ recommended: pathwayKey, resume: pathwayKey, score: result.readiness_score }}
+            search={{ recommended: "club", resume: "club", score: result.readiness_score }}
             className="group mt-7 inline-flex h-14 w-full items-center justify-center gap-3 rounded-full px-8 text-base font-semibold transition hover:scale-[1.02] active:scale-[0.99] md:w-auto md:min-w-[360px]"
             style={{
               background: "var(--gradient-gold)",
@@ -463,9 +463,7 @@ function ResultBody({ result }: { result: Result }) {
                 "0 20px 60px -15px color-mix(in oklab, var(--primary) 70%, transparent), 0 0 0 1px color-mix(in oklab, var(--primary) 50%, transparent) inset",
             }}
           >
-            <span>Start fixing this</span>
-            <span className="opacity-70">·</span>
-            <span className="tabular-nums">{result.recommended_price}</span>
+            <span>Start my monthly coaching</span>
             <span aria-hidden className="transition group-hover:translate-x-1">→</span>
           </Link>
 
@@ -487,9 +485,10 @@ function ResultBody({ result }: { result: Result }) {
           <div className="mt-6">
             <Link
               to="/pricing"
+              search={{ recommended: pathwayKey, score: result.readiness_score }}
               className="text-xs text-muted-foreground underline-offset-4 transition hover:text-foreground hover:underline"
             >
-              See all coaching pathways
+              Prefer a one-time {result.recommended_pathway_name}? See all options
             </Link>
           </div>
         </div>
