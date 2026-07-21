@@ -58,7 +58,7 @@ test.describe("auth forms render + cross-link", () => {
     await expect(page.getByLabel(/email/i)).toBeVisible();
     await expect(page.getByLabel(/password/i)).toBeVisible();
     await expect(page.getByRole("button", { name: /sign in/i })).toBeEnabled();
-    await page.getByRole("link", { name: /sign up|create account/i }).first().click();
+    await page.getByRole("link", { name: /create an account/i }).first().click();
     await expect(page).toHaveURL(/\/signup$/);
   });
 
