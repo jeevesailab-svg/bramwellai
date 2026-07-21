@@ -148,8 +148,9 @@ for (const route of PUBLIC_ROUTES) {
         content: `*, *::before, *::after { animation: none !important; transition: none !important; }`,
       });
       await page.evaluate(() => window.scrollTo(0, 0));
+      const size = page.viewportSize() ?? { width: 1280, height: 900 };
       await expect(page).toHaveScreenshot(`${route.label}-hero.png`, {
-        clip: { x: 0, y: 0, width: 1280, height: 900 },
+        clip: { x: 0, y: 0, width: size.width, height: Math.min(size.height, 900) },
       });
     });
   });
