@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Mic } from "lucide-react";
+import { CtaButton } from "@/components/site/CtaButton";
 
 export const Route = createFileRoute("/diagnostic/")({
   component: DiagnosticRoute,
@@ -735,15 +735,9 @@ function DiagnosticPage() {
                 Answer one question out loud. Bramwell will show you exactly how you sound under pressure.
               </p>
               <div className="mt-8 flex justify-center">
-                <button
-                  onClick={startDiagnostic}
-                  className="group inline-flex h-14 items-center justify-center gap-3 rounded-full px-9 text-base font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95"
-                  style={{ background: "var(--gradient-cta)", boxShadow: "var(--shadow-cta)" }}
-                >
-                  <Mic className="h-5 w-5" strokeWidth={2.5} />
+                <CtaButton as="button" onClick={startDiagnostic} size="lg">
                   Start free voice session
-                  <span className="transition-transform group-hover:translate-x-0.5">→</span>
-                </button>
+                </CtaButton>
               </div>
               <p className="mt-4 text-xs text-muted-foreground">
                 Instant result · Free · No credit card

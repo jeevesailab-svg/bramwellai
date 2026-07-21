@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Mic } from "lucide-react";
+import { CtaButton } from "@/components/site/CtaButton";
 import { CtaWithCapture, type Pathway } from "./CtaWithCapture";
 
 export function SiteNav({ ctaLabel = "Talk to Bramwell free", ctaHref = "/diagnostic?autostart=1" }: { ctaLabel?: string; ctaHref?: string }) {
@@ -15,28 +15,18 @@ export function SiteNav({ ctaLabel = "Talk to Bramwell free", ctaHref = "/diagno
         <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
         <a href="/login" className="transition-colors hover:text-foreground">Sign In</a>
       </nav>
-      <a
-        href={ctaHref}
-        className="inline-flex h-10 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold text-neutral-900 transition hover:opacity-95"
-        style={{ background: "var(--gradient-cta)", boxShadow: "var(--shadow-cta)" }}
-      >
-        <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> {ctaLabel} <span>→</span>
-      </a>
+      <CtaButton href={ctaHref} size="sm">
+        {ctaLabel}
+      </CtaButton>
     </header>
   );
 }
 
 export function GoldButton({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <a
-      href={href}
-      className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-7 text-sm font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95"
-      style={{ background: "var(--gradient-cta)", boxShadow: "var(--shadow-cta)" }}
-    >
-      <Mic className="h-4 w-4" strokeWidth={2.5} />
+    <CtaButton href={href} size="md">
       {children}
-      <span className="transition-transform group-hover:translate-x-0.5">→</span>
-    </a>
+    </CtaButton>
   );
 }
 

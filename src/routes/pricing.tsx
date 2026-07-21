@@ -5,6 +5,7 @@ import { useStripeCheckout } from "@/hooks/useStripeCheckout";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { createPortalSession } from "@/lib/payments.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
+import { CtaButton } from "@/components/site/CtaButton";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
@@ -316,12 +317,11 @@ function PricingPage() {
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
             {hero.sub}
           </p>
-          <Link
-            to="/diagnostic"
-            className="mt-8 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium backdrop-blur transition hover:bg-foreground/10"
-          >
-            {hero.cta}
-          </Link>
+          <div className="mt-8 flex justify-center">
+            <CtaButton href="/diagnostic" size="md">
+              {hero.cta}
+            </CtaButton>
+          </div>
         </div>
       </section>
 
@@ -462,22 +462,11 @@ function PathwayCard({ p, onSelect }: { p: Pathway; onSelect: () => void }) {
         ))}
       </ul>
 
-      <button
-        type="button"
-        onClick={onSelect}
-        className={`mt-8 inline-flex h-11 items-center justify-center rounded-full text-sm font-semibold transition ${
-          p.highlight
-              ? "hover:opacity-95"
-              : "border border-foreground/30 bg-foreground/5 hover:bg-foreground/10"
-        }`}
-        style={
-          p.highlight
-            ? { background: "var(--gradient-gold)", color: "var(--primary-foreground)" }
-            : undefined
-        }
-      >
-        Choose {p.name}
-      </button>
+      <div className="mt-8">
+        <CtaButton as="button" onClick={onSelect} size="md" className="w-full">
+          Choose {p.name}
+        </CtaButton>
+      </div>
     </article>
   );
 }

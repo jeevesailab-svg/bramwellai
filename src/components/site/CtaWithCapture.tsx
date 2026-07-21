@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import { CtaButton } from "@/components/site/CtaButton";
 
 type Pathway = "graduate" | "comeback" | "returner" | "pivot" | "executive" | "advisors";
 
@@ -72,15 +73,9 @@ export function CtaWithCapture({
 
   if (!open) {
     return (
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold transition hover:opacity-95"
-        style={{ background: "var(--gradient-gold)", color: "var(--primary-foreground)", boxShadow: "var(--shadow-elegant)" }}
-      >
+      <CtaButton as="button" onClick={() => setOpen(true)} size="md">
         {children}
-        <span className="transition-transform group-hover:translate-x-0.5">→</span>
-      </button>
+      </CtaButton>
     );
   }
 
@@ -98,14 +93,9 @@ export function CtaWithCapture({
         placeholder="Your email"
         className="h-10 flex-1 rounded-full bg-transparent px-4 text-sm text-foreground outline-none placeholder:text-muted-foreground"
       />
-      <button
-        type="submit"
-        disabled={submitting}
-        className="inline-flex h-10 items-center justify-center rounded-full px-5 text-sm font-semibold transition hover:opacity-95 disabled:opacity-60"
-        style={{ background: "var(--gradient-gold)", color: "var(--primary-foreground)" }}
-      >
-        {submitting ? "…" : "Continue →"}
-      </button>
+      <CtaButton as="button" size="sm" showArrow={false} className={submitting ? "opacity-60" : ""}>
+        {submitting ? "…" : "Continue"}
+      </CtaButton>
       <button
         type="button"
         onClick={onSkip}
