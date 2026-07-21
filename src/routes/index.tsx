@@ -180,7 +180,7 @@ function SymptomCause() {
             <a
               key={it.symptom}
               href="/diagnostic?autostart=1"
-              className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card p-8 transition hover:-translate-y-1 hover:border-primary/40"
+              className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/40 sm:p-8"
               style={{ boxShadow: "var(--shadow-soft)" }}
             >
               <span aria-hidden className="absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-40 blur-2xl transition group-hover:opacity-70" style={{ background: it.accent }} />
@@ -322,14 +322,14 @@ function BlueOcean() {
         </p>
 
         <div className="mt-12 overflow-hidden rounded-3xl border border-border bg-white/90 backdrop-blur" style={{ boxShadow: "var(--shadow-soft)" }}>
-          <div className="grid grid-cols-[1fr_auto_auto] gap-x-6 border-b border-border px-6 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto_auto] gap-x-3 border-b border-border px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground sm:gap-x-6 sm:px-6 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]">
             <span></span>
             <span className="text-right" style={{ color: "var(--primary)" }}>Bramwell</span>
-            <span className="text-right">Everyone else</span>
+            <span className="text-right">Others</span>
           </div>
           {rows.map((r) => (
-            <div key={r.thing} className="grid grid-cols-[1fr_auto_auto] items-center gap-x-6 border-b border-border/60 px-6 py-4 text-sm last:border-b-0">
-              <span className="text-foreground">{r.thing}</span>
+            <div key={r.thing} className="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-x-3 border-b border-border/60 px-4 py-3.5 text-[13px] leading-snug last:border-b-0 sm:gap-x-6 sm:px-6 sm:py-4 sm:text-sm">
+              <span className="min-w-0 text-foreground">{r.thing}</span>
               <span className="text-right text-lg" style={{ color: "var(--primary)" }}>✓</span>
               <span className="text-right text-lg text-muted-foreground/40">—</span>
             </div>
@@ -368,7 +368,7 @@ function PricingTease() {
           {plans.map((p) => (
             <div
               key={p.name}
-              className={"relative flex flex-col rounded-3xl border p-8 transition hover:-translate-y-1 " + (p.featured ? "border-transparent" : "border-border")}
+              className={"relative flex flex-col rounded-3xl border p-6 transition hover:-translate-y-1 sm:p-8 " + (p.featured ? "border-transparent" : "border-border")}
               style={p.featured ? { background: "white", boxShadow: "0 0 0 2px var(--primary), var(--shadow-elegant)" } : { background: "white", boxShadow: "var(--shadow-soft)" }}
             >
               {p.featured && (
