@@ -149,7 +149,15 @@ const PATHWAYS: Pathway[] = [
   },
 ];
 
-function getHeroCopy(score?: number) {
+function getHeroCopy(score?: number, recommended?: keyof typeof PRICE_IDS) {
+  if (recommended === "club") {
+    return {
+      eyebrow: "Simple monthly coaching",
+      headline: "Stay ready for every room that matters.",
+      sub: "One subscription. Up to 3 voice sessions a week. Monthly progress checks. Every new scenario as it drops. Cancel anytime.",
+      cta: "Join the Club →",
+    };
+  }
   if (typeof score === "number" && score <= 50) {
     return {
       eyebrow: "Your next move",
