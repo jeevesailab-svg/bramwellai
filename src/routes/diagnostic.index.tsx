@@ -129,22 +129,11 @@ function routePathway(
     return { key: "comeback", ...PATHWAY.comeback };
   }
 
-  // Score overrides.
-  if (score >= 80) return { key: "club", ...PATHWAY.club };
-  if (score < 40) return { key: "graduate", ...PATHWAY.graduate };
-
-  // Communication-type routing.
-  if (/(rambler|over[- ]?explainer|under[- ]?seller|invisible)/.test(type)) {
-    return { key: "confidence", ...PATHWAY.confidence };
-  }
-  if (/(apolog)/.test(type)) {
-    return { key: "comeback", ...PATHWAY.comeback };
-  }
-  if (/(next[- ]?level|leader)/.test(type)) {
-    return { key: "club", ...PATHWAY.club };
-  }
-
-  return { key: "confidence", ...PATHWAY.confidence };
+  // Simple monthly pricing as the default recommendation: every archetype
+  // flows into the Career Confidence Club, with sprints available as upsells
+  // on the pricing page. Career-moment hints are still surfaced in the result
+  // copy, but the purchase path is a single, low-friction subscription.
+  return { key: "club", ...PATHWAY.club };
 }
 
 function DiagnosticRoute() {
