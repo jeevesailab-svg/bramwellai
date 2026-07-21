@@ -176,10 +176,10 @@ function getHeroCopy(score?: number, recommended?: keyof typeof PRICE_IDS) {
     };
   }
   return {
-    eyebrow: "Strategic communication",
-    headline: "Build trust. Drive decisions. Lead with influence.",
-    sub: "Learn to persuade, influence and lead conversations so your ideas get heard, your recommendations get backed, and you get the yes you deserve.",
-    cta: "Sharpen my edge →",
+    eyebrow: "Simple monthly coaching",
+    headline: "Stay ready for every room that matters.",
+    sub: "One subscription. Up to 3 voice sessions a week. Monthly progress checks. Every new scenario as it drops. Cancel anytime.",
+    cta: "Join the Club →",
   };
 }
 
