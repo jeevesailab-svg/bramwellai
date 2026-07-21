@@ -48,7 +48,7 @@ export function GoldText({ children }: { children: ReactNode }) {
 
 export function StatsBar({ stats }: { stats: { value: string; label: string }[] }) {
   return (
-    <section className="relative border-y border-border py-16 md:py-20" style={{ background: "oklch(0.12 0.02 255)" }}>
+    <section className="relative border-y border-border bg-white py-16 md:py-20" style={{ boxShadow: "var(--shadow-soft)" }}>
       <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-3 md:gap-8 md:px-10">
         {stats.map((s) => (
           <div key={s.value} className="text-center md:text-left">
