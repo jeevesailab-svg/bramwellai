@@ -271,14 +271,13 @@ function SevenQuestionsPage() {
             <Link
               to="/diagnostic"
               search={{ autostart: "1" }}
-              className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold transition hover:opacity-95"
+              className="group mt-8 inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-7 text-sm font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95"
               style={{
-                background: "var(--gradient-gold)",
-                color: "var(--primary-foreground)",
-                boxShadow: "var(--shadow-elegant)",
+                background: "var(--gradient-cta)",
+                boxShadow: "var(--shadow-cta)",
               }}
             >
-              Talk to Bramwell free →
+              <MicIcon /> Talk to Bramwell free <span className="transition-transform group-hover:translate-x-0.5">→</span>
             </Link>
             <p className="mt-4 text-xs text-muted-foreground/80">
               No card · No login

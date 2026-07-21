@@ -72,13 +72,13 @@ export function PainChecklist() {
         <div className="mt-12 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
           <a
             href="/diagnostic?autostart=1"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:opacity-95"
+            className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-7 text-sm font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95"
             style={{
-              background: "var(--gradient-gold)",
-              boxShadow: "var(--shadow-elegant)",
+              background: "var(--gradient-cta)",
+              boxShadow: "var(--shadow-cta)",
             }}
           >
-            <Mic className="h-4 w-4" strokeWidth={2.5} /> Talk to Bramwell free →
+            <Mic className="h-4 w-4" strokeWidth={2.5} /> Talk to Bramwell free <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
           <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80">
             No login · No card

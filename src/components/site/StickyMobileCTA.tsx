@@ -19,9 +19,10 @@ export function StickyMobileCTA({
         <Link
           to={href}
           search={search ?? { autostart: "1" }}
-          className="flex h-11 w-full items-center justify-center gap-2 rounded-full text-sm font-semibold text-white transition active:scale-[0.98]"
+          className="flex h-11 w-full items-center justify-center gap-2.5 rounded-full text-sm font-semibold text-neutral-900 transition active:scale-[0.98]"
           style={{
-            background: "var(--gradient-gold)",
+            background: "var(--gradient-cta)",
+            boxShadow: "var(--shadow-cta)",
           }}
         >
           <Mic className="h-4 w-4" strokeWidth={2.5} /> {label}
