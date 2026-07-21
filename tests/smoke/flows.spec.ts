@@ -13,6 +13,7 @@ test.describe("landing → diagnostic CTA", () => {
     await cta.click();
     await expect(page).toHaveURL(/\/diagnostic(\?|$)/);
     // Autostart search param is what triggers the mic session immediately.
+    await page.waitForTimeout(500);
     expect(new URL(page.url()).searchParams.get("autostart")).toBe("1");
   });
 
@@ -45,7 +46,7 @@ test.describe("auth forms render + cross-link", () => {
     await expect(page.getByLabel(/first name/i)).toBeVisible();
     await expect(page.getByLabel(/email/i)).toBeVisible();
     await expect(page.getByLabel(/password/i)).toBeVisible();
-    await expect(page.getByRole("button", { name: /(create|sign up|continue)/i })).toBeEnabled();
+    await expect(page.getByRole("button", { name: /create account|sign up/i })).toBeEnabled();
   });
 
   test("/signup → /login via 'Sign in' cross-link", async ({ page }) => {
@@ -59,14 +60,14 @@ test.describe("auth forms render + cross-link", () => {
     await page.goto("/login");
     await expect(page.getByLabel(/email/i)).toBeVisible();
     await expect(page.getByLabel(/password/i)).toBeVisible();
-    await expect(page.getByRole("button", { name: /(sign in|log in|continue)/i })).toBeEnabled();
+    await expect(page.getByRole("button", { name: /sign in/i })).toBeEnabled();
     await page.getByRole("link", { name: /sign up|create account/i }).first().click();
     await expect(page).toHaveURL(/\/signup$/);
   });
 
   test("/login blocks empty submit (HTML5 required)", async ({ page }) => {
     await page.goto("/login");
-    await page.getByRole("button", { name: /(sign in|log in|continue)/i }).first().click();
+    await page.getByRole("button", { name: /sign in/i }).first().click();
     // Required inputs prevent navigation; still on /login.
     await expect(page).toHaveURL(/\/login$/);
     const email = page.getByLabel(/email/i);
