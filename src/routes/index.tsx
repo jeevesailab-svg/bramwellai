@@ -464,7 +464,7 @@ function Footer() {
         <div>
           <BramwellLogo size={28} />
           <p className="mt-4 max-w-sm text-xs leading-relaxed text-muted-foreground">
-            Your live AI voice coach. Speak like the best in the room. Your sessions are private and never used to train public models.
+            Your live AI voice coach. Hear what the room hears. Your sessions are private and never used to train public models.
           </p>
         </div>
         <div>
