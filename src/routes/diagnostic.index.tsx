@@ -10,17 +10,17 @@ export const Route = createFileRoute("/diagnostic/")({
   }),
   head: () => ({
     meta: [
-      { title: "Try Bramwell Free. Hear how you really sound" },
+      { title: "Try Bramwell Free. Hear what the room hears" },
       {
         name: "description",
         content:
-          "A free voice session with Bramwell. Answer one question, get your communication type, your three biggest gaps, and your Readiness Score.",
+          "A free voice session with Bramwell. Talk, hear what the room hears, and get your communication type, three biggest gaps, and Readiness Score.",
       },
-      { property: "og:title", content: "Try Bramwell Free" },
+      { property: "og:title", content: "Try Bramwell Free. Hear what the room hears" },
       {
         property: "og:description",
         content:
-          "One question with Bramwell. Your communication type, three biggest gaps, and Readiness Score. No login, no card.",
+          "One question with Bramwell. Talk, hear what the room hears, and get your communication type, three biggest gaps, and Readiness Score. No login, no card.",
       },
     ],
   }),
