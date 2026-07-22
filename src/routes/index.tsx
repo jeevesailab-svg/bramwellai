@@ -442,11 +442,11 @@ function FinalCTA() {
       <div aria-hidden className="pointer-events-none absolute right-10 top-10 h-60 w-60 rounded-full opacity-50 blur-3xl" style={{ background: ELECTRIC }} />
       <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
         <h2 className="text-balance text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
-          Ready to sound like the{" "}
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>best in the room?</span>
+          Ready to hear what the{" "}
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>room hears?</span>
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-          Talk to Bramwell for 5 minutes. Hear exactly what&apos;s costing you the room, and exactly how to fix it. Free. No login. No card.
+          Talk to Bramwell for 5 minutes. Get the only perspective that matters — what actually lands when you speak. Free. No login. No card.
         </p>
         <div className="mt-10 flex justify-center">
           <PrimaryCTA size="lg" />
