@@ -51,7 +51,7 @@ function Index() {
       <FAQ />
       <FinalCTA />
       <Footer />
-      <StickyMobileCTA label="Talk to Bramwell free" />
+      <StickyMobileCTA label="Start your coaching now" />
     </main>
   );
 }
