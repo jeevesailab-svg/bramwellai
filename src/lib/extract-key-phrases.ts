@@ -20,7 +20,7 @@ export function extractKeyPhrases(text: string, n = 7): string[] {
   const counts = new Map<string, number>();
   const bump = (k: string, w = 1) => counts.set(k, (counts.get(k) ?? 0) + w);
 
-  // Bigrams (weighted higher — multi-word phrases are more informative)
+  // Bigrams (weighted higher - multi-word phrases are more informative)
   for (let i = 0; i < tokens.length - 1; i++) {
     const a = tokens[i];
     const b = tokens[i + 1];

@@ -5,7 +5,7 @@ import { PUBLIC_ROUTES, DARK_BG_ALLOWLIST, FORBIDDEN_CLASS_PATTERNS } from "./ro
 // oklch(0.995 0.005 95) resolves in Chromium to ~rgb(254, 253, 250).
 const EXPECTED = {
   bodyBgRgbApprox: { r: 254, g: 253, b: 250, tolerance: 6 },
-  // --foreground oklch(0.18 0.03 275) is a dark ink — R,G,B all < 90.
+  // --foreground oklch(0.18 0.03 275) is a dark ink - R,G,B all < 90.
   bodyFgMaxChannel: 90,
   requiredCssVars: [
     "--background",
@@ -94,7 +94,7 @@ async function readThemeSnapshot(page: Page, forbiddenPatterns: string[]) {
     document.querySelectorAll<HTMLElement>("body *").forEach((el) => {
       if (isAllowed(el)) return;
       const rect = el.getBoundingClientRect();
-      // Ignore truly zero-size nodes; keep tiny/off-screen ones — a stray
+      // Ignore truly zero-size nodes; keep tiny/off-screen ones - a stray
       // dark surface below the fold is still a regression.
       if (rect.width === 0 || rect.height === 0) return;
 
@@ -179,7 +179,7 @@ for (const route of PUBLIC_ROUTES) {
   test.describe(`${tag}route ${route.path}`, () => {
     test(`${tag}applies light theme tokens (${route.label})`, async ({ page }) => {
       const resp = await page.goto(route.path, { waitUntil: "domcontentloaded" });
-      // Redirects (e.g. /dashboard when unauthed) still land somewhere — we
+      // Redirects (e.g. /dashboard when unauthed) still land somewhere - we
       // assert whatever renders is in the light theme.
       expect(resp, "response").toBeTruthy();
       await page.waitForLoadState("networkidle").catch(() => {});

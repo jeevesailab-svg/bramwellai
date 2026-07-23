@@ -26,7 +26,7 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
 
         const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
 
-        // 1. Per-IP STARTS cap — the real cost guard. Every mint of a signed URL costs
+        // 1. Per-IP STARTS cap - the real cost guard. Every mint of a signed URL costs
         //    ElevenLabs credits whether the user completes or not, so we cap attempts.
         const { count: ipStarts, error: ipStartsErr } = await supabaseAdmin
           .from("diagnostic_sessions")
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
           );
         }
 
-        // 2. Per-IP COMPLETIONS cap — one household shouldn't burn many full sessions.
+        // 2. Per-IP COMPLETIONS cap - one household shouldn't burn many full sessions.
         const { count: ipCompleted, error: ipDoneErr } = await supabaseAdmin
           .from("diagnostic_sessions")
           .select("id", { count: "exact", head: true })
@@ -67,7 +67,7 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
           );
         }
 
-        // 3. GLOBAL circuit-breaker — hard ceiling on paid sessions per 24h across all users.
+        // 3. GLOBAL circuit-breaker - hard ceiling on paid sessions per 24h across all users.
         const { count: globalStarts, error: globalErr } = await supabaseAdmin
           .from("diagnostic_sessions")
           .select("id", { count: "exact", head: true })

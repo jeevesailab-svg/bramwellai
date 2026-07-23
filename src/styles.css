@@ -63,7 +63,7 @@
 
 :root {
   --radius: 0.625rem;
-  /* Bramwell AI — bright, playful, Loveable/Canva-inspired */
+  /* Bramwell AI - bright, playful, Loveable/Canva-inspired */
   --background: oklch(0.995 0.005 95);
   --foreground: oklch(0.18 0.03 275);
   --card: oklch(1 0 0);

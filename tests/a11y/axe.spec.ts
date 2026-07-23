@@ -15,7 +15,7 @@ const DISABLED_RULES: string[] = [];
 for (const route of PUBLIC_ROUTES) {
   test(`a11y ${route.label} (${route.path})`, async ({ page }) => {
     const response = await page.goto(route.path, { waitUntil: "networkidle" });
-    // Routes behind auth (dashboard) may redirect — audit whatever renders.
+    // Routes behind auth (dashboard) may redirect - audit whatever renders.
     expect(response, `no response for ${route.path}`).not.toBeNull();
 
     const builder = new AxeBuilder({ page }).withTags(AXE_TAGS);
@@ -29,7 +29,7 @@ for (const route of PUBLIC_ROUTES) {
             .slice(0, 3)
             .map((n) => `      • ${n.target.join(" ")}`)
             .join("\n");
-          return `  [${v.impact ?? "n/a"}] ${v.id} — ${v.help}\n    ${v.helpUrl}\n${nodes}`;
+          return `  [${v.impact ?? "n/a"}] ${v.id} - ${v.help}\n    ${v.helpUrl}\n${nodes}`;
         })
         .join("\n\n");
       throw new Error(

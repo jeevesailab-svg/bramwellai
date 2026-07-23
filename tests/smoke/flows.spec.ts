@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-// These smoke tests only exercise navigation and form UI — they never submit
+// These smoke tests only exercise navigation and form UI - they never submit
 // real credentials, hit Supabase, or start a paid ElevenLabs session. Every
 // assertion is on client-side behavior a broken build would visibly break.
 
@@ -68,7 +68,7 @@ test.describe("auth forms render + cross-link", () => {
     // Required inputs prevent navigation; still on /login.
     await expect(page).toHaveURL(/\/login$/);
     const email = page.getByLabel(/email/i);
-    // :invalid is the browser's own validity state — no state hooks needed.
+    // :invalid is the browser's own validity state - no state hooks needed.
     await expect(email).toHaveJSProperty("validity.valid", false);
   });
 });

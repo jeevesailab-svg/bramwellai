@@ -86,7 +86,7 @@ export async function verifyWebhook(req: Request, env: StripeEnv): Promise<{ typ
 }
 
 /**
- * Bramwell pathway configuration — keyed by Stripe lookup_key (price_id).
+ * Bramwell pathway configuration - keyed by Stripe lookup_key (price_id).
  * Each entry drives the fulfillment write into `public.users` and the
  * pathway-specific welcome shown on /portal after purchase.
  */
