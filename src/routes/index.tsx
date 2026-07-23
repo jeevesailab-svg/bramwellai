@@ -199,7 +199,7 @@ function SymptomCause() {
               />
               <p className="relative mt-5 text-sm leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: it.copy }} />
               <span className="relative mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
-                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Talk to Bramwell free <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Start your coaching now <span className="transition-transform group-hover:translate-x-0.5">→</span>
               </span>
             </a>
           ))}
