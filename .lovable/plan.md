@@ -20,7 +20,7 @@ Public/SEO + the three named pages:
 - `/`
 - `/pricing`
 - `/login`
-- `/dashboard` (redirects when unauthed — assert the redirect target still renders in light theme, or seed a session if `LOVABLE_BROWSER_AUTH_STATUS=injected`)
+- `/dashboard` (redirects when unauthed - assert the redirect target still renders in light theme, or seed a session if `LOVABLE_BROWSER_AUTH_STATUS=injected`)
 - `/diagnostic`
 - `/advisors`, `/executive`, `/graduate`, `/pivot`, `/redundant`, `/returner`, `/signup`, `/the-7-questions`
 
@@ -28,11 +28,11 @@ Route list is generated at test time from `src/routeTree.gen.ts` so new SEO rout
 
 ## Files
 
-- `tests/visual/theme.spec.ts` — Playwright test file
-- `tests/visual/routes.ts` — helper that reads the route tree and returns the public route list
-- `playwright.config.ts` — chromium project, `viewport: 1280x1800`, `baseURL: http://localhost:8080`, snapshot dir under `tests/visual/__snapshots__/`
-- `package.json` — add `test:visual` script and `@playwright/test` dev dep
-- `.gitignore` — ignore `test-results/` and `playwright-report/`
+- `tests/visual/theme.spec.ts` - Playwright test file
+- `tests/visual/routes.ts` - helper that reads the route tree and returns the public route list
+- `playwright.config.ts` - chromium project, `viewport: 1280x1800`, `baseURL: http://localhost:8080`, snapshot dir under `tests/visual/__snapshots__/`
+- `package.json` - add `test:visual` script and `@playwright/test` dev dep
+- `.gitignore` - ignore `test-results/` and `playwright-report/`
 
 ## How it runs
 
@@ -44,4 +44,4 @@ Route list is generated at test time from `src/routeTree.gen.ts` so new SEO rout
 
 - Authenticated deep pages behind role gates (dashboard beyond redirect).
 - Mobile viewport snapshots (can add a second project later).
-- Component-level snapshots (Storybook) — route-level is enough to catch token regressions.
+- Component-level snapshots (Storybook) - route-level is enough to catch token regressions.

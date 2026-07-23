@@ -3,7 +3,7 @@
 // tablet landscape, iPhone 12, iPhone 14 Pro Max).
 // Kept explicit (rather than parsing routeTree.gen.ts) so param/api/underscore
 // routes are trivially excluded and new SEO routes are added intentionally.
-// `priority: true` routes are the highest-conversion pages — they must render
+// `priority: true` routes are the highest-conversion pages - they must render
 // correctly on every viewport; filter with `pnpm test -g "priority"` for a
 // fast smoke run.
 export const PUBLIC_ROUTES: { path: string; label: string; priority?: boolean }[] = [
@@ -22,7 +22,7 @@ export const PUBLIC_ROUTES: { path: string; label: string; priority?: boolean }[
   { path: "/the-7-questions", label: "the-7-questions" },
 ];
 
-// Selectors that are ALLOWED to render a near-black background — modal scrims,
+// Selectors that are ALLOWED to render a near-black background - modal scrims,
 // etc. Everything else with an rgb(0,0,0)-ish bg counts as a regression.
 export const DARK_BG_ALLOWLIST = [
   '[data-slot="dialog-overlay"]',
@@ -33,7 +33,7 @@ export const DARK_BG_ALLOWLIST = [
 ];
 
 // Tailwind utility classes that hardcode a dark surface. Any occurrence on a
-// non-allowlisted element counts as a theming regression — dark surfaces must
+// non-allowlisted element counts as a theming regression - dark surfaces must
 // flow through semantic tokens (bg-background, bg-card, bg-foreground/…).
 // Anchored with word boundaries so `bg-slate-50` / `bg-gray-100` are safe.
 export const FORBIDDEN_CLASS_PATTERNS: RegExp[] = [

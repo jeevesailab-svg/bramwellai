@@ -10,13 +10,13 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
       meta: [
-        { title: "Bramwell.ai — How to Speak Like a CEO" },
+        { title: "Bramwell.ai | How to Speak Like a CEO" },
         {
           name: "description",
           content:
             "Meet Bramwell. The world's first AI influence and persuasion coach. Start your free 5-minute voice session and learn how to speak like a CEO.",
         },
-        { property: "og:title", content: "Bramwell.ai — How to Speak Like a CEO" },
+        { property: "og:title", content: "Bramwell.ai | How to Speak Like a CEO" },
         {
           property: "og:description",
           content:
@@ -101,7 +101,7 @@ function Hero() {
         </p>
 
         <p className="mx-auto mt-5 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
-          One free voice session. Zero scripts. You&apos;ll hear exactly how you sound to the room — and what to change before your next big moment.
+          One free voice session. Zero scripts. You&apos;ll hear exactly how you sound to the room, and what to change before your next big moment.
         </p>
 
         <div className="mt-8 flex justify-center sm:mt-10">
@@ -334,7 +334,7 @@ function BlueOcean() {
             <div key={r.thing} className="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-x-3 border-b border-border/60 px-4 py-3.5 text-[13px] leading-snug last:border-b-0 sm:gap-x-6 sm:px-6 sm:py-4 sm:text-sm">
               <span className="min-w-0 text-foreground">{r.thing}</span>
               <span className="text-right text-lg" style={{ color: "var(--primary)" }}>✓</span>
-              <span className="text-right text-lg text-muted-foreground/40">—</span>
+              <span className="text-right text-lg text-muted-foreground/40">-</span>
             </div>
           ))}
         </div>

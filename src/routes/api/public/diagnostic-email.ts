@@ -46,7 +46,7 @@ function renderReportEmail(row: ReportRow): string {
     ${type ? `<p style="margin:24px 0 8px;font-size:14px;color:#7a6f5b;text-transform:uppercase;letter-spacing:.2em;">Your communication type</p><p style="margin:0;font-size:18px;color:#c4a04a;text-transform:capitalize;">The ${esc(type)}</p>` : ""}
     ${gapsHtml ? `<h2 style="font-size:16px;margin:28px 0 12px;">Your top gaps</h2><ul style="padding-left:18px;margin:0;color:#333333;font-size:14px;line-height:1.6;">${gapsHtml}</ul>` : ""}
     <h2 style="font-size:16px;margin:28px 0 8px;">Recommended next step</h2>
-    <p style="margin:0 0 20px;color:#333333;font-size:14px;line-height:1.6;">Join the ${esc(pathway)} — ${esc(price)}. Up to 3 voice sessions per week, monthly progress checks, cancel anytime.</p>
+    <p style="margin:0 0 20px;color:#333333;font-size:14px;line-height:1.6;">Join the ${esc(pathway)} at ${esc(price)}. Up to 3 voice sessions per week, monthly progress checks, cancel anytime.</p>
     <p style="margin:24px 0 0;font-size:12px;color:#7a6f5b;">Your full interactive report is on screen at bramwellai.lovable.app.</p>
   </div>
 </body></html>`;

@@ -1,5 +1,5 @@
 /**
- * Bramwell — Single source of truth for design tokens.
+ * Bramwell - Single source of truth for design tokens.
  *
  * The actual values live as CSS custom properties in `src/styles.css`
  * (loaded once via `src/routes/__root.tsx`). This module exposes them to

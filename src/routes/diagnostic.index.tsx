@@ -10,13 +10,13 @@ export const Route = createFileRoute("/diagnostic/")({
   }),
   head: () => ({
     meta: [
-      { title: "How to Speak Like a CEO — 5 minutes — Bramwell.ai" },
+      { title: "How to Speak Like a CEO | 5 minutes | Bramwell.ai" },
       {
         name: "description",
         content:
           "Meet Bramwell. The world's first AI influence and persuasion coach. Start your free 5-minute voice session and learn how to speak like a CEO.",
       },
-      { property: "og:title", content: "How to Speak Like a CEO — 5 minutes — Bramwell.ai" },
+      { property: "og:title", content: "How to Speak Like a CEO | 5 minutes | Bramwell.ai" },
       {
         property: "og:description",
         content:
@@ -656,7 +656,7 @@ function DiagnosticPage() {
     }
   }, [conversation]);
 
-  // Always auto-start immediately — no intro page. The CTA opens ElevenLabs directly.
+  // Always auto-start immediately - no intro page. The CTA opens ElevenLabs directly.
   useSearch({ from: "/diagnostic/" });
   const autoStartedRef = useRef(false);
   useEffect(() => {
@@ -732,7 +732,7 @@ function DiagnosticPage() {
                 How to Speak Like a CEO
               </h1>
               <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-relaxed text-muted-foreground">
-                In 5 minutes. One free voice session. Zero scripts. You&apos;ll hear exactly how you sound to the room — and what to change before your next big moment.
+                In 5 minutes. One free voice session. Zero scripts. You&apos;ll hear exactly how you sound to the room, and what to change before your next big moment.
               </p>
               <div className="mt-8 flex justify-center">
                 <CtaButton as="button" onClick={startDiagnostic} size="lg">

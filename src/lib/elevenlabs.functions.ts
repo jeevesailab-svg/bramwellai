@@ -8,7 +8,7 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
  * is also returned so the client doesn't need it in its bundle.
  *
  * Requires an authenticated user with an active paid plan and remaining
- * sessions — prevents anonymous token harvesting / quota abuse.
+ * sessions - prevents anonymous token harvesting / quota abuse.
  */
 export const getElevenLabsCoachToken = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])

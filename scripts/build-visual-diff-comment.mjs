@@ -4,7 +4,7 @@
  *
  * Emits a short status line, per-viewport failure counts, and links to the
  * Playwright HTML report / artifacts. Full per-test details live in the
- * uploaded report — this comment is intentionally scannable, not exhaustive.
+ * uploaded report - this comment is intentionally scannable, not exhaustive.
  *
  * Inputs (env):
  *   RESULTS_JSON   path to Playwright results.json (default: test-results/results.json)
@@ -69,7 +69,7 @@ function buildBody(tests, failures) {
     lines.push("");
   }
 
-  const preview = failures.slice(0, 5).map((f) => `- \`${f.project}\` — ${f.title}`);
+  const preview = failures.slice(0, 5).map((f) => `- \`${f.project}\` - ${f.title}`);
   if (preview.length) {
     lines.push("<details><summary>First failures</summary>");
     lines.push("");
