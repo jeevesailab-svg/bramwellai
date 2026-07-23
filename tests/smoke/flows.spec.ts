@@ -8,7 +8,7 @@ test.describe("landing → diagnostic CTA", () => {
   test("hero primary CTA routes to /diagnostic", async ({ page }) => {
     await page.goto("/");
     // Primary CTA copy is standardized across the site. /diagnostic now auto-starts the voice session.
-    const cta = page.getByRole("link", { name: /start your 5-minute session/i }).first();
+    const cta = page.getByRole("link", { name: /start your 5 minute session/i }).first();
     await expect(cta).toBeVisible();
     await cta.click();
     await expect(page).toHaveURL(/\/diagnostic(\?|$)/);
