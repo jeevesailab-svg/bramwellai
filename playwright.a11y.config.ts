@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 // Axe-core accessibility audit. Runs against the same public route list as
-// the visual suite but on a single desktop viewport — WCAG violations don't
+// the visual suite but on a single desktop viewport - WCAG violations don't
 // change per-breakpoint often enough to justify the matrix cost.
 export default defineConfig({
   testDir: "./tests/a11y",

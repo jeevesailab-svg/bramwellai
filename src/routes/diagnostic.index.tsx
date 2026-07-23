@@ -656,7 +656,7 @@ function DiagnosticPage() {
     }
   }, [conversation]);
 
-  // Always auto-start immediately — no intro page. The CTA opens ElevenLabs directly.
+  // Always auto-start immediately - no intro page. The CTA opens ElevenLabs directly.
   useSearch({ from: "/diagnostic/" });
   const autoStartedRef = useRef(false);
   useEffect(() => {
