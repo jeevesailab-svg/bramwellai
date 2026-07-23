@@ -51,7 +51,7 @@ function Index() {
       <FAQ />
       <FinalCTA />
       <Footer />
-      <StickyMobileCTA label="Start your coaching now" />
+      <StickyMobileCTA label="Start your 5-minute session" />
     </main>
   );
 }
@@ -202,7 +202,7 @@ function SymptomCause() {
               />
               <p className="relative mt-5 text-sm leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: it.copy }} />
               <span className="relative mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
-                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Start your coaching now <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Start your 5-minute session <span className="transition-transform group-hover:translate-x-0.5">→</span>
               </span>
             </a>
           ))}
