@@ -10,13 +10,13 @@ export const Route = createFileRoute("/diagnostic/")({
   }),
   head: () => ({
     meta: [
-      { title: "How to Speak Like a CEO | 5 minutes | Bramwell.ai" },
+      { title: "Learn the Formula | 5 minutes | Bramwell.ai" },
       {
         name: "description",
         content:
-          "Meet Bramwell. The world's first AI influence and persuasion coach. Start your free 5-minute voice session and learn how to speak like a CEO.",
+          "Meet Bramwell. The world's first AI voice coach. Learn the formula the best speakers use, in a free 5-minute session.",
       },
-      { property: "og:title", content: "How to Speak Like a CEO | 5 minutes | Bramwell.ai" },
+      { property: "og:title", content: "Learn the Formula | 5 minutes | Bramwell.ai" },
       {
         property: "og:description",
         content:
@@ -729,14 +729,14 @@ function DiagnosticPage() {
                   fontWeight: 800,
                 }}
               >
-                How to Speak Like a CEO
+                Learn the Formula
               </h1>
               <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-relaxed text-muted-foreground">
-                In 5 minutes. One free voice session. Zero scripts. You&apos;ll hear exactly how you sound to the room, and what to change before your next big moment.
+                The world&apos;s best speakers don&apos;t wing it. They use a formula. In 5 minutes, Bramwell will show you how to use it too.
               </p>
               <div className="mt-8 flex justify-center">
                 <CtaButton as="button" onClick={startDiagnostic} size="lg">
-                  Start your 5-minute session
+                  Start your 5 minute session
                 </CtaButton>
               </div>
               <p className="mt-4 text-xs text-muted-foreground">

@@ -10,17 +10,17 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
       meta: [
-        { title: "Bramwell.ai | How to Speak Like a CEO" },
+        { title: "Bramwell.ai | Learn the Formula" },
         {
           name: "description",
           content:
-            "Meet Bramwell. The world's first AI influence and persuasion coach. Start your free 5-minute voice session and learn how to speak like a CEO.",
+            "Meet Bramwell. The world's first AI voice coach. Learn the formula the best speakers use, in a free 5-minute session.",
         },
-        { property: "og:title", content: "Bramwell.ai | How to Speak Like a CEO" },
+        { property: "og:title", content: "Bramwell.ai | Learn the Formula" },
         {
           property: "og:description",
           content:
-            "Meet Bramwell. The world's first AI influence and persuasion coach. Start your free 5-minute voice session.",
+            "Meet Bramwell. The world's first AI voice coach. Learn the formula the best speakers use, in a free 5-minute session.",
         },
       ],
   }),
@@ -32,7 +32,7 @@ const HERO = "var(--gradient-hero)";
 const MINT = "var(--gradient-mint)";
 const SUNRISE = "var(--gradient-sunrise)";
 
-function PrimaryCTA({ label = "Start your 5-minute session", href = "/diagnostic?autostart=1", size = "md" as "md" | "lg" | "sm" }) {
+function PrimaryCTA({ label = "Start your 5 minute session", href = "/diagnostic?autostart=1", size = "md" as "md" | "lg" | "sm" }) {
   return <CtaButton href={href} size={size}>{label}</CtaButton>;
 }
 
@@ -51,7 +51,7 @@ function Index() {
       <FAQ />
       <FinalCTA />
       <Footer />
-      <StickyMobileCTA label="Start your 5-minute session" />
+      <StickyMobileCTA label="Start your 5 minute session" />
     </main>
   );
 }
@@ -89,11 +89,11 @@ function Hero() {
       <div className="relative z-10 mx-auto max-w-5xl px-4 pb-16 pt-6 text-center sm:px-6 sm:pb-20 sm:pt-8 md:px-10 md:pb-28 md:pt-12">
         <div className="mx-auto mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-white/80 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground shadow-sm backdrop-blur sm:px-4 sm:text-[11px] sm:tracking-[0.22em]">
           <Sparkles className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--primary)" }} />
-          <span className="truncate">Meet Bramwell · The world's first AI influence and persuasion coach</span>
+          <span className="truncate">Bramwell · The AI voice coach for speakers</span>
         </div>
 
         <h1 className="mx-auto max-w-4xl text-balance text-[34px] font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-[72px]">
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>How to Speak Like a CEO</span>
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>Learn the Formula.</span>
         </h1>
 
         <p className="mx-auto mt-5 max-w-2xl text-balance text-2xl font-semibold leading-relaxed text-foreground sm:mt-6 sm:text-3xl md:text-4xl">
@@ -101,7 +101,7 @@ function Hero() {
         </p>
 
         <p className="mx-auto mt-5 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
-          One free voice session. Zero scripts. You&apos;ll hear exactly how you sound to the room, and what to change before your next big moment.
+          The world&apos;s best speakers don&apos;t wing it. They use a formula.
         </p>
 
         <div className="mt-8 flex justify-center sm:mt-10">
@@ -202,7 +202,7 @@ function SymptomCause() {
               />
               <p className="relative mt-5 text-sm leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: it.copy }} />
               <span className="relative mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
-                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Start your 5-minute session <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Start your 5 minute session <span className="transition-transform group-hover:translate-x-0.5">→</span>
               </span>
             </a>
           ))}
@@ -467,13 +467,13 @@ function Footer() {
         <div>
           <BramwellLogo size={28} />
           <p className="mt-4 max-w-sm text-xs leading-relaxed text-muted-foreground">
-            Meet Bramwell. The world's first AI influence and persuasion coach. Your sessions are private and never used to train public models.
+            Meet Bramwell. The AI voice coach that teaches you the formula the world&apos;s best speakers use. Your sessions are private and never used to train public models.
           </p>
         </div>
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em]">Bramwell</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
-            <a href="/diagnostic?autostart=1" className="hover:text-foreground">Start your 5-minute session</a>
+            <a href="/diagnostic?autostart=1" className="hover:text-foreground">Start your 5 minute session</a>
             <a href="/pricing" className="hover:text-foreground">Pricing</a>
             <a href="/login" className="hover:text-foreground">Sign in</a>
           </nav>
