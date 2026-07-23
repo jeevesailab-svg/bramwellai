@@ -10,17 +10,17 @@ export const Route = createFileRoute("/diagnostic/")({
   }),
   head: () => ({
     meta: [
-      { title: "Try Bramwell Free. Hear what the room hears" },
+      { title: "Start your coaching now — Bramwell.ai" },
       {
         name: "description",
         content:
-          "A free voice session with Bramwell. Talk, hear what the room hears, and get your communication type, three biggest gaps, and Readiness Score.",
+          "A free 5-minute voice session with Bramwell. Be coached on the techniques, strategies and secrets of the world's most influential speakers.",
       },
-      { property: "og:title", content: "Try Bramwell Free. Hear what the room hears" },
+      { property: "og:title", content: "Start your coaching now — Bramwell.ai" },
       {
         property: "og:description",
         content:
-          "One question with Bramwell. Talk, hear what the room hears, and get your communication type, three biggest gaps, and Readiness Score. No login, no card.",
+          "One free 5-minute voice session with Bramwell. Get your Readiness Score, communication type, and the three biggest gaps to fix. No login, no card.",
       },
     ],
   }),
@@ -729,14 +729,14 @@ function DiagnosticPage() {
                   fontWeight: 800,
                 }}
               >
-                Talk to Bramwell. Hear what the room hears.
+                Speak and the room listens.
               </h1>
               <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-relaxed text-muted-foreground">
-                Answer one question out loud. Bramwell will show you exactly how you sound under pressure.
+                Be coached on the techniques, strategies and secrets of the world&apos;s most influential speakers — in one free 5-minute voice session.
               </p>
               <div className="mt-8 flex justify-center">
                 <CtaButton as="button" onClick={startDiagnostic} size="lg">
-                  Start free voice session
+                  Start your coaching now
                 </CtaButton>
               </div>
               <p className="mt-4 text-xs text-muted-foreground">
