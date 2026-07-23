@@ -123,7 +123,7 @@ function SevenQuestionsPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <SiteNav ctaLabel="Talk to Bramwell free" ctaHref="/diagnostic?autostart=1" />
+      <SiteNav ctaLabel="Start your coaching now" ctaHref="/diagnostic?autostart=1" />
 
       <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
         <div
@@ -278,7 +278,7 @@ function SevenQuestionsPage() {
                 boxShadow: "var(--shadow-cta)",
               }}
             >
-              <Mic className="h-4 w-4" strokeWidth={2.5} /> Talk to Bramwell free <span className="transition-transform group-hover:translate-x-0.5">→</span>
+              <Mic className="h-4 w-4" strokeWidth={2.5} /> Start your coaching now <span className="transition-transform group-hover:translate-x-0.5">→</span>
             </Link>
             <p className="mt-4 text-xs text-muted-foreground/80">
               No card · No login

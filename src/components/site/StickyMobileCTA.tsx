@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Mic } from "lucide-react";
 
 export function StickyMobileCTA({
-  label = "Talk to Bramwell free",
+  label = "Start your coaching now",
   href = "/diagnostic",
   search,
 }: {

@@ -9,20 +9,20 @@ import { Mic, Sparkles, Zap, MessageCircle, Rocket, Target, Heart, Star, Wand2, 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
-    meta: [
-      { title: "Bramwell.ai — Hear what the room hears" },
-      {
-        name: "description",
-        content:
-          "Bramwell is your live AI voice coach. Talk to him, hear what the room hears, and train to sound clear, calm and impossible to ignore.",
-      },
-      { property: "og:title", content: "Bramwell.ai — Hear what the room hears" },
-      {
-        property: "og:description",
-        content:
-          "The first AI that listens like your audience listens. Talk to Bramwell free, hear what the room hears, and walk in ready.",
-      },
-    ],
+      meta: [
+        { title: "Bramwell.ai — Speak and the room listens" },
+        {
+          name: "description",
+          content:
+            "Bramwell is the first AI that trains you to speak like a CEO. Be coached on the techniques, strategies and secrets of the world's most influential speakers.",
+        },
+        { property: "og:title", content: "Bramwell.ai — Speak and the room listens" },
+        {
+          property: "og:description",
+          content:
+            "The first AI that trains you to speak like a CEO. Start your coaching now with a free 5-minute voice session.",
+        },
+      ],
   }),
 });
 
@@ -32,7 +32,7 @@ const HERO = "var(--gradient-hero)";
 const MINT = "var(--gradient-mint)";
 const SUNRISE = "var(--gradient-sunrise)";
 
-function PrimaryCTA({ label = "Talk to Bramwell free", href = "/diagnostic?autostart=1", size = "md" as "md" | "lg" | "sm" }) {
+function PrimaryCTA({ label = "Start your coaching now", href = "/diagnostic?autostart=1", size = "md" as "md" | "lg" | "sm" }) {
   return <CtaButton href={href} size={size}>{label}</CtaButton>;
 }
 
@@ -51,7 +51,7 @@ function Index() {
       <FAQ />
       <FinalCTA />
       <Footer />
-      <StickyMobileCTA label="Talk to Bramwell free" />
+      <StickyMobileCTA label="Start your coaching now" />
     </main>
   );
 }
@@ -89,16 +89,16 @@ function Hero() {
       <div className="relative z-10 mx-auto max-w-5xl px-4 pb-16 pt-6 text-center sm:px-6 sm:pb-20 sm:pt-8 md:px-10 md:pb-28 md:pt-12">
         <div className="mx-auto mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-white/80 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground shadow-sm backdrop-blur sm:px-4 sm:text-[11px] sm:tracking-[0.22em]">
           <Sparkles className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--primary)" }} />
-          <span className="truncate">The first AI that listens like the room listens</span>
+          <span className="truncate">The first AI that trains you to speak like a CEO</span>
         </div>
 
         <h1 className="mx-auto max-w-4xl text-balance text-[34px] font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-[72px]">
-          Hear what the{" "}
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>room hears.</span>
+          Speak and the{" "}
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>room listens.</span>
         </h1>
 
         <p className="mx-auto mt-5 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg md:text-xl">
-          Bramwell is your live AI voice coach. But here&apos;s the difference: you talk, he listens like your audience listens, then tells you — in real time — what&apos;s landing, what&apos;s drifting, and what to fix. Train to sound clear, calm and <strong className="text-foreground">impossible to ignore</strong>.
+          Be coached on the techniques, strategies and secrets of the world&apos;s most influential speakers. One five-minute voice session shows you exactly how to sound clear, calm and <strong className="text-foreground">impossible to ignore</strong>.
         </p>
 
         <div className="mt-8 flex justify-center sm:mt-10">
@@ -199,7 +199,7 @@ function SymptomCause() {
               />
               <p className="relative mt-5 text-sm leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: it.copy }} />
               <span className="relative mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
-                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Talk to Bramwell free <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Start your coaching now <span className="transition-transform group-hover:translate-x-0.5">→</span>
               </span>
             </a>
           ))}
@@ -318,7 +318,7 @@ function BlueOcean() {
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: ELECTRIC }}>this.</span>
         </h2>
         <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-          Executive coaches cost thousands and book out for weeks. ChatGPT can rewrite your answer, but it can&apos;t hear you. Bramwell is the only place you can hear what the room hears before you walk in, get corrected live, and walk in ready, tonight.
+          Executive coaches cost thousands and book out for weeks. ChatGPT can rewrite your answer, but it can&apos;t hear you. Bramwell is the only place you can train live, get corrected in real time, and walk into your next room sounding like the best leader in it.
         </p>
 
         <div className="mt-12 overflow-hidden rounded-3xl border border-border bg-white/90 backdrop-blur" style={{ boxShadow: "var(--shadow-soft)" }}>
@@ -442,11 +442,11 @@ function FinalCTA() {
       <div aria-hidden className="pointer-events-none absolute right-10 top-10 h-60 w-60 rounded-full opacity-50 blur-3xl" style={{ background: ELECTRIC }} />
       <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
         <h2 className="text-balance text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
-          Ready to hear what the{" "}
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>room hears?</span>
+          Ready to speak like the{" "}
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>best in the room?</span>
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-          Talk to Bramwell for 5 minutes. Get the only perspective that matters — what actually lands when you speak. Free. No login. No card.
+          Start your coaching now. One free 5-minute voice session shows you exactly how to sound clear, commanding and impossible to ignore. No login. No card.
         </p>
         <div className="mt-10 flex justify-center">
           <PrimaryCTA size="lg" />
@@ -464,7 +464,7 @@ function Footer() {
         <div>
           <BramwellLogo size={28} />
           <p className="mt-4 max-w-sm text-xs leading-relaxed text-muted-foreground">
-            Your live AI voice coach. Hear what the room hears. Your sessions are private and never used to train public models.
+            The first AI that trains you to speak like a CEO. Your sessions are private and never used to train public models.
           </p>
         </div>
         <div>
