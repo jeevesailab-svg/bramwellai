@@ -351,7 +351,7 @@ function PricingPage() {
         </div>
       </section>
 
-      <section className="bg-background py-20 md:py-28">
+      <section id="plans" className="bg-background py-20 md:py-28">
         {recommendedKey && (
           <div className="mx-auto mb-10 max-w-3xl px-6 text-center md:px-10">
             <span
