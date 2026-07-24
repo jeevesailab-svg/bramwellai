@@ -520,6 +520,10 @@ function Footer() {
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
             <a href="/diagnostic?autostart=1" className="hover:text-foreground">Start your 5 minute session</a>
             <a href="/pricing" className="hover:text-foreground">Pricing</a>
+            <a href="/waitlist" className="inline-flex items-center gap-2 hover:text-foreground">
+              For Sales Teams
+              <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>
+            </a>
             <a href="/login" className="hover:text-foreground">Sign in</a>
           </nav>
         </div>
