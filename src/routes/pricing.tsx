@@ -327,9 +327,26 @@ function PricingPage() {
             {hero.sub}
           </p>
           <div className="mt-8 flex justify-center">
-            <CtaButton href="/diagnostic" size="md">
-              {hero.cta}
-            </CtaButton>
+            {recommendedKey ? (
+              <CtaButton
+                size="md"
+                showIcon={false}
+                onClick={() => {
+                  if (user) {
+                    handlePurchase(recommendedKey);
+                  } else {
+                    sessionStorage.setItem("bramwell_pending_purchase", recommendedKey);
+                    window.location.href = `/signup?resume=${recommendedKey}`;
+                  }
+                }}
+              >
+                {hero.cta}
+              </CtaButton>
+            ) : (
+              <CtaButton href="#plans" size="md" showIcon={false}>
+                {hero.cta}
+              </CtaButton>
+            )}
           </div>
         </div>
       </section>
