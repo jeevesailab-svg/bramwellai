@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { StickyMobileCTA } from "@/components/site/StickyMobileCTA";
 import { StatBar } from "@/components/landing/StatBar";
 import { PainChecklist } from "@/components/landing/PainChecklist";
 import { BramwellLogo } from "@/components/site/BramwellLogo";
 import { CtaButton } from "@/components/site/CtaButton";
-import { Mic, Sparkles, Zap, MessageCircle, Rocket, Target, Heart, Star, Wand2, Trophy } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetClose } from "@/components/ui/sheet";
+import { Mic, Sparkles, Zap, MessageCircle, Rocket, Target, Heart, Star, Wand2, Trophy, Menu } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
