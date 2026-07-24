@@ -13,6 +13,10 @@ export function SiteNav({ ctaLabel = "Start your coaching now", ctaHref = "/diag
         <a href="/#how" className="transition-colors hover:text-foreground">How It Works</a>
         <a href="/#pathways" className="transition-colors hover:text-foreground">Pathways</a>
         <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
+        <a href="/waitlist" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
+          For Sales Teams
+          <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>
+        </a>
         <a href="/login" className="transition-colors hover:text-foreground">Sign In</a>
       </nav>
       <CtaButton href={ctaHref} size="sm">
