@@ -7,26 +7,83 @@ import { CtaButton } from "@/components/site/CtaButton";
 import { CtaWithCapture, type Pathway } from "./CtaWithCapture";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetClose } from "@/components/ui/sheet";
 
+const navLinks = [
+  { label: "How It Works", href: "/#how" },
+  { label: "Pathways", href: "/#pathways" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Sign In", href: "/login" },
+];
+
 export function SiteNav({ ctaLabel = "Start your coaching now", ctaHref = "/diagnostic?autostart=1" }: { ctaLabel?: string; ctaHref?: string }) {
+  const [open, setOpen] = useState(false);
+
   return (
     <header className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
       <a href="/" className="flex items-baseline gap-1.5">
         <span className="text-xl font-semibold tracking-tight">Bramwell</span>
         <span className="text-xl font-light tracking-tight" style={{ color: "var(--primary)" }}>AI</span>
       </a>
+
       <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-        <a href="/#how" className="transition-colors hover:text-foreground">How It Works</a>
-        <a href="/#pathways" className="transition-colors hover:text-foreground">Pathways</a>
-        <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
+        {navLinks.map((link) => (
+          <a key={link.href} href={link.href} className="transition-colors hover:text-foreground">
+            {link.label}
+          </a>
+        ))}
         <a href="/waitlist" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
           For Sales Teams
           <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>
         </a>
-        <a href="/login" className="transition-colors hover:text-foreground">Sign In</a>
       </nav>
-      <CtaButton href={ctaHref} size="sm">
-        {ctaLabel}
-      </CtaButton>
+
+      <div className="flex items-center gap-3">
+        <CtaButton href={ctaHref} size="sm" className="hidden sm:flex">
+          {ctaLabel}
+        </CtaButton>
+
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background text-foreground transition-colors hover:bg-accent md:hidden"
+              aria-label="Open menu"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-[280px] bg-background p-6">
+            <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+            <nav className="mt-8 flex flex-col gap-1">
+              {navLinks.map((link) => (
+                <SheetClose asChild key={link.href}>
+                  <a
+                    href={link.href}
+                    className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                </SheetClose>
+              ))}
+              <SheetClose asChild>
+                <a
+                  href="/waitlist"
+                  className="mt-2 flex items-center justify-between rounded-lg border border-border bg-white px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                >
+                  <span>For Sales Teams</span>
+                  <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>
+                </a>
+              </SheetClose>
+            </nav>
+            <div className="mt-6">
+              <SheetClose asChild>
+                <CtaButton href={ctaHref} size="md" className="w-full">
+                  {ctaLabel}
+                </CtaButton>
+              </SheetClose>
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
     </header>
   );
 }
