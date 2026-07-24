@@ -1,6 +1,11 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { CtaButton } from "@/components/site/CtaButton";
 import { CtaWithCapture, type Pathway } from "./CtaWithCapture";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetClose } from "@/components/ui/sheet";
 
 export function SiteNav({ ctaLabel = "Start your coaching now", ctaHref = "/diagnostic?autostart=1" }: { ctaLabel?: string; ctaHref?: string }) {
   return (
