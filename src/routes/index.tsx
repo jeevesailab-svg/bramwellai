@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { StickyMobileCTA } from "@/components/site/StickyMobileCTA";
 import { StatBar } from "@/components/landing/StatBar";
 import { PainChecklist } from "@/components/landing/PainChecklist";
 import { BramwellLogo } from "@/components/site/BramwellLogo";
 import { CtaButton } from "@/components/site/CtaButton";
-import { Mic, Sparkles, Zap, MessageCircle, Rocket, Target, Heart, Star, Wand2, Trophy } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetClose } from "@/components/ui/sheet";
+import { Mic, Sparkles, Zap, MessageCircle, Rocket, Target, Heart, Star, Wand2, Trophy, Menu } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -58,8 +60,10 @@ function Index() {
 
 /* ───────────── Nav ───────────── */
 function Nav() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <header className="relative z-20 mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-4 sm:px-6 sm:py-5 md:flex md:justify-between md:px-10">
+    <header className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 sm:py-5 md:px-10">
       <a href="/" className="flex min-w-0 items-center">
         <BramwellLogo size={32} />
       </a>
@@ -67,11 +71,52 @@ function Nav() {
         <a href="#learn" className="hover:text-foreground">What you learn</a>
         <a href="#14days" className="hover:text-foreground">In 14 days</a>
         <a href="/pricing" className="hover:text-foreground">Pricing</a>
+        <a href="/waitlist" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
+          For Sales Teams
+          <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>
+        </a>
         <a href="/login" className="hover:text-foreground">Sign in</a>
       </nav>
-      <div className="shrink-0">
+      <div className="flex items-center gap-3">
         <span className="hidden sm:inline-flex"><PrimaryCTA size="sm" /></span>
         <span className="inline-flex sm:hidden"><PrimaryCTA size="sm" label="Try free" /></span>
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background text-foreground transition-colors hover:bg-accent md:hidden"
+              aria-label="Open menu"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-[280px] bg-background p-6">
+            <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+            <nav className="mt-8 flex flex-col gap-1">
+              <SheetClose asChild>
+                <a href="#learn" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">What you learn</a>
+              </SheetClose>
+              <SheetClose asChild>
+                <a href="#14days" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">In 14 days</a>
+              </SheetClose>
+              <SheetClose asChild>
+                <a href="/pricing" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">Pricing</a>
+              </SheetClose>
+              <SheetClose asChild>
+                <a href="/login" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">Sign in</a>
+              </SheetClose>
+              <SheetClose asChild>
+                <a
+                  href="/waitlist"
+                  className="mt-2 flex items-center justify-between rounded-lg border border-border bg-white px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                >
+                  <span>For Sales Teams</span>
+                  <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>
+                </a>
+              </SheetClose>
+            </nav>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   );
@@ -475,6 +520,10 @@ function Footer() {
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
             <a href="/diagnostic?autostart=1" className="hover:text-foreground">Start your 5 minute session</a>
             <a href="/pricing" className="hover:text-foreground">Pricing</a>
+            <a href="/waitlist" className="inline-flex items-center gap-2 hover:text-foreground">
+              For Sales Teams
+              <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>
+            </a>
             <a href="/login" className="hover:text-foreground">Sign in</a>
           </nav>
         </div>
