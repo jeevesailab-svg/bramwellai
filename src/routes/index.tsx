@@ -394,7 +394,6 @@ function BlueOcean() {
 /* ───────────── Pricing tease ───────────── */
 function PricingTease() {
   const plans = [
-    { name: "Starter", price: "$29", cadence: "/month", copy: "Weekly voice reps + your Readiness Score. Perfect if you have one big room coming up.", cta: "Start Starter", accent: ELECTRIC },
     { name: "Pro", price: "$79", cadence: "/month", copy: "Unlimited voice coaching, playbook, archetype tracking. Most people pick this.", cta: "Go Pro", accent: GOLD, featured: true },
     { name: "Executive", price: "$197", cadence: "/month", copy: "Everything in Pro, plus board-level scenario drills and monthly human review.", cta: "Go Executive", accent: SUNRISE },
   ];
@@ -412,7 +411,7 @@ function PricingTease() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mx-auto mt-14 grid max-w-4xl gap-6 md:grid-cols-2">
           {plans.map((p) => (
             <div
               key={p.name}
