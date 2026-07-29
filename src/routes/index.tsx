@@ -208,10 +208,60 @@ function CallOrb() {
   );
 }
 
+/* ───────────── Villain band ───────────── */
+function VillainBand() {
+  return (
+    <section className="border-y border-border bg-white py-8 md:py-10">
+      <p className="mx-auto max-w-4xl text-balance px-6 text-center text-base font-medium leading-relaxed text-foreground md:px-10 md:text-lg">
+        Your CV got you the interview. Delivery under pressure is what loses it.{" "}
+        <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>
+          Bramwell trains the signal until the room hears your level.
+        </span>
+      </p>
+    </section>
+  );
+}
+
+/* ───────────── Proof slots (real stories only) ───────────── */
+function ProofSlots() {
+  return (
+    <section className="border-y border-border bg-white py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">Graduate stories</p>
+          <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Real sessions.{" "}
+            <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>Real words.</span>
+          </h2>
+          <p className="mt-4 text-sm text-muted-foreground">
+            We only publish stories from people who have actually run a free diagnostic. These slots fill as they come in.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              className="flex min-h-[180px] flex-col justify-between rounded-3xl border border-dashed border-border bg-background/60 p-8"
+            >
+              <span aria-hidden className="text-4xl leading-none text-muted-foreground/30">&ldquo;</span>
+              <p className="text-sm text-muted-foreground/70">
+                Your story here, after your first free session.
+              </p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-10 flex justify-center">
+          <PrimaryCTA />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ───────────── Symptom → Cause ───────────── */
 function SymptomCause() {
   const items = [
-    { icon: Target, symptom: "Struggling to get a job?", cause: "It&apos;s most likely your delivery.", copy: "Bramwell listens live and tells you exactly where your delivery loses the room.", accent: GOLD },
+    { icon: Target, symptom: "Interview after interview, no offer?", cause: "It&apos;s most likely your delivery.", copy: "Graduate and early-career interviews are decided on delivery, not your transcript. Bramwell listens live and tells you exactly where you lose the panel.", accent: GOLD },
     { icon: Heart, symptom: "People losing interest mid-sentence?", cause: "It&apos;s most likely your tone.", copy: "Pace, energy and pitch decide whether people lean in or check out. Bramwell trains all three, live.", accent: ELECTRIC },
     { icon: MessageCircle, symptom: "People talking over you?", cause: "It&apos;s most likely how you structure your sentences.", copy: "You&apos;re burying the point. Bramwell teaches the four-part answer that lands first and holds the floor.", accent: SUNRISE },
   ];
