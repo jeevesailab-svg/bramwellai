@@ -380,7 +380,7 @@ function ResultBody({ result }: { result: Result }) {
         <p className="mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
           See coaching options →
         </p>
-      </Link>
+      </a>
 
       {/* SECTION 3, Behavioural report (gated) */}
       <BehaviouralReport
