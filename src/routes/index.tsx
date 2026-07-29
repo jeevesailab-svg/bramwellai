@@ -136,19 +136,20 @@ function Hero() {
       <div className="relative z-10 mx-auto max-w-5xl px-4 pb-16 pt-6 text-center sm:px-6 sm:pb-20 sm:pt-8 md:px-10 md:pb-28 md:pt-12">
         <div className="mx-auto mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-white/80 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground shadow-sm backdrop-blur sm:px-4 sm:text-[11px] sm:tracking-[0.22em]">
           <Sparkles className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--primary)" }} />
-          <span className="truncate">Bramwell · The AI coach for speakers</span>
+          <span className="truncate">Live voice · 5 minutes · Free</span>
         </div>
 
         <h1 className="mx-auto max-w-4xl text-balance text-[34px] font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-[72px]">
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>Not a course. A coach.</span>
+          Your CV is fine.{" "}
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>The room still isn&apos;t sure.</span>
         </h1>
 
-        <p className="mx-auto mt-5 max-w-2xl text-balance text-2xl font-semibold leading-relaxed text-foreground sm:mt-6 sm:text-3xl md:text-4xl">
-          Meet Bramwell. The AI coach that teaches you to speak like a CEO.
+        <p className="mx-auto mt-5 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground sm:mt-6 sm:text-xl md:text-2xl">
+          It&apos;s not your answers. It&apos;s the signal in the first eight seconds. One free live voice diagnostic. Sixty seconds of truth about how you come across under pressure.
         </p>
 
-        <p className="mx-auto mt-5 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
-          Try a free 5-minute voice session. Get feedback on how you actually sound, and a plan to sound like the best leader in the room.
+        <p className="mx-auto mt-4 max-w-xl text-sm italic leading-relaxed text-muted-foreground/70 sm:text-base">
+          &ldquo;I know I&apos;m capable. I just can&apos;t sell myself when it counts.&rdquo;
         </p>
 
         <div className="mt-8 flex justify-center sm:mt-10">
