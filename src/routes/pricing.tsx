@@ -39,10 +39,7 @@ export const Route = createFileRoute("/pricing")({
 
 // Stripe lookup_keys for the 5 Bramwell pathways
 const PRICE_IDS = {
-  graduate: "graduate_sprint_onetime",
-  comeback: "comeback_sprint_onetime",
-  confidence: "confidence_sprint_onetime",
-  executive: "executive_sprint_onetime",
+  executive: "executive_monthly",
   club: "career_confidence_club_monthly",
 } as const;
 
@@ -61,91 +58,37 @@ type Pathway = {
 const PATHWAYS: Pathway[] = [
   {
     key: "club",
-    name: "Career Confidence Club",
-    forWho: "The simple way to stay ready",
-    price: "A$79",
+    name: "Pro",
+    forWho: "Most popular",
+    price: "$79",
     cadence: "per month · cancel anytime",
-    sessions: "Up to 3 sessions per week · 30 mins each",
+    sessions: "Unlimited live voice coaching",
     highlight: true,
     blurb:
-      "Promotions. Pay reviews. Difficult stakeholders. Board presentations. Stay sharp between the moments that matter, so when your moment arrives, you're already ready.",
+      "Unlimited live voice coaching, your personal playbook and archetype tracking. The room only gets easier when you keep training for it.",
     includes: [
-      "Unlimited voice coaching, up to 3 sessions per week",
-      "Monthly voice check to track your improvement over time",
-      "New scenario library added monthly: negotiations, presentations, stakeholders",
-      "Priority access to new features and session types as they launch",
-      "Community access, share wins, prep together, stay accountable",
-      "20% off any sprint upgrade, any time",
-    ],
-  },
-  {
-    key: "confidence",
-    name: "Interview Confidence Sprint",
-    forWho: "Mid-career with a real interview coming",
-    price: "A$249",
-    cadence: "one-time",
-    sessions: "4 sessions · 30 mins · use within 14 days",
-    blurb:
-      "You're the most qualified person in the room. It's time to sound like it. Four sessions designed to close the gap between who you are and how they hear you.",
-    includes: [
-      "Full voice check, readiness score, communication type, three specific gaps",
-      "4 × 30-min sessions: diagnose → drill → pressure → perform",
-      "Commercial language coaching, translate impact into numbers that land",
-      "Curveball and pushback simulation, trained for what actually happens",
-      "Before-and-after performance report to track your improvement",
-      "Salary and offer negotiation language coaching",
-    ],
-  },
-  {
-    key: "comeback",
-    name: "Career Comeback Sprint",
-    forWho: "Returning after a break or redundancy",
-    price: "A$199",
-    cadence: "one-time",
-    sessions: "3 sessions · 30 mins · use within 21 days",
-    blurb:
-      "The experience is still there. It just needs to sound like it. Your story, rebuilt for the room you're walking into, no judgement, no generic prep.",
-    includes: [
-      "Diagnostic that maps your gap and rebuilds your confidence baseline",
-      "3 × 30-min sessions tuned to modern language and your specific story",
-      "Career break narrative coaching, turn the gap into a strength",
-      "Pressure simulation: harder follow-ups when you're getting comfortable",
-      "Full performance report and recommended next session focus",
+      "Unlimited live voice coaching sessions with Bramwell",
+      "Your personal playbook, sharpened every week",
+      "Archetype tracking and Readiness Score after every call",
+      "New scenario library added monthly: interviews, negotiations, presentations",
+      "Priority access to new session types as they launch",
     ],
   },
   {
     key: "executive",
-    name: "Executive Communication Sprint",
-    forWho: "Senior leaders in high-stakes conversations",
-    price: "A$499",
-    cadence: "one-time",
-    sessions: "3 sessions · 30 mins · precision over volume",
+    name: "Executive",
+    forWho: "Senior leaders and high-stakes rooms",
+    price: "$197",
+    cadence: "per month · cancel anytime",
+    sessions: "Everything in Pro, plus human review",
     blurb:
-      "The room already respects your title. Make them respect your thinking. Peer-level coaching: direct, precise, zero filler. Three high-signal sessions.",
+      "Everything in Pro, plus board-level scenario drills and a monthly human review of your progress.",
     includes: [
-      "Executive voice check, precision readiness mapping for senior conversations",
-      "3 × 30-min peer-level coaching, high-signal feedback only",
-      "Board, CEO, and panel interview simulation",
+      "Everything in Pro",
+      "Board-level scenario drills: CEO, panel and investor rooms",
+      "Monthly human review of your sessions and progress",
       "Strategic narrative coaching, the three-line version of your vision",
-      "Stakeholder influence and buying committee language",
-      "Executive presence: pacing, silence, authority under pressure",
-    ],
-  },
-  {
-    key: "graduate",
-    name: "Graduate Interview Prep",
-    forWho: "Graduates entering the workforce",
-    price: "A$99",
-    cadence: "one-time",
-    sessions: "3 sessions · 20 mins · use within 14 days",
-    blurb:
-      "You've worked for this. Transform your words to be the person that gets chosen. Your CV got you the interview, now the job goes to whoever commands the room.",
-    includes: [
-      "Free AI voice check, your exact gaps identified before session one",
-      "3 × 20-min voice coaching sessions built to your role and industry",
-      "Structured frameworks for behavioural and competency questions",
-      "Real-time interruption when your delivery drifts, no empty praise",
-      "Full performance report delivered to your inbox",
+      "Executive presence: pacing, silence and authority under pressure",
     ],
   },
 ];
@@ -185,9 +128,9 @@ function getHeroCopy(score?: number, recommended?: keyof typeof PRICE_IDS) {
 
 function PricingPage() {
   const { recommended, resume, score } = Route.useSearch();
-  const recommendedKey = (
-    ["graduate", "comeback", "confidence", "executive", "club"] as const
-  ).find((k) => k === recommended);
+  const recommendedKey = (["executive", "club"] as const).find(
+    (k) => k === recommended || (k === "club" && recommended !== "executive" && !!recommended),
+  );
 
   const hero = getHeroCopy(score, recommendedKey);
 
@@ -369,15 +312,20 @@ function PricingPage() {
             </p>
           </div>
         )}
-        <div className="mx-auto grid max-w-6xl gap-5 px-6 md:grid-cols-2 md:px-10 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-4xl gap-5 px-6 md:grid-cols-2 md:px-10 lg:grid-cols-2">
           {pathways.map((p) => (
             <PathwayCard key={p.key} p={p} onSelect={() => handlePurchase(p.key)} />
           ))}
         </div>
 
-        <p className="mx-auto mt-12 max-w-2xl px-6 text-center text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          Private by design · Cancel anytime · Built for the moments that matter
+        <p className="mx-auto mt-12 max-w-2xl px-6 text-center text-sm leading-relaxed text-muted-foreground">
+          Try Bramwell free first. No card. No login. If it doesn&apos;t change how you sound in your first session, don&apos;t upgrade.
         </p>
+        <div className="mt-8 flex justify-center px-6">
+          <CtaButton href="/diagnostic?autostart=1" size="md" showIcon={false}>
+            Take the free diagnostic →
+          </CtaButton>
+        </div>
       </section>
 
       <section className="border-t border-border bg-foreground/[0.02] py-16 md:py-20">
@@ -458,7 +406,7 @@ function PathwayCard({ p, onSelect }: { p: Pathway; onSelect: () => void }) {
     <article
       className={`group relative flex flex-col rounded-2xl border bg-foreground/[0.02] p-8 transition ${
         p.highlight ? "border-foreground/30 bg-foreground/[0.04]" : "border-border hover:border-foreground/20 hover:bg-foreground/[0.04]"
-      } ${p.key === "club" ? "md:col-span-2 lg:col-span-1" : ""}`}
+      } `}
       style={p.highlight ? { boxShadow: "var(--shadow-elegant)" } : undefined}
     >
       {p.highlight && (
@@ -490,7 +438,7 @@ function PathwayCard({ p, onSelect }: { p: Pathway; onSelect: () => void }) {
 
       <div className="mt-8">
         <CtaButton as="button" onClick={onSelect} size="md" className="w-full">
-          Choose {p.name}
+          Go {p.name} →
         </CtaButton>
       </div>
     </article>
