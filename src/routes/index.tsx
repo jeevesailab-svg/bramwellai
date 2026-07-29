@@ -12,17 +12,17 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
       meta: [
-        { title: "Bramwell.ai | Not a course. A coach." },
+        { title: "Not a course. A coach. | Bramwell.ai" },
         {
           name: "description",
           content:
-            "Meet Bramwell. The AI coach that teaches you to speak like a CEO. Try a free 5-minute voice session.",
+            "Your CV is fine. The room still isn't sure. One free live voice diagnostic tells you how you come across under pressure. No login, no card.",
         },
-        { property: "og:title", content: "Bramwell.ai | Not a course. A coach." },
+        { property: "og:title", content: "Not a course. A coach. | Bramwell.ai" },
         {
           property: "og:description",
           content:
-            "Meet Bramwell. The AI coach that teaches you to speak like a CEO. Try a free 5-minute voice session.",
+            "Your CV is fine. The room still isn't sure. One free live voice diagnostic tells you how you come across under pressure. No login, no card.",
         },
       ],
   }),
@@ -300,7 +300,7 @@ function SymptomCause() {
               />
               <p className="relative mt-5 text-sm leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: it.copy }} />
               <span className="relative mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
-                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Start your 5 minute session <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Take the free diagnostic <span className="transition-transform group-hover:translate-x-0.5">→</span>
               </span>
             </a>
           ))}
@@ -542,11 +542,11 @@ function FinalCTA() {
       <div aria-hidden className="pointer-events-none absolute right-10 top-10 h-60 w-60 rounded-full opacity-50 blur-3xl" style={{ background: ELECTRIC }} />
       <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
         <h2 className="text-balance text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
-          Ready to speak like the{" "}
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>best in the room?</span>
+          Ready to sound as{" "}
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>capable as you are?</span>
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-          Start your coaching now. One free 5-minute voice session shows you exactly how to sound clear, commanding and impossible to ignore. No login. No card.
+          One free live voice diagnostic tells you exactly what the room hears in your first eight seconds, and how to fix it. 5 min · Live voice · Free · No login · No card.
         </p>
         <div className="mt-10 flex justify-center">
           <PrimaryCTA size="lg" />
@@ -570,7 +570,7 @@ function Footer() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em]">Bramwell</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
-            <a href="/diagnostic?autostart=1" className="hover:text-foreground">Start your 5 minute session</a>
+            <a href="/diagnostic?autostart=1" className="hover:text-foreground">Take the free diagnostic</a>
             <a href="/pricing" className="hover:text-foreground">Pricing</a>
             <a href="/waitlist" className="inline-flex items-center gap-2 hover:text-foreground">
               For Sales Teams
