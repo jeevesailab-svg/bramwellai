@@ -34,7 +34,7 @@ const HERO = "var(--gradient-hero)";
 const MINT = "var(--gradient-mint)";
 const SUNRISE = "var(--gradient-sunrise)";
 
-function PrimaryCTA({ label = "Start your 5 minute session", href = "/diagnostic?autostart=1", size = "md" as "md" | "lg" | "sm" }) {
+function PrimaryCTA({ label = "Take the free diagnostic", href = "/diagnostic?autostart=1", size = "md" as "md" | "lg" | "sm" }) {
   return <CtaButton href={href} size={size}>{label}</CtaButton>;
 }
 
@@ -43,17 +43,19 @@ function Index() {
     <main className="min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
+      <VillainBand />
       <SymptomCause />
-      <WhatYouLearn />
-      <StatBar />
       <PainChecklist />
+      <StatBar />
       <FourteenDays />
       <BlueOcean />
+      <WhatYouLearn />
+      <ProofSlots />
       <PricingTease />
       <FAQ />
       <FinalCTA />
       <Footer />
-      <StickyMobileCTA label="Start your 5 minute session" />
+      <StickyMobileCTA label="Take the free diagnostic" />
     </main>
   );
 }
