@@ -347,9 +347,8 @@ function ResultBody({ result }: { result: Result }) {
       </section>
 
       {/* SECTION 2, Type */}
-      <Link
-        to="/pricing"
-        search={{ recommended: "club", score: result.readiness_score }}
+      <a
+        href={`/pricing?recommended=club&score=${result.readiness_score}`}
         className="block rounded-2xl border border-border bg-foreground/[0.03] p-8 text-center backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.06]"
       >
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
@@ -381,7 +380,7 @@ function ResultBody({ result }: { result: Result }) {
         <p className="mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
           See coaching options →
         </p>
-      </Link>
+      </a>
 
       {/* SECTION 3, Behavioural report (gated) */}
       <BehaviouralReport
@@ -445,16 +444,15 @@ function ResultBody({ result }: { result: Result }) {
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: "var(--gradient-gold)" }}
             >
-              A$79/month
+              $79/month
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-muted-foreground">
             Unlimited voice coaching, up to 3 sessions a week, monthly progress checks, and every scenario library as it drops. Cancel anytime.
           </p>
 
-          <Link
-            to="/pricing"
-            search={{ recommended: "club", resume: "club", score: result.readiness_score }}
+          <a
+            href={`/pricing?recommended=club&resume=club&score=${result.readiness_score}`}
             className="group mt-7 inline-flex h-14 w-full items-center justify-center gap-3 rounded-full px-8 text-base font-semibold transition hover:scale-[1.02] active:scale-[0.99] md:w-auto md:min-w-[360px]"
             style={{
               background: "var(--gradient-gold)",
@@ -465,7 +463,7 @@ function ResultBody({ result }: { result: Result }) {
           >
             <span>Start my monthly coaching</span>
             <span aria-hidden className="transition group-hover:translate-x-1">→</span>
-          </Link>
+          </a>
 
           <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
             <span className="inline-flex items-center gap-1.5">
@@ -483,13 +481,12 @@ function ResultBody({ result }: { result: Result }) {
           </div>
 
           <div className="mt-6">
-            <Link
-              to="/pricing"
-              search={{ recommended: pathwayKey, score: result.readiness_score }}
+            <a
+              href={`/pricing?recommended=club&score=${result.readiness_score}`}
               className="text-xs text-muted-foreground underline-offset-4 transition hover:text-foreground hover:underline"
             >
-              Prefer a one-time {result.recommended_pathway_name}? See all options
-            </Link>
+              Compare Pro and Executive
+            </a>
           </div>
         </div>
       </section>

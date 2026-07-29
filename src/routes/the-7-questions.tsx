@@ -269,17 +269,16 @@ function SevenQuestionsPage() {
               Try Bramwell free. He listens to how you actually deliver
               these answers, and tells you what the panel will hear before they do.
             </p>
-            <Link
-              to="/diagnostic"
-              search={{ autostart: "1" }}
+            <a
+              href="/diagnostic?autostart=1"
               className="group mt-8 inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-7 text-sm font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95"
               style={{
                 background: "var(--gradient-cta)",
                 boxShadow: "var(--shadow-cta)",
               }}
             >
-              <Mic className="h-4 w-4" strokeWidth={2.5} /> Start your coaching now <span className="transition-transform group-hover:translate-x-0.5">→</span>
-            </Link>
+              <Mic className="h-4 w-4" strokeWidth={2.5} /> Take the free diagnostic <span className="transition-transform group-hover:translate-x-0.5">→</span>
+            </a>
             <p className="mt-4 text-xs text-muted-foreground/80">
               No card · No login
             </p>

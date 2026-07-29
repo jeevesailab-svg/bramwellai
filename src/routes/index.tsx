@@ -12,17 +12,17 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
       meta: [
-        { title: "Bramwell.ai | Not a course. A coach." },
+        { title: "Not a course. A coach. | Bramwell.ai" },
         {
           name: "description",
           content:
-            "Meet Bramwell. The AI coach that teaches you to speak like a CEO. Try a free 5-minute voice session.",
+            "Your CV is fine. The room still isn't sure. One free live voice diagnostic tells you how you come across under pressure. No login, no card.",
         },
-        { property: "og:title", content: "Bramwell.ai | Not a course. A coach." },
+        { property: "og:title", content: "Not a course. A coach. | Bramwell.ai" },
         {
           property: "og:description",
           content:
-            "Meet Bramwell. The AI coach that teaches you to speak like a CEO. Try a free 5-minute voice session.",
+            "Your CV is fine. The room still isn't sure. One free live voice diagnostic tells you how you come across under pressure. No login, no card.",
         },
       ],
   }),
@@ -34,7 +34,7 @@ const HERO = "var(--gradient-hero)";
 const MINT = "var(--gradient-mint)";
 const SUNRISE = "var(--gradient-sunrise)";
 
-function PrimaryCTA({ label = "Start your 5 minute session", href = "/diagnostic?autostart=1", size = "md" as "md" | "lg" | "sm" }) {
+function PrimaryCTA({ label = "Take the free diagnostic", href = "/diagnostic?autostart=1", size = "md" as "md" | "lg" | "sm" }) {
   return <CtaButton href={href} size={size}>{label}</CtaButton>;
 }
 
@@ -43,17 +43,19 @@ function Index() {
     <main className="min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
+      <VillainBand />
       <SymptomCause />
-      <WhatYouLearn />
-      <StatBar />
       <PainChecklist />
+      <StatBar />
       <FourteenDays />
       <BlueOcean />
+      <WhatYouLearn />
+      <ProofSlots />
       <PricingTease />
       <FAQ />
       <FinalCTA />
       <Footer />
-      <StickyMobileCTA label="Start your 5 minute session" />
+      <StickyMobileCTA label="Take the free diagnostic" />
     </main>
   );
 }
@@ -134,19 +136,20 @@ function Hero() {
       <div className="relative z-10 mx-auto max-w-5xl px-4 pb-16 pt-6 text-center sm:px-6 sm:pb-20 sm:pt-8 md:px-10 md:pb-28 md:pt-12">
         <div className="mx-auto mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-white/80 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground shadow-sm backdrop-blur sm:px-4 sm:text-[11px] sm:tracking-[0.22em]">
           <Sparkles className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--primary)" }} />
-          <span className="truncate">Bramwell · The AI coach for speakers</span>
+          <span className="truncate">Live voice · 5 minutes · Free</span>
         </div>
 
         <h1 className="mx-auto max-w-4xl text-balance text-[34px] font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-[72px]">
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>Not a course. A coach.</span>
+          Your CV is fine.{" "}
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>The room still isn&apos;t sure.</span>
         </h1>
 
-        <p className="mx-auto mt-5 max-w-2xl text-balance text-2xl font-semibold leading-relaxed text-foreground sm:mt-6 sm:text-3xl md:text-4xl">
-          Meet Bramwell. The AI coach that teaches you to speak like a CEO.
+        <p className="mx-auto mt-5 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground sm:mt-6 sm:text-xl md:text-2xl">
+          It&apos;s not your answers. It&apos;s the signal in the first eight seconds. One free live voice diagnostic. Sixty seconds of truth about how you come across under pressure.
         </p>
 
-        <p className="mx-auto mt-5 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
-          Try a free 5-minute voice session. Get feedback on how you actually sound, and a plan to sound like the best leader in the room.
+        <p className="mx-auto mt-4 max-w-xl text-sm italic leading-relaxed text-muted-foreground/70 sm:text-base">
+          &ldquo;I know I&apos;m capable. I just can&apos;t sell myself when it counts.&rdquo;
         </p>
 
         <div className="mt-8 flex justify-center sm:mt-10">
@@ -205,10 +208,60 @@ function CallOrb() {
   );
 }
 
+/* ───────────── Villain band ───────────── */
+function VillainBand() {
+  return (
+    <section className="border-y border-border bg-white py-8 md:py-10">
+      <p className="mx-auto max-w-4xl text-balance px-6 text-center text-base font-medium leading-relaxed text-foreground md:px-10 md:text-lg">
+        Your CV got you the interview. Delivery under pressure is what loses it.{" "}
+        <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>
+          Bramwell trains the signal until the room hears your level.
+        </span>
+      </p>
+    </section>
+  );
+}
+
+/* ───────────── Proof slots (real stories only) ───────────── */
+function ProofSlots() {
+  return (
+    <section className="border-y border-border bg-white py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">Graduate stories</p>
+          <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Real sessions.{" "}
+            <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>Real words.</span>
+          </h2>
+          <p className="mt-4 text-sm text-muted-foreground">
+            We only publish stories from people who have actually run a free diagnostic. These slots fill as they come in.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              className="flex min-h-[180px] flex-col justify-between rounded-3xl border border-dashed border-border bg-background/60 p-8"
+            >
+              <span aria-hidden className="text-4xl leading-none text-muted-foreground/30">&ldquo;</span>
+              <p className="text-sm text-muted-foreground/70">
+                Your story here, after your first free session.
+              </p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-10 flex justify-center">
+          <PrimaryCTA />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ───────────── Symptom → Cause ───────────── */
 function SymptomCause() {
   const items = [
-    { icon: Target, symptom: "Struggling to get a job?", cause: "It&apos;s most likely your delivery.", copy: "Bramwell listens live and tells you exactly where your delivery loses the room.", accent: GOLD },
+    { icon: Target, symptom: "Interview after interview, no offer?", cause: "It&apos;s most likely your delivery.", copy: "Graduate and early-career interviews are decided on delivery, not your transcript. Bramwell listens live and tells you exactly where you lose the panel.", accent: GOLD },
     { icon: Heart, symptom: "People losing interest mid-sentence?", cause: "It&apos;s most likely your tone.", copy: "Pace, energy and pitch decide whether people lean in or check out. Bramwell trains all three, live.", accent: ELECTRIC },
     { icon: MessageCircle, symptom: "People talking over you?", cause: "It&apos;s most likely how you structure your sentences.", copy: "You&apos;re burying the point. Bramwell teaches the four-part answer that lands first and holds the floor.", accent: SUNRISE },
   ];
@@ -247,7 +300,7 @@ function SymptomCause() {
               />
               <p className="relative mt-5 text-sm leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: it.copy }} />
               <span className="relative mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
-                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Start your 5 minute session <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Take the free diagnostic <span className="transition-transform group-hover:translate-x-0.5">→</span>
               </span>
             </a>
           ))}
@@ -489,11 +542,11 @@ function FinalCTA() {
       <div aria-hidden className="pointer-events-none absolute right-10 top-10 h-60 w-60 rounded-full opacity-50 blur-3xl" style={{ background: ELECTRIC }} />
       <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
         <h2 className="text-balance text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
-          Ready to speak like the{" "}
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>best in the room?</span>
+          Ready to sound as{" "}
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>capable as you are?</span>
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-          Start your coaching now. One free 5-minute voice session shows you exactly how to sound clear, commanding and impossible to ignore. No login. No card.
+          One free live voice diagnostic tells you exactly what the room hears in your first eight seconds, and how to fix it. 5 min · Live voice · Free · No login · No card.
         </p>
         <div className="mt-10 flex justify-center">
           <PrimaryCTA size="lg" />
@@ -517,7 +570,7 @@ function Footer() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em]">Bramwell</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
-            <a href="/diagnostic?autostart=1" className="hover:text-foreground">Start your 5 minute session</a>
+            <a href="/diagnostic?autostart=1" className="hover:text-foreground">Take the free diagnostic</a>
             <a href="/pricing" className="hover:text-foreground">Pricing</a>
             <a href="/waitlist" className="inline-flex items-center gap-2 hover:text-foreground">
               For Sales Teams
