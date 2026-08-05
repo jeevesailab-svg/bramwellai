@@ -123,7 +123,7 @@ function WaitlistPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <SiteNav ctaLabel="Apply for access" ctaHref="#apply" />
+      <SiteNav ctaLabel="Get a free assessment" ctaHref="#apply" />
 
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border">
