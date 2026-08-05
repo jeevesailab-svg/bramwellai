@@ -78,7 +78,7 @@ export function PainChecklist() {
               boxShadow: "var(--shadow-cta)",
             }}
           >
-            <Mic className="h-4 w-4" strokeWidth={2.5} /> Take the free diagnostic <span className="transition-transform group-hover:translate-x-0.5">→</span>
+            <Mic className="h-4 w-4" strokeWidth={2.5} /> Start the test <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
           <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80">
             No login · No card
