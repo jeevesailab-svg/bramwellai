@@ -200,7 +200,7 @@ function WaitlistPage() {
               {error && <p className="mt-4 text-sm" style={{ color: "var(--destructive, #b00020)" }}>{error}</p>}
               <div className="mt-6">
                 <CtaButton as="button" size="md" className={submitting ? "opacity-60" : ""}>
-                  {submitting ? "Submitting…" : "Join the Waitlist"}
+                  {submitting ? "Submitting…" : "Get my free assessment"}
                 </CtaButton>
               </div>
               <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
