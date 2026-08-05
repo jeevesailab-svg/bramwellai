@@ -133,13 +133,14 @@ function WaitlistPage() {
               <span className="h-1.5 w-1.5 animate-pulse rounded-full" style={{ background: "var(--primary)" }} />
               Bramwell for Sales Teams, By Application
             </span>
-            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-              Clone your best closer.
-              <br />
-              <GoldText>Build an army of closers.</GoldText>
+            <p className="mt-6 text-sm font-medium uppercase tracking-widest" style={{ color: "var(--primary)" }}>
+              Want this built for you?
+            </p>
+            <h1 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+              We help founders and CEOs clone their best salesperson to build the <GoldText>strongest sales team</GoldText> to propel growth.
             </h1>
             <p className="mt-6 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground md:text-lg">
-              Bramwell High Performance Sales Coach studies your top performer, extracts exactly what they do differently, and trains every rep on your team to do the same. Until closing is no longer a personality. It's a system.
+              Bramwell studies your top performer, extracts exactly what they do differently, and trains every rep on your team to do the same. Until closing is no longer a personality. It's a system.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground">
               <span className="rounded-full border border-border bg-white/70 px-3 py-1">September intake</span>
@@ -148,7 +149,7 @@ function WaitlistPage() {
             </div>
             <div className="mt-10">
               <CtaButton as="button" onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })} size="md">
-                Apply for the waitlist
+                Get a free sales team assessment
               </CtaButton>
             </div>
           </div>
