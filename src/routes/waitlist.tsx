@@ -7,17 +7,17 @@ export const Route = createFileRoute("/waitlist")({
   component: WaitlistPage,
   head: () => ({
     meta: [
-      { title: "Bramwell for Sales Teams, Apply for the September intake" },
+      { title: "Bramwell for Sales Teams | Clone your best salesperson" },
       {
         name: "description",
         content:
-          "Clone your best closer. Bramwell studies your top performer and trains every rep on your team to do the same. Applications only. Limited spots.",
+          "We help founders and CEOs clone their best salesperson to build the strongest sales team to propel growth. Bramwell studies your top performer and trains every rep to close the same way. Apply for the September intake.",
       },
-      { property: "og:title", content: "Bramwell for Sales Teams, Apply for the September intake" },
+      { property: "og:title", content: "Bramwell for Sales Teams | Clone your best salesperson" },
       {
         property: "og:description",
         content:
-          "Clone your best closer. Build an army of closers. Waitlist pricing for founding teams. Application required.",
+          "We help founders and CEOs clone their best salesperson to build the strongest sales team to propel growth. Get a free sales team assessment.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
