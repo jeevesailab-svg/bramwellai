@@ -144,25 +144,18 @@ function Hero() {
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>The room still isn&apos;t sure.</span>
         </h1>
 
-        <p className="mx-auto mt-5 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground sm:mt-6 sm:text-xl md:text-2xl">
-          It&apos;s not your answers. It&apos;s the signal in the first eight seconds. One free live voice diagnostic. Sixty seconds of truth about how you come across under pressure.
-        </p>
+        <a
+          href="/diagnostic?autostart=1"
+          className="group mx-auto mt-8 inline-flex h-14 items-center justify-center gap-3 rounded-full px-9 text-base font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95 sm:mt-10"
+          style={{ background: GOLD, boxShadow: "var(--shadow-cta)" }}
+        >
+          <Sparkles className="h-5 w-5" strokeWidth={2.5} />
+          Start the test
+          <span className="text-lg transition-transform group-hover:translate-y-0.5">↓</span>
+        </a>
 
-        <p className="mx-auto mt-4 max-w-xl text-sm italic leading-relaxed text-muted-foreground/70 sm:text-base">
-          &ldquo;I know I&apos;m capable. I just can&apos;t sell myself when it counts.&rdquo;
-        </p>
-
-        <div className="mt-8 flex justify-center sm:mt-10">
+        <div className="mt-10 flex justify-center sm:mt-12">
           <CallOrb />
-        </div>
-
-        <div className="mt-8 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
-          <div className="mx-auto w-full max-w-xs sm:w-auto sm:max-w-none">
-            <PrimaryCTA size="lg" />
-          </div>
-          <a href="#learn" className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
-            See what you&apos;ll learn ↓
-          </a>
         </div>
 
         <p className="mx-auto mt-5 max-w-[280px] text-[10px] uppercase tracking-[0.2em] text-muted-foreground sm:max-w-none sm:text-[11px] sm:tracking-[0.22em]">
