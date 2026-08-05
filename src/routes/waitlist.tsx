@@ -7,17 +7,17 @@ export const Route = createFileRoute("/waitlist")({
   component: WaitlistPage,
   head: () => ({
     meta: [
-      { title: "Bramwell for Sales Teams, Apply for the September intake" },
+      { title: "Bramwell for Sales Teams | Clone your best salesperson" },
       {
         name: "description",
         content:
-          "Clone your best closer. Bramwell studies your top performer and trains every rep on your team to do the same. Applications only. Limited spots.",
+          "We help founders and CEOs clone their best salesperson to build the strongest sales team to propel growth. Bramwell studies your top performer and trains every rep to close the same way. Apply for the September intake.",
       },
-      { property: "og:title", content: "Bramwell for Sales Teams, Apply for the September intake" },
+      { property: "og:title", content: "Bramwell for Sales Teams | Clone your best salesperson" },
       {
         property: "og:description",
         content:
-          "Clone your best closer. Build an army of closers. Waitlist pricing for founding teams. Application required.",
+          "We help founders and CEOs clone their best salesperson to build the strongest sales team to propel growth. Get a free sales team assessment.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -123,7 +123,7 @@ function WaitlistPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <SiteNav ctaLabel="Apply for access" ctaHref="#apply" />
+      <SiteNav ctaLabel="Get a free assessment" ctaHref="#apply" />
 
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border">
@@ -133,13 +133,14 @@ function WaitlistPage() {
               <span className="h-1.5 w-1.5 animate-pulse rounded-full" style={{ background: "var(--primary)" }} />
               Bramwell for Sales Teams, By Application
             </span>
-            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-              Clone your best closer.
-              <br />
-              <GoldText>Build an army of closers.</GoldText>
+            <p className="mt-6 text-sm font-medium uppercase tracking-widest" style={{ color: "var(--primary)" }}>
+              Want this built for you?
+            </p>
+            <h1 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+              We help founders and CEOs clone their best salesperson to build the <GoldText>strongest sales team</GoldText> to propel growth.
             </h1>
             <p className="mt-6 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground md:text-lg">
-              Bramwell High Performance Sales Coach studies your top performer, extracts exactly what they do differently, and trains every rep on your team to do the same. Until closing is no longer a personality. It's a system.
+              Bramwell studies your top performer, extracts exactly what they do differently, and trains every rep on your team to do the same. Until closing is no longer a personality. It's a system.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground">
               <span className="rounded-full border border-border bg-white/70 px-3 py-1">September intake</span>
@@ -148,7 +149,7 @@ function WaitlistPage() {
             </div>
             <div className="mt-10">
               <CtaButton as="button" onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })} size="md">
-                Apply for the waitlist
+                Get a free sales team assessment
               </CtaButton>
             </div>
           </div>
@@ -199,7 +200,7 @@ function WaitlistPage() {
               {error && <p className="mt-4 text-sm" style={{ color: "var(--destructive, #b00020)" }}>{error}</p>}
               <div className="mt-6">
                 <CtaButton as="button" size="md" className={submitting ? "opacity-60" : ""}>
-                  {submitting ? "Submitting…" : "Join the Waitlist"}
+                  {submitting ? "Submitting…" : "Get my free assessment"}
                 </CtaButton>
               </div>
               <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
@@ -246,7 +247,7 @@ function WaitlistPage() {
           </p>
           <div className="mt-8 flex justify-center">
             <CtaButton as="button" onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })} size="md">
-              Apply for the waitlist
+              Get a free sales team assessment
             </CtaButton>
           </div>
         </div>
