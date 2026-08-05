@@ -211,11 +211,14 @@ function CallOrb() {
 /* ───────────── Villain band ───────────── */
 function VillainBand() {
   return (
-    <section className="border-y border-border bg-white py-8 md:py-10">
-      <p className="mx-auto max-w-4xl text-balance px-6 text-center text-base font-medium leading-relaxed text-foreground md:px-10 md:text-lg">
+    <section className="border-y border-border bg-white py-10 md:py-12">
+      <p className="text-center text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+        This is the secret you wish they taught you.
+      </p>
+      <p className="mx-auto mt-3 max-w-4xl text-balance px-6 text-center text-base font-medium leading-relaxed text-foreground md:px-10 md:text-lg">
         Your CV got you the interview. Delivery under pressure is what loses it.{" "}
         <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>
-          Bramwell trains the signal until the room hears your level.
+          Bramwell rehearses you, step by step, until you sound like the most capable person in the room.
         </span>
       </p>
     </section>
@@ -447,7 +450,7 @@ function BlueOcean() {
 /* ───────────── Pricing tease ───────────── */
 function PricingTease() {
   const plans = [
-    { name: "Pro", price: "$79", cadence: "/month", copy: "Unlimited voice coaching, playbook, archetype tracking. Most people pick this.", cta: "Go Pro", accent: GOLD, featured: true },
+    { name: "Pro", price: "$79", cadence: "/month", copy: "Your step by step process to being successful in an interview: walk in rehearsed, sound structured under pressure, and answer the way the best leaders do. Practice every week before the interview, through your first 90 days, and every time you ask for more. $79 a month is less than one hour with a human coach. Most people stay.", cta: "Go Pro", accent: GOLD, featured: true },
     { name: "Executive", price: "$197", cadence: "/month", copy: "Everything in Pro, plus board-level scenario drills and monthly human review.", cta: "Go Executive", accent: SUNRISE },
   ];
   return (
