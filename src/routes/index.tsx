@@ -276,7 +276,7 @@ function SymptomCause() {
         </p>
         <h2 className="mx-auto mt-4 max-w-3xl text-balance text-center text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
           The problem isn&apos;t you.{" "}
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>It&apos;s the signal you&apos;re sending.</span>
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>It&apos;s how you&apos;re delivering every answer.</span>
         </h2>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
