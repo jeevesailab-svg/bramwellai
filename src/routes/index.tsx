@@ -55,7 +55,7 @@ function Index() {
       <FAQ />
       <FinalCTA />
       <Footer />
-      <StickyMobileCTA label="Take the free diagnostic" />
+      <StickyMobileCTA label="Start the test" />
     </main>
   );
 }
