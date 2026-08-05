@@ -247,7 +247,7 @@ function WaitlistPage() {
           </p>
           <div className="mt-8 flex justify-center">
             <CtaButton as="button" onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })} size="md">
-              Apply for the waitlist
+              Get a free sales team assessment
             </CtaButton>
           </div>
         </div>
