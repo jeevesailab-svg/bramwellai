@@ -323,7 +323,7 @@ function PricingPage() {
         </p>
         <div className="mt-8 flex justify-center px-6">
           <CtaButton href="/diagnostic?autostart=1" size="md" showIcon={false}>
-            Take the free diagnostic →
+            Start the test →
           </CtaButton>
         </div>
       </section>
