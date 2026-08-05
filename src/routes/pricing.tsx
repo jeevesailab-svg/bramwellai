@@ -65,7 +65,7 @@ const PATHWAYS: Pathway[] = [
     sessions: "Unlimited live voice coaching",
     highlight: true,
     blurb:
-      "Unlimited live voice coaching, your personal playbook and archetype tracking. The room only gets easier when you keep training for it.",
+      "Your step by step process to being successful in an interview: walk in rehearsed, sound structured under pressure, and answer the way the best leaders do. Practice every week before the interview, through your first 90 days, and every time you ask for more. $79 a month is less than one hour with a human coach. Most people stay.",
     includes: [
       "Unlimited live voice coaching sessions with Bramwell",
       "Your personal playbook, sharpened every week",
