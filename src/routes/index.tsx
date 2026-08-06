@@ -510,7 +510,7 @@ function FAQ() {
     { q: "Is this really live voice?", a: "Yes. You speak. Bramwell listens and responds in real time, like a phone call with a coach." },
     { q: "Do I need to prepare anything?", a: "No. Just click and talk. Bramwell leads the session and tells you exactly what to fix." },
     { q: "Will I sound scripted?", a: "The opposite. Bramwell trains your natural voice to be sharper, warmer and more structured, not robotic." },
-    { q: "Can I cancel any time?", a: "Yes. Membership is month to month. Pause or cancel in one click." },
+    { q: "What if it is not for me?", a: "Run your first session. If Bramwell does not identify something specific and actionable about how you communicate, we refund you in full. No forms. No questions." },
     { q: "How is this different from ChatGPT?", a: "ChatGPT can write. Bramwell can hear. Bramwell scores how you sound, not just what you say, and coaches the delivery." },
   ];
   return (
