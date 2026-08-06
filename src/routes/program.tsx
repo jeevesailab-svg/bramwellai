@@ -389,12 +389,13 @@ function ProgramPage() {
               <span className="text-sm text-muted-foreground">USD, one payment</span>
             </div>
             <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted-foreground">
-              Ten minutes a day for 30 days
+              30 scored sessions, 4 weeks, 1 curriculum
             </p>
 
             <ul className="mt-6 flex-1 space-y-3 text-sm">
               {[
-                "Daily live voice sessions with Bramwell your Voice AI Mentor, 30 days straight",
+                "30 structured impromptu speaking sessions with Bramwell your Voice AI Mentor",
+                "A four week curriculum: Structure, Specificity, Confidence Signals, the real room",
                 "Scored across Structure, Specificity, Confidence Signals and Relevance",
                 "Weekly check ins that track your Readiness Score",
                 "An accountability pod of 4 to 6 professionals",
@@ -417,8 +418,8 @@ function ProgramPage() {
                 Get started
               </CtaButton>
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                Cohort 1 begins {COHORT_START}. Secure checkout. Refunded in full after session one
-                if it does not land.
+                Cohort 1 begins {COHORT_START}. Secure checkout. Complete the first 7 sessions and
+                your Week 1 check in, and if your score has not moved we refund all $299.
               </p>
             </div>
           </article>
@@ -464,13 +465,28 @@ function ProgramPage() {
             The Bramwell Guarantee
           </p>
           <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Value on session one, or your money back.
+            Your score moves in Week 1, or you get all $299 back.
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground">
-            Run your first session. If Bramwell your Voice AI Mentor does not identify something
-            specific and actionable about how you communicate, something you had not seen yourself,
-            we refund you in full. No forms. No questions.
+            Here are the exact terms, so nobody has to guess.
           </p>
+          <ul className="mx-auto mt-7 max-w-xl space-y-3 text-left text-sm text-muted-foreground">
+            {[
+              "Complete your Day 1 diagnostic to set a baseline Readiness Score.",
+              "Complete the first 7 daily sessions and your Week 1 check in.",
+              "If your Week 1 Readiness Score has not improved on your Day 1 baseline, reply to any Bramwell email within 14 days of purchase.",
+              "We refund the full $299 to your original payment method within 5 business days. No forms, no call, no questions.",
+            ].map((t) => (
+              <li key={t} className="flex gap-3">
+                <span
+                  aria-hidden
+                  className="mt-2 inline-block h-1.5 w-1.5 flex-none rounded-full"
+                  style={{ background: "var(--primary)" }}
+                />
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -513,7 +529,7 @@ function ProgramPage() {
             Thirty days from now, they stop talking over you.
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-base opacity-70">
-            Cohort 1 starts {COHORT_START}. Ten minutes a day. One payment of $299.
+            Cohort 1 starts {COHORT_START}. A structured 30 day curriculum. One payment of $299.
           </p>
           <div className="mt-9 flex justify-center">
             <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false}>
