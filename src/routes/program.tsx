@@ -47,7 +47,7 @@ const METHOD = [
   },
   {
     step: "Practise",
-    body: "Five minutes a day with your Voice AI Mentor. You speak. It listens. It scores. No judgement, just honest feedback. 30 sessions. 4 weekly check ins. A pod that holds you to it.",
+    body: "One structured session a day, built around impromptu speaking. Your Mentor sets the prompt, you answer cold, it scores the answer and you run it again. 30 sessions. 4 weekly check ins. A pod that holds you to it.",
   },
   {
     step: "Perform",
@@ -56,6 +56,37 @@ const METHOD = [
   {
     step: "Prove",
     body: "Day 30. You retake the diagnostic with your Voice AI Mentor. Your score went from 42 to 65. You can see it. You can share it. You can prove it.",
+  },
+];
+
+const CURRICULUM = [
+  {
+    week: "Week 1",
+    title: "Structure under pressure",
+    focus: "Answer first, then evidence",
+    body: "Days 1 to 7. Cold prompts with no prep time. You learn one repeatable answer frame and drill it until you lead with the point instead of the run up. Day 1 sets your baseline Readiness Score.",
+    drills: ["60 second impromptu answers", "Point first re takes", "Kill the preamble"],
+  },
+  {
+    week: "Week 2",
+    title: "Specificity and evidence",
+    focus: "Numbers, names, outcomes",
+    body: "Days 8 to 14. Harder prompts drawn from your real work. Your Mentor pushes back until vague claims are replaced with concrete evidence a decision maker can act on.",
+    drills: ["Story to number", "The so what test", "Handling the challenge question"],
+  },
+  {
+    week: "Week 3",
+    title: "Confidence signals",
+    focus: "Pace, pauses, filler, landing",
+    body: "Days 15 to 21. Measured delivery work. Filler count, words per minute and pause pattern are tracked every session so you can hear the difference and see it in the numbers.",
+    drills: ["Pause instead of um", "Pace control reps", "Land the last line"],
+  },
+  {
+    week: "Week 4",
+    title: "The real room",
+    focus: "High stakes rehearsal",
+    body: "Days 22 to 30. Full scenario rehearsal: the status update, the pitch, the interview, the pushback from the person who does not agree with you. Day 30 you retake the diagnostic and compare.",
+    drills: ["Executive update in 90 seconds", "Pitch and objection", "Day 30 retest"],
   },
 ];
 
@@ -187,8 +218,9 @@ function ProgramPage() {
             Change your life.
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Ten minutes a day for 30 days with Bramwell, your Voice AI Mentor. You speak. He scores
-            you. On Day 30 the number proves it.
+            A structured 30 day program with Bramwell, your Voice AI Mentor. Four weeks of impromptu
+            speaking drills, one scored session a day, weekly check ins. On Day 30 the number proves
+            it.
           </p>
 
           <div className="mt-9 flex flex-col items-center gap-3">
@@ -196,7 +228,7 @@ function ProgramPage() {
               Get started, $299
             </CtaButton>
             <p className="text-xs text-muted-foreground">
-              One payment. Full refund after session one if it does not land.{" "}
+              One payment. Complete Week 1 and if your score has not moved, we refund all $299.{" "}
               <a href="/diagnostic?autostart=1" className="font-medium text-foreground underline underline-offset-4">
                 Or take the free 5 minute test first
               </a>
