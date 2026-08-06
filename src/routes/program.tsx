@@ -300,18 +300,16 @@ function ProgramPage() {
             >
               Cohort 1, {COHORT_START}
             </span>
-            <h3 className="text-2xl font-semibold tracking-tight">
-              This is your step by step voice playbook
+            <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">
+              30 Day Voice Mastery Program
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Get to the root of what is holding you back and create a practice system that lets you
-              scale without sacrificing time, energy and confidence. In this immersive experience you
-              get the system of success Bramwell has leveraged, along with insights from the most
-              brilliant minds in communication.
+              One human voice coach costs $300 an hour and gives you an opinion. Bramwell costs $299
+              once, trains you every day for 30 days, and gives you a score.
             </p>
 
-            <div className="mt-6 flex items-baseline gap-2">
-              <span className="text-4xl font-semibold tracking-tight">$299</span>
+            <div className="mt-6 flex items-baseline gap-3">
+              <span className="text-5xl font-semibold tracking-tight">$299</span>
               <span className="text-sm text-muted-foreground">USD, one payment</span>
             </div>
             <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted-foreground">
@@ -339,21 +337,26 @@ function ProgramPage() {
             </ul>
 
             <div className="mt-8">
-              <CtaButton as="button" onClick={startCheckout} size="md" showIcon={false} className="w-full">
-                Join the 30 Day Voice Mastery Program
+              <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false} className="w-full">
+                Get started
               </CtaButton>
+              <p className="mt-3 text-center text-xs text-muted-foreground">
+                Cohort 1 begins {COHORT_START}. Secure checkout. Refunded in full after session one
+                if it does not land.
+              </p>
             </div>
           </article>
 
-          <p className="mx-auto mt-10 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-            Own your voice, do not let it own you. Take the free test first. No card. No login. If it
-            does not change how you sound in your first session, do not buy the program.
+          <p className="mx-auto mt-8 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
+            Not ready?{" "}
+            <a
+              href="/diagnostic?autostart=1"
+              className="font-medium text-foreground underline underline-offset-4"
+            >
+              Take the free 5 minute test
+            </a>{" "}
+            and hear your score first. No card. No login.
           </p>
-          <div className="mt-6 flex justify-center">
-            <CtaButton href="/diagnostic?autostart=1" size="md" showIcon={false} showArrow={false}>
-              Start the test ↓
-            </CtaButton>
-          </div>
         </div>
       </section>
 
