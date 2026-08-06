@@ -7,17 +7,17 @@ export const Route = createFileRoute("/waitlist")({
   component: WaitlistPage,
   head: () => ({
     meta: [
-      { title: "Bramwell for Sales Teams | Clone your best salesperson" },
+      { title: "30 Day Team Voice Mastery Program | Bramwell your Voice AI Mentor" },
       {
         name: "description",
         content:
-          "We help founders and CEOs clone their best salesperson to build the strongest sales team to propel growth. Bramwell studies your top performer and trains every rep to close the same way. Apply for the September intake.",
+          "Your Voice AI Mentor in every rep's pocket. Clone your founder. Build an army of closers. 30 days, manager dashboard, team benchmarking. $1,500 for 10 seats.",
       },
-      { property: "og:title", content: "Bramwell for Sales Teams | Clone your best salesperson" },
+      { property: "og:title", content: "30 Day Team Voice Mastery Program | Bramwell your Voice AI Mentor" },
       {
         property: "og:description",
         content:
-          "We help founders and CEOs clone their best salesperson to build the strongest sales team to propel growth. Get a free sales team assessment.",
+          "Every rep trains daily against your founder's pitch with their Voice AI Mentor. Team benchmark on Day 1, proof on Day 30.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -39,34 +39,122 @@ const ROLES = [
 
 const BENEFITS = [
   {
+    icon: "🧬",
+    title: "Clone your founder's pitch",
+    body: "Bramwell your Voice AI Mentor turns your founder's words, pace, objections and closes into daily practice every rep trains against.",
+  },
+  {
     icon: "🎯",
-    title: "The Methodology",
-    body: "Your team learns the exact influence and persuasion formula used by the world's top sales performers. Structured, repeatable, scoreable.",
+    title: "Master the art of closing",
+    body: "Win any deal by uncovering the secret behind how prospects decide to listen. Your Mentor rehearses with every rep until they own it.",
+  },
+  {
+    icon: "📈",
+    title: "Gain a competitive edge",
+    body: "Create a comprehensive voice strategy to target your ideal prospects and build pipeline, guided by your Mentor every step.",
   },
   {
     icon: "🎙️",
-    title: "Live Practice Sessions",
-    body: "Reps practise real objection handling, discovery and closing conversations with Bramwell before they cost you a live deal.",
-  },
-  {
-    icon: "📊",
-    title: "Team Performance Scores",
-    body: "Every session scored. Every rep tracked. You see exactly who is ready and who needs work, before the next pipeline review.",
+    title: "Take charge of your team's presence",
+    body: "Use proven insights from your Mentor to steer your reps through any call, objection or conversation.",
   },
   {
     icon: "⚡",
-    title: "Live in One Day",
-    body: "No IT. No procurement. No 6 month onboarding. Bramwell Sales Coach is running for your team within 24 hours of signing.",
+    title: "Stay ahead of the competition",
+    body: "Build a team that is differentiated and adaptable no matter the market. Your Mentor adapts practice as each rep grows.",
   },
   {
-    icon: "🔒",
-    title: "Waitlist Pricing",
-    body: "Founding members lock in pricing significantly below public launch. First in, best deal. Never repeated.",
+    icon: "🗺️",
+    title: "Create a map for your team",
+    body: "Your Mentor builds a flexible, results driven plan so you hit your revenue goals faster.",
+  },
+];
+
+const PILLARS = [
+  {
+    title: "Personalised attention",
+    body: "Bramwell your Voice AI Mentor runs live practice sessions with every rep, listening, scoring and building a plan for each rep's exact gaps. Your manager dashboard tracks it all.",
   },
   {
-    icon: "🤝",
-    title: "Personal Onboarding",
-    body: "Every accepted team gets a personal onboarding call. We configure Bramwell to your playbook, your ICP and your objections.",
+    title: "Practical strategies",
+    body: "Improve your team's tone, pace and confidence immediately, with real time feedback from the Mentor after every practice session.",
+  },
+  {
+    title: "Immersive experiences",
+    body: "This is not passive training. Your reps speak with their Voice AI Mentor daily. It listens. It scores. They adjust.",
+  },
+  {
+    title: "Empowering discoveries",
+    body: "Break the cycle of reps freezing on calls, with a Mentor that never judges, never gets impatient, and is always available.",
+  },
+];
+
+const METHOD = [
+  {
+    step: "Diagnose",
+    body: "Every rep takes the free test and speaks with their Voice AI Mentor for 5 minutes. You get a team benchmark report on Day 1. Most sales leaders have never measured their team's voice. The numbers might sting. That is the point.",
+  },
+  {
+    step: "Practise",
+    body: "Five minutes a day with their Voice AI Mentor. Every rep trains against your founder's pitch: their words, their pace, their objections, their closes. 30 sessions. 4 weekly check ins. A pod that holds them to it.",
+  },
+  {
+    step: "Perform",
+    body: "Week by week every rep's score moves. Week 1: team average 48. Week 2: 53. Week 3: 57. Week 4: 62. You see the difference in your next pipeline review.",
+  },
+  {
+    step: "Prove",
+    body: "Day 30. Every rep retakes the diagnostic with their Voice AI Mentor. Team average went from 48 to 62. You can see it. You can share it with your VP. You can prove it.",
+  },
+];
+
+const TESTIMONIALS = [
+  { quote: "You are accomplishing in 30 days what it would probably take a year of coaching to learn.", name: "Marcus, VP of Sales" },
+  { quote: "My team's average score went from 48 to 62. I showed my VP. She said how did you do that?", name: "David, Sales Manager" },
+  { quote: "Every rep on my team now pitches like our founder. Same words. Same confidence. Same closes.", name: "Lisa, Revenue Lead" },
+  { quote: "We used to rely on one or two heroes to carry the number. Now every rep sounds like a closer.", name: "James, Head of Sales" },
+];
+
+const FAQS = [
+  {
+    q: "What is the 30 Day Team Voice Mastery Program?",
+    a: "A 30 day structured voice training program for sales teams with a Voice AI Mentor. Every rep practises daily against your founder's pitch with their Mentor, an AI that listens, scores and gives real time feedback. You get a team benchmark on Day 1, weekly score updates, and a final report on Day 30 that proves the transformation.",
+  },
+  {
+    q: "Who is it for?",
+    a: "VPs and sales managers, founders and revenue leaders, anyone who wants their team to pitch like their top performer. If your reps freeze on calls, lose deals in the first 30 seconds, or sound nothing like your founder, this is for you.",
+  },
+  {
+    q: "How does the founder cloning work?",
+    a: "You upload your founder's best pitch: their words, pace, objection handling and closes. Bramwell's Voice AI Mentor turns that into roleplay scenarios every rep trains against, scores their responses against your founder's patterns, and gives real time feedback. Cloning means cloning the pitch, words and approach into AI practice scenarios, not cloning a literal voice or creating deepfakes.",
+  },
+  {
+    q: "What can I expect my team to learn?",
+    a: "Daily voice practice with their Voice AI Mentor, scored across four dimensions: Structure, Specificity, Confidence Signals and Relevance. Weekly check ins that track every rep's score, a manager dashboard with team benchmarking, and a before and after Readiness Score for every rep.",
+  },
+  {
+    q: "How long is the program?",
+    a: "30 days. Daily practice takes 5 minutes per rep. Weekly check ins take 15 minutes. The full program runs across 4 weeks with a final team retest on Day 30.",
+  },
+  {
+    q: "How much does it cost?",
+    a: "$1,500 for 10 seats. That is $150 per rep for 30 days of daily practice, team benchmarking, and a manager dashboard that proves the change.",
+  },
+  {
+    q: "We already use a sales enablement tool, is this different?",
+    a: "Yes. Sales enablement tools tell your reps what to say. Bramwell trains how they say it. The Readiness Score measures tone, pace, confidence signals and structure, not just content. Most enablement tools do not score voice. Bramwell does.",
+  },
+  {
+    q: "I have a sales kickoff in 4 weeks, can this work?",
+    a: "That is exactly what the program is designed for. Run it before the kickoff. Every rep's score moves before the event and you walk in with a benchmarked team.",
+  },
+  {
+    q: "Is there a manager dashboard?",
+    a: "Yes. You see every rep's daily practice, weekly score movement and team benchmark. Week 2: average 48. Week 4: average 62. Printable one pager for your VP.",
+  },
+  {
+    q: "What makes this different from hiring a sales coach?",
+    a: "The global average for a communication coach is $244 per hour, per the ICF 2023 Global Coaching Study. For $150 per rep, every rep gets 30 days of daily practice with their Voice AI Mentor against your founder's pitch, not one hour of coaching they forget in a week. The Mentor is always available and never cancels.",
   },
 ];
 
