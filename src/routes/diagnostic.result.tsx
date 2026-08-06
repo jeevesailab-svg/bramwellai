@@ -436,19 +436,19 @@ function ResultBody({ result }: { result: Result }) {
               className="inline-block h-1.5 w-1.5 animate-pulse rounded-full"
               style={{ background: "var(--primary)" }}
             />
-            Simple monthly coaching
+            Cohort 1, 15 August 2026
           </span>
           <h2 className="mt-5 text-balance text-3xl font-semibold leading-[1.05] tracking-tight md:text-4xl">
-            Keep Bramwell in your corner for{" "}
+            Move this score in 30 days for{" "}
             <span
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: "var(--gradient-gold)" }}
             >
-              $79/month
+              $299
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-muted-foreground">
-            Unlimited voice coaching, up to 3 sessions a week, monthly progress checks, and every scenario library as it drops. Cancel anytime.
+            Ten minutes a day for 30 days with Bramwell your Voice AI Mentor. Every session scored, weekly check ins, and a Day 30 retest that proves the change. One payment, USD.
           </p>
 
           <a
@@ -461,14 +461,14 @@ function ResultBody({ result }: { result: Result }) {
                 "0 20px 60px -15px color-mix(in oklab, var(--primary) 70%, transparent), 0 0 0 1px color-mix(in oklab, var(--primary) 50%, transparent) inset",
             }}
           >
-            <span>Start my monthly coaching</span>
+            <span>Get started, $299</span>
             <span aria-hidden className="transition group-hover:translate-x-1">→</span>
           </a>
 
           <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
             <span className="inline-flex items-center gap-1.5">
               <span aria-hidden style={{ color: "var(--primary)" }}>✓</span>
-              30 day guarantee
+              Refund after session one
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span aria-hidden style={{ color: "var(--primary)" }}>✓</span>
@@ -476,7 +476,7 @@ function ResultBody({ result }: { result: Result }) {
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span aria-hidden style={{ color: "var(--primary)" }}>✓</span>
-              Cancel anytime
+              One payment
             </span>
           </div>
 
@@ -485,7 +485,7 @@ function ResultBody({ result }: { result: Result }) {
               href={`/program?score=${result.readiness_score}`}
               className="text-xs text-muted-foreground underline-offset-4 transition hover:text-foreground hover:underline"
             >
-              Compare Pro and Executive
+              See what the 30 days looks like
             </a>
           </div>
         </div>
