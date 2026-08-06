@@ -197,7 +197,7 @@ function ProgramPage() {
 
           <div className="mt-8 flex flex-col items-center gap-3">
             <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false}>
-              Start the 30 days →
+              Start the 30 days
             </CtaButton>
             <p className="text-xs text-muted-foreground">
               $299 USD, one payment. 30 days of access. No subscription.
@@ -284,7 +284,7 @@ function ProgramPage() {
 
             <div className="mt-8">
               <CtaButton as="button" onClick={startCheckout} size="md" showIcon={false} className="w-full">
-                Start the 30 days →
+                Start the 30 days
               </CtaButton>
             </div>
           </article>
@@ -295,7 +295,7 @@ function ProgramPage() {
           </p>
           <div className="mt-6 flex justify-center">
             <CtaButton href="/diagnostic?autostart=1" size="md" showIcon={false}>
-              Start the test →
+              Start the test
             </CtaButton>
           </div>
         </div>
