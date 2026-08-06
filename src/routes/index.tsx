@@ -128,42 +128,83 @@ function Nav() {
 /* ───────────── Hero ───────────── */
 function Hero() {
   return (
-    <section className="relative overflow-hidden" style={{ background: HERO }}>
-      {/* playful floating blobs, brighter & softer */}
-      <div aria-hidden className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full opacity-60 blur-3xl" style={{ background: ELECTRIC }} />
-      <div aria-hidden className="pointer-events-none absolute -right-24 top-10 h-80 w-80 rounded-full opacity-60 blur-3xl" style={{ background: SUNRISE }} />
-      <div aria-hidden className="pointer-events-none absolute bottom-0 left-1/2 h-72 w-[600px] -translate-x-1/2 rounded-full opacity-50 blur-3xl" style={{ background: MINT }} />
+    <>
+      {/* Photo band */}
+      <section className="relative isolate overflow-hidden">
+        <img
+          src={heroPortrait.url}
+          alt="Executive pausing before she speaks, lit from above in a dark room"
+          className="absolute inset-0 h-full w-full object-cover object-[70%_center] md:object-[65%_20%]"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, oklch(0.16 0.02 60 / 0.94) 0%, oklch(0.16 0.02 60 / 0.82) 45%, oklch(0.16 0.02 60 / 0.35) 100%)",
+          }}
+        />
+        <div className="relative z-10 mx-auto flex min-h-[560px] max-w-7xl flex-col justify-center px-5 py-20 sm:px-6 md:min-h-[660px] md:px-10 md:py-28">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur">
+              <Sparkles className="h-3.5 w-3.5 shrink-0" />
+              Live voice · 5 minutes · Free
+            </div>
 
-      <div className="relative z-10 mx-auto max-w-5xl px-4 pb-16 pt-6 text-center sm:px-6 sm:pb-20 sm:pt-8 md:px-10 md:pb-28 md:pt-12">
-        <div className="mx-auto mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-white/80 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground shadow-sm backdrop-blur sm:px-4 sm:text-[11px] sm:tracking-[0.22em]">
-          <Sparkles className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--primary)" }} />
-          <span className="truncate">Live voice · 5 minutes · Free</span>
+            <h1 className="mt-6 text-balance text-[40px] font-bold leading-[0.98] tracking-tight text-white sm:text-6xl md:text-[76px]">
+              Are you heard,
+              <br />
+              or ignored?
+            </h1>
+
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-white/80 sm:text-lg">
+              Ever feel like the smartest person in the room, but the one who gets ignored? Find out
+              why.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href="/diagnostic?autostart=1"
+                className="group inline-flex h-14 items-center justify-center gap-3 rounded-full px-9 text-base font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95"
+                style={{ background: GOLD, boxShadow: "var(--shadow-cta)" }}
+              >
+                <Mic className="h-5 w-5" strokeWidth={2.5} />
+                Take the test
+                <span className="transition-transform group-hover:translate-x-0.5">→</span>
+              </a>
+              <a href="/program" className="text-sm font-medium text-white/75 underline underline-offset-4 hover:text-white">
+                See the 30 day program
+              </a>
+            </div>
+
+            <p className="mt-6 text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+              5 min · Live voice · Free · No login · No card
+            </p>
+          </div>
         </div>
+      </section>
 
-        <h1 className="mx-auto max-w-4xl text-balance text-[34px] font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-[72px]">
-          Your CV is fine.{" "}
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>The room still isn&apos;t sure.</span>
-        </h1>
-
-        <a
-          href="/diagnostic?autostart=1"
-          className="group mx-auto mt-8 inline-flex h-14 items-center justify-center gap-3 rounded-full px-9 text-base font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95 sm:mt-10"
-          style={{ background: GOLD, boxShadow: "var(--shadow-cta)" }}
-        >
-          <Sparkles className="h-5 w-5" strokeWidth={2.5} />
-          Start the test
-          <span className="text-lg transition-transform group-hover:translate-y-0.5">↓</span>
-        </a>
-
-        <div className="mt-10 flex justify-center sm:mt-12">
-          <CallOrb />
+      {/* Light call band */}
+      <section className="relative overflow-hidden" style={{ background: HERO }}>
+        <div aria-hidden className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full opacity-60 blur-3xl" style={{ background: ELECTRIC }} />
+        <div aria-hidden className="pointer-events-none absolute -right-24 top-0 h-80 w-80 rounded-full opacity-60 blur-3xl" style={{ background: SUNRISE }} />
+        <div aria-hidden className="pointer-events-none absolute bottom-0 left-1/2 h-64 w-[600px] -translate-x-1/2 rounded-full opacity-50 blur-3xl" style={{ background: MINT }} />
+        <div className="relative z-10 mx-auto max-w-3xl px-5 py-14 text-center sm:px-6 md:py-20">
+          <h2 className="text-balance text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
+            Ready to unlock your breakthrough?
+          </h2>
+          <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground sm:text-base">
+            Tap the mic. Speak for five minutes. Bramwell tells you exactly what the room hears.
+          </p>
+          <div className="mt-8 flex justify-center">
+            <CallOrb />
+          </div>
+          <p className="mt-5 text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:text-[11px]">
+            Start today
+          </p>
         </div>
-
-        <p className="mx-auto mt-5 max-w-[280px] text-[10px] uppercase tracking-[0.2em] text-muted-foreground sm:max-w-none sm:text-[11px] sm:tracking-[0.22em]">
-          5 min · Live voice · Free · No login · No card
-        </p>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
