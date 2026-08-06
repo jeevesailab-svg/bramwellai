@@ -40,52 +40,6 @@ export const Route = createFileRoute("/program")({
   }),
 });
 
-const BENEFITS = [
-  {
-    title: "Turbocharge your voice",
-    body: "Bramwell your Voice AI Mentor runs daily practice sessions that optimise the speech patterns driving how you land, so you grow faster.",
-  },
-  {
-    title: "Master the art of speaking",
-    body: "Hold any room by uncovering the secret behind how people decide to listen. Your Mentor rehearses with you until you own it.",
-  },
-  {
-    title: "Gain a competitive edge",
-    body: "Build a complete voice strategy that targets your audience and builds authority, guided by Bramwell your Voice AI Mentor every step.",
-  },
-  {
-    title: "Take charge of your presence",
-    body: "Use proven insights from Bramwell your Voice AI Mentor to steer your communication through any room or conversation.",
-  },
-  {
-    title: "Stay ahead of the conversation",
-    body: "Build a voice that is differentiated and adaptable no matter the audience. Your Mentor adapts your practice as you grow.",
-  },
-  {
-    title: "Create a map for your voice",
-    body: "Your Mentor builds a flexible, results driven plan so you hit your communication goals faster.",
-  },
-];
-
-const PILLARS = [
-  {
-    title: "Personalised attention",
-    body: "Bramwell your Voice AI Mentor listens to every session, scores every response, and builds a practice plan for your exact gaps. No generic feedback. No one size fits all.",
-  },
-  {
-    title: "Practical strategies",
-    body: "Implement practical strategies for tone, pace and confidence immediately, with real time feedback from your Mentor after every session.",
-  },
-  {
-    title: "Immersive experiences",
-    body: "This is not a passive course. Your Mentor runs live practice sessions. You speak. It scores. You adjust. Every day.",
-  },
-  {
-    title: "Empowering discoveries",
-    body: "Break the cycle of fear and the patterns that stop you speaking up, with a Mentor that never judges, never gets impatient, and is always available.",
-  },
-];
-
 const METHOD = [
   {
     step: "Diagnose",
@@ -209,13 +163,13 @@ function ProgramPage() {
   }, [user, resume]);
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-background text-foreground pb-24 md:pb-0">
       <PaymentTestModeBanner />
-      <SiteNav ctaLabel="Start the test" ctaHref="/diagnostic?autostart=1" />
+      <SiteNav ctaLabel="Get started" ctaHref="/program#enrol" />
 
       {/* Hero */}
       <section
-        className="relative overflow-hidden pb-20 pt-10 md:pb-28 md:pt-16"
+        className="relative overflow-hidden pb-16 pt-12 md:pb-24 md:pt-20"
         style={{ background: "var(--gradient-hero)" }}
       >
         <div
@@ -223,153 +177,85 @@ function ProgramPage() {
           className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 rounded-full opacity-25 blur-3xl"
           style={{ background: "var(--gradient-gold)" }}
         />
-        <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
+        <div className="relative mx-auto max-w-4xl px-6 text-center md:px-10">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] backdrop-blur">
             Cohort 1 starts {COHORT_START}
           </span>
-          <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            30 Day Voice Mastery Program
+          <h1 className="mt-7 text-balance text-5xl font-semibold leading-[0.95] tracking-tight md:text-7xl">
+            Change your voice.
+            <br />
+            Change your life.
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Bramwell your Voice AI Mentor in your pocket. Change your voice.
-            Change your life in 30 days.
-          </p>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
-            Get the concrete strategies and tools that have transformed thousands of voices at
-            every stage. Your Voice AI Mentor trains you daily, scores every session, and proves
-            your progress.
+          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            Ten minutes a day for 30 days with Bramwell, your Voice AI Mentor. You speak. He scores
+            you. On Day 30 the number proves it.
           </p>
 
-          <div className="mt-8 flex flex-col items-center gap-3">
-            <CtaButton href="/diagnostic?autostart=1" size="lg" showIcon={false} showArrow={false}>
-              Start the test ↓
+          <div className="mt-9 flex flex-col items-center gap-3">
+            <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false}>
+              Get started, $299
             </CtaButton>
+            <p className="text-xs text-muted-foreground">
+              One payment. Full refund after session one if it does not land.{" "}
+              <a href="/diagnostic?autostart=1" className="font-medium text-foreground underline underline-offset-4">
+                Or take the free 5 minute test first
+              </a>
+            </p>
             {typeof score === "number" && !Number.isNaN(score) ? (
               <p className="text-xs text-muted-foreground">
                 Your diagnostic scored {score}. This is the program that moves it.
               </p>
             ) : null}
           </div>
-
-          <dl className="mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border text-left sm:grid-cols-3">
-            {[
-              { k: "Date", v: `Cohort 1, starts ${COHORT_START}` },
-              { k: "Format", v: "30 day online program plus community pod" },
-              { k: "Price", v: "$299 USD, one payment" },
-            ].map((row) => (
-              <div key={row.k} className="bg-background/80 px-5 py-4 backdrop-blur">
-                <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  {row.k}
-                </dt>
-                <dd className="mt-1 text-sm font-medium">{row.v}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
       </section>
 
-      {/* About */}
-      <section className="border-y border-border bg-background py-20 md:py-24">
-        <div className="mx-auto grid max-w-5xl items-center gap-10 px-6 md:grid-cols-2 md:px-10">
-          <div>
-            <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>
-              About
-            </p>
-            <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-              Meet Bramwell your Voice AI Mentor
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              Bramwell your Voice AI Mentor in your pocket, training you on the system for
-              sustainable transformation. You speak. It listens. It scores. Every day for 30 days.
-            </p>
-            <div className="mt-7">
-              <CtaButton href="/diagnostic?autostart=1" size="md" showIcon={false} showArrow={false}>
-                Start the test ↓
-              </CtaButton>
+      {/* Proof band */}
+      <section className="bg-foreground py-16 text-background md:py-20">
+        <div className="mx-auto max-w-5xl px-6 md:px-10">
+          <div className="grid items-center gap-10 md:grid-cols-[1fr_auto_1fr]">
+            <div className="text-center md:text-right">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] opacity-60">Day 1</p>
+              <p className="mt-2 text-7xl font-semibold tracking-tight opacity-50 md:text-8xl">42</p>
+              <p className="mt-1 text-sm opacity-60">Overlooked in the room</p>
+            </div>
+            <div aria-hidden className="text-center text-3xl opacity-40">
+              →
+            </div>
+            <div className="text-center md:text-left">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] opacity-60">Day 30</p>
+              <p
+                className="mt-2 text-7xl font-semibold tracking-tight md:text-8xl"
+                style={{ color: "var(--primary)" }}
+              >
+                65
+              </p>
+              <p className="mt-1 text-sm opacity-80">Impossible to ignore</p>
             </div>
           </div>
-          <div
-            className="flex aspect-video items-center justify-center rounded-2xl border border-border bg-foreground/[0.03]"
-            style={{ boxShadow: "var(--shadow-soft)" }}
-          >
-            <span className="text-sm uppercase tracking-[0.18em] text-muted-foreground">
-              Watch video
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* Key benefits */}
-      <section className="bg-background py-20 md:py-28">
-        <div className="mx-auto max-w-5xl px-6 md:px-10">
-          <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>
-            Key benefits
+          <p className="mx-auto mt-10 max-w-xl text-center text-sm leading-relaxed opacity-70">
+            Your Readiness Score is measured on Day 1 and again on Day 30, across Structure,
+            Specificity, Confidence Signals and Relevance. The change is not a feeling. It is a
+            number you can show someone.
           </p>
-          <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Bramwell your Voice AI Mentor in your pocket, training you on the system for
-            sustainable transformation.
-          </h2>
-          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {BENEFITS.map((b) => (
-              <article
-                key={b.title}
-                className="rounded-2xl border border-border bg-foreground/[0.02] p-7 transition hover:border-foreground/20"
-              >
-                <h3 className="text-lg font-semibold tracking-tight">{b.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{b.body}</p>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Overlooked to undeniable */}
-      <section className="border-y border-border bg-foreground/[0.02] py-20 md:py-24">
-        <div className="mx-auto grid max-w-5xl gap-10 px-6 md:grid-cols-3 md:px-10">
-          <div className="md:col-span-3">
-            <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-              Go from overlooked to undeniable
-            </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-              With the right tools and skills you stop shrinking in meetings and start owning every
-              room you walk into. This is your roadmap for scaling like you never thought possible.
-            </p>
-          </div>
-          {[
-            {
-              t: "Built for today's professionals",
-              b: "For managers and executives, founders and sales leaders, anyone who wants to transform their voice, align on a new direction, or grow to heights they never thought possible.",
-            },
-            {
-              t: "Now is the time",
-              b: "During economic, social and professional challenges, the quest for authority in a sea of voices becomes crucial. Voice Mastery does not just help you weather any room, it helps you thrive.",
-            },
-            {
-              t: "Change your voice and your life",
-              b: "From the strategies to the support, Voice Mastery is unlike any program you have experienced. Your Voice AI Mentor is with you every day, listening, scoring and coaching.",
-            },
-          ].map((c) => (
-            <article key={c.t} className="rounded-2xl border border-border bg-background p-7">
-              <h3 className="text-lg font-semibold tracking-tight">{c.t}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.b}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* Pillars */}
+      {/* What it costs you */}
       <section className="bg-background py-20 md:py-24">
-        <div className="mx-auto max-w-5xl px-6 md:px-10">
-          <div className="grid gap-5 md:grid-cols-2">
-            {PILLARS.map((p) => (
-              <article key={p.title} className="rounded-2xl border border-border p-7">
-                <h3 className="text-lg font-semibold tracking-tight">{p.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
-              </article>
-            ))}
-          </div>
+        <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
+          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+            You are not underqualified. You are under heard.
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            The promotion went to the person who spoke second. The pitch died in the room. You had
+            the better answer and said it three seconds too late. That is not a knowledge gap. It is
+            a delivery gap, and it is the only skill nobody ever taught you.
+          </p>
         </div>
       </section>
+
+
 
       {/* The Bramwell Method */}
       <section className="border-y border-border bg-foreground/[0.02] py-20 md:py-28">
@@ -414,18 +300,16 @@ function ProgramPage() {
             >
               Cohort 1, {COHORT_START}
             </span>
-            <h3 className="text-2xl font-semibold tracking-tight">
-              This is your step by step voice playbook
+            <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">
+              30 Day Voice Mastery Program
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Get to the root of what is holding you back and create a practice system that lets you
-              scale without sacrificing time, energy and confidence. In this immersive experience you
-              get the system of success Bramwell has leveraged, along with insights from the most
-              brilliant minds in communication.
+              One human voice coach costs $300 an hour and gives you an opinion. Bramwell costs $299
+              once, trains you every day for 30 days, and gives you a score.
             </p>
 
-            <div className="mt-6 flex items-baseline gap-2">
-              <span className="text-4xl font-semibold tracking-tight">$299</span>
+            <div className="mt-6 flex items-baseline gap-3">
+              <span className="text-5xl font-semibold tracking-tight">$299</span>
               <span className="text-sm text-muted-foreground">USD, one payment</span>
             </div>
             <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted-foreground">
@@ -453,21 +337,26 @@ function ProgramPage() {
             </ul>
 
             <div className="mt-8">
-              <CtaButton as="button" onClick={startCheckout} size="md" showIcon={false} className="w-full">
-                Join the 30 Day Voice Mastery Program
+              <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false} className="w-full">
+                Get started
               </CtaButton>
+              <p className="mt-3 text-center text-xs text-muted-foreground">
+                Cohort 1 begins {COHORT_START}. Secure checkout. Refunded in full after session one
+                if it does not land.
+              </p>
             </div>
           </article>
 
-          <p className="mx-auto mt-10 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-            Own your voice, do not let it own you. Take the free test first. No card. No login. If it
-            does not change how you sound in your first session, do not buy the program.
+          <p className="mx-auto mt-8 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
+            Not ready?{" "}
+            <a
+              href="/diagnostic?autostart=1"
+              className="font-medium text-foreground underline underline-offset-4"
+            >
+              Take the free 5 minute test
+            </a>{" "}
+            and hear your score first. No card. No login.
           </p>
-          <div className="mt-6 flex justify-center">
-            <CtaButton href="/diagnostic?autostart=1" size="md" showIcon={false} showArrow={false}>
-              Start the test ↓
-            </CtaButton>
-          </div>
         </div>
       </section>
 
@@ -516,11 +405,19 @@ function ProgramPage() {
             Frequently asked questions
           </h2>
           <div className="mt-10 divide-y divide-border border-y border-border">
-            {FAQS.map((f) => (
-              <div key={f.q} className="py-6">
-                <h3 className="text-base font-semibold tracking-tight">{f.q}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
-              </div>
+            {FAQS.map((f, i) => (
+              <details key={f.q} className="group py-5" open={i === 0}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold tracking-tight">
+                  {f.q}
+                  <span
+                    aria-hidden
+                    className="text-muted-foreground transition-transform group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+              </details>
             ))}
           </div>
           <p className="mt-10 text-sm text-muted-foreground">
@@ -534,20 +431,36 @@ function ProgramPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="border-t border-border bg-foreground/[0.02] py-20 md:py-24">
+      <section className="bg-foreground py-20 text-background md:py-28">
         <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
-          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Break through to the next level in your voice
+          <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+            Thirty days from now, they stop talking over you.
           </h2>
-          <div className="mt-8 flex justify-center">
-            <CtaButton href="/diagnostic?autostart=1" size="lg" showIcon={false} showArrow={false}>
-              Start the test ↓
+          <p className="mx-auto mt-5 max-w-lg text-base opacity-70">
+            Cohort 1 starts {COHORT_START}. Ten minutes a day. One payment of $299.
+          </p>
+          <div className="mt-9 flex justify-center">
+            <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false}>
+              Get started
             </CtaButton>
           </div>
         </div>
       </section>
 
       <SiteFooter />
+
+      {/* Sticky buy bar */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 px-4 py-3 backdrop-blur md:hidden">
+        <div className="flex items-center gap-3">
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm font-semibold">30 Day Voice Mastery</p>
+            <p className="truncate text-xs text-muted-foreground">$299 USD, one payment</p>
+          </div>
+          <CtaButton as="button" onClick={startCheckout} size="sm" showIcon={false}>
+            Get started
+          </CtaButton>
+        </div>
+      </div>
 
       {isOpen ? (
         <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-foreground/40 p-4 backdrop-blur-sm">
