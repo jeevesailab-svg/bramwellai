@@ -1,53 +1,73 @@
-# Bramwell AI: Pivot to the 90-Day Cohort
+# Bramwell v2: Brand Book to Build Plan
 
-Goal: move the site from a $79/month subscription to one flagship paid outcome, and stop the diagnostic from dead-ending. Ship in four waves so revenue is live after Wave 1.
+You asked for a revised plan with questions before any build. Here it is. Nothing has been built.
 
-## The commercial decision (locked before code)
+## What the brand book changes
 
-One flagship offer: **The 90-Day Room Test, $697 USD**, quarterly cohort intake, capped seats.
-Continuity for graduates only: $197/month, not sold on the public site.
-Free live voice diagnostic stays the only top-of-funnel entry.
+The site today sells one thing: a $79/month AI communication mentor, with a free voice diagnostic as the hook. The brand book replaces that with a two-step ladder and a much stronger emotional spine.
 
-Why: the diagnostic sells a transformation, not tool access. A cohort with a start date, a cap and a refund promise converts far better than an open-ended subscription, and it removes the churn problem entirely.
+New commercial architecture:
 
-## Wave 1: stop the leak (revenue-critical)
+| Offer | B2C | B2B (10 seats) | Duration |
+| --- | --- | --- | --- |
+| Free diagnostic | $0 | $0 | 5 min |
+| 28-Day Reset / Sprint | $197 | $1,500 | 28 days |
+| 90-Day Transformation / Cohort | $497 | $3,500 | 90 days |
+| 28 to 90 upgrade | $300 | $2,000 | +62 days |
 
-1. Result page branch. After the score, split the CTA by who they are: individual goes to the cohort offer, team or leader goes to the B2B audit. Today every archetype funnels to a subscription that will no longer exist.
-2. Email capture before the result renders, session ID minted before the call so the score, transcript and email are one record.
-3. Cohort checkout: single $697 one-time Stripe product, seat counter, sold-out and waitlist states.
-4. Pricing page rewritten to one offer plus a graduate continuity note. Remove every $79 and $197 public card.
-5. Explicit guarantee: complete the 90 days, sound different or full refund. Stated on the offer page and at checkout.
+New spine: 28 days to a new you. The Readiness Score is the mirror. The before and after number is the proof.
 
-## Wave 2: entitlement truth
+## Decisions I need from you before I build
 
-6. Replace session-decrement gating with cohort membership. Access is: are you in an active cohort, and which week are you in.
-7. Cohort schema: cohorts, enrolments, week unlocks, baseline / mid / final assessment slots.
-8. Onboarding page after purchase: start date, what happens in week one, calendar add.
+1. **Does $79/month survive?** The brand book has no monthly tier. My recommendation: kill it publicly, keep $197/month only as a graduate continuity offer sold inside the product, not on the pricing page. Confirm.
+2. **Score movement is a promise.** The book states 42 to 65 in 28 days and 42 to 71 in 90 days. Today the score is a single number the model asserts, not a measured metric. I will not ship those numbers as a guarantee until the score is deterministic. Do you want them shown as illustrative example journeys for launch, or held back until Wave 4 lands?
+3. **Currency.** Prices in the book are unmarked. AUD or USD? Site copy is Australian English but the audience skews US.
+4. **Cohort or self-paced?** 28 days with weekly check-ins and Discord pods implies real cohort scheduling. Are we launching with fixed start dates and pods, or self-paced starting on purchase with the community layer added later? This is the single biggest scope difference.
+5. **Existing $79 members.** Any live subscribers to grandfather or migrate?
 
-## Wave 3: defensible score
+## Build waves
 
-9. Deterministic sub-scores from the transcript: filler count, words per minute, pause pattern, answer structure. The score stops being an opinion the model asserts and becomes numbers we can show twice and compare.
-10. Baseline vs final comparison view. This is the proof the guarantee rests on and the asset people share.
-11. Audio retention with explicit consent, so week one and week twelve can be played back to back.
+### Wave 1: the offer ladder (revenue-critical)
 
-## Wave 4: B2B and hygiene
+- Two Stripe products, one-time: 28-Day Reset $197, 90-Day Transformation $497. Plus a $300 upgrade price. B2B seat products created but sold via the audit form, not self-serve checkout.
+- Pricing page rebuilt as a two-card ladder with the 28-day as the entry and the 90-day as the anchor. Remove every $79 and $197/month public reference.
+- Result page becomes the conversion moment: score, the mirror copy, then a B2C or B2B branch. Individual sees the two offers. Team leader sees the audit CTA.
+- Email capture before the result renders, session ID minted before the call so score, transcript and email are one record.
+- Refund promise stated on both offers and at checkout.
 
-12. Team audit form with qualifying fields, team size, budget band, timeline, so the enterprise waitlist is not noise.
-13. Patch the critical dependency advisory in the router and start packages.
+### Wave 2: copy and brand rewrite
 
-## Voice agent changes (runs alongside Wave 1)
+- Homepage hero to the Worth or Explosive Transformation version, pending your pick.
+- Diagnostic page to the mirror moment framing: your voice has a score, most people have never measured it.
+- Villain section rewritten around The Invisible Expert Problem.
+- Waitlist and B2B page to the army of closers spine, with qualifying fields on the audit form.
+- Voice rules enforced across every route: no em dashes, no "lack confidence", Australian English, no hype and no begging.
 
-- Ask the scenario inside the conversation, never as a pre-call form. Every extra field before the mic costs conversion.
-- Fix the spoken close so Bramwell always delivers the summary before the session ends.
-- Pass the scenario answer through to the result so the CTA branch is accurate.
+### Wave 3: entitlement and program
 
-## Copy rules carried forward
+- Replace session-count gating with program enrolment: which program, which day, which week unlocked.
+- Schema for programs, enrolments, day and week unlocks, and baseline / mid / final assessments.
+- Post-purchase onboarding page: start date, what happens on day one, calendar add.
 
-Australian English. No em dashes. Never "lack confidence", never "take the quiz". "Not a course. A coach." Specific step by step language, not vague signal language.
+### Wave 4: defensible score
+
+- Deterministic sub-scores from the transcript: filler count, words per minute, pause pattern, answer structure. The score becomes measurable, repeatable and comparable.
+- Before and after view. Day 1 versus Day 28. This is the proof the whole brand rests on and the asset people share.
+- Audio retention with explicit consent so the two sessions can be played back to back.
+
+### Wave 5: hygiene
+
+- Patch the critical dependency advisory in the router and start packages.
+
+## Voice agent changes
+
+- Ask the scenario inside the conversation, never as a pre-call form.
+- Always deliver the spoken summary before the session ends.
+- Pass the B2C or B2B signal through to the result so the CTA branch is accurate.
 
 ## Technical notes
 
-- Cohort SKU is a one-time Stripe price with promotion codes left enabled.
-- Seat cap enforced server side at checkout creation, not in the UI.
-- Enrolment written by the Stripe webhook, keyed on cohort and user, environment scoped.
-- Sub-scores computed server side from the stored transcript so the same input always gives the same number.
+- Programs are one-time Stripe prices, promotion codes stay enabled.
+- The 28 to 90 upgrade is a separate price, gated to people with a completed 28-day enrolment.
+- Enrolment written by the Stripe webhook, keyed on user and program, environment scoped.
+- Sub-scores computed server side from the stored transcript so the same input always returns the same number.
