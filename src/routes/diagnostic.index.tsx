@@ -5,7 +5,9 @@ import { CtaButton } from "@/components/site/CtaButton";
 
 export const Route = createFileRoute("/diagnostic/")({
   component: DiagnosticRoute,
-  validateSearch: (search: Record<string, unknown>) => ({
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { autostart?: "1" } => ({
     autostart: search.autostart === "1" ? "1" : undefined,
   }),
   head: () => ({
