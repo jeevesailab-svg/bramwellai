@@ -103,9 +103,10 @@ const ReadinessReport = ({ firstName, score, communicationType, gaps }: Props) =
             Your next step
           </Heading>
           <Text style={body}>
-            The 30 Day Voice Mastery Program is 10 minutes a day with Bramwell, your Voice AI
-            Mentor. Every session scored, weekly check ins, and a Day 30 retest that proves the
-            change. One payment of $299 USD.
+            The 30 Day Voice Mastery Program is a structured four week curriculum with Bramwell,
+            your Voice AI Mentor: structure under pressure, specificity and evidence, confidence
+            signals, then high stakes rehearsal. Every session is impromptu and scored, with weekly
+            check ins and a Day 30 retest that proves the change. One payment of $299 USD.
           </Text>
           <Button href="https://www.bramwellai.com/program" style={cta}>
             Get started, $299
