@@ -277,14 +277,14 @@ function PricingPage() {
             </p>
           </div>
         )}
-        <div className="mx-auto grid max-w-4xl gap-5 px-6 md:grid-cols-2 md:px-10 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-2xl gap-5 px-6 md:px-10">
           {pathways.map((p) => (
             <PathwayCard key={p.key} p={p} onSelect={() => handlePurchase(p.key)} />
           ))}
         </div>
 
         <p className="mx-auto mt-12 max-w-2xl px-6 text-center text-sm leading-relaxed text-muted-foreground">
-          Try Bramwell free first. No card. No login. If it doesn&apos;t change how you sound in your first session, don&apos;t upgrade.
+          Try Bramwell free first. No card. No login. If it doesn&apos;t change how you sound in your first session, don&apos;t buy the program.
         </p>
         <div className="mt-8 flex justify-center px-6">
           <CtaButton href="/diagnostic?autostart=1" size="md" showIcon={false}>
@@ -403,7 +403,7 @@ function PathwayCard({ p, onSelect }: { p: Pathway; onSelect: () => void }) {
 
       <div className="mt-8">
         <CtaButton as="button" onClick={onSelect} size="md" className="w-full">
-          Go {p.name} →
+          Start the 30 days →
         </CtaButton>
       </div>
     </article>
