@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WaitlistRouteImport } from './routes/waitlist'
 import { Route as The7QuestionsRouteImport } from './routes/the-7-questions'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ProgramRouteImport } from './routes/program'
@@ -32,6 +33,11 @@ import { Route as ApiPublicDiagnosticIncompleteRouteImport } from './routes/api/
 import { Route as ApiPublicDiagnosticEmailRouteImport } from './routes/api/public/diagnostic-email'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 
+const WaitlistRoute = WaitlistRouteImport.update({
+  id: '/waitlist',
+  path: '/waitlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const The7QuestionsRoute = The7QuestionsRouteImport.update({
   id: '/the-7-questions',
   path: '/the-7-questions',
@@ -159,6 +165,7 @@ export interface FileRoutesByFullPath {
   '/program': typeof ProgramRoute
   '/signup': typeof SignupRoute
   '/the-7-questions': typeof The7QuestionsRoute
+  '/waitlist': typeof WaitlistRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
@@ -182,6 +189,7 @@ export interface FileRoutesByTo {
   '/program': typeof ProgramRoute
   '/signup': typeof SignupRoute
   '/the-7-questions': typeof The7QuestionsRoute
+  '/waitlist': typeof WaitlistRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
@@ -207,6 +215,7 @@ export interface FileRoutesById {
   '/program': typeof ProgramRoute
   '/signup': typeof SignupRoute
   '/the-7-questions': typeof The7QuestionsRoute
+  '/waitlist': typeof WaitlistRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
@@ -233,6 +242,7 @@ export interface FileRouteTypes {
     | '/program'
     | '/signup'
     | '/the-7-questions'
+    | '/waitlist'
     | '/diagnostic/result'
     | '/portal/coach'
     | '/portal/setup'
@@ -256,6 +266,7 @@ export interface FileRouteTypes {
     | '/program'
     | '/signup'
     | '/the-7-questions'
+    | '/waitlist'
     | '/diagnostic/result'
     | '/portal/coach'
     | '/portal/setup'
@@ -280,6 +291,7 @@ export interface FileRouteTypes {
     | '/program'
     | '/signup'
     | '/the-7-questions'
+    | '/waitlist'
     | '/diagnostic/result'
     | '/portal/coach'
     | '/portal/setup'
@@ -305,6 +317,7 @@ export interface RootRouteChildren {
   ProgramRoute: typeof ProgramRoute
   SignupRoute: typeof SignupRoute
   The7QuestionsRoute: typeof The7QuestionsRoute
+  WaitlistRoute: typeof WaitlistRoute
   DiagnosticResultRoute: typeof DiagnosticResultRoute
   DiagnosticIndexRoute: typeof DiagnosticIndexRoute
   ApiPublicDiagnosticEmailRoute: typeof ApiPublicDiagnosticEmailRoute
@@ -318,6 +331,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/waitlist': {
+      id: '/waitlist'
+      path: '/waitlist'
+      fullPath: '/waitlist'
+      preLoaderRoute: typeof WaitlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/the-7-questions': {
       id: '/the-7-questions'
       path: '/the-7-questions'
@@ -501,6 +521,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProgramRoute: ProgramRoute,
   SignupRoute: SignupRoute,
   The7QuestionsRoute: The7QuestionsRoute,
+  WaitlistRoute: WaitlistRoute,
   DiagnosticResultRoute: DiagnosticResultRoute,
   DiagnosticIndexRoute: DiagnosticIndexRoute,
   ApiPublicDiagnosticEmailRoute: ApiPublicDiagnosticEmailRoute,
@@ -514,13 +535,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

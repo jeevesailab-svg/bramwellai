@@ -583,13 +583,10 @@ function Footer() {
           </nav>
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em]">For you</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em]">Company</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
-            <a href="/graduate" className="hover:text-foreground">Graduates</a>
-            <a href="/redundant" className="hover:text-foreground">After redundancy</a>
-            <a href="/returner" className="hover:text-foreground">Returners</a>
-            <a href="/pivot" className="hover:text-foreground">Career pivots</a>
-            <a href="/executive" className="hover:text-foreground">Executives</a>
+            <a href="/program#faq" className="hover:text-foreground">FAQ</a>
+            <a href="/advisors" className="hover:text-foreground">For advisors</a>
           </nav>
         </div>
       </div>
