@@ -251,7 +251,7 @@ function Dashboard() {
                   Pick up where you left off in the coaching portal.
                 </p>
                 <Link
-                  to="/portal"
+                  to="/portal" search={{}}
                   className="mt-5 inline-flex h-11 items-center justify-center rounded-full px-6 text-sm font-semibold transition hover:opacity-95"
                   style={{
                     background: "var(--gradient-gold)",

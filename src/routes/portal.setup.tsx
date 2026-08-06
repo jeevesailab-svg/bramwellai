@@ -102,7 +102,7 @@ function PortalSetupPage() {
       return;
     }
     setSavedAt(new Date());
-    navigate({ to: "/portal/coach" });
+    navigate({ to: "/portal/coach", search: {} });
   }
 
   const cvReady = cvText.trim().length >= 50;
