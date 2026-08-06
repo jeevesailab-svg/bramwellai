@@ -65,6 +65,6 @@ Filler count, words per minute, pause pattern, answer structure, all computed fr
 ## Two things I still need
 
 1. **Currency.** $197 AUD or USD?
-2. **Any live $79 subscribers** to grandfather before I remove the plan?
+2. **Any live $79 subscribers** to grandfather before I remove the plan? Haven't launched yet
 
 I can start on Step 1 and 2 without either answer if you want to move.
