@@ -12,15 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WaitlistRouteImport } from './routes/waitlist'
 import { Route as The7QuestionsRouteImport } from './routes/the-7-questions'
 import { Route as SignupRouteImport } from './routes/signup'
-import { Route as ReturnerRouteImport } from './routes/returner'
-import { Route as RedundantRouteImport } from './routes/redundant'
 import { Route as ProgramRouteImport } from './routes/program'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PortalRouteImport } from './routes/portal'
-import { Route as PivotRouteImport } from './routes/pivot'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as GraduateRouteImport } from './routes/graduate'
-import { Route as ExecutiveRouteImport } from './routes/executive'
+import { Route as FoundersRouteImport } from './routes/founders'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AdvisorsRouteImport } from './routes/advisors'
 import { Route as IndexRouteImport } from './routes/index'
@@ -52,16 +48,6 @@ const SignupRoute = SignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ReturnerRoute = ReturnerRouteImport.update({
-  id: '/returner',
-  path: '/returner',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RedundantRoute = RedundantRouteImport.update({
-  id: '/redundant',
-  path: '/redundant',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ProgramRoute = ProgramRouteImport.update({
   id: '/program',
   path: '/program',
@@ -77,24 +63,14 @@ const PortalRoute = PortalRouteImport.update({
   path: '/portal',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PivotRoute = PivotRouteImport.update({
-  id: '/pivot',
-  path: '/pivot',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GraduateRoute = GraduateRouteImport.update({
-  id: '/graduate',
-  path: '/graduate',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExecutiveRoute = ExecutiveRouteImport.update({
-  id: '/executive',
-  path: '/executive',
+const FoundersRoute = FoundersRouteImport.update({
+  id: '/founders',
+  path: '/founders',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -182,15 +158,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
-  '/executive': typeof ExecutiveRoute
-  '/graduate': typeof GraduateRoute
+  '/founders': typeof FoundersRoute
   '/login': typeof LoginRoute
-  '/pivot': typeof PivotRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/program': typeof ProgramRoute
-  '/redundant': typeof RedundantRoute
-  '/returner': typeof ReturnerRoute
   '/signup': typeof SignupRoute
   '/the-7-questions': typeof The7QuestionsRoute
   '/waitlist': typeof WaitlistRoute
@@ -211,14 +183,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
-  '/executive': typeof ExecutiveRoute
-  '/graduate': typeof GraduateRoute
+  '/founders': typeof FoundersRoute
   '/login': typeof LoginRoute
-  '/pivot': typeof PivotRoute
   '/pricing': typeof PricingRoute
   '/program': typeof ProgramRoute
-  '/redundant': typeof RedundantRoute
-  '/returner': typeof ReturnerRoute
   '/signup': typeof SignupRoute
   '/the-7-questions': typeof The7QuestionsRoute
   '/waitlist': typeof WaitlistRoute
@@ -240,15 +208,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
-  '/executive': typeof ExecutiveRoute
-  '/graduate': typeof GraduateRoute
+  '/founders': typeof FoundersRoute
   '/login': typeof LoginRoute
-  '/pivot': typeof PivotRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/program': typeof ProgramRoute
-  '/redundant': typeof RedundantRoute
-  '/returner': typeof ReturnerRoute
   '/signup': typeof SignupRoute
   '/the-7-questions': typeof The7QuestionsRoute
   '/waitlist': typeof WaitlistRoute
@@ -271,15 +235,11 @@ export interface FileRouteTypes {
     | '/'
     | '/advisors'
     | '/dashboard'
-    | '/executive'
-    | '/graduate'
+    | '/founders'
     | '/login'
-    | '/pivot'
     | '/portal'
     | '/pricing'
     | '/program'
-    | '/redundant'
-    | '/returner'
     | '/signup'
     | '/the-7-questions'
     | '/waitlist'
@@ -300,14 +260,10 @@ export interface FileRouteTypes {
     | '/'
     | '/advisors'
     | '/dashboard'
-    | '/executive'
-    | '/graduate'
+    | '/founders'
     | '/login'
-    | '/pivot'
     | '/pricing'
     | '/program'
-    | '/redundant'
-    | '/returner'
     | '/signup'
     | '/the-7-questions'
     | '/waitlist'
@@ -328,15 +284,11 @@ export interface FileRouteTypes {
     | '/'
     | '/advisors'
     | '/dashboard'
-    | '/executive'
-    | '/graduate'
+    | '/founders'
     | '/login'
-    | '/pivot'
     | '/portal'
     | '/pricing'
     | '/program'
-    | '/redundant'
-    | '/returner'
     | '/signup'
     | '/the-7-questions'
     | '/waitlist'
@@ -358,15 +310,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdvisorsRoute: typeof AdvisorsRoute
   DashboardRoute: typeof DashboardRoute
-  ExecutiveRoute: typeof ExecutiveRoute
-  GraduateRoute: typeof GraduateRoute
+  FoundersRoute: typeof FoundersRoute
   LoginRoute: typeof LoginRoute
-  PivotRoute: typeof PivotRoute
   PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
   ProgramRoute: typeof ProgramRoute
-  RedundantRoute: typeof RedundantRoute
-  ReturnerRoute: typeof ReturnerRoute
   SignupRoute: typeof SignupRoute
   The7QuestionsRoute: typeof The7QuestionsRoute
   WaitlistRoute: typeof WaitlistRoute
@@ -404,20 +352,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/returner': {
-      id: '/returner'
-      path: '/returner'
-      fullPath: '/returner'
-      preLoaderRoute: typeof ReturnerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/redundant': {
-      id: '/redundant'
-      path: '/redundant'
-      fullPath: '/redundant'
-      preLoaderRoute: typeof RedundantRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/program': {
       id: '/program'
       path: '/program'
@@ -439,13 +373,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/pivot': {
-      id: '/pivot'
-      path: '/pivot'
-      fullPath: '/pivot'
-      preLoaderRoute: typeof PivotRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -453,18 +380,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/graduate': {
-      id: '/graduate'
-      path: '/graduate'
-      fullPath: '/graduate'
-      preLoaderRoute: typeof GraduateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/executive': {
-      id: '/executive'
-      path: '/executive'
-      fullPath: '/executive'
-      preLoaderRoute: typeof ExecutiveRouteImport
+    '/founders': {
+      id: '/founders'
+      path: '/founders'
+      fullPath: '/founders'
+      preLoaderRoute: typeof FoundersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -594,15 +514,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdvisorsRoute: AdvisorsRoute,
   DashboardRoute: DashboardRoute,
-  ExecutiveRoute: ExecutiveRoute,
-  GraduateRoute: GraduateRoute,
+  FoundersRoute: FoundersRoute,
   LoginRoute: LoginRoute,
-  PivotRoute: PivotRoute,
   PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,
   ProgramRoute: ProgramRoute,
-  RedundantRoute: RedundantRoute,
-  ReturnerRoute: ReturnerRoute,
   SignupRoute: SignupRoute,
   The7QuestionsRoute: The7QuestionsRoute,
   WaitlistRoute: WaitlistRoute,

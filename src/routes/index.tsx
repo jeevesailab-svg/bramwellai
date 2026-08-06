@@ -73,7 +73,7 @@ function Nav() {
         <a href="#learn" className="hover:text-foreground">What you learn</a>
         <a href="#14days" className="hover:text-foreground">In 14 days</a>
         <a href="/program" className="hover:text-foreground">The Program</a>
-        <a href="/waitlist" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
+        <a href="/founders" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
           For Sales Teams
           <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>
         </a>
@@ -109,7 +109,7 @@ function Nav() {
               </SheetClose>
               <SheetClose asChild>
                 <a
-                  href="/waitlist"
+                  href="/founders"
                   className="mt-2 flex items-center justify-between rounded-lg border border-border bg-white px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
                 >
                   <span>For Sales Teams</span>
@@ -575,7 +575,7 @@ function Footer() {
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
             <a href="/diagnostic?autostart=1" className="hover:text-foreground">Start the test</a>
             <a href="/program" className="hover:text-foreground">The Program</a>
-            <a href="/waitlist" className="inline-flex items-center gap-2 hover:text-foreground">
+            <a href="/founders" className="inline-flex items-center gap-2 hover:text-foreground">
               For Sales Teams
               <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>
             </a>
@@ -583,13 +583,10 @@ function Footer() {
           </nav>
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em]">For you</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em]">Company</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
-            <a href="/graduate" className="hover:text-foreground">Graduates</a>
-            <a href="/redundant" className="hover:text-foreground">After redundancy</a>
-            <a href="/returner" className="hover:text-foreground">Returners</a>
-            <a href="/pivot" className="hover:text-foreground">Career pivots</a>
-            <a href="/executive" className="hover:text-foreground">Executives</a>
+            <a href="/program#faq" className="hover:text-foreground">FAQ</a>
+            <a href="/advisors" className="hover:text-foreground">For advisors</a>
           </nav>
         </div>
       </div>

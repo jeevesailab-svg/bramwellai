@@ -30,7 +30,7 @@ export function SiteNav({ ctaLabel = "Start your coaching now", ctaHref = "/diag
             {link.label}
           </a>
         ))}
-        <a href="/waitlist" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
+        <a href="/founders" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
           For Sales Teams
           <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>
         </a>
@@ -66,7 +66,7 @@ export function SiteNav({ ctaLabel = "Start your coaching now", ctaHref = "/diag
               ))}
               <SheetClose asChild>
                 <a
-                  href="/waitlist"
+                  href="/founders"
                   className="mt-2 flex items-center justify-between rounded-lg border border-border bg-white px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
                 >
                   <span>For Sales Teams</span>
@@ -176,7 +176,7 @@ export function SiteFooter() {
             <a href="/diagnostic?autostart=1" className="transition-colors hover:text-foreground">Start your coaching now</a>
             <a href="/#pathways" className="transition-colors hover:text-foreground">Pathways</a>
             <a href="/program" className="transition-colors hover:text-foreground">The Program</a>
-            <a href="/waitlist" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
+            <a href="/founders" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
               For Sales Teams
               <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>
             </a>
@@ -184,13 +184,9 @@ export function SiteFooter() {
           </nav>
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">For You</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">Company</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
-            <a href="/graduate" className="transition-colors hover:text-foreground">Graduates</a>
-            <a href="/redundant" className="transition-colors hover:text-foreground">After Redundancy</a>
-            <a href="/returner" className="transition-colors hover:text-foreground">Returners</a>
-            <a href="/pivot" className="transition-colors hover:text-foreground">Career Pivots</a>
-            <a href="/executive" className="transition-colors hover:text-foreground">Executives</a>
+            <a href="/program#faq" className="transition-colors hover:text-foreground">FAQ</a>
             <a href="/advisors" className="transition-colors hover:text-foreground">For Advisors</a>
           </nav>
         </div>

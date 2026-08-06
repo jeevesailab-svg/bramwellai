@@ -422,7 +422,7 @@ function ProgramPage() {
           </div>
           <p className="mt-10 text-sm text-muted-foreground">
             Leading a team?{" "}
-            <Link to="/waitlist" className="font-medium text-foreground underline-offset-4 hover:underline">
+            <Link to="/founders" className="font-medium text-foreground underline-offset-4 hover:underline">
               See the 30 Day Team Voice Mastery Program
             </Link>
             .
