@@ -31,6 +31,7 @@ import { Route as ApiPublicDiagnosticTokenRouteImport } from './routes/api/publi
 import { Route as ApiPublicDiagnosticResultRouteImport } from './routes/api/public/diagnostic-result'
 import { Route as ApiPublicDiagnosticIncompleteRouteImport } from './routes/api/public/diagnostic-incomplete'
 import { Route as ApiPublicDiagnosticEmailRouteImport } from './routes/api/public/diagnostic-email'
+import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 
 const WaitlistRoute = WaitlistRouteImport.update({
@@ -147,6 +148,12 @@ const ApiPublicDiagnosticEmailRoute =
     path: '/api/public/diagnostic-email',
     getParentRoute: () => rootRouteImport,
   } as any)
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicPaymentsWebhookRoute =
   ApiPublicPaymentsWebhookRouteImport.update({
     id: '/api/public/payments/webhook',
@@ -178,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -202,6 +210,7 @@ export interface FileRoutesByTo {
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -228,6 +237,7 @@ export interface FileRoutesById {
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -255,6 +265,7 @@ export interface FileRouteTypes {
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
     | '/api/public/payments/webhook'
+    | '/lovable/email/queue/process'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -279,6 +290,7 @@ export interface FileRouteTypes {
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
     | '/api/public/payments/webhook'
+    | '/lovable/email/queue/process'
   id:
     | '__root__'
     | '/'
@@ -304,6 +316,7 @@ export interface FileRouteTypes {
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
     | '/api/public/payments/webhook'
+    | '/lovable/email/queue/process'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -327,6 +340,7 @@ export interface RootRouteChildren {
   ApiPublicKlaviyoEventRoute: typeof ApiPublicKlaviyoEventRoute
   ApiPublicQuizLeadRoute: typeof ApiPublicQuizLeadRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
+  LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -485,6 +499,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicDiagnosticEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/payments/webhook': {
       id: '/api/public/payments/webhook'
       path: '/api/public/payments/webhook'
@@ -531,6 +552,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicKlaviyoEventRoute: ApiPublicKlaviyoEventRoute,
   ApiPublicQuizLeadRoute: ApiPublicQuizLeadRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
+  LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
