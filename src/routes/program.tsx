@@ -40,52 +40,6 @@ export const Route = createFileRoute("/program")({
   }),
 });
 
-const BENEFITS = [
-  {
-    title: "Turbocharge your voice",
-    body: "Bramwell your Voice AI Mentor runs daily practice sessions that optimise the speech patterns driving how you land, so you grow faster.",
-  },
-  {
-    title: "Master the art of speaking",
-    body: "Hold any room by uncovering the secret behind how people decide to listen. Your Mentor rehearses with you until you own it.",
-  },
-  {
-    title: "Gain a competitive edge",
-    body: "Build a complete voice strategy that targets your audience and builds authority, guided by Bramwell your Voice AI Mentor every step.",
-  },
-  {
-    title: "Take charge of your presence",
-    body: "Use proven insights from Bramwell your Voice AI Mentor to steer your communication through any room or conversation.",
-  },
-  {
-    title: "Stay ahead of the conversation",
-    body: "Build a voice that is differentiated and adaptable no matter the audience. Your Mentor adapts your practice as you grow.",
-  },
-  {
-    title: "Create a map for your voice",
-    body: "Your Mentor builds a flexible, results driven plan so you hit your communication goals faster.",
-  },
-];
-
-const PILLARS = [
-  {
-    title: "Personalised attention",
-    body: "Bramwell your Voice AI Mentor listens to every session, scores every response, and builds a practice plan for your exact gaps. No generic feedback. No one size fits all.",
-  },
-  {
-    title: "Practical strategies",
-    body: "Implement practical strategies for tone, pace and confidence immediately, with real time feedback from your Mentor after every session.",
-  },
-  {
-    title: "Immersive experiences",
-    body: "This is not a passive course. Your Mentor runs live practice sessions. You speak. It scores. You adjust. Every day.",
-  },
-  {
-    title: "Empowering discoveries",
-    body: "Break the cycle of fear and the patterns that stop you speaking up, with a Mentor that never judges, never gets impatient, and is always available.",
-  },
-];
-
 const METHOD = [
   {
     step: "Diagnose",
