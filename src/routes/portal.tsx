@@ -57,7 +57,7 @@ function PortalLayout() {
       const hasActivePlan = isPaid && hasSessionsLeft && notExpired;
 
       if (!hasActivePlan) {
-        navigate({ to: "/program", search: {}, replace: true });
+        navigate({ to: "/program", replace: true });
         return;
       }
 

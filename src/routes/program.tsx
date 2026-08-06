@@ -10,14 +10,15 @@ const PRICE_ID = "voice_mastery_30day_once";
 const COHORT_START = "15 August 2026";
 const SHOW_TESTIMONIALS = false;
 
+type ProgramSearch = { resume?: string; score?: number };
+
 export const Route = createFileRoute("/program")({
   component: ProgramPage,
-  validateSearch: (search: Record<string, unknown>) => ({
-    resume: typeof search.resume === "string" ? search.resume : undefined,
-    score:
-      typeof search.score === "string" || typeof search.score === "number"
-        ? Number(search.score)
-        : undefined,
+  validateSearch: (search: Record<string, unknown>): ProgramSearch => ({
+    ...(typeof search.resume === "string" ? { resume: search.resume } : {}),
+    ...(typeof search.score === "string" || typeof search.score === "number"
+      ? { score: Number(search.score) }
+      : {}),
   }),
   head: () => ({
     meta: [
