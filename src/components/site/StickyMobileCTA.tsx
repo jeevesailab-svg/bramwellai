@@ -1,7 +1,7 @@
 import { Mic } from "lucide-react";
 
 export function StickyMobileCTA({
-  label = "Start the test",
+  label = "Take the test",
   href = "/diagnostic?autostart=1",
 }: {
   label?: string;
