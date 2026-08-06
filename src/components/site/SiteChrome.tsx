@@ -184,13 +184,9 @@ export function SiteFooter() {
           </nav>
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">For You</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">Company</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
-            <a href="/graduate" className="transition-colors hover:text-foreground">Graduates</a>
-            <a href="/redundant" className="transition-colors hover:text-foreground">After Redundancy</a>
-            <a href="/returner" className="transition-colors hover:text-foreground">Returners</a>
-            <a href="/pivot" className="transition-colors hover:text-foreground">Career Pivots</a>
-            <a href="/executive" className="transition-colors hover:text-foreground">Executives</a>
+            <a href="/program#faq" className="transition-colors hover:text-foreground">FAQ</a>
             <a href="/advisors" className="transition-colors hover:text-foreground">For Advisors</a>
           </nav>
         </div>
