@@ -231,7 +231,7 @@ function Dashboard() {
                     : "Pick the pathway that matches the moment you're in."}
                 </p>
                 <Link
-                  to="/pricing"
+                  to="/program"
                   className="mt-5 inline-flex h-11 items-center justify-center rounded-full px-6 text-sm font-semibold transition hover:opacity-95"
                   style={{
                     background: "var(--gradient-gold)",

@@ -72,7 +72,7 @@ function Nav() {
       <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
         <a href="#learn" className="hover:text-foreground">What you learn</a>
         <a href="#14days" className="hover:text-foreground">In 14 days</a>
-        <a href="/pricing" className="hover:text-foreground">Pricing</a>
+        <a href="/program" className="hover:text-foreground">The Program</a>
         <a href="/waitlist" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
           For Sales Teams
           <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>
@@ -102,7 +102,7 @@ function Nav() {
                 <a href="#14days" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">In 14 days</a>
               </SheetClose>
               <SheetClose asChild>
-                <a href="/pricing" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">Pricing</a>
+                <a href="/program" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">The Program</a>
               </SheetClose>
               <SheetClose asChild>
                 <a href="/login" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">Sign in</a>
@@ -479,7 +479,7 @@ function PricingTease() {
               </div>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.copy}</p>
               <a
-                href="/pricing"
+                href="/program"
                 className="mt-8 inline-flex h-11 items-center justify-center gap-2 rounded-full text-sm font-semibold transition hover:-translate-y-0.5"
                 style={p.featured ? { background: GOLD, color: "white", boxShadow: "var(--shadow-elegant)" } : { border: "1px solid var(--border)", color: "var(--foreground)", background: "white" }}
               >
@@ -567,7 +567,7 @@ function Footer() {
           <p className="text-xs font-semibold uppercase tracking-[0.18em]">Bramwell</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
             <a href="/diagnostic?autostart=1" className="hover:text-foreground">Start the test</a>
-            <a href="/pricing" className="hover:text-foreground">Pricing</a>
+            <a href="/program" className="hover:text-foreground">The Program</a>
             <a href="/waitlist" className="inline-flex items-center gap-2 hover:text-foreground">
               For Sales Teams
               <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>

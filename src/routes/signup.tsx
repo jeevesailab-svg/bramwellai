@@ -30,7 +30,7 @@ function SignupPage() {
           ? sessionStorage.getItem("bramwell_pending_purchase")
           : null;
         if (pending) {
-          navigate({ to: "/pricing", search: { resume: pending } as any });
+          navigate({ to: "/program", search: { resume: pending } as any });
         } else {
           navigate({ to: "/portal" });
         }
@@ -50,7 +50,7 @@ function SignupPage() {
         emailRedirectTo:
           window.location.origin +
           (sessionStorage.getItem("bramwell_pending_purchase")
-            ? `/pricing?resume=${sessionStorage.getItem("bramwell_pending_purchase")}`
+            ? `/program?resume=${sessionStorage.getItem("bramwell_pending_purchase")}`
             : "/portal"),
         data: { first_name: firstName },
       },
@@ -65,7 +65,7 @@ function SignupPage() {
     const pending = sessionStorage.getItem("bramwell_pending_purchase");
     const result = await lovable.auth.signInWithOAuth("google", {
       redirect_uri:
-        window.location.origin + (pending ? `/pricing?resume=${pending}` : "/portal"),
+        window.location.origin + (pending ? `/program?resume=${pending}` : "/portal"),
     });
     if (result.error) setError(result.error.message);
   }

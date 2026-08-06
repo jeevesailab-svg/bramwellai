@@ -879,7 +879,7 @@ function DiagnosticPage() {
                       pick a Bramwell pathway.
                     </p>
                     <Link
-                      to="/pricing"
+                      to="/program"
                       className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full text-sm font-semibold transition hover:opacity-95"
                       style={{
                         background: "var(--gradient-gold)",
