@@ -143,13 +143,12 @@ function Hero() {
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Your Voice AI Mentor listens to how you speak, scores you across four dimensions, and
-              shows you exactly what is holding you back.
+              Find out why you're being ignored.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <CtaButton href="/diagnostic?autostart=1" size="lg">
-                Take the Test
+                Take the test
               </CtaButton>
               <a href="/program" className="text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-foreground">
                 See the 30 day program
