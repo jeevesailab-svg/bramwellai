@@ -481,11 +481,13 @@ function FoundersPage() {
               {error ? <p className="mt-5 text-sm text-destructive">{error}</p> : null}
 
               <div className="mt-8">
-                <CtaButton as="button" onClick={() => undefined} size="lg" showIcon={false} className="w-full">
-                  {submitting ? "Sending" : "Audit my team"}
-                </CtaButton>
-                <button type="submit" className="sr-only">
-                  Submit
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="inline-flex h-14 w-full items-center justify-center gap-3 rounded-full text-base font-semibold text-primary-foreground transition hover:-translate-y-0.5 hover:opacity-90 disabled:opacity-60"
+                  style={{ background: "var(--gradient-cta)", boxShadow: "var(--shadow-cta)" }}
+                >
+                  {submitting ? "Sending" : "Audit my team"} <span>→</span>
                 </button>
               </div>
               <p className="mt-4 text-xs text-muted-foreground">
