@@ -486,7 +486,7 @@ function PricingTease() {
               </div>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.copy}</p>
               <a
-                href="/program"
+                href="/program?resume=mastery#enrol"
                 className="mt-8 inline-flex h-11 items-center justify-center gap-2 rounded-full text-sm font-semibold transition hover:-translate-y-0.5"
                 style={p.featured ? { background: GOLD, color: "white", boxShadow: "var(--shadow-elegant)" } : { border: "1px solid var(--border)", color: "var(--foreground)", background: "white" }}
               >
