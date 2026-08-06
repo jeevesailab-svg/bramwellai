@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SiteNav, SiteFooter, GoldText } from "@/components/site/SiteChrome";
 import { CtaButton } from "@/components/site/CtaButton";
 
-export const Route = createFileRoute("/waitlist")({
+export const Route = createFileRoute("/founders")({
   component: WaitlistPage,
   head: () => ({
     meta: [
