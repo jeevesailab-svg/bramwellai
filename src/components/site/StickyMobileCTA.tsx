@@ -15,7 +15,7 @@ export function StickyMobileCTA({
       >
         <a
           href={href}
-          className="flex h-11 w-full items-center justify-center gap-2.5 rounded-full text-sm font-semibold text-neutral-900 transition active:scale-[0.98]"
+          className="flex h-11 w-full items-center justify-center gap-2.5 rounded-full text-sm font-semibold text-primary-foreground transition active:scale-[0.98]"
           style={{
             background: "var(--gradient-cta)",
             boxShadow: "var(--shadow-cta)",
