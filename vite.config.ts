@@ -5,7 +5,7 @@
 //     error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({ vite: { ... } }) if needed.
 import path from "node:path";
-import { defineConfig, loadEnv } from "vite";
+import { loadEnv } from "vite";
 import { defineConfig as defineLovableConfig } from "@lovable.dev/vite-tanstack-config";
 
 // Load all env vars (not just VITE_*) into process.env for server routes.
