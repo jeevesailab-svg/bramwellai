@@ -729,58 +729,48 @@ function DiagnosticPage() {
                   fontWeight: 800,
                 }}
               >
-                Not a course. A coach.
+                Ready to unlock your voice breakthrough?
               </h1>
-              <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-relaxed text-muted-foreground">
-                Meet Bramwell. The AI coach that teaches you to speak like a CEO. In 5 minutes, he&apos;ll show you how you sound and what to change.
+              <p className="mx-auto mt-6 max-w-[620px] text-[18px] leading-relaxed text-muted-foreground">
+                Do you ever feel stuck, frustrated or invisible when it comes to how you sound? The
+                number one thing holding most people back is not their expertise or how hard they
+                prepare. It is the hidden patterns in their voice quietly sabotaging their authority.
               </p>
               <div className="mt-8 flex justify-center">
-                <CtaButton as="button" onClick={startDiagnostic} size="lg">
-                  Start your 5 minute session
+                <CtaButton as="button" onClick={startDiagnostic} size="lg" showArrow={false}>
+                  Take the test ↓
                 </CtaButton>
               </div>
               <p className="mt-4 text-xs text-muted-foreground">
-                Instant result · Free · No credit card
+                Free · Live · No card · 5 minutes with your Voice AI Mentor
               </p>
 
-              <ul className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+              <div className="mx-auto mt-10 max-w-xl rounded-2xl border border-border bg-foreground/[0.03] p-6 text-left backdrop-blur">
+                <p className="text-base font-semibold text-white">
+                  Your voice has a score. Most people have never measured it.
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  30 days to a new you. In 5 minutes with Bramwell your Voice AI Mentor you will know
+                  exactly where you stand. The number might sting. Most people feel it. That is the point.
+                </p>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  This is the mirror moment. You speak with your Voice AI Mentor. It listens. It scores.
+                  It is not comfortable. It is necessary. The score is the proof there is a gap, and that
+                  the gap is closeable.
+                </p>
+              </div>
+
+              <ul className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-3 text-left sm:grid-cols-2">
                 {[
-                  {
-                    title: "3 minutes",
-                    body: "One question. One honest answer.",
-                    icon: (
-                      <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2 2M9 2h6" /></svg>
-                    ),
-                  },
-                  {
-                    title: "Private by default",
-                    body: "No login, no card. Audio deleted after analysis.",
-                    icon: (
-                      <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 1 1 8 0v4" /></svg>
-                    ),
-                  },
-                  {
-                    title: "Research-backed",
-                    body: "40+ years of communication science.",
-                    icon: (
-                      <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l9 4-9 4-9-4 9-4z" /><path d="M21 10v5M6 9v5a6 6 0 0 0 12 0V9" /></svg>
-                    ),
-                  },
+                  { r: "0 to 39", t: "Your voice is costing you.", b: "Every meeting you shrink in, every opportunity you pass on. Now you know, and knowing is the first step." },
+                  { r: "40 to 59", t: "You are in the majority.", b: "Most professionals have never measured their voice. You just did. The gap is closeable. In 30 days this number moves." },
+                  { r: "60 to 79", t: "You sound competent.", b: "Competent is not the same as undeniable. You are close. Let us push you past the tipping point." },
+                  { r: "80 to 100", t: "You sound like the person they ask to present.", b: "Do not stop now. You are the benchmark. Let us make you the coach." },
                 ].map((item) => (
-                  <li
-                    key={item.title}
-                    className="flex items-start gap-3 rounded-xl border border-border bg-foreground/[0.03] px-4 py-3 text-left backdrop-blur"
-                  >
-                    <span
-                      className="mt-0.5 inline-flex h-7 w-7 flex-none items-center justify-center rounded-full"
-                      style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
-                    >
-                      {item.icon}
-                    </span>
-                    <span className="flex flex-col">
-                      <span className="text-sm font-semibold text-white">{item.title}</span>
-                      <span className="text-xs leading-snug text-muted-foreground">{item.body}</span>
-                    </span>
+                  <li key={item.r} className="rounded-xl border border-border bg-foreground/[0.03] px-5 py-4 backdrop-blur">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--primary)" }}>{item.r}</span>
+                    <p className="mt-2 text-sm font-semibold text-white">{item.t}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{item.b}</p>
                   </li>
                 ))}
               </ul>
@@ -790,14 +780,14 @@ function DiagnosticPage() {
                   className="text-[10px] font-semibold uppercase"
                   style={{ letterSpacing: "0.24em", color: "var(--primary)" }}
                 >
-                  The science behind Bramwell
+                  You are not alone
                 </p>
                 <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
-                  Trained on <span className="font-semibold text-white">10,000+ hours</span> of
-                  high-stakes interviews, pitches and board briefings, analysed against the
-                  frameworks of <span className="font-semibold text-white">Mehrabian, Cuddy,
-                  Goleman and Carnegie</span>. Bramwell hears what interviewers and boards hear,
-                  and tells you what they won't.
+                  <span className="font-semibold text-white">21.2% of people</span> have a lifetime
+                  fear of public speaking. Most never measure it, they just feel it. Source: NCS-R,
+                  National Comorbidity Survey Replication. Bramwell your Voice AI Mentor does not just
+                  help you measure it, it helps you change it. Daily practice, real time scoring, and in
+                  30 days a score that proves it.
                 </p>
               </div>
             </>
@@ -886,7 +876,7 @@ function DiagnosticPage() {
                         color: "var(--primary-foreground)",
                       }}
                     >
-                      See coaching pathways →
+                      Join the 30 Day Voice Mastery Program
                     </Link>
                     <p className="mt-4 text-xs text-muted-foreground">
                       Free sessions reset every 24 hours.
