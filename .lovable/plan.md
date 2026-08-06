@@ -1,47 +1,53 @@
+# Bramwell AI: Pivot to the 90-Day Cohort
 
-## Goal
+Goal: move the site from a $79/month subscription to one flagship paid outcome, and stop the diagnostic from dead-ending. Ship in four waves so revenue is live after Wave 1.
 
-Catch regressions where a route stops honoring the light Loveable/Canva theme tokens (e.g. someone reintroduces `bg-black`, a dark hero, or a hardcoded hex). Cover pricing, login, dashboard, and every SEO-facing route.
+## The commercial decision (locked before code)
 
-## Approach
+One flagship offer: **The 90-Day Room Test, $697 USD**, quarterly cohort intake, capped seats.
+Continuity for graduates only: $197/month, not sold on the public site.
+Free live voice diagnostic stays the only top-of-funnel entry.
 
-Use Playwright (already available in the sandbox) with two complementary checks per route:
+Why: the diagnostic sells a transformation, not tool access. A cohort with a start date, a cap and a refund promise converts far better than an open-ended subscription, and it removes the churn problem entirely.
 
-1. **Token assertion (fast, deterministic).** Read computed styles of `<body>` and key landmarks and assert they resolve to the light theme:
-   - `body` background ≈ `oklch(0.995 0.005 95)` (warm cream)
-   - `body` color is the dark ink (`--foreground`)
-   - No element in the initial viewport has `background-color: rgb(0,0,0)` or a near-black fill outside allow-listed selectors (modal scrims: `[data-slot="dialog-overlay"]`, `.bg-black\/70`, etc.)
-   - `--background`, `--foreground`, `--primary`, `--gradient-hero` CSS vars are present on `:root`
-2. **Screenshot snapshot (visual).** `page.screenshot()` of the above-the-fold hero saved under `tests/visual/__snapshots__/`. Re-runs pixel-diff against the baseline with a small tolerance.
+## Wave 1: stop the leak (revenue-critical)
 
-## Routes covered
+1. Result page branch. After the score, split the CTA by who they are: individual goes to the cohort offer, team or leader goes to the B2B audit. Today every archetype funnels to a subscription that will no longer exist.
+2. Email capture before the result renders, session ID minted before the call so the score, transcript and email are one record.
+3. Cohort checkout: single $697 one-time Stripe product, seat counter, sold-out and waitlist states.
+4. Pricing page rewritten to one offer plus a graduate continuity note. Remove every $79 and $197 public card.
+5. Explicit guarantee: complete the 90 days, sound different or full refund. Stated on the offer page and at checkout.
 
-Public/SEO + the three named pages:
-- `/`
-- `/pricing`
-- `/login`
-- `/dashboard` (redirects when unauthed - assert the redirect target still renders in light theme, or seed a session if `LOVABLE_BROWSER_AUTH_STATUS=injected`)
-- `/diagnostic`
-- `/advisors`, `/executive`, `/graduate`, `/pivot`, `/redundant`, `/returner`, `/signup`, `/the-7-questions`
+## Wave 2: entitlement truth
 
-Route list is generated at test time from `src/routeTree.gen.ts` so new SEO routes are picked up automatically (filtered to public, non-`api/`, non-`$`-param routes).
+6. Replace session-decrement gating with cohort membership. Access is: are you in an active cohort, and which week are you in.
+7. Cohort schema: cohorts, enrolments, week unlocks, baseline / mid / final assessment slots.
+8. Onboarding page after purchase: start date, what happens in week one, calendar add.
 
-## Files
+## Wave 3: defensible score
 
-- `tests/visual/theme.spec.ts` - Playwright test file
-- `tests/visual/routes.ts` - helper that reads the route tree and returns the public route list
-- `playwright.config.ts` - chromium project, `viewport: 1280x1800`, `baseURL: http://localhost:8080`, snapshot dir under `tests/visual/__snapshots__/`
-- `package.json` - add `test:visual` script and `@playwright/test` dev dep
-- `.gitignore` - ignore `test-results/` and `playwright-report/`
+9. Deterministic sub-scores from the transcript: filler count, words per minute, pause pattern, answer structure. The score stops being an opinion the model asserts and becomes numbers we can show twice and compare.
+10. Baseline vs final comparison view. This is the proof the guarantee rests on and the asset people share.
+11. Audio retention with explicit consent, so week one and week twelve can be played back to back.
 
-## How it runs
+## Wave 4: B2B and hygiene
 
-- Local / CI: `bun run test:visual` (assumes dev server on `:8080`, matching the existing sandbox convention).
-- First run generates baselines; subsequent runs fail on token drift or visual diff.
-- Baselines are checked in so a PR that flips the theme back to dark fails immediately.
+12. Team audit form with qualifying fields, team size, budget band, timeline, so the enterprise waitlist is not noise.
+13. Patch the critical dependency advisory in the router and start packages.
 
-## Out of scope
+## Voice agent changes (runs alongside Wave 1)
 
-- Authenticated deep pages behind role gates (dashboard beyond redirect).
-- Mobile viewport snapshots (can add a second project later).
-- Component-level snapshots (Storybook) - route-level is enough to catch token regressions.
+- Ask the scenario inside the conversation, never as a pre-call form. Every extra field before the mic costs conversion.
+- Fix the spoken close so Bramwell always delivers the summary before the session ends.
+- Pass the scenario answer through to the result so the CTA branch is accurate.
+
+## Copy rules carried forward
+
+Australian English. No em dashes. Never "lack confidence", never "take the quiz". "Not a course. A coach." Specific step by step language, not vague signal language.
+
+## Technical notes
+
+- Cohort SKU is a one-time Stripe price with promotion codes left enabled.
+- Seat cap enforced server side at checkout creation, not in the UI.
+- Enrolment written by the Stripe webhook, keyed on cohort and user, environment scoped.
+- Sub-scores computed server side from the stored transcript so the same input always gives the same number.
