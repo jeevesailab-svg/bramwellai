@@ -112,15 +112,12 @@ const Schema = z.object({
   readiness_score: z.number().int().min(0).max(100),
   gaps: z.array(z.string().min(1).max(280)).min(1).max(5),
   career_moment: z.string().max(120).optional().default(""),
-  recommended_pathway: z.enum([
-    "graduate",
-    "comeback",
-    "confidence",
-    "executive",
-    "club",
-  ]),
-  recommended_pathway_name: z.string().min(1).max(120),
-  recommended_price: z.string().min(1).max(32),
+  recommended_pathway: z
+    .enum(["graduate", "comeback", "confidence", "executive", "club"])
+    .optional()
+    .default("club"),
+  recommended_pathway_name: z.string().min(1).max(120).optional().default(PATHWAY.club.name),
+  recommended_price: z.string().min(1).max(32).optional().default(PATHWAY.club.price),
   transcript: z.string().max(50000).optional().default(""),
   metrics: MetricsSchema.optional(),
 });
