@@ -7,22 +7,23 @@ import { BramwellLogo } from "@/components/site/BramwellLogo";
 import { CtaButton } from "@/components/site/CtaButton";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetClose } from "@/components/ui/sheet";
 import { Mic, Sparkles, Zap, MessageCircle, Rocket, Target, Heart, Star, Wand2, Trophy, Menu } from "lucide-react";
+import heroPortrait from "@/assets/hero-portrait.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
       meta: [
-        { title: "Not a course. A coach. | Bramwell.ai" },
+        { title: "Are you heard, or ignored? | Bramwell.ai" },
         {
           name: "description",
           content:
-            "Your CV is fine. The room still isn't sure. One free live voice diagnostic tells you how you come across under pressure. No login, no card.",
+            "Ever feel like the smartest person in the room, but the one who gets ignored? Take the free 5 minute live voice test and find out why. No login, no card.",
         },
-        { property: "og:title", content: "Not a course. A coach. | Bramwell.ai" },
+        { property: "og:title", content: "Are you heard, or ignored? | Bramwell.ai" },
         {
           property: "og:description",
           content:
-            "Your CV is fine. The room still isn't sure. One free live voice diagnostic tells you how you come across under pressure. No login, no card.",
+            "Ever feel like the smartest person in the room, but the one who gets ignored? Take the free 5 minute live voice test and find out why.",
         },
       ],
   }),
