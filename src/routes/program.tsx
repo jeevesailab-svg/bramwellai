@@ -321,6 +321,7 @@ function ProgramPage() {
 
       {/* Enrol */}
       <section id="enrol" className="bg-background py-20 md:py-28">
+        {/* placeholder anchor */}
         <div className="mx-auto max-w-2xl px-6 md:px-10">
           <article
             className="relative flex flex-col rounded-2xl border border-foreground/30 bg-foreground/[0.04] p-8"
