@@ -30,7 +30,7 @@ export function CtaButton({
   as?: "a" | "button";
 }) {
   const s = SIZE[size];
-  const cls = `group inline-flex ${s.h} items-center justify-center rounded-full font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95 ${className}`;
+  const cls = `group inline-flex ${s.h} items-center justify-center rounded-full font-semibold text-primary-foreground transition hover:-translate-y-0.5 hover:opacity-90 ${className}`;
   const style = { background: theme.gradients.cta, boxShadow: theme.shadows.cta } as const;
   const inner = (
     <>

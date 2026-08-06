@@ -13,17 +13,17 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
       meta: [
-        { title: "Are you heard, or ignored? | Bramwell.ai" },
+        { title: "Speak like a CEO | Bramwell.ai Voice AI Mentor" },
         {
           name: "description",
           content:
-            "Ever feel like the smartest person in the room, but the one who gets ignored? Take the free 5 minute live voice test and find out why. No login, no card.",
+            "Your Voice AI Mentor listens to how you speak, scores you across four dimensions, and shows you exactly what is holding you back. Free 5 minute test.",
         },
-        { property: "og:title", content: "Are you heard, or ignored? | Bramwell.ai" },
+        { property: "og:title", content: "Speak like a CEO | Bramwell.ai Voice AI Mentor" },
         {
           property: "og:description",
           content:
-            "Ever feel like the smartest person in the room, but the one who gets ignored? Take the free 5 minute live voice test and find out why.",
+            "Your Voice AI Mentor scores how you speak across four dimensions and shows you exactly what is holding you back. Free 5 minute test.",
         },
       ],
   }),
@@ -129,57 +129,46 @@ function Nav() {
 function Hero() {
   return (
     <>
-      {/* Photo band */}
-      <section className="relative isolate overflow-hidden">
-        <img
-          src={heroPortrait.url}
-          alt="Executive pausing before she speaks, lit from above in a dark room"
-          className="absolute inset-0 h-full w-full object-cover object-[70%_center] md:object-[65%_20%]"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(90deg, oklch(0.16 0.02 60 / 0.94) 0%, oklch(0.16 0.02 60 / 0.82) 45%, oklch(0.16 0.02 60 / 0.35) 100%)",
-          }}
-        />
-        <div className="relative z-10 mx-auto flex min-h-[560px] max-w-7xl flex-col justify-center px-5 py-20 sm:px-6 md:min-h-[660px] md:px-10 md:py-28">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur">
+      {/* Hero */}
+      <section className="relative isolate overflow-hidden bg-background">
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 sm:px-6 md:grid-cols-[1.05fr_0.95fr] md:px-10 md:py-24">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 shrink-0" />
               Live voice · 5 minutes · Free
             </div>
 
-            <h1 className="mt-6 text-balance text-[40px] font-bold leading-[0.98] tracking-tight text-white sm:text-6xl md:text-[76px]">
-              Are you heard,
-              <br />
-              or ignored?
+            <h1 className="mt-6 text-balance text-[44px] font-semibold leading-[0.98] tracking-[-0.03em] sm:text-6xl md:text-[80px]">
+              Speak like a CEO.
             </h1>
 
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-white/80 sm:text-lg">
-              Ever feel like the smartest person in the room, but the one who gets ignored? Find out
-              why.
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Your Voice AI Mentor listens to how you speak, scores you across four dimensions, and
+              shows you exactly what is holding you back.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <a
-                href="/diagnostic?autostart=1"
-                className="group inline-flex h-14 items-center justify-center gap-3 rounded-full px-9 text-base font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95"
-                style={{ background: GOLD, boxShadow: "var(--shadow-cta)" }}
-              >
-                <Mic className="h-5 w-5" strokeWidth={2.5} />
-                Take the test
-                <span className="transition-transform group-hover:translate-x-0.5">→</span>
-              </a>
-              <a href="/program" className="text-sm font-medium text-white/75 underline underline-offset-4 hover:text-white">
+            <div className="mt-9 flex flex-wrap items-center gap-4">
+              <CtaButton href="/diagnostic?autostart=1" size="lg">
+                Take the Test
+              </CtaButton>
+              <a href="/program" className="text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-foreground">
                 See the 30 day program
               </a>
             </div>
 
-            <p className="mt-6 text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+            <p className="mt-7 text-[10px] uppercase tracking-[0.2em] text-muted-foreground sm:text-[11px]">
               5 min · Live voice · Free · No login · No card
             </p>
+          </div>
+
+          <div className="relative">
+            <div className="overflow-hidden rounded-3xl border border-border bg-muted" style={{ boxShadow: "var(--shadow-elegant)" }}>
+              <img
+                src={heroPortrait.url}
+                alt="Executive pausing before she speaks"
+                className="h-[320px] w-full object-cover object-[60%_20%] md:h-[520px]"
+              />
+            </div>
           </div>
         </div>
       </section>
