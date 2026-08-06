@@ -25,22 +25,20 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Simple monthly coaching for the moments that matter. Start with the Career Confidence Club, or pick a focused sprint.",
+          "The 30-Day Voice Mastery Program. $299 once. Ten minutes a day for 30 days and you won't be recognisable.",
       },
       { property: "og:title", content: "Pricing, Bramwell AI" },
       {
         property: "og:description",
         content:
-          "Simple monthly coaching for the moments that matter. Start with the Career Confidence Club, or pick a focused sprint.",
+          "The 30-Day Voice Mastery Program. $299 once. Ten minutes a day for 30 days and you won't be recognisable.",
       },
     ],
   }),
 });
 
-// Stripe lookup_keys for the 5 Bramwell pathways
 const PRICE_IDS = {
-  executive: "executive_monthly",
-  club: "career_confidence_club_monthly",
+  mastery: "voice_mastery_30day_once",
 } as const;
 
 type Pathway = {
@@ -57,80 +55,47 @@ type Pathway = {
 
 const PATHWAYS: Pathway[] = [
   {
-    key: "club",
-    name: "Pro",
-    forWho: "Most popular",
-    price: "$79",
-    cadence: "per month · cancel anytime",
-    sessions: "Unlimited live voice coaching",
+    key: "mastery",
+    name: "30-Day Voice Mastery Program",
+    forWho: "For managers and executives, founders and sales leaders",
+    price: "$299",
+    cadence: "one payment · lifetime access",
+    sessions: "10 minutes a day for 30 days",
     highlight: true,
     blurb:
-      "Your step by step process to being successful in an interview: walk in rehearsed, sound structured under pressure, and answer the way the best leaders do. Practice every week before the interview, through your first 90 days, and every time you ask for more. $79 a month is less than one hour with a human coach. Most people stay.",
+      "For managers and executives, founders and sales leaders, professionals at any stage who want to transform how they sound. If you've ever felt overlooked in meetings, passed over for presentations, or like your voice hasn't caught up to your expertise, this program is for you. This is the step by step system to transform your voice in 30 days. See massive change in your finances, relationships, and more.",
     includes: [
-      "Unlimited live voice coaching sessions with Bramwell",
-      "Your personal playbook, sharpened every week",
-      "Archetype tracking and Readiness Score after every call",
-      "New scenario library added monthly: interviews, negotiations, presentations",
-      "Priority access to new session types as they launch",
-    ],
-  },
-  {
-    key: "executive",
-    name: "Executive",
-    forWho: "Senior leaders and high-stakes rooms",
-    price: "$197",
-    cadence: "per month · cancel anytime",
-    sessions: "Everything in Pro, plus human review",
-    blurb:
-      "Everything in Pro, plus board-level scenario drills and a monthly human review of your progress.",
-    includes: [
-      "Everything in Pro",
-      "Board-level scenario drills: CEO, panel and investor rooms",
-      "Monthly human review of your sessions and progress",
-      "Strategic narrative coaching, the three-line version of your vision",
-      "Executive presence: pacing, silence and authority under pressure",
+      "A daily 10 minute live voice session with Bramwell, 30 days straight",
+      "The step by step system: structure, pace, tone, and presence under pressure",
+      "Your Readiness Score tracked every day, so you can see the change",
+      "Real scenarios: interviews, board updates, pitches, negotiations, hard conversations",
+      "Your personal playbook, rewritten as you improve",
+      "Day 1 and Day 30 recordings, side by side, so the change is undeniable",
     ],
   },
 ];
 
 function getHeroCopy(score?: number, recommended?: keyof typeof PRICE_IDS) {
-  if (recommended === "club") {
-    return {
-      eyebrow: "Simple monthly coaching",
-      headline: "Stay ready for every room that matters.",
-      sub: "One subscription. Up to 3 voice sessions a week. Monthly progress checks. Every new scenario as it drops. Cancel anytime.",
-      cta: "Join the Club →",
-    };
-  }
+  void recommended;
   if (typeof score === "number" && score <= 50) {
     return {
-      eyebrow: "Your next move",
-      headline: "Train your speaking skills. Sound like the person you already are.",
-      sub: "Short, focused training to organise your thoughts in real time and speak with authority, no more ideas vanishing mid sentence, no more rooms you should have won slipping away.",
-      cta: "Start training →",
-    };
-  }
-  if (typeof score === "number" && score <= 75) {
-    return {
-      eyebrow: "Your next level",
-      headline: "Persuasion is not getting your way. It is a skill you can learn.",
-      sub: "Influence and persuasion are how the most persuasive person in the room gets the promotion, wins the pitch, and closes the offer. Bramwell trains both, in your own voice.",
-      cta: "Build my edge →",
+      eyebrow: "One program. One price.",
+      headline: "Thirty days from now, they will not recognise how you sound.",
+      sub: "Be coached for 10 minutes a day for 30 days. People stop and listen. You command attention. You get paid more. This is the secret you wish you were taught before.",
+      cta: "Start the 30 days →",
     };
   }
   return {
-    eyebrow: "Simple monthly coaching",
-    headline: "Stay ready for every room that matters.",
-    sub: "One subscription. Up to 3 voice sessions a week. Monthly progress checks. Every new scenario as it drops. Cancel anytime.",
-    cta: "Join the Club →",
+    eyebrow: "One program. One price.",
+    headline: "Thirty days from now, they will not recognise how you sound.",
+    sub: "Be coached for 10 minutes a day for 30 days. People stop and listen. You command attention. You get paid more. This is the secret you wish you were taught before.",
+    cta: "Start the 30 days →",
   };
 }
 
 function PricingPage() {
   const { recommended, resume, score } = Route.useSearch();
-  const recommendedKey = (["executive", "club"] as const).find(
-    (k) => k === recommended || (k === "club" && recommended !== "executive" && !!recommended),
-  );
+  const recommendedKey = recommended ? ("mastery" as const) : undefined;
 
   const hero = getHeroCopy(score, recommendedKey);
 
@@ -312,14 +277,14 @@ function PricingPage() {
             </p>
           </div>
         )}
-        <div className="mx-auto grid max-w-4xl gap-5 px-6 md:grid-cols-2 md:px-10 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-2xl gap-5 px-6 md:px-10">
           {pathways.map((p) => (
             <PathwayCard key={p.key} p={p} onSelect={() => handlePurchase(p.key)} />
           ))}
         </div>
 
         <p className="mx-auto mt-12 max-w-2xl px-6 text-center text-sm leading-relaxed text-muted-foreground">
-          Try Bramwell free first. No card. No login. If it doesn&apos;t change how you sound in your first session, don&apos;t upgrade.
+          Try Bramwell free first. No card. No login. If it doesn&apos;t change how you sound in your first session, don&apos;t buy the program.
         </p>
         <div className="mt-8 flex justify-center px-6">
           <CtaButton href="/diagnostic?autostart=1" size="md" showIcon={false}>
@@ -438,7 +403,7 @@ function PathwayCard({ p, onSelect }: { p: Pathway; onSelect: () => void }) {
 
       <div className="mt-8">
         <CtaButton as="button" onClick={onSelect} size="md" className="w-full">
-          Go {p.name} →
+          Start the 30 days →
         </CtaButton>
       </div>
     </article>

@@ -131,6 +131,14 @@ export const PATHWAY_CONFIG = {
     welcome: 'You are on the Club. Bramwell is always here. What is coming up next?',
     productName: 'Career Confidence Club',
   },
+  voice_mastery_30day_once: {
+    pathway: 'mastery',
+    sessions: 9999,
+    minutes: 10,
+    accessDays: 365,
+    welcome: 'Day one starts now. Ten minutes a day, thirty days, and you will not sound like this again.',
+    productName: '30-Day Voice Mastery Program',
+  },
 } as const;
 
 export type PriceId = keyof typeof PATHWAY_CONFIG;
