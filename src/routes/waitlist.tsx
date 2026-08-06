@@ -211,7 +211,7 @@ function WaitlistPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <SiteNav ctaLabel="Get a free assessment" ctaHref="#apply" />
+      <SiteNav ctaLabel="Audit my team now" ctaHref="#apply" />
 
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border">
@@ -219,27 +219,54 @@ function WaitlistPage() {
           <div className="flex flex-col items-center text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3 py-1 text-xs font-medium uppercase tracking-widest text-muted-foreground backdrop-blur">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full" style={{ background: "var(--primary)" }} />
-              Bramwell for Sales Teams, By Application
+              Bramwell for Sales Teams
             </span>
-            <p className="mt-6 text-sm font-medium uppercase tracking-widest" style={{ color: "var(--primary)" }}>
-              Want this built for you?
-            </p>
-            <h1 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-              We help founders and CEOs clone their best salesperson to build the <GoldText>strongest sales team</GoldText> to propel growth.
+            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+              30 Day <GoldText>Team Voice Mastery</GoldText> Program
             </h1>
-            <p className="mt-6 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground md:text-lg">
-              Bramwell studies your top performer, extracts exactly what they do differently, and trains every rep on your team to do the same. Until closing is no longer a personality. It's a system.
+            <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground">
+              Your Voice AI Mentor in every rep's pocket. Clone your founder. Build an army of closers.
             </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground">
-              <span className="rounded-full border border-border bg-white/70 px-3 py-1">September intake</span>
-              <span className="rounded-full border border-border bg-white/70 px-3 py-1">12 teams selected</span>
-              <span className="rounded-full border border-border bg-white/70 px-3 py-1">Founding pricing, locked forever</span>
-            </div>
-            <div className="mt-10">
-              <CtaButton as="button" onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })} size="md">
-                Get a free sales team assessment
+            <p className="mt-4 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground">
+              Get the concrete strategies and tools that have transformed thousands of sales teams at
+              every stage. Your Voice AI Mentor trains every rep daily against your founder's pitch.
+            </p>
+            <div className="mt-9">
+              <CtaButton as="button" onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })} size="lg" showIcon={false} showArrow={false}>
+                Audit my team now ↓
               </CtaButton>
             </div>
+            <dl className="mt-12 grid w-full max-w-3xl grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border text-left sm:grid-cols-3">
+              {[
+                { k: "Date", v: "Cohort 1, starts 15 August 2026" },
+                { k: "Format", v: "30 day online program, manager dashboard, pods" },
+                { k: "Price", v: "$1,500 for 10 seats" },
+              ].map((row) => (
+                <div key={row.k} className="bg-white/80 px-5 py-4 backdrop-blur">
+                  <dt className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{row.k}</dt>
+                  <dd className="mt-1 text-sm font-medium">{row.v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section className="border-b border-border py-20 md:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 md:grid-cols-2 md:px-10">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">About</p>
+            <h2 className="mt-3 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+              Your Voice AI Mentor. <GoldText>Every rep. Every day.</GoldText>
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+              Bramwell your Voice AI Mentor in every rep's pocket, training them on the system for
+              sustainable sales transformation. They speak. It listens. It scores. Every day for 30 days.
+            </p>
+          </div>
+          <div className="flex aspect-video items-center justify-center rounded-3xl border border-border bg-white shadow-sm">
+            <span className="text-sm uppercase tracking-widest text-muted-foreground">Watch video</span>
           </div>
         </div>
       </section>
@@ -288,7 +315,7 @@ function WaitlistPage() {
               {error && <p className="mt-4 text-sm" style={{ color: "var(--destructive, #b00020)" }}>{error}</p>}
               <div className="mt-6">
                 <CtaButton as="button" size="md" className={submitting ? "opacity-60" : ""}>
-                  {submitting ? "Submitting…" : "Get my free assessment"}
+                  {submitting ? "Submitting…" : "Audit my team now"}
                 </CtaButton>
               </div>
               <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
@@ -305,11 +332,10 @@ function WaitlistPage() {
       <section className="border-b border-border py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <div className="max-w-2xl">
-            <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Founding members only</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Key benefits</p>
             <h2 className="mt-3 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-              What waitlist members
-              <br />
-              <GoldText>get first.</GoldText>
+              Your Voice AI Mentor in every rep's pocket, training them on the system for{" "}
+              <GoldText>sustainable sales transformation.</GoldText>
             </h2>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -324,18 +350,99 @@ function WaitlistPage() {
         </div>
       </section>
 
+      {/* Pillars */}
+      <section className="border-b border-border bg-white py-20 md:py-24">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <h2 className="max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Change your team's voice and your <GoldText>revenue.</GoldText>
+          </h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {PILLARS.map((p) => (
+              <article key={p.title} className="rounded-3xl border border-border bg-background p-7">
+                <h3 className="text-lg font-semibold tracking-tight">{p.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Method */}
+      <section className="border-b border-border py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">The Bramwell Method for teams</p>
+          <h2 className="mt-3 max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Your Mentor trains every rep against your founder's pitch, scores every response, and{" "}
+            <GoldText>proves every rep's progress.</GoldText>
+          </h2>
+          <ol className="mt-12 grid gap-6 md:grid-cols-2">
+            {METHOD.map((m, i) => (
+              <li key={m.step} className="rounded-3xl border border-border bg-white p-7 shadow-sm">
+                <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--primary)" }}>0{i + 1}</span>
+                <h3 className="mt-3 text-xl font-semibold tracking-tight">{m.step}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            <p className="rounded-3xl border border-border bg-white p-7 text-sm leading-relaxed text-muted-foreground">
+              41% of your reps want more roleplay. Only 26% are getting it. That gap is costing you deals.
+              <span className="mt-2 block text-xs">Source: Salesforce State of Sales 2026</span>
+            </p>
+            <p className="rounded-3xl border border-border bg-white p-7 text-sm leading-relaxed text-muted-foreground">
+              Snowflake eliminated 1,215 manager hours per quarter with AI roleplay. Your team is next.
+              <span className="mt-2 block text-xs">Source: Yoodli case study</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="border-b border-border bg-white py-20 md:py-24">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            See what others are saying
+          </h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {TESTIMONIALS.map((t) => (
+              <figure key={t.name} className="rounded-3xl border border-border bg-background p-7">
+                <blockquote className="text-base leading-relaxed">"{t.quote}"</blockquote>
+                <figcaption className="mt-4 text-xs uppercase tracking-widest text-muted-foreground">{t.name}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="border-b border-border py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6 md:px-10">
+          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Frequently asked questions
+          </h2>
+          <div className="mt-10 divide-y divide-border border-y border-border">
+            {FAQS.map((f) => (
+              <div key={f.q} className="py-6">
+                <h3 className="text-base font-semibold tracking-tight">{f.q}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="border-b border-border bg-background py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
           <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            The next intake closes when we hit <GoldText>12 teams.</GoldText>
+            Break through to the next level in your <GoldText>team's voice.</GoldText>
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
-            After that, founding pricing is gone and the waitlist re opens for the following quarter.
+            Stop hiring and hoping. Start cloning and closing. $1,500 for 10 seats, 30 days, proof on Day 30.
           </p>
           <div className="mt-8 flex justify-center">
             <CtaButton as="button" onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })} size="md">
-              Get a free sales team assessment
+              Audit my team now ↓
             </CtaButton>
           </div>
         </div>
