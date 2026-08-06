@@ -91,42 +91,33 @@ export const Route = createFileRoute("/api/public/diagnostic-email")({
           return Response.json({ error: "Database error" }, { status: 500 });
         }
 
-        // Send the readiness report directly via Resend (connector gateway).
-        const lovableKey = process.env.LOVABLE_API_KEY;
-        const resendKey = process.env.RESEND_API_KEY;
-        if (lovableKey && resendKey && row.email) {
+        // Send the branded readiness report through Lovable Emails.
+        if (row.email) {
           try {
-            const html = renderReportEmail({ ...row, email: row.email });
-            const sendRes = await fetch(
-              "https://connector-gateway.lovable.dev/resend/emails",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${lovableKey}`,
-                  "X-Connection-Api-Key": resendKey,
-                },
-                body: JSON.stringify({
-                  from: "Bramwell <onboarding@resend.dev>",
-                  to: [row.email],
-                  subject: `Your Bramwell Readiness Score: ${row.readiness_score}/100`,
-                  html,
-                }),
-              },
+            const { sendTransactionalServerSide } = await import(
+              "@/lib/email/send.server"
             );
-            if (!sendRes.ok) {
-              console.warn(
-                "Resend send failed",
-                sendRes.status,
-                await sendRes.text(),
-              );
+            const result = await sendTransactionalServerSide({
+              templateName: "readiness-report",
+              recipientEmail: row.email,
+              idempotencyKey: `readiness-report-${d.sessionId}`,
+              templateData: {
+                firstName: row.first_name ?? undefined,
+                score: row.readiness_score ?? 0,
+                communicationType: row.communication_type ?? undefined,
+                gaps: Array.isArray(row.gaps)
+                  ? (row.gaps as unknown[]).map(String)
+                  : [],
+              },
+            });
+            if (!result.ok) {
+              console.warn("Readiness report not sent", result.reason);
             }
           } catch (sendErr) {
-            const msg = sendErr instanceof Error ? sendErr.message : String(sendErr);
-            console.warn("Resend send threw", msg);
+            const msg =
+              sendErr instanceof Error ? sendErr.message : String(sendErr);
+            console.warn("Readiness report send threw", msg);
           }
-        } else {
-          console.warn("Skipping Resend send, missing LOVABLE_API_KEY or RESEND_API_KEY");
         }
 
         const zapUrl = process.env.ZAPIER_QUIZ_WEBHOOK_URL;
