@@ -448,7 +448,7 @@ function ResultBody({ result }: { result: Result }) {
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-muted-foreground">
-            Ten minutes a day for 30 days with Bramwell your Voice AI Mentor. Every session scored, weekly check ins, and a Day 30 retest that proves the change. One payment, USD.
+            A structured 30 day curriculum with Bramwell your Voice AI Mentor: structure under pressure, specificity and evidence, confidence signals, then high stakes rehearsal. Every session impromptu and scored, weekly check ins, and a Day 30 retest that proves the change. One payment, USD.
           </p>
 
           <a

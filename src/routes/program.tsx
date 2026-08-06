@@ -47,7 +47,7 @@ const METHOD = [
   },
   {
     step: "Practise",
-    body: "Five minutes a day with your Voice AI Mentor. You speak. It listens. It scores. No judgement, just honest feedback. 30 sessions. 4 weekly check ins. A pod that holds you to it.",
+    body: "One structured session a day, built around impromptu speaking. Your Mentor sets the prompt, you answer cold, it scores the answer and you run it again. 30 sessions. 4 weekly check ins. A pod that holds you to it.",
   },
   {
     step: "Perform",
@@ -56,6 +56,37 @@ const METHOD = [
   {
     step: "Prove",
     body: "Day 30. You retake the diagnostic with your Voice AI Mentor. Your score went from 42 to 65. You can see it. You can share it. You can prove it.",
+  },
+];
+
+const CURRICULUM = [
+  {
+    week: "Week 1",
+    title: "Structure under pressure",
+    focus: "Answer first, then evidence",
+    body: "Days 1 to 7. Cold prompts with no prep time. You learn one repeatable answer frame and drill it until you lead with the point instead of the run up. Day 1 sets your baseline Readiness Score.",
+    drills: ["60 second impromptu answers", "Point first re takes", "Kill the preamble"],
+  },
+  {
+    week: "Week 2",
+    title: "Specificity and evidence",
+    focus: "Numbers, names, outcomes",
+    body: "Days 8 to 14. Harder prompts drawn from your real work. Your Mentor pushes back until vague claims are replaced with concrete evidence a decision maker can act on.",
+    drills: ["Story to number", "The so what test", "Handling the challenge question"],
+  },
+  {
+    week: "Week 3",
+    title: "Confidence signals",
+    focus: "Pace, pauses, filler, landing",
+    body: "Days 15 to 21. Measured delivery work. Filler count, words per minute and pause pattern are tracked every session so you can hear the difference and see it in the numbers.",
+    drills: ["Pause instead of um", "Pace control reps", "Land the last line"],
+  },
+  {
+    week: "Week 4",
+    title: "The real room",
+    focus: "High stakes rehearsal",
+    body: "Days 22 to 30. Full scenario rehearsal: the status update, the pitch, the interview, the pushback from the person who does not agree with you. Day 30 you retake the diagnostic and compare.",
+    drills: ["Executive update in 90 seconds", "Pitch and objection", "Day 30 retest"],
   },
 ];
 
@@ -77,11 +108,15 @@ const FAQS = [
   },
   {
     q: "What can I expect to learn?",
-    a: "Daily voice practice with your Voice AI Mentor. Your Mentor scores you across four dimensions: Structure, Specificity, Confidence Signals and Relevance. Weekly check ins that track your score, an accountability pod, and a before and after Readiness Score that proves your transformation.",
+    a: "A four week curriculum built on impromptu speaking. Week 1 structure under pressure, Week 2 specificity and evidence, Week 3 confidence signals like pace, pauses and filler, Week 4 high stakes rehearsal. Every session is scored across Structure, Specificity, Confidence Signals and Relevance, with weekly check ins, an accountability pod, and a Day 1 and Day 30 Readiness Score.",
   },
   {
     q: "How long is the program?",
-    a: "30 days. Daily practice takes 5 minutes. Weekly check ins take 15 minutes. The full program runs across 4 weeks with a final retest on Day 30.",
+    a: "30 days, run as four themed weeks. One scored session a day, a 15 minute check in each week, and a final retest on Day 30 that gives you a before and after number.",
+  },
+  {
+    q: "What are the refund terms exactly?",
+    a: "Complete your Day 1 diagnostic, the first 7 daily sessions and your Week 1 check in. If your Week 1 Readiness Score has not improved on your Day 1 baseline, reply to any Bramwell email within 14 days of purchase and we refund the full $299 to your original payment method within 5 business days.",
   },
   {
     q: "I have never done voice training before, is this for me?",
@@ -187,8 +222,9 @@ function ProgramPage() {
             Change your life.
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Ten minutes a day for 30 days with Bramwell, your Voice AI Mentor. You speak. He scores
-            you. On Day 30 the number proves it.
+            A structured 30 day program with Bramwell, your Voice AI Mentor. Four weeks of impromptu
+            speaking drills, one scored session a day, weekly check ins. On Day 30 the number proves
+            it.
           </p>
 
           <div className="mt-9 flex flex-col items-center gap-3">
@@ -196,7 +232,7 @@ function ProgramPage() {
               Get started, $299
             </CtaButton>
             <p className="text-xs text-muted-foreground">
-              One payment. Full refund after session one if it does not land.{" "}
+              One payment. Complete Week 1 and if your score has not moved, we refund all $299.{" "}
               <a href="/diagnostic?autostart=1" className="font-medium text-foreground underline underline-offset-4">
                 Or take the free 5 minute test first
               </a>
@@ -287,8 +323,52 @@ function ProgramPage() {
         </div>
       </section>
 
+      {/* Curriculum */}
+      <section className="bg-background py-20 md:py-28">
+        <div className="mx-auto max-w-5xl px-6 md:px-10">
+          <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>
+            The 30 day curriculum
+          </p>
+          <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Four weeks. One skill layered on the last.
+          </h2>
+          <p className="mt-4 max-w-2xl text-base text-muted-foreground">
+            Every session is impromptu. No scripts, no slides, no rehearsing in the shower. Your
+            Mentor sets a cold prompt, you answer, you get scored, you run it again. That is how
+            speaking actually improves.
+          </p>
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {CURRICULUM.map((w) => (
+              <article key={w.week} className="rounded-2xl border border-border bg-foreground/[0.02] p-7">
+                <div className="flex items-baseline justify-between gap-4">
+                  <span
+                    className="text-xs font-semibold uppercase tracking-[0.18em]"
+                    style={{ color: "var(--primary)" }}
+                  >
+                    {w.week}
+                  </span>
+                  <span className="text-xs text-muted-foreground">{w.focus}</span>
+                </div>
+                <h3 className="mt-3 text-xl font-semibold tracking-tight">{w.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{w.body}</p>
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {w.drills.map((d) => (
+                    <li
+                      key={d}
+                      className="rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/80"
+                    >
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Enrol */}
-      <section id="enrol" className="bg-background py-20 md:py-28">
+      <section id="enrol" className="border-t border-border bg-background py-20 md:py-28">
         <div className="mx-auto max-w-2xl px-6 md:px-10">
           <article
             className="relative flex flex-col rounded-2xl border border-foreground/30 bg-foreground/[0.04] p-8"
@@ -313,12 +393,13 @@ function ProgramPage() {
               <span className="text-sm text-muted-foreground">USD, one payment</span>
             </div>
             <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted-foreground">
-              Ten minutes a day for 30 days
+              30 scored sessions, 4 weeks, 1 curriculum
             </p>
 
             <ul className="mt-6 flex-1 space-y-3 text-sm">
               {[
-                "Daily live voice sessions with Bramwell your Voice AI Mentor, 30 days straight",
+                "30 structured impromptu speaking sessions with Bramwell your Voice AI Mentor",
+                "A four week curriculum: Structure, Specificity, Confidence Signals, the real room",
                 "Scored across Structure, Specificity, Confidence Signals and Relevance",
                 "Weekly check ins that track your Readiness Score",
                 "An accountability pod of 4 to 6 professionals",
@@ -341,8 +422,8 @@ function ProgramPage() {
                 Get started
               </CtaButton>
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                Cohort 1 begins {COHORT_START}. Secure checkout. Refunded in full after session one
-                if it does not land.
+                Cohort 1 begins {COHORT_START}. Secure checkout. Complete the first 7 sessions and
+                your Week 1 check in, and if your score has not moved we refund all $299.
               </p>
             </div>
           </article>
@@ -388,13 +469,28 @@ function ProgramPage() {
             The Bramwell Guarantee
           </p>
           <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Value on session one, or your money back.
+            Your score moves in Week 1, or you get all $299 back.
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground">
-            Run your first session. If Bramwell your Voice AI Mentor does not identify something
-            specific and actionable about how you communicate, something you had not seen yourself,
-            we refund you in full. No forms. No questions.
+            Here are the exact terms, so nobody has to guess.
           </p>
+          <ul className="mx-auto mt-7 max-w-xl space-y-3 text-left text-sm text-muted-foreground">
+            {[
+              "Complete your Day 1 diagnostic to set a baseline Readiness Score.",
+              "Complete the first 7 daily sessions and your Week 1 check in.",
+              "If your Week 1 Readiness Score has not improved on your Day 1 baseline, reply to any Bramwell email within 14 days of purchase.",
+              "We refund the full $299 to your original payment method within 5 business days. No forms, no call, no questions.",
+            ].map((t) => (
+              <li key={t} className="flex gap-3">
+                <span
+                  aria-hidden
+                  className="mt-2 inline-block h-1.5 w-1.5 flex-none rounded-full"
+                  style={{ background: "var(--primary)" }}
+                />
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -437,7 +533,7 @@ function ProgramPage() {
             Thirty days from now, they stop talking over you.
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-base opacity-70">
-            Cohort 1 starts {COHORT_START}. Ten minutes a day. One payment of $299.
+            Cohort 1 starts {COHORT_START}. A structured 30 day curriculum. One payment of $299.
           </p>
           <div className="mt-9 flex justify-center">
             <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false}>
