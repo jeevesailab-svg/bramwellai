@@ -1,4 +1,4 @@
-# Bramwell v2: Brand Book to Build Plan
+# Bramwell v2: Brand Book to Build Plan - do not build send me your recommendations you are a billion dollar brand builder what makes sense reject what you think should be rejected and send me revised plan i think it is complicated
 
 You asked for a revised plan with questions before any build. Here it is. Nothing has been built.
 
@@ -8,12 +8,14 @@ The site today sells one thing: a $79/month AI communication mentor, with a free
 
 New commercial architecture:
 
-| Offer | B2C | B2B (10 seats) | Duration |
-| --- | --- | --- | --- |
-| Free diagnostic | $0 | $0 | 5 min |
-| 28-Day Reset / Sprint | $197 | $1,500 | 28 days |
-| 90-Day Transformation / Cohort | $497 | $3,500 | 90 days |
-| 28 to 90 upgrade | $300 | $2,000 | +62 days |
+
+| Offer                          | B2C  | B2B (10 seats) | Duration |
+| ------------------------------ | ---- | -------------- | -------- |
+| Free diagnostic                | $0   | $0             | 5 min    |
+| 28-Day Reset / Sprint          | $197 | $1,500         | 28 days  |
+| 90-Day Transformation / Cohort | $497 | $3,500         | 90 days  |
+| 28 to 90 upgrade               | $300 | $2,000         | +62 days |
+
 
 New spine: 28 days to a new you. The Readiness Score is the mirror. The before and after number is the proof.
 
