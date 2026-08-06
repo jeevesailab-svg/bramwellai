@@ -397,7 +397,7 @@ function FourteenDays() {
             <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-sunrise)" }}>persuasive and commanding.</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Not motivational. Measurable. Ten minutes a day with Bramwell and you&apos;ll hear the difference by day seven.
+            Not motivational. Measurable. A structured 30 day curriculum of impromptu speaking drills with Bramwell, and you&apos;ll hear the difference by day seven.
           </p>
         </div>
 
@@ -478,7 +478,7 @@ function PricingTease() {
       name: "30 Day Voice Mastery Program",
       price: "$299",
       cadence: "USD, one payment",
-      copy: "Ten minutes a day for 30 days with Bramwell your Voice AI Mentor. Every session scored across Structure, Specificity, Confidence Signals and Relevance. Weekly check ins, an accountability pod, and a Day 1 and Day 30 Readiness Score so the change is a number you can show someone. One human coach costs $300 an hour and gives you an opinion.",
+      copy: "A structured 30 day curriculum with Bramwell your Voice AI Mentor. Week 1 structure under pressure, Week 2 specificity and evidence, Week 3 confidence signals, Week 4 high stakes rehearsal. Every session is impromptu and scored across Structure, Specificity, Confidence Signals and Relevance. Weekly check ins, an accountability pod, and a Day 1 and Day 30 Readiness Score so the change is a number you can show someone. One human coach costs $300 an hour and gives you an opinion.",
       cta: "Get started",
       accent: GOLD,
       featured: true,
@@ -494,7 +494,7 @@ function PricingTease() {
             <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>practice.</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Thirty days of daily practice with Bramwell. Refunded in full after session one if it does not land.
+            Thirty structured sessions with Bramwell. Complete Week 1 and if your Readiness Score has not moved, we refund all $299.
           </p>
         </div>
 
@@ -528,7 +528,7 @@ function PricingTease() {
         </div>
 
         <p className="mt-8 text-center text-xs text-muted-foreground">
-          Take the free 5 minute test first, no card, no login. If your first session does not tell you something specific about how you sound, we refund you in full.
+          Take the free 5 minute test first, no card, no login. Refund terms: complete your Day 1 diagnostic, the first 7 sessions and your Week 1 check in. If your Week 1 Readiness Score has not improved, reply to any Bramwell email within 14 days and we refund the full $299.
         </p>
       </div>
     </section>
@@ -541,7 +541,7 @@ function FAQ() {
     { q: "Is this really live voice?", a: "Yes. You speak. Bramwell listens and responds in real time, like a phone call with a coach." },
     { q: "Do I need to prepare anything?", a: "No. Just click and talk. Bramwell leads the session and tells you exactly what to fix." },
     { q: "Will I sound scripted?", a: "The opposite. Bramwell trains your natural voice to be sharper, warmer and more structured, not robotic." },
-    { q: "What if it is not for me?", a: "Run your first session. If Bramwell does not identify something specific and actionable about how you communicate, we refund you in full. No forms. No questions." },
+    { q: "What if it is not for me?", a: "Complete your Day 1 diagnostic, the first 7 daily sessions and your Week 1 check in. If your Week 1 Readiness Score has not improved on your Day 1 baseline, reply to any Bramwell email within 14 days of purchase and we refund the full $299 to your original payment method within 5 business days." },
     { q: "How is this different from ChatGPT?", a: "ChatGPT can write. Bramwell can hear. Bramwell scores how you sound, not just what you say, and coaches the delivery." },
   ];
   return (
