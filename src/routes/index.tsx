@@ -17,13 +17,13 @@ export const Route = createFileRoute("/")({
         {
           name: "description",
           content:
-            "Your Voice AI Mentor listens to how you speak, scores you across four dimensions, and shows you exactly what is holding you back. Free 5 minute test.",
+            "Find out why you're being ignored. Take the free 5-minute test with Bramwell, your Voice AI Mentor.",
         },
         { property: "og:title", content: "Speak like a CEO | Bramwell.ai Voice AI Mentor" },
         {
           property: "og:description",
           content:
-            "Your Voice AI Mentor scores how you speak across four dimensions and shows you exactly what is holding you back. Free 5 minute test.",
+            "Find out why you're being ignored. Take the free 5-minute test with Bramwell, your Voice AI Mentor.",
         },
       ],
   }),
