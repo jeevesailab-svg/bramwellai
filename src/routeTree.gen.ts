@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WaitlistRouteImport } from './routes/waitlist'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as The7QuestionsRouteImport } from './routes/the-7-questions'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ProgramRouteImport } from './routes/program'
@@ -41,6 +42,11 @@ import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/publi
 const WaitlistRoute = WaitlistRouteImport.update({
   id: '/waitlist',
   path: '/waitlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const The7QuestionsRoute = The7QuestionsRouteImport.update({
@@ -198,6 +204,7 @@ export interface FileRoutesByFullPath {
   '/program': typeof ProgramRoute
   '/signup': typeof SignupRoute
   '/the-7-questions': typeof The7QuestionsRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/waitlist': typeof WaitlistRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -227,6 +234,7 @@ export interface FileRoutesByTo {
   '/program': typeof ProgramRoute
   '/signup': typeof SignupRoute
   '/the-7-questions': typeof The7QuestionsRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/waitlist': typeof WaitlistRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -258,6 +266,7 @@ export interface FileRoutesById {
   '/program': typeof ProgramRoute
   '/signup': typeof SignupRoute
   '/the-7-questions': typeof The7QuestionsRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/waitlist': typeof WaitlistRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -290,6 +299,7 @@ export interface FileRouteTypes {
     | '/program'
     | '/signup'
     | '/the-7-questions'
+    | '/unsubscribe'
     | '/waitlist'
     | '/diagnostic/result'
     | '/email/unsubscribe'
@@ -319,6 +329,7 @@ export interface FileRouteTypes {
     | '/program'
     | '/signup'
     | '/the-7-questions'
+    | '/unsubscribe'
     | '/waitlist'
     | '/diagnostic/result'
     | '/email/unsubscribe'
@@ -349,6 +360,7 @@ export interface FileRouteTypes {
     | '/program'
     | '/signup'
     | '/the-7-questions'
+    | '/unsubscribe'
     | '/waitlist'
     | '/diagnostic/result'
     | '/email/unsubscribe'
@@ -380,6 +392,7 @@ export interface RootRouteChildren {
   ProgramRoute: typeof ProgramRoute
   SignupRoute: typeof SignupRoute
   The7QuestionsRoute: typeof The7QuestionsRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
   WaitlistRoute: typeof WaitlistRoute
   DiagnosticResultRoute: typeof DiagnosticResultRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
@@ -404,6 +417,13 @@ declare module '@tanstack/react-router' {
       path: '/waitlist'
       fullPath: '/waitlist'
       preLoaderRoute: typeof WaitlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/the-7-questions': {
@@ -624,6 +644,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProgramRoute: ProgramRoute,
   SignupRoute: SignupRoute,
   The7QuestionsRoute: The7QuestionsRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
   WaitlistRoute: WaitlistRoute,
   DiagnosticResultRoute: DiagnosticResultRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
@@ -643,3 +664,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
