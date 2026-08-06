@@ -319,9 +319,52 @@ function ProgramPage() {
         </div>
       </section>
 
+      {/* Curriculum */}
+      <section className="bg-background py-20 md:py-28">
+        <div className="mx-auto max-w-5xl px-6 md:px-10">
+          <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>
+            The 30 day curriculum
+          </p>
+          <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Four weeks. One skill layered on the last.
+          </h2>
+          <p className="mt-4 max-w-2xl text-base text-muted-foreground">
+            Every session is impromptu. No scripts, no slides, no rehearsing in the shower. Your
+            Mentor sets a cold prompt, you answer, you get scored, you run it again. That is how
+            speaking actually improves.
+          </p>
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {CURRICULUM.map((w) => (
+              <article key={w.week} className="rounded-2xl border border-border bg-foreground/[0.02] p-7">
+                <div className="flex items-baseline justify-between gap-4">
+                  <span
+                    className="text-xs font-semibold uppercase tracking-[0.18em]"
+                    style={{ color: "var(--primary)" }}
+                  >
+                    {w.week}
+                  </span>
+                  <span className="text-xs text-muted-foreground">{w.focus}</span>
+                </div>
+                <h3 className="mt-3 text-xl font-semibold tracking-tight">{w.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{w.body}</p>
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {w.drills.map((d) => (
+                    <li
+                      key={d}
+                      className="rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/80"
+                    >
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Enrol */}
-      <section id="enrol" className="bg-background py-20 md:py-28">
-        {/* placeholder anchor */}
+      <section id="enrol" className="border-t border-border bg-background py-20 md:py-28">
         <div className="mx-auto max-w-2xl px-6 md:px-10">
           <article
             className="relative flex flex-col rounded-2xl border border-foreground/30 bg-foreground/[0.04] p-8"
