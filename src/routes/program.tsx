@@ -405,11 +405,19 @@ function ProgramPage() {
             Frequently asked questions
           </h2>
           <div className="mt-10 divide-y divide-border border-y border-border">
-            {FAQS.map((f) => (
-              <div key={f.q} className="py-6">
-                <h3 className="text-base font-semibold tracking-tight">{f.q}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
-              </div>
+            {FAQS.map((f, i) => (
+              <details key={f.q} className="group py-5" open={i === 0}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold tracking-tight">
+                  {f.q}
+                  <span
+                    aria-hidden
+                    className="text-muted-foreground transition-transform group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+              </details>
             ))}
           </div>
           <p className="mt-10 text-sm text-muted-foreground">
@@ -423,20 +431,36 @@ function ProgramPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="border-t border-border bg-foreground/[0.02] py-20 md:py-24">
+      <section className="bg-foreground py-20 text-background md:py-28">
         <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
-          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Break through to the next level in your voice
+          <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+            Thirty days from now, they stop talking over you.
           </h2>
-          <div className="mt-8 flex justify-center">
-            <CtaButton href="/diagnostic?autostart=1" size="lg" showIcon={false} showArrow={false}>
-              Start the test ↓
+          <p className="mx-auto mt-5 max-w-lg text-base opacity-70">
+            Cohort 1 starts {COHORT_START}. Ten minutes a day. One payment of $299.
+          </p>
+          <div className="mt-9 flex justify-center">
+            <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false}>
+              Get started
             </CtaButton>
           </div>
         </div>
       </section>
 
       <SiteFooter />
+
+      {/* Sticky buy bar */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 px-4 py-3 backdrop-blur md:hidden">
+        <div className="flex items-center gap-3">
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm font-semibold">30 Day Voice Mastery</p>
+            <p className="truncate text-xs text-muted-foreground">$299 USD, one payment</p>
+          </div>
+          <CtaButton as="button" onClick={startCheckout} size="sm" showIcon={false}>
+            Get started
+          </CtaButton>
+        </div>
+      </div>
 
       {isOpen ? (
         <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-foreground/40 p-4 backdrop-blur-sm">
