@@ -237,7 +237,7 @@ function PortalCoachPage() {
               </span>
             )}
             <Link
-              to="/portal/setup"
+              to="/portal/setup" search={{}}
               className="text-muted-foreground hover:text-foreground"
             >
               Update CV / JD

@@ -22,7 +22,7 @@ function PortalGate() {
       const ready =
         !!row?.cv_text && row.cv_text.trim().length >= 50 &&
         !!row?.jd_text && row.jd_text.trim().length >= 50;
-      navigate({ to: ready ? "/portal/coach" : "/portal/setup", replace: true });
+      navigate({ to: ready ? "/portal/coach" : "/portal/setup", search: {}, replace: true });
     })();
     return () => {
       cancelled = true;

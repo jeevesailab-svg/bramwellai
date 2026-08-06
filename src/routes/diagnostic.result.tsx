@@ -270,7 +270,7 @@ function DiagnosticResultPage() {
                     you normally would, and Bramwell will score you on the spot.
                   </p>
                   <Link
-                    to="/diagnostic"
+                    to="/diagnostic" search={{}}
                     className="mt-8 inline-flex h-12 items-center justify-center rounded-full px-8 text-sm font-semibold transition hover:opacity-95"
                     style={{
                       background: "var(--gradient-gold)",
@@ -284,7 +284,7 @@ function DiagnosticResultPage() {
                 <>
                   <p className="text-sm text-destructive">{state.message}</p>
                   <Link
-                    to="/diagnostic"
+                    to="/diagnostic" search={{}}
                     className="mt-6 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium transition hover:bg-foreground/10"
                   >
                     Take the diagnostic

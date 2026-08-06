@@ -22,10 +22,10 @@ function LoginPage() {
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (session) navigate({ to: "/portal" });
+      if (session) navigate({ to: "/portal", search: {} });
     });
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/portal" });
+      if (data.session) navigate({ to: "/portal", search: {} });
     });
     return () => subscription.unsubscribe();
   }, [navigate]);

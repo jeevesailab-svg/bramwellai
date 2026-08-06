@@ -7,17 +7,17 @@ export const Route = createFileRoute("/waitlist")({
   component: WaitlistPage,
   head: () => ({
     meta: [
-      { title: "Bramwell for Sales Teams | Clone your best salesperson" },
+      { title: "30 Day Team Voice Mastery Program | Bramwell your Voice AI Mentor" },
       {
         name: "description",
         content:
-          "We help founders and CEOs clone their best salesperson to build the strongest sales team to propel growth. Bramwell studies your top performer and trains every rep to close the same way. Apply for the September intake.",
+          "Your Voice AI Mentor in every rep's pocket. Clone your founder. Build an army of closers. 30 days, manager dashboard, team benchmarking. $1,500 for 10 seats.",
       },
-      { property: "og:title", content: "Bramwell for Sales Teams | Clone your best salesperson" },
+      { property: "og:title", content: "30 Day Team Voice Mastery Program | Bramwell your Voice AI Mentor" },
       {
         property: "og:description",
         content:
-          "We help founders and CEOs clone their best salesperson to build the strongest sales team to propel growth. Get a free sales team assessment.",
+          "Every rep trains daily against your founder's pitch with their Voice AI Mentor. Team benchmark on Day 1, proof on Day 30.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -39,34 +39,122 @@ const ROLES = [
 
 const BENEFITS = [
   {
+    icon: "🧬",
+    title: "Clone your founder's pitch",
+    body: "Bramwell your Voice AI Mentor turns your founder's words, pace, objections and closes into daily practice every rep trains against.",
+  },
+  {
     icon: "🎯",
-    title: "The Methodology",
-    body: "Your team learns the exact influence and persuasion formula used by the world's top sales performers. Structured, repeatable, scoreable.",
+    title: "Master the art of closing",
+    body: "Win any deal by uncovering the secret behind how prospects decide to listen. Your Mentor rehearses with every rep until they own it.",
+  },
+  {
+    icon: "📈",
+    title: "Gain a competitive edge",
+    body: "Create a comprehensive voice strategy to target your ideal prospects and build pipeline, guided by your Mentor every step.",
   },
   {
     icon: "🎙️",
-    title: "Live Practice Sessions",
-    body: "Reps practise real objection handling, discovery and closing conversations with Bramwell before they cost you a live deal.",
-  },
-  {
-    icon: "📊",
-    title: "Team Performance Scores",
-    body: "Every session scored. Every rep tracked. You see exactly who is ready and who needs work, before the next pipeline review.",
+    title: "Take charge of your team's presence",
+    body: "Use proven insights from your Mentor to steer your reps through any call, objection or conversation.",
   },
   {
     icon: "⚡",
-    title: "Live in One Day",
-    body: "No IT. No procurement. No 6 month onboarding. Bramwell Sales Coach is running for your team within 24 hours of signing.",
+    title: "Stay ahead of the competition",
+    body: "Build a team that is differentiated and adaptable no matter the market. Your Mentor adapts practice as each rep grows.",
   },
   {
-    icon: "🔒",
-    title: "Waitlist Pricing",
-    body: "Founding members lock in pricing significantly below public launch. First in, best deal. Never repeated.",
+    icon: "🗺️",
+    title: "Create a map for your team",
+    body: "Your Mentor builds a flexible, results driven plan so you hit your revenue goals faster.",
+  },
+];
+
+const PILLARS = [
+  {
+    title: "Personalised attention",
+    body: "Bramwell your Voice AI Mentor runs live practice sessions with every rep, listening, scoring and building a plan for each rep's exact gaps. Your manager dashboard tracks it all.",
   },
   {
-    icon: "🤝",
-    title: "Personal Onboarding",
-    body: "Every accepted team gets a personal onboarding call. We configure Bramwell to your playbook, your ICP and your objections.",
+    title: "Practical strategies",
+    body: "Improve your team's tone, pace and confidence immediately, with real time feedback from the Mentor after every practice session.",
+  },
+  {
+    title: "Immersive experiences",
+    body: "This is not passive training. Your reps speak with their Voice AI Mentor daily. It listens. It scores. They adjust.",
+  },
+  {
+    title: "Empowering discoveries",
+    body: "Break the cycle of reps freezing on calls, with a Mentor that never judges, never gets impatient, and is always available.",
+  },
+];
+
+const METHOD = [
+  {
+    step: "Diagnose",
+    body: "Every rep takes the free test and speaks with their Voice AI Mentor for 5 minutes. You get a team benchmark report on Day 1. Most sales leaders have never measured their team's voice. The numbers might sting. That is the point.",
+  },
+  {
+    step: "Practise",
+    body: "Five minutes a day with their Voice AI Mentor. Every rep trains against your founder's pitch: their words, their pace, their objections, their closes. 30 sessions. 4 weekly check ins. A pod that holds them to it.",
+  },
+  {
+    step: "Perform",
+    body: "Week by week every rep's score moves. Week 1: team average 48. Week 2: 53. Week 3: 57. Week 4: 62. You see the difference in your next pipeline review.",
+  },
+  {
+    step: "Prove",
+    body: "Day 30. Every rep retakes the diagnostic with their Voice AI Mentor. Team average went from 48 to 62. You can see it. You can share it with your VP. You can prove it.",
+  },
+];
+
+const TESTIMONIALS = [
+  { quote: "You are accomplishing in 30 days what it would probably take a year of coaching to learn.", name: "Marcus, VP of Sales" },
+  { quote: "My team's average score went from 48 to 62. I showed my VP. She said how did you do that?", name: "David, Sales Manager" },
+  { quote: "Every rep on my team now pitches like our founder. Same words. Same confidence. Same closes.", name: "Lisa, Revenue Lead" },
+  { quote: "We used to rely on one or two heroes to carry the number. Now every rep sounds like a closer.", name: "James, Head of Sales" },
+];
+
+const FAQS = [
+  {
+    q: "What is the 30 Day Team Voice Mastery Program?",
+    a: "A 30 day structured voice training program for sales teams with a Voice AI Mentor. Every rep practises daily against your founder's pitch with their Mentor, an AI that listens, scores and gives real time feedback. You get a team benchmark on Day 1, weekly score updates, and a final report on Day 30 that proves the transformation.",
+  },
+  {
+    q: "Who is it for?",
+    a: "VPs and sales managers, founders and revenue leaders, anyone who wants their team to pitch like their top performer. If your reps freeze on calls, lose deals in the first 30 seconds, or sound nothing like your founder, this is for you.",
+  },
+  {
+    q: "How does the founder cloning work?",
+    a: "You upload your founder's best pitch: their words, pace, objection handling and closes. Bramwell's Voice AI Mentor turns that into roleplay scenarios every rep trains against, scores their responses against your founder's patterns, and gives real time feedback. Cloning means cloning the pitch, words and approach into AI practice scenarios, not cloning a literal voice or creating deepfakes.",
+  },
+  {
+    q: "What can I expect my team to learn?",
+    a: "Daily voice practice with their Voice AI Mentor, scored across four dimensions: Structure, Specificity, Confidence Signals and Relevance. Weekly check ins that track every rep's score, a manager dashboard with team benchmarking, and a before and after Readiness Score for every rep.",
+  },
+  {
+    q: "How long is the program?",
+    a: "30 days. Daily practice takes 5 minutes per rep. Weekly check ins take 15 minutes. The full program runs across 4 weeks with a final team retest on Day 30.",
+  },
+  {
+    q: "How much does it cost?",
+    a: "$1,500 for 10 seats. That is $150 per rep for 30 days of daily practice, team benchmarking, and a manager dashboard that proves the change.",
+  },
+  {
+    q: "We already use a sales enablement tool, is this different?",
+    a: "Yes. Sales enablement tools tell your reps what to say. Bramwell trains how they say it. The Readiness Score measures tone, pace, confidence signals and structure, not just content. Most enablement tools do not score voice. Bramwell does.",
+  },
+  {
+    q: "I have a sales kickoff in 4 weeks, can this work?",
+    a: "That is exactly what the program is designed for. Run it before the kickoff. Every rep's score moves before the event and you walk in with a benchmarked team.",
+  },
+  {
+    q: "Is there a manager dashboard?",
+    a: "Yes. You see every rep's daily practice, weekly score movement and team benchmark. Week 2: average 48. Week 4: average 62. Printable one pager for your VP.",
+  },
+  {
+    q: "What makes this different from hiring a sales coach?",
+    a: "The global average for a communication coach is $244 per hour, per the ICF 2023 Global Coaching Study. For $150 per rep, every rep gets 30 days of daily practice with their Voice AI Mentor against your founder's pitch, not one hour of coaching they forget in a week. The Mentor is always available and never cancels.",
   },
 ];
 
@@ -123,7 +211,7 @@ function WaitlistPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <SiteNav ctaLabel="Get a free assessment" ctaHref="#apply" />
+      <SiteNav ctaLabel="Audit my team now" ctaHref="#apply" />
 
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border">
@@ -131,27 +219,54 @@ function WaitlistPage() {
           <div className="flex flex-col items-center text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3 py-1 text-xs font-medium uppercase tracking-widest text-muted-foreground backdrop-blur">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full" style={{ background: "var(--primary)" }} />
-              Bramwell for Sales Teams, By Application
+              Bramwell for Sales Teams
             </span>
-            <p className="mt-6 text-sm font-medium uppercase tracking-widest" style={{ color: "var(--primary)" }}>
-              Want this built for you?
-            </p>
-            <h1 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-              We help founders and CEOs clone their best salesperson to build the <GoldText>strongest sales team</GoldText> to propel growth.
+            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+              30 Day <GoldText>Team Voice Mastery</GoldText> Program
             </h1>
-            <p className="mt-6 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground md:text-lg">
-              Bramwell studies your top performer, extracts exactly what they do differently, and trains every rep on your team to do the same. Until closing is no longer a personality. It's a system.
+            <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground">
+              Your Voice AI Mentor in every rep's pocket. Clone your founder. Build an army of closers.
             </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground">
-              <span className="rounded-full border border-border bg-white/70 px-3 py-1">September intake</span>
-              <span className="rounded-full border border-border bg-white/70 px-3 py-1">12 teams selected</span>
-              <span className="rounded-full border border-border bg-white/70 px-3 py-1">Founding pricing, locked forever</span>
-            </div>
-            <div className="mt-10">
-              <CtaButton as="button" onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })} size="md">
-                Get a free sales team assessment
+            <p className="mt-4 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground">
+              Get the concrete strategies and tools that have transformed thousands of sales teams at
+              every stage. Your Voice AI Mentor trains every rep daily against your founder's pitch.
+            </p>
+            <div className="mt-9">
+              <CtaButton as="button" onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })} size="lg" showIcon={false} showArrow={false}>
+                Audit my team now ↓
               </CtaButton>
             </div>
+            <dl className="mt-12 grid w-full max-w-3xl grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border text-left sm:grid-cols-3">
+              {[
+                { k: "Date", v: "Cohort 1, starts 15 August 2026" },
+                { k: "Format", v: "30 day online program, manager dashboard, pods" },
+                { k: "Price", v: "$1,500 for 10 seats" },
+              ].map((row) => (
+                <div key={row.k} className="bg-white/80 px-5 py-4 backdrop-blur">
+                  <dt className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{row.k}</dt>
+                  <dd className="mt-1 text-sm font-medium">{row.v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section className="border-b border-border py-20 md:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 md:grid-cols-2 md:px-10">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">About</p>
+            <h2 className="mt-3 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+              Your Voice AI Mentor. <GoldText>Every rep. Every day.</GoldText>
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+              Bramwell your Voice AI Mentor in every rep's pocket, training them on the system for
+              sustainable sales transformation. They speak. It listens. It scores. Every day for 30 days.
+            </p>
+          </div>
+          <div className="flex aspect-video items-center justify-center rounded-3xl border border-border bg-white shadow-sm">
+            <span className="text-sm uppercase tracking-widest text-muted-foreground">Watch video</span>
           </div>
         </div>
       </section>
@@ -200,7 +315,7 @@ function WaitlistPage() {
               {error && <p className="mt-4 text-sm" style={{ color: "var(--destructive, #b00020)" }}>{error}</p>}
               <div className="mt-6">
                 <CtaButton as="button" size="md" className={submitting ? "opacity-60" : ""}>
-                  {submitting ? "Submitting…" : "Get my free assessment"}
+                  {submitting ? "Submitting…" : "Audit my team now"}
                 </CtaButton>
               </div>
               <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
@@ -217,11 +332,10 @@ function WaitlistPage() {
       <section className="border-b border-border py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <div className="max-w-2xl">
-            <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Founding members only</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Key benefits</p>
             <h2 className="mt-3 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-              What waitlist members
-              <br />
-              <GoldText>get first.</GoldText>
+              Your Voice AI Mentor in every rep's pocket, training them on the system for{" "}
+              <GoldText>sustainable sales transformation.</GoldText>
             </h2>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -236,18 +350,99 @@ function WaitlistPage() {
         </div>
       </section>
 
+      {/* Pillars */}
+      <section className="border-b border-border bg-white py-20 md:py-24">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <h2 className="max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Change your team's voice and your <GoldText>revenue.</GoldText>
+          </h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {PILLARS.map((p) => (
+              <article key={p.title} className="rounded-3xl border border-border bg-background p-7">
+                <h3 className="text-lg font-semibold tracking-tight">{p.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Method */}
+      <section className="border-b border-border py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">The Bramwell Method for teams</p>
+          <h2 className="mt-3 max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Your Mentor trains every rep against your founder's pitch, scores every response, and{" "}
+            <GoldText>proves every rep's progress.</GoldText>
+          </h2>
+          <ol className="mt-12 grid gap-6 md:grid-cols-2">
+            {METHOD.map((m, i) => (
+              <li key={m.step} className="rounded-3xl border border-border bg-white p-7 shadow-sm">
+                <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--primary)" }}>0{i + 1}</span>
+                <h3 className="mt-3 text-xl font-semibold tracking-tight">{m.step}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            <p className="rounded-3xl border border-border bg-white p-7 text-sm leading-relaxed text-muted-foreground">
+              41% of your reps want more roleplay. Only 26% are getting it. That gap is costing you deals.
+              <span className="mt-2 block text-xs">Source: Salesforce State of Sales 2026</span>
+            </p>
+            <p className="rounded-3xl border border-border bg-white p-7 text-sm leading-relaxed text-muted-foreground">
+              Snowflake eliminated 1,215 manager hours per quarter with AI roleplay. Your team is next.
+              <span className="mt-2 block text-xs">Source: Yoodli case study</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="border-b border-border bg-white py-20 md:py-24">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            See what others are saying
+          </h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {TESTIMONIALS.map((t) => (
+              <figure key={t.name} className="rounded-3xl border border-border bg-background p-7">
+                <blockquote className="text-base leading-relaxed">"{t.quote}"</blockquote>
+                <figcaption className="mt-4 text-xs uppercase tracking-widest text-muted-foreground">{t.name}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="border-b border-border py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6 md:px-10">
+          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+            Frequently asked questions
+          </h2>
+          <div className="mt-10 divide-y divide-border border-y border-border">
+            {FAQS.map((f) => (
+              <div key={f.q} className="py-6">
+                <h3 className="text-base font-semibold tracking-tight">{f.q}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="border-b border-border bg-background py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
           <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            The next intake closes when we hit <GoldText>12 teams.</GoldText>
+            Break through to the next level in your <GoldText>team's voice.</GoldText>
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
-            After that, founding pricing is gone and the waitlist re opens for the following quarter.
+            Stop hiring and hoping. Start cloning and closing. $1,500 for 10 seats, 30 days, proof on Day 30.
           </p>
           <div className="mt-8 flex justify-center">
             <CtaButton as="button" onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })} size="md">
-              Get a free sales team assessment
+              Audit my team now ↓
             </CtaButton>
           </div>
         </div>
