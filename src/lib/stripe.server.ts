@@ -136,7 +136,7 @@ export const PATHWAY_CONFIG = {
     sessions: 9999,
     minutes: 10,
     accessDays: 30,
-    welcome: 'Day one starts now. Ten minutes a day, thirty days, and you will not sound like this again.',
+    welcome: 'Day one starts now. Four weeks of structured impromptu practice, thirty scored sessions, and you will not sound like this again.',
     productName: '30-Day Voice Mastery Program',
   },
 } as const;
