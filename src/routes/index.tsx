@@ -13,17 +13,17 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
       meta: [
-        { title: "Are you heard, or ignored? | Bramwell.ai" },
+        { title: "Speak like a CEO | Bramwell.ai Voice AI Mentor" },
         {
           name: "description",
           content:
-            "Ever feel like the smartest person in the room, but the one who gets ignored? Take the free 5 minute live voice test and find out why. No login, no card.",
+            "Your Voice AI Mentor listens to how you speak, scores you across four dimensions, and shows you exactly what is holding you back. Free 5 minute test.",
         },
-        { property: "og:title", content: "Are you heard, or ignored? | Bramwell.ai" },
+        { property: "og:title", content: "Speak like a CEO | Bramwell.ai Voice AI Mentor" },
         {
           property: "og:description",
           content:
-            "Ever feel like the smartest person in the room, but the one who gets ignored? Take the free 5 minute live voice test and find out why.",
+            "Your Voice AI Mentor scores how you speak across four dimensions and shows you exactly what is holding you back. Free 5 minute test.",
         },
       ],
   }),
