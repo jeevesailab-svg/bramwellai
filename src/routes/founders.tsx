@@ -1,29 +1,31 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { SiteNav, SiteFooter, GoldText } from "@/components/site/SiteChrome";
+import { SiteNav, SiteFooter } from "@/components/site/SiteChrome";
 import { CtaButton } from "@/components/site/CtaButton";
 
 export const Route = createFileRoute("/founders")({
-  component: WaitlistPage,
+  component: FoundersPage,
   head: () => ({
     meta: [
-      { title: "30 Day Team Voice Mastery Program | Bramwell your Voice AI Mentor" },
+      { title: "Clone Your Best Closer | 30 Day Team Voice Mastery | Bramwell" },
       {
         name: "description",
         content:
-          "Your Voice AI Mentor in every rep's pocket. Clone your founder. Build an army of closers. 30 days, manager dashboard, team benchmarking. $1,500 for 10 seats.",
+          "Your best closer is one person. Make them everyone. Every rep trains daily against your founder's pitch with their Voice AI Mentor. 30 days. $1,500 for 10 seats.",
       },
-      { property: "og:title", content: "30 Day Team Voice Mastery Program | Bramwell your Voice AI Mentor" },
+      { property: "og:title", content: "Clone Your Best Closer | 30 Day Team Voice Mastery" },
       {
         property: "og:description",
         content:
-          "Every rep trains daily against your founder's pitch with their Voice AI Mentor. Team benchmark on Day 1, proof on Day 30.",
+          "Every rep trains daily against your founder's pitch with their Voice AI Mentor. Team benchmark on Day 1. Proof on Day 30.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
 });
+
+const COHORT_START = "15 August 2026";
 
 const TEAM_SIZES = ["1-10 reps", "11-25 reps", "26-50 reps", "51-100 reps", "100+ reps"];
 const ROLES = [
@@ -37,128 +39,110 @@ const ROLES = [
   "Other",
 ];
 
-const BENEFITS = [
-  {
-    icon: "🧬",
-    title: "Clone your founder's pitch",
-    body: "Bramwell your Voice AI Mentor turns your founder's words, pace, objections and closes into daily practice every rep trains against.",
-  },
-  {
-    icon: "🎯",
-    title: "Master the art of closing",
-    body: "Win any deal by uncovering the secret behind how prospects decide to listen. Your Mentor rehearses with every rep until they own it.",
-  },
-  {
-    icon: "📈",
-    title: "Gain a competitive edge",
-    body: "Create a comprehensive voice strategy to target your ideal prospects and build pipeline, guided by your Mentor every step.",
-  },
-  {
-    icon: "🎙️",
-    title: "Take charge of your team's presence",
-    body: "Use proven insights from your Mentor to steer your reps through any call, objection or conversation.",
-  },
-  {
-    icon: "⚡",
-    title: "Stay ahead of the competition",
-    body: "Build a team that is differentiated and adaptable no matter the market. Your Mentor adapts practice as each rep grows.",
-  },
-  {
-    icon: "🗺️",
-    title: "Create a map for your team",
-    body: "Your Mentor builds a flexible, results driven plan so you hit your revenue goals faster.",
-  },
+const STATS = [
+  { n: "41%", l: "of reps want more roleplay practice", s: "Salesforce, State of Sales 2026" },
+  { n: "26%", l: "actually get it from their manager", s: "Salesforce, State of Sales 2026" },
+  { n: "1,215", l: "manager hours a quarter freed by AI roleplay", s: "Snowflake, Yoodli case study" },
 ];
 
 const PILLARS = [
   {
-    title: "Personalised attention",
-    body: "Bramwell your Voice AI Mentor runs live practice sessions with every rep, listening, scoring and building a plan for each rep's exact gaps. Your manager dashboard tracks it all.",
+    k: "01",
+    title: "Clone your best closer",
+    body: "You upload the pitch that wins. Their words, their pace, their objection handling, their close. Your Voice AI Mentor turns it into daily roleplay every rep trains against.",
   },
   {
-    title: "Practical strategies",
-    body: "Improve your team's tone, pace and confidence immediately, with real time feedback from the Mentor after every practice session.",
+    k: "02",
+    title: "Practice that actually happens",
+    body: "Five minutes a day, every day, for every rep. No calendar tetris, no manager shadowing, no waiting for a coach who cancels. The Mentor never cancels.",
   },
   {
-    title: "Immersive experiences",
-    body: "This is not passive training. Your reps speak with their Voice AI Mentor daily. It listens. It scores. They adjust.",
+    k: "03",
+    title: "A number on every rep",
+    body: "Structure, Specificity, Confidence Signals, Relevance. Every session scored. You finally know who is ready for the enterprise call and who is not.",
   },
   {
-    title: "Empowering discoveries",
-    body: "Break the cycle of reps freezing on calls, with a Mentor that never judges, never gets impatient, and is always available.",
+    k: "04",
+    title: "Proof for your VP",
+    body: "Day 1 team benchmark. Day 30 team benchmark. Average 48 to 62 on one printable page. Not a feeling about ramp. A number.",
   },
 ];
 
 const METHOD = [
   {
     step: "Diagnose",
-    body: "Every rep takes the free test and speaks with their Voice AI Mentor for 5 minutes. You get a team benchmark report on Day 1. Most sales leaders have never measured their team's voice. The numbers might sting. That is the point.",
+    body: "Every rep speaks with their Voice AI Mentor for five minutes. You get a team benchmark on Day 1. Most sales leaders have never measured their team's voice. The numbers sting. That is the point.",
   },
   {
     step: "Practise",
-    body: "Five minutes a day with their Voice AI Mentor. Every rep trains against your founder's pitch: their words, their pace, their objections, their closes. 30 sessions. 4 weekly check ins. A pod that holds them to it.",
+    body: "Five minutes a day against your founder's pitch. Their words. Their objections. Their closes. Thirty sessions, four weekly check ins, a pod that holds them to it.",
   },
   {
     step: "Perform",
-    body: "Week by week every rep's score moves. Week 1: team average 48. Week 2: 53. Week 3: 57. Week 4: 62. You see the difference in your next pipeline review.",
+    body: "Week 1: team average 48. Week 2: 53. Week 3: 57. Week 4: 62. You hear it on live calls before you see it in the dashboard.",
   },
   {
     step: "Prove",
-    body: "Day 30. Every rep retakes the diagnostic with their Voice AI Mentor. Team average went from 48 to 62. You can see it. You can share it with your VP. You can prove it.",
+    body: "Day 30 retest. Team average 48 to 62. You can see it, share it and defend it in the board meeting.",
   },
 ];
 
 const TESTIMONIALS = [
-  { quote: "You are accomplishing in 30 days what it would probably take a year of coaching to learn.", name: "Marcus, VP of Sales" },
-  { quote: "My team's average score went from 48 to 62. I showed my VP. She said how did you do that?", name: "David, Sales Manager" },
-  { quote: "Every rep on my team now pitches like our founder. Same words. Same confidence. Same closes.", name: "Lisa, Revenue Lead" },
-  { quote: "We used to rely on one or two heroes to carry the number. Now every rep sounds like a closer.", name: "James, Head of Sales" },
+  { quote: "You are accomplishing in 30 days what it would take a year of coaching to learn.", name: "Marcus, VP of Sales" },
+  { quote: "My team average went from 48 to 62. I showed my VP. She said how did you do that?", name: "David, Sales Manager" },
+  { quote: "Every rep now pitches like our founder. Same words. Same confidence. Same closes.", name: "Lisa, Revenue Lead" },
+  { quote: "We used to rely on two heroes to carry the number. Now every rep sounds like a closer.", name: "James, Head of Sales" },
+];
+
+const INCLUDED = [
+  "Ten seats, 30 days of daily voice practice per rep",
+  "Your founder's pitch cloned into roleplay scenarios",
+  "Every session scored across four dimensions",
+  "Manager dashboard with live team benchmarking",
+  "Day 1 and Day 30 team report, printable for your VP",
+  "Four weekly check ins and accountability pods",
 ];
 
 const FAQS = [
   {
     q: "What is the 30 Day Team Voice Mastery Program?",
-    a: "A 30 day structured voice training program for sales teams with a Voice AI Mentor. Every rep practises daily against your founder's pitch with their Mentor, an AI that listens, scores and gives real time feedback. You get a team benchmark on Day 1, weekly score updates, and a final report on Day 30 that proves the transformation.",
+    a: "A 30 day voice training program for sales teams. Every rep practises daily against your founder's pitch with a Voice AI Mentor that listens, scores and gives real time feedback. You get a team benchmark on Day 1, weekly score movement, and a final report on Day 30.",
   },
   {
-    q: "Who is it for?",
-    a: "VPs and sales managers, founders and revenue leaders, anyone who wants their team to pitch like their top performer. If your reps freeze on calls, lose deals in the first 30 seconds, or sound nothing like your founder, this is for you.",
-  },
-  {
-    q: "How does the founder cloning work?",
-    a: "You upload your founder's best pitch: their words, pace, objection handling and closes. Bramwell's Voice AI Mentor turns that into roleplay scenarios every rep trains against, scores their responses against your founder's patterns, and gives real time feedback. Cloning means cloning the pitch, words and approach into AI practice scenarios, not cloning a literal voice or creating deepfakes.",
-  },
-  {
-    q: "What can I expect my team to learn?",
-    a: "Daily voice practice with their Voice AI Mentor, scored across four dimensions: Structure, Specificity, Confidence Signals and Relevance. Weekly check ins that track every rep's score, a manager dashboard with team benchmarking, and a before and after Readiness Score for every rep.",
-  },
-  {
-    q: "How long is the program?",
-    a: "30 days. Daily practice takes 5 minutes per rep. Weekly check ins take 15 minutes. The full program runs across 4 weeks with a final team retest on Day 30.",
+    q: "How does cloning your closer work?",
+    a: "You upload your best pitch: words, pace, objection handling and closes. The Mentor turns that into roleplay scenarios and scores every rep against those patterns. Cloning means cloning the pitch and approach into practice scenarios, not cloning a literal voice or creating deepfakes.",
   },
   {
     q: "How much does it cost?",
-    a: "$1,500 for 10 seats. That is $150 per rep for 30 days of daily practice, team benchmarking, and a manager dashboard that proves the change.",
+    a: "$1,500 for 10 seats. That is $150 per rep for 30 days of daily practice, team benchmarking and a manager dashboard that proves the change.",
   },
   {
     q: "We already use a sales enablement tool, is this different?",
-    a: "Yes. Sales enablement tools tell your reps what to say. Bramwell trains how they say it. The Readiness Score measures tone, pace, confidence signals and structure, not just content. Most enablement tools do not score voice. Bramwell does.",
+    a: "Yes. Enablement tools tell reps what to say. Bramwell trains how they say it. The Readiness Score measures structure, specificity, confidence signals and relevance, not just content.",
   },
   {
-    q: "I have a sales kickoff in 4 weeks, can this work?",
-    a: "That is exactly what the program is designed for. Run it before the kickoff. Every rep's score moves before the event and you walk in with a benchmarked team.",
+    q: "I have a sales kickoff in four weeks, can this work?",
+    a: "That is exactly what the program is built for. Run it before the kickoff and walk in with a benchmarked team instead of a hope.",
   },
   {
     q: "Is there a manager dashboard?",
-    a: "Yes. You see every rep's daily practice, weekly score movement and team benchmark. Week 2: average 48. Week 4: average 62. Printable one pager for your VP.",
+    a: "Yes. Every rep's daily practice, weekly score movement and the team benchmark, on one page you can print.",
   },
   {
     q: "What makes this different from hiring a sales coach?",
-    a: "The global average for a communication coach is $244 per hour, per the ICF 2023 Global Coaching Study. For $150 per rep, every rep gets 30 days of daily practice with their Voice AI Mentor against your founder's pitch, not one hour of coaching they forget in a week. The Mentor is always available and never cancels.",
+    a: "The global average for a communication coach is $244 an hour, per the ICF 2023 Global Coaching Study. For $150 a rep you get 30 days of daily practice against your own winning pitch, not one hour they forget in a week.",
+  },
+  {
+    q: "How long is the program?",
+    a: "30 days. Five minutes of practice a day per rep. Fifteen minute weekly check ins. Final team retest on Day 30.",
   },
 ];
 
-function WaitlistPage() {
+function scrollToApply() {
+  document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" });
+}
+
+function FoundersPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -209,141 +193,87 @@ function WaitlistPage() {
     }
   }
 
+  const field =
+    "mt-2 h-12 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition focus:border-foreground";
+
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <SiteNav ctaLabel="Audit my team now" ctaHref="#apply" />
+      <SiteNav ctaLabel="Audit my team" ctaHref="#apply" />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border">
-        <div className="mx-auto max-w-6xl px-6 pb-20 pt-16 md:px-10 md:pb-28 md:pt-24">
-          <div className="flex flex-col items-center text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3 py-1 text-xs font-medium uppercase tracking-widest text-muted-foreground backdrop-blur">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full" style={{ background: "var(--primary)" }} />
-              Bramwell for Sales Teams
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-6xl px-6 pb-16 pt-14 md:px-10 md:pb-24 md:pt-20">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-foreground" />
+            Bramwell for sales teams
+          </span>
+
+          <h1 className="mt-8 max-w-4xl text-balance text-[46px] font-semibold leading-[0.94] tracking-[-0.035em] sm:text-7xl md:text-[92px]">
+            Your best closer is one person.
+            <br />
+            Make them everyone.
+          </h1>
+
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            Every rep trains daily against your founder's pitch with their Voice AI Mentor. It
+            listens, it scores, it never cancels. Thirty days later the whole team sounds like your
+            top performer.
+          </p>
+
+          <div className="mt-10 flex flex-wrap items-center gap-5">
+            <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
+              Audit my team
+            </CtaButton>
+            <span className="text-sm text-muted-foreground">
+              Free team benchmark. No card. Cohort 1 starts {COHORT_START}.
             </span>
-            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-              30 Day <GoldText>Team Voice Mastery</GoldText> Program
-            </h1>
-            <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground">
-              Your Voice AI Mentor in every rep's pocket. Clone your founder. Build an army of closers.
-            </p>
-            <p className="mt-4 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground">
-              Get the concrete strategies and tools that have transformed thousands of sales teams at
-              every stage. Your Voice AI Mentor trains every rep daily against your founder's pitch.
-            </p>
-            <div className="mt-9">
-              <CtaButton as="button" onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })} size="lg" showIcon={false} showArrow={false}>
-                Audit my team now ↓
-              </CtaButton>
-            </div>
-            <dl className="mt-12 grid w-full max-w-3xl grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border text-left sm:grid-cols-3">
-              {[
-                { k: "Date", v: "Cohort 1, starts 15 August 2026" },
-                { k: "Format", v: "30 day online program, manager dashboard, pods" },
-                { k: "Price", v: "$1,500 for 10 seats" },
-              ].map((row) => (
-                <div key={row.k} className="bg-white/80 px-5 py-4 backdrop-blur">
-                  <dt className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{row.k}</dt>
-                  <dd className="mt-1 text-sm font-medium">{row.v}</dd>
-                </div>
-              ))}
-            </dl>
           </div>
+
+          <dl className="mt-14 grid w-full grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border text-left sm:grid-cols-3">
+            {[
+              { k: "Date", v: `Cohort 1, starts ${COHORT_START}` },
+              { k: "Format", v: "30 day program, manager dashboard, pods" },
+              { k: "Price", v: "$1,500 for 10 seats" },
+            ].map((row) => (
+              <div key={row.k} className="bg-background px-5 py-5">
+                <dt className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  {row.k}
+                </dt>
+                <dd className="mt-2 text-sm font-medium">{row.v}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
-      {/* About */}
+      {/* Big statement */}
+      <section className="bg-foreground py-24 text-background md:py-32">
+        <div className="mx-auto max-w-5xl px-6 md:px-10">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] opacity-50">
+            The real leak
+          </p>
+          <h2 className="mt-6 text-balance text-[38px] font-semibold leading-[0.98] tracking-[-0.03em] md:text-7xl">
+            You do not have a lead problem.
+            <br />
+            You have a delivery problem.
+          </h2>
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed opacity-70">
+            The deck is fine. The pricing is fine. The deal dies in the first thirty seconds of the
+            call, when the prospect decides whether this rep sounds like someone worth listening to.
+            Nobody scores that. So nobody fixes it.
+          </p>
+        </div>
+      </section>
+
+      {/* Stats */}
       <section className="border-b border-border py-20 md:py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 md:grid-cols-2 md:px-10">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">About</p>
-            <h2 className="mt-3 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-              Your Voice AI Mentor. <GoldText>Every rep. Every day.</GoldText>
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              Bramwell your Voice AI Mentor in every rep's pocket, training them on the system for
-              sustainable sales transformation. They speak. It listens. It scores. Every day for 30 days.
-            </p>
-          </div>
-          <div className="flex aspect-video items-center justify-center rounded-3xl border border-border bg-white shadow-sm">
-            <span className="text-sm uppercase tracking-widest text-muted-foreground">Watch video</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Application form */}
-      <section id="apply" className="border-b border-border bg-white py-20 md:py-28" style={{ boxShadow: "var(--shadow-soft)" }}>
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[1.1fr_1fr] md:px-10">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Step 1 of 1, Application</p>
-            <h2 className="mt-3 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-              We select 12 teams per intake.
-              <br />
-              <GoldText>Tell us why yours should be one.</GoldText>
-            </h2>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground md:text-base">
-              Every application is reviewed by our team. We onboard teams personally, so we cap each intake to protect the quality of the coaching. If you fit, we'll be in touch within 48 hours.
-            </p>
-            <ul className="mt-8 space-y-3 text-sm text-muted-foreground">
-              <li className="flex items-start gap-3"><span style={{ color: "var(--primary)" }}>✓</span> No commitment required to apply</li>
-              <li className="flex items-start gap-3"><span style={{ color: "var(--primary)" }}>✓</span> September intake, limited spots</li>
-              <li className="flex items-start gap-3"><span style={{ color: "var(--primary)" }}>✓</span> Personal onboarding included</li>
-              <li className="flex items-start gap-3"><span style={{ color: "var(--primary)" }}>✓</span> Founding pricing, locked forever</li>
-            </ul>
-          </div>
-
-          {submitted ? (
-            <div className="rounded-3xl border border-border bg-background p-8 shadow-sm">
-              <div className="text-4xl">🎉</div>
-              <h3 className="mt-4 text-2xl font-semibold tracking-tight">Application received.</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Thank you, {form.firstName}. Our team reviews every application personally. If {form.company} is a fit for the September intake, we'll be in touch within 48 hours from a real human, not an automation.
-              </p>
-              <p className="mt-4 text-xs uppercase tracking-widest text-muted-foreground">Position on the list</p>
-              <p className="mt-1 text-xl font-semibold">Reviewing, priority queue</p>
-            </div>
-          ) : (
-            <form onSubmit={onSubmit} className="rounded-3xl border border-border bg-background p-6 shadow-sm md:p-8">
-              <div className="grid gap-4 md:grid-cols-2">
-                <Field label="First Name" placeholder="James" value={form.firstName} onChange={(v) => update("firstName", v)} />
-                <Field label="Last Name" placeholder="Chen" value={form.lastName} onChange={(v) => update("lastName", v)} />
-                <Field label="Work Email" type="email" placeholder="james@company.com" value={form.email} onChange={(v) => update("email", v)} className="md:col-span-2" />
-                <Field label="Company" placeholder="Acme Inc." value={form.company} onChange={(v) => update("company", v)} className="md:col-span-2" />
-                <Select label="Team Size" placeholder="Select team size" options={TEAM_SIZES} value={form.teamSize} onChange={(v) => update("teamSize", v)} />
-                <Select label="Your Role" placeholder="Select your role" options={ROLES} value={form.role} onChange={(v) => update("role", v)} />
-              </div>
-              {error && <p className="mt-4 text-sm" style={{ color: "var(--destructive, #b00020)" }}>{error}</p>}
-              <div className="mt-6">
-                <CtaButton as="button" size="md" className={submitting ? "opacity-60" : ""}>
-                  {submitting ? "Submitting…" : "Audit my team now"}
-                </CtaButton>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-                <span>No commitment required</span>
-                <span>September intake, limited spots</span>
-                <span>Personal onboarding included</span>
-              </div>
-            </form>
-          )}
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="border-b border-border py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
-          <div className="max-w-2xl">
-            <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Key benefits</p>
-            <h2 className="mt-3 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-              Your Voice AI Mentor in every rep's pocket, training them on the system for{" "}
-              <GoldText>sustainable sales transformation.</GoldText>
-            </h2>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {BENEFITS.map((b) => (
-              <div key={b.title} className="rounded-3xl border border-border bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
-                <div className="text-3xl">{b.icon}</div>
-                <h3 className="mt-4 text-lg font-semibold tracking-tight">{b.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{b.body}</p>
+          <div className="grid gap-12 md:grid-cols-3">
+            {STATS.map((s) => (
+              <div key={s.n}>
+                <p className="text-6xl font-semibold tracking-[-0.04em] md:text-7xl">{s.n}</p>
+                <p className="mt-4 text-base font-medium leading-snug">{s.l}</p>
+                <p className="mt-2 text-xs text-muted-foreground">{s.s}</p>
               </div>
             ))}
           </div>
@@ -351,164 +281,269 @@ function WaitlistPage() {
       </section>
 
       {/* Pillars */}
-      <section className="border-b border-border bg-white py-20 md:py-24">
+      <section className="border-b border-border py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
-          <h2 className="max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Change your team's voice and your <GoldText>revenue.</GoldText>
+          <h2 className="max-w-3xl text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
+            Stop hiring and hoping.
+            <br />
+            Start cloning and closing.
           </h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
             {PILLARS.map((p) => (
-              <article key={p.title} className="rounded-3xl border border-border bg-background p-7">
-                <h3 className="text-lg font-semibold tracking-tight">{p.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Method */}
-      <section className="border-b border-border py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-6 md:px-10">
-          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">The Bramwell Method for teams</p>
-          <h2 className="mt-3 max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Your Mentor trains every rep against your founder's pitch, scores every response, and{" "}
-            <GoldText>proves every rep's progress.</GoldText>
-          </h2>
-          <ol className="mt-12 grid gap-6 md:grid-cols-2">
-            {METHOD.map((m, i) => (
-              <li key={m.step} className="rounded-3xl border border-border bg-white p-7 shadow-sm">
-                <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--primary)" }}>0{i + 1}</span>
-                <h3 className="mt-3 text-xl font-semibold tracking-tight">{m.step}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            <p className="rounded-3xl border border-border bg-white p-7 text-sm leading-relaxed text-muted-foreground">
-              41% of your reps want more roleplay. Only 26% are getting it. That gap is costing you deals.
-              <span className="mt-2 block text-xs">Source: Salesforce State of Sales 2026</span>
-            </p>
-            <p className="rounded-3xl border border-border bg-white p-7 text-sm leading-relaxed text-muted-foreground">
-              Snowflake eliminated 1,215 manager hours per quarter with AI roleplay. Your team is next.
-              <span className="mt-2 block text-xs">Source: Yoodli case study</span>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="border-b border-border bg-white py-20 md:py-24">
-        <div className="mx-auto max-w-6xl px-6 md:px-10">
-          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            See what others are saying
-          </h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {TESTIMONIALS.map((t) => (
-              <figure key={t.name} className="rounded-3xl border border-border bg-background p-7">
-                <blockquote className="text-base leading-relaxed">"{t.quote}"</blockquote>
-                <figcaption className="mt-4 text-xs uppercase tracking-widest text-muted-foreground">{t.name}</figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="border-b border-border py-20 md:py-24">
-        <div className="mx-auto max-w-3xl px-6 md:px-10">
-          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Frequently asked questions
-          </h2>
-          <div className="mt-10 divide-y divide-border border-y border-border">
-            {FAQS.map((f) => (
-              <div key={f.q} className="py-6">
-                <h3 className="text-base font-semibold tracking-tight">{f.q}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+              <div key={p.k} className="bg-background p-8 md:p-10">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  {p.k}
+                </span>
+                <h3 className="mt-4 text-2xl font-semibold tracking-tight">{p.title}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="border-b border-border bg-background py-20 md:py-24">
-        <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
-          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Break through to the next level in your <GoldText>team's voice.</GoldText>
-          </h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
-            Stop hiring and hoping. Start cloning and closing. $1,500 for 10 seats, 30 days, proof on Day 30.
+      {/* Method */}
+      <section className="border-b border-border bg-muted py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            The Bramwell Method
           </p>
-          <div className="mt-8 flex justify-center">
-            <CtaButton as="button" onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })} size="md">
-              Audit my team now ↓
-            </CtaButton>
+          <h2 className="mt-6 max-w-3xl text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
+            Four steps. Thirty days. One number that moves.
+          </h2>
+          <ol className="mt-16 grid gap-5 md:grid-cols-2">
+            {METHOD.map((m, i) => (
+              <li key={m.step} className="rounded-2xl border border-border bg-background p-8">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  0{i + 1}
+                </span>
+                <h3 className="mt-3 text-2xl font-semibold tracking-tight">{m.step}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Proof band */}
+      <section className="bg-foreground py-24 text-background md:py-32">
+        <div className="mx-auto max-w-5xl px-6 md:px-10">
+          <h2 className="text-balance text-center text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
+            The change is not a feeling.
+            <br />
+            It is a number.
+          </h2>
+          <div className="mt-16 grid items-center gap-10 md:grid-cols-[1fr_auto_1fr]">
+            <div className="text-center md:text-right">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] opacity-50">
+                Day 1 team average
+              </p>
+              <p className="mt-3 text-7xl font-semibold tracking-[-0.04em] opacity-50 md:text-8xl">48</p>
+              <p className="mt-2 text-sm opacity-60">Two heroes carry the number</p>
+            </div>
+            <div aria-hidden className="text-center text-3xl opacity-40">
+              →
+            </div>
+            <div className="text-center md:text-left">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] opacity-50">
+                Day 30 team average
+              </p>
+              <p className="mt-3 text-7xl font-semibold tracking-[-0.04em] md:text-8xl">62</p>
+              <p className="mt-2 text-sm opacity-80">Every rep sounds like a closer</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="border-b border-border py-24 md:py-28">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-5xl">
+            What sales leaders say
+          </h2>
+          <div className="mt-14 grid gap-5 md:grid-cols-2">
+            {TESTIMONIALS.map((t) => (
+              <figure key={t.name} className="rounded-2xl border border-border bg-background p-8">
+                <blockquote className="text-lg leading-relaxed">"{t.quote}"</blockquote>
+                <figcaption className="mt-5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  {t.name}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Price */}
+      <section className="border-b border-border py-24 md:py-32">
+        <div className="mx-auto max-w-5xl px-6 md:px-10">
+          <div className="grid gap-12 md:grid-cols-2 md:items-center">
+            <div>
+              <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
+                $150 a rep.
+                <br />
+                Thirty days of practice.
+              </h2>
+              <p className="mt-8 text-lg leading-relaxed text-muted-foreground">
+                One hour with a communication coach averages $244 and your reps forget it by Friday.
+                This is daily practice against your own winning pitch, scored every session, for a
+                month.
+              </p>
+              <div className="mt-10">
+                <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
+                  Audit my team
+                </CtaButton>
+              </div>
+            </div>
+            <div className="rounded-2xl border border-border p-8" style={{ boxShadow: "var(--shadow-elegant)" }}>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                30 Day Team Voice Mastery
+              </p>
+              <div className="mt-4 flex items-baseline gap-3">
+                <span className="text-5xl font-semibold tracking-[-0.03em]">$1,500</span>
+                <span className="text-sm text-muted-foreground">USD, 10 seats</span>
+              </div>
+              <ul className="mt-8 space-y-3 text-sm">
+                {INCLUDED.map((i) => (
+                  <li key={i} className="flex gap-3 text-foreground/90">
+                    <span aria-hidden className="mt-2 inline-block h-1.5 w-1.5 flex-none rounded-full bg-foreground" />
+                    {i}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Apply */}
+      <section id="apply" className="border-b border-border bg-muted py-24 md:py-32">
+        <div className="mx-auto max-w-3xl px-6 md:px-10">
+          <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
+            Get a free team assessment.
+          </h2>
+          <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+            Tell us about your team. We benchmark your reps and show you exactly where the deals are
+            leaking, before you spend a dollar.
+          </p>
+
+          {submitted ? (
+            <div className="mt-10 rounded-2xl border border-border bg-background p-8">
+              <h3 className="text-2xl font-semibold tracking-tight">Application received.</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                We review every application by hand. If your team is a fit for Cohort 1 you will
+                hear from us within two business days with your assessment details.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={onSubmit} className="mt-10 rounded-2xl border border-border bg-background p-8">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <label className="block text-sm font-medium">
+                  First name
+                  <input className={field} value={form.firstName} onChange={(e) => update("firstName", e.target.value)} />
+                </label>
+                <label className="block text-sm font-medium">
+                  Last name
+                  <input className={field} value={form.lastName} onChange={(e) => update("lastName", e.target.value)} />
+                </label>
+                <label className="block text-sm font-medium sm:col-span-2">
+                  Work email
+                  <input type="email" className={field} value={form.email} onChange={(e) => update("email", e.target.value)} />
+                </label>
+                <label className="block text-sm font-medium sm:col-span-2">
+                  Company
+                  <input className={field} value={form.company} onChange={(e) => update("company", e.target.value)} />
+                </label>
+                <label className="block text-sm font-medium">
+                  Team size
+                  <select className={field} value={form.teamSize} onChange={(e) => update("teamSize", e.target.value)}>
+                    <option value="">Select</option>
+                    {TEAM_SIZES.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block text-sm font-medium">
+                  Your role
+                  <select className={field} value={form.role} onChange={(e) => update("role", e.target.value)}>
+                    <option value="">Select</option>
+                    {ROLES.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
+              {error ? <p className="mt-5 text-sm text-destructive">{error}</p> : null}
+
+              <div className="mt-8">
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="inline-flex h-14 w-full items-center justify-center gap-3 rounded-full text-base font-semibold text-primary-foreground transition hover:-translate-y-0.5 hover:opacity-90 disabled:opacity-60"
+                  style={{ background: "var(--gradient-cta)", boxShadow: "var(--shadow-cta)" }}
+                >
+                  {submitting ? "Sending" : "Audit my team"} <span>→</span>
+                </button>
+              </div>
+              <p className="mt-4 text-xs text-muted-foreground">
+                We only use these details to review your team and send your assessment.
+              </p>
+            </form>
+          )}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="border-b border-border py-24 md:py-28">
+        <div className="mx-auto max-w-3xl px-6 md:px-10">
+          <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-5xl">
+            Frequently asked questions
+          </h2>
+          <div className="mt-12 divide-y divide-border border-y border-border">
+            {FAQS.map((f, i) => (
+              <details key={f.q} className="group py-5" open={i === 0}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold tracking-tight">
+                  {f.q}
+                  <span aria-hidden className="text-muted-foreground transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="bg-foreground py-28 text-background md:py-36">
+        <div className="mx-auto max-w-4xl px-6 text-center md:px-10">
+          <h2 className="text-balance text-[42px] font-semibold leading-[0.96] tracking-[-0.035em] md:text-7xl">
+            Thirty days from now,
+            <br />
+            every rep sounds like your best one.
+          </h2>
+          <p className="mx-auto mt-8 max-w-xl text-lg opacity-70">
+            Cohort 1 starts {COHORT_START}. Ten seats. $1,500.
+          </p>
+          <div className="mt-10 flex justify-center">
+            <button
+              type="button"
+              onClick={scrollToApply}
+              className="inline-flex h-14 items-center justify-center gap-3 rounded-full bg-background px-9 text-base font-semibold text-foreground transition hover:-translate-y-0.5 hover:opacity-90"
+            >
+              Audit my team <span>→</span>
+            </button>
           </div>
         </div>
       </section>
 
       <SiteFooter />
     </main>
-  );
-}
-
-function Field({
-  label,
-  value,
-  onChange,
-  placeholder,
-  type = "text",
-  className = "",
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-  type?: string;
-  className?: string;
-}) {
-  return (
-    <label className={`block ${className}`}>
-      <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">{label}</span>
-      <input
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        maxLength={200}
-        className="mt-2 h-11 w-full rounded-xl border border-border bg-background px-4 text-sm text-foreground outline-none transition focus:border-foreground/40"
-      />
-    </label>
-  );
-}
-
-function Select({
-  label,
-  value,
-  onChange,
-  options,
-  placeholder,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  options: string[];
-  placeholder: string;
-}) {
-  return (
-    <label className="block">
-      <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">{label}</span>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="mt-2 h-11 w-full rounded-xl border border-border bg-background px-3 text-sm text-foreground outline-none transition focus:border-foreground/40"
-      >
-        <option value="">{placeholder}</option>
-        {options.map((o) => (
-          <option key={o} value={o}>{o}</option>
-        ))}
-      </select>
-    </label>
   );
 }
