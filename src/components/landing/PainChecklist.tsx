@@ -1,4 +1,4 @@
-import { Mic } from "lucide-react";
+import { CtaButton } from "@/components/site/CtaButton";
 
 const PAINS = [
   {
