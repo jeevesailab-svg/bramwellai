@@ -32,7 +32,7 @@ function SignupPage() {
         if (pending) {
           navigate({ to: "/program", search: { resume: pending } as any });
         } else {
-          navigate({ to: "/portal", search: {} });
+          navigate({ to: "/portal" });
         }
       }
     });
