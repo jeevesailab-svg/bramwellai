@@ -236,7 +236,7 @@ function DiagnosticResultPage() {
         </Link>
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
           <Link to="/" className="transition-colors hover:text-foreground">Home</Link>
-          <Link to="/pricing" className="transition-colors hover:text-foreground">Pricing</Link>
+          <Link to="/program" className="transition-colors hover:text-foreground">Pricing</Link>
           <Link to="/login" className="transition-colors hover:text-foreground">Sign in</Link>
         </nav>
       </header>
@@ -348,7 +348,7 @@ function ResultBody({ result }: { result: Result }) {
 
       {/* SECTION 2, Type */}
       <a
-        href={`/pricing?recommended=club&score=${result.readiness_score}`}
+        href={`/program?score=${result.readiness_score}`}
         className="block rounded-2xl border border-border bg-foreground/[0.03] p-8 text-center backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.06]"
       >
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
@@ -452,7 +452,7 @@ function ResultBody({ result }: { result: Result }) {
           </p>
 
           <a
-            href={`/pricing?recommended=club&resume=club&score=${result.readiness_score}`}
+            href={`/program?resume=mastery&score=${result.readiness_score}`}
             className="group mt-7 inline-flex h-14 w-full items-center justify-center gap-3 rounded-full px-8 text-base font-semibold transition hover:scale-[1.02] active:scale-[0.99] md:w-auto md:min-w-[360px]"
             style={{
               background: "var(--gradient-gold)",
@@ -482,7 +482,7 @@ function ResultBody({ result }: { result: Result }) {
 
           <div className="mt-6">
             <a
-              href={`/pricing?recommended=club&score=${result.readiness_score}`}
+              href={`/program?score=${result.readiness_score}`}
               className="text-xs text-muted-foreground underline-offset-4 transition hover:text-foreground hover:underline"
             >
               Compare Pro and Executive

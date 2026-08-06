@@ -14,6 +14,7 @@ import { Route as The7QuestionsRouteImport } from './routes/the-7-questions'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ReturnerRouteImport } from './routes/returner'
 import { Route as RedundantRouteImport } from './routes/redundant'
+import { Route as ProgramRouteImport } from './routes/program'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PivotRouteImport } from './routes/pivot'
@@ -59,6 +60,11 @@ const ReturnerRoute = ReturnerRouteImport.update({
 const RedundantRoute = RedundantRouteImport.update({
   id: '/redundant',
   path: '/redundant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgramRoute = ProgramRouteImport.update({
+  id: '/program',
+  path: '/program',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -182,6 +188,7 @@ export interface FileRoutesByFullPath {
   '/pivot': typeof PivotRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/program': typeof ProgramRoute
   '/redundant': typeof RedundantRoute
   '/returner': typeof ReturnerRoute
   '/signup': typeof SignupRoute
@@ -209,6 +216,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/pivot': typeof PivotRoute
   '/pricing': typeof PricingRoute
+  '/program': typeof ProgramRoute
   '/redundant': typeof RedundantRoute
   '/returner': typeof ReturnerRoute
   '/signup': typeof SignupRoute
@@ -238,6 +246,7 @@ export interface FileRoutesById {
   '/pivot': typeof PivotRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/program': typeof ProgramRoute
   '/redundant': typeof RedundantRoute
   '/returner': typeof ReturnerRoute
   '/signup': typeof SignupRoute
@@ -268,6 +277,7 @@ export interface FileRouteTypes {
     | '/pivot'
     | '/portal'
     | '/pricing'
+    | '/program'
     | '/redundant'
     | '/returner'
     | '/signup'
@@ -295,6 +305,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/pivot'
     | '/pricing'
+    | '/program'
     | '/redundant'
     | '/returner'
     | '/signup'
@@ -323,6 +334,7 @@ export interface FileRouteTypes {
     | '/pivot'
     | '/portal'
     | '/pricing'
+    | '/program'
     | '/redundant'
     | '/returner'
     | '/signup'
@@ -352,6 +364,7 @@ export interface RootRouteChildren {
   PivotRoute: typeof PivotRoute
   PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
+  ProgramRoute: typeof ProgramRoute
   RedundantRoute: typeof RedundantRoute
   ReturnerRoute: typeof ReturnerRoute
   SignupRoute: typeof SignupRoute
@@ -403,6 +416,13 @@ declare module '@tanstack/react-router' {
       path: '/redundant'
       fullPath: '/redundant'
       preLoaderRoute: typeof RedundantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/program': {
+      id: '/program'
+      path: '/program'
+      fullPath: '/program'
+      preLoaderRoute: typeof ProgramRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -580,6 +600,7 @@ const rootRouteChildren: RootRouteChildren = {
   PivotRoute: PivotRoute,
   PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,
+  ProgramRoute: ProgramRoute,
   RedundantRoute: RedundantRoute,
   ReturnerRoute: ReturnerRoute,
   SignupRoute: SignupRoute,
@@ -598,3 +619,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

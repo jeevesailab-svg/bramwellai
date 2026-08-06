@@ -10,7 +10,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetClose } from "@/com
 const navLinks = [
   { label: "How It Works", href: "/#how" },
   { label: "Pathways", href: "/#pathways" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "The Program", href: "/program" },
   { label: "Sign In", href: "/login" },
 ];
 
@@ -175,7 +175,7 @@ export function SiteFooter() {
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
             <a href="/diagnostic?autostart=1" className="transition-colors hover:text-foreground">Start your coaching now</a>
             <a href="/#pathways" className="transition-colors hover:text-foreground">Pathways</a>
-            <a href="/pricing" className="transition-colors hover:text-foreground">Pricing</a>
+            <a href="/program" className="transition-colors hover:text-foreground">The Program</a>
             <a href="/waitlist" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
               For Sales Teams
               <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">Apply</span>

@@ -135,7 +135,7 @@ export const PATHWAY_CONFIG = {
     pathway: 'mastery',
     sessions: 9999,
     minutes: 10,
-    accessDays: 365,
+    accessDays: 30,
     welcome: 'Day one starts now. Ten minutes a day, thirty days, and you will not sound like this again.',
     productName: '30-Day Voice Mastery Program',
   },
