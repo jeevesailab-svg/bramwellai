@@ -26,8 +26,8 @@ function renderReportEmail(row: ReportRow): string {
   const name = row.first_name ? esc(row.first_name) : "there";
   const score = row.readiness_score ?? 0;
   const type = (row.communication_type ?? "").replace(/_/g, " ");
-  const pathway = row.recommended_pathway_name ?? "Career Confidence Club";
-  const price = row.recommended_price ?? "A$79/month";
+  const pathway = "30 Day Voice Mastery Program";
+  const price = "$299 USD, one payment";
   const gapsArr: string[] = Array.isArray(row.gaps)
     ? (row.gaps as unknown[]).map(String)
     : [];
@@ -46,7 +46,8 @@ function renderReportEmail(row: ReportRow): string {
     ${type ? `<p style="margin:24px 0 8px;font-size:14px;color:#7a6f5b;text-transform:uppercase;letter-spacing:.2em;">Your communication type</p><p style="margin:0;font-size:18px;color:#c4a04a;text-transform:capitalize;">The ${esc(type)}</p>` : ""}
     ${gapsHtml ? `<h2 style="font-size:16px;margin:28px 0 12px;">Your top gaps</h2><ul style="padding-left:18px;margin:0;color:#333333;font-size:14px;line-height:1.6;">${gapsHtml}</ul>` : ""}
     <h2 style="font-size:16px;margin:28px 0 8px;">Recommended next step</h2>
-    <p style="margin:0 0 20px;color:#333333;font-size:14px;line-height:1.6;">Join the ${esc(pathway)} at ${esc(price)}. Up to 3 voice sessions per week, monthly progress checks, cancel anytime.</p>
+    <p style="margin:0 0 20px;color:#333333;font-size:14px;line-height:1.6;">Join the ${esc(pathway)} for ${esc(price)}. Ten minutes a day for 30 days with Bramwell your Voice AI Mentor, every session scored, weekly check ins, and a Day 30 retest that proves the change. Refunded in full after session one if it does not land.</p>
+    <p style="margin:0 0 24px;"><a href="https://www.bramwellai.com/program" style="display:inline-block;background:#c4a04a;color:#ffffff;text-decoration:none;font-weight:600;font-size:14px;padding:12px 24px;border-radius:999px;">Get started, $299</a></p>
     <p style="margin:24px 0 0;font-size:12px;color:#7a6f5b;">Your full interactive report is on screen at bramwellai.lovable.app.</p>
   </div>
 </body></html>`;

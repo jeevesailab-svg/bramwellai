@@ -443,24 +443,31 @@ function BlueOcean() {
 /* ───────────── Pricing tease ───────────── */
 function PricingTease() {
   const plans = [
-    { name: "Pro", price: "$79", cadence: "/month", copy: "Your step by step process to being successful in an interview: walk in rehearsed, sound structured under pressure, and answer the way the best leaders do. Practice every week before the interview, through your first 90 days, and every time you ask for more. $79 a month is less than one hour with a human coach. Most people stay.", cta: "Go Pro", accent: GOLD, featured: true },
-    { name: "Executive", price: "$197", cadence: "/month", copy: "Everything in Pro, plus board-level scenario drills and monthly human review.", cta: "Go Executive", accent: SUNRISE },
+    {
+      name: "30 Day Voice Mastery Program",
+      price: "$299",
+      cadence: "USD, one payment",
+      copy: "Ten minutes a day for 30 days with Bramwell your Voice AI Mentor. Every session scored across Structure, Specificity, Confidence Signals and Relevance. Weekly check ins, an accountability pod, and a Day 1 and Day 30 Readiness Score so the change is a number you can show someone. One human coach costs $300 an hour and gives you an opinion.",
+      cta: "Get started",
+      accent: GOLD,
+      featured: true,
+    },
   ];
   return (
     <section id="pricing" className="border-y border-border bg-white py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">Membership, not one-off</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">One program. One price.</p>
           <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
             Influence isn&apos;t a course. It&apos;s a{" "}
             <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>practice.</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Bramwell trains with you every week. Pause any time. Cancel any time.
+            Thirty days of daily practice with Bramwell. Refunded in full after session one if it does not land.
           </p>
         </div>
 
-        <div className="mx-auto mt-14 grid max-w-4xl gap-6 md:grid-cols-2">
+        <div className="mx-auto mt-14 grid max-w-xl gap-6">
           {plans.map((p) => (
             <div
               key={p.name}
@@ -469,7 +476,7 @@ function PricingTease() {
             >
               {p.featured && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white" style={{ background: GOLD }}>
-                  Most popular
+                  Cohort 1, 15 August 2026
                 </span>
               )}
               <p className="text-sm font-semibold uppercase tracking-[0.2em] bg-clip-text text-transparent" style={{ backgroundImage: p.accent }}>{p.name}</p>
@@ -490,7 +497,7 @@ function PricingTease() {
         </div>
 
         <p className="mt-8 text-center text-xs text-muted-foreground">
-          Try Bramwell free first, no card, no login. If it doesn&apos;t change how you sound in your first session, don&apos;t upgrade.
+          Take the free 5 minute test first, no card, no login. If your first session does not tell you something specific about how you sound, we refund you in full.
         </p>
       </div>
     </section>
@@ -503,7 +510,7 @@ function FAQ() {
     { q: "Is this really live voice?", a: "Yes. You speak. Bramwell listens and responds in real time, like a phone call with a coach." },
     { q: "Do I need to prepare anything?", a: "No. Just click and talk. Bramwell leads the session and tells you exactly what to fix." },
     { q: "Will I sound scripted?", a: "The opposite. Bramwell trains your natural voice to be sharper, warmer and more structured, not robotic." },
-    { q: "Can I cancel any time?", a: "Yes. Membership is month to month. Pause or cancel in one click." },
+    { q: "What if it is not for me?", a: "Run your first session. If Bramwell does not identify something specific and actionable about how you communicate, we refund you in full. No forms. No questions." },
     { q: "How is this different from ChatGPT?", a: "ChatGPT can write. Bramwell can hear. Bramwell scores how you sound, not just what you say, and coaches the delivery." },
   ];
   return (
