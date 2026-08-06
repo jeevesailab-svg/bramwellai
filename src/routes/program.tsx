@@ -108,11 +108,15 @@ const FAQS = [
   },
   {
     q: "What can I expect to learn?",
-    a: "Daily voice practice with your Voice AI Mentor. Your Mentor scores you across four dimensions: Structure, Specificity, Confidence Signals and Relevance. Weekly check ins that track your score, an accountability pod, and a before and after Readiness Score that proves your transformation.",
+    a: "A four week curriculum built on impromptu speaking. Week 1 structure under pressure, Week 2 specificity and evidence, Week 3 confidence signals like pace, pauses and filler, Week 4 high stakes rehearsal. Every session is scored across Structure, Specificity, Confidence Signals and Relevance, with weekly check ins, an accountability pod, and a Day 1 and Day 30 Readiness Score.",
   },
   {
     q: "How long is the program?",
-    a: "30 days. Daily practice takes 5 minutes. Weekly check ins take 15 minutes. The full program runs across 4 weeks with a final retest on Day 30.",
+    a: "30 days, run as four themed weeks. One scored session a day, a 15 minute check in each week, and a final retest on Day 30 that gives you a before and after number.",
+  },
+  {
+    q: "What are the refund terms exactly?",
+    a: "Complete your Day 1 diagnostic, the first 7 daily sessions and your Week 1 check in. If your Week 1 Readiness Score has not improved on your Day 1 baseline, reply to any Bramwell email within 14 days of purchase and we refund the full $299 to your original payment method within 5 business days.",
   },
   {
     q: "I have never done voice training before, is this for me?",
