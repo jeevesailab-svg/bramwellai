@@ -7,22 +7,23 @@ import { BramwellLogo } from "@/components/site/BramwellLogo";
 import { CtaButton } from "@/components/site/CtaButton";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetClose } from "@/components/ui/sheet";
 import { Mic, Sparkles, Zap, MessageCircle, Rocket, Target, Heart, Star, Wand2, Trophy, Menu } from "lucide-react";
+import heroPortrait from "@/assets/hero-portrait.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
       meta: [
-        { title: "Not a course. A coach. | Bramwell.ai" },
+        { title: "Are you heard, or ignored? | Bramwell.ai" },
         {
           name: "description",
           content:
-            "Your CV is fine. The room still isn't sure. One free live voice diagnostic tells you how you come across under pressure. No login, no card.",
+            "Ever feel like the smartest person in the room, but the one who gets ignored? Take the free 5 minute live voice test and find out why. No login, no card.",
         },
-        { property: "og:title", content: "Not a course. A coach. | Bramwell.ai" },
+        { property: "og:title", content: "Are you heard, or ignored? | Bramwell.ai" },
         {
           property: "og:description",
           content:
-            "Your CV is fine. The room still isn't sure. One free live voice diagnostic tells you how you come across under pressure. No login, no card.",
+            "Ever feel like the smartest person in the room, but the one who gets ignored? Take the free 5 minute live voice test and find out why.",
         },
       ],
   }),
@@ -34,7 +35,7 @@ const HERO = "var(--gradient-hero)";
 const MINT = "var(--gradient-mint)";
 const SUNRISE = "var(--gradient-sunrise)";
 
-function PrimaryCTA({ label = "Start the test", href = "/diagnostic?autostart=1", size = "md" as "md" | "lg" | "sm" }) {
+function PrimaryCTA({ label = "Take the test", href = "/diagnostic?autostart=1", size = "md" as "md" | "lg" | "sm" }) {
   return <CtaButton href={href} size={size}>{label}</CtaButton>;
 }
 
@@ -55,7 +56,7 @@ function Index() {
       <FAQ />
       <FinalCTA />
       <Footer />
-      <StickyMobileCTA label="Start the test" />
+      <StickyMobileCTA label="Take the test" />
     </main>
   );
 }
@@ -127,42 +128,83 @@ function Nav() {
 /* ───────────── Hero ───────────── */
 function Hero() {
   return (
-    <section className="relative overflow-hidden" style={{ background: HERO }}>
-      {/* playful floating blobs, brighter & softer */}
-      <div aria-hidden className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full opacity-60 blur-3xl" style={{ background: ELECTRIC }} />
-      <div aria-hidden className="pointer-events-none absolute -right-24 top-10 h-80 w-80 rounded-full opacity-60 blur-3xl" style={{ background: SUNRISE }} />
-      <div aria-hidden className="pointer-events-none absolute bottom-0 left-1/2 h-72 w-[600px] -translate-x-1/2 rounded-full opacity-50 blur-3xl" style={{ background: MINT }} />
+    <>
+      {/* Photo band */}
+      <section className="relative isolate overflow-hidden">
+        <img
+          src={heroPortrait.url}
+          alt="Executive pausing before she speaks, lit from above in a dark room"
+          className="absolute inset-0 h-full w-full object-cover object-[70%_center] md:object-[65%_20%]"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, oklch(0.16 0.02 60 / 0.94) 0%, oklch(0.16 0.02 60 / 0.82) 45%, oklch(0.16 0.02 60 / 0.35) 100%)",
+          }}
+        />
+        <div className="relative z-10 mx-auto flex min-h-[560px] max-w-7xl flex-col justify-center px-5 py-20 sm:px-6 md:min-h-[660px] md:px-10 md:py-28">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur">
+              <Sparkles className="h-3.5 w-3.5 shrink-0" />
+              Live voice · 5 minutes · Free
+            </div>
 
-      <div className="relative z-10 mx-auto max-w-5xl px-4 pb-16 pt-6 text-center sm:px-6 sm:pb-20 sm:pt-8 md:px-10 md:pb-28 md:pt-12">
-        <div className="mx-auto mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-white/80 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground shadow-sm backdrop-blur sm:px-4 sm:text-[11px] sm:tracking-[0.22em]">
-          <Sparkles className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--primary)" }} />
-          <span className="truncate">Live voice · 5 minutes · Free</span>
+            <h1 className="mt-6 text-balance text-[40px] font-bold leading-[0.98] tracking-tight text-white sm:text-6xl md:text-[76px]">
+              Are you heard,
+              <br />
+              or ignored?
+            </h1>
+
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-white/80 sm:text-lg">
+              Ever feel like the smartest person in the room, but the one who gets ignored? Find out
+              why.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href="/diagnostic?autostart=1"
+                className="group inline-flex h-14 items-center justify-center gap-3 rounded-full px-9 text-base font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95"
+                style={{ background: GOLD, boxShadow: "var(--shadow-cta)" }}
+              >
+                <Mic className="h-5 w-5" strokeWidth={2.5} />
+                Take the test
+                <span className="transition-transform group-hover:translate-x-0.5">→</span>
+              </a>
+              <a href="/program" className="text-sm font-medium text-white/75 underline underline-offset-4 hover:text-white">
+                See the 30 day program
+              </a>
+            </div>
+
+            <p className="mt-6 text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+              5 min · Live voice · Free · No login · No card
+            </p>
+          </div>
         </div>
+      </section>
 
-        <h1 className="mx-auto max-w-4xl text-balance text-[34px] font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-[72px]">
-          Your CV is fine.{" "}
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>The room still isn&apos;t sure.</span>
-        </h1>
-
-        <a
-          href="/diagnostic?autostart=1"
-          className="group mx-auto mt-8 inline-flex h-14 items-center justify-center gap-3 rounded-full px-9 text-base font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:opacity-95 sm:mt-10"
-          style={{ background: GOLD, boxShadow: "var(--shadow-cta)" }}
-        >
-          <Sparkles className="h-5 w-5" strokeWidth={2.5} />
-          Start the test
-          <span className="text-lg transition-transform group-hover:translate-y-0.5">↓</span>
-        </a>
-
-        <div className="mt-10 flex justify-center sm:mt-12">
-          <CallOrb />
+      {/* Light call band */}
+      <section className="relative overflow-hidden" style={{ background: HERO }}>
+        <div aria-hidden className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full opacity-60 blur-3xl" style={{ background: ELECTRIC }} />
+        <div aria-hidden className="pointer-events-none absolute -right-24 top-0 h-80 w-80 rounded-full opacity-60 blur-3xl" style={{ background: SUNRISE }} />
+        <div aria-hidden className="pointer-events-none absolute bottom-0 left-1/2 h-64 w-[600px] -translate-x-1/2 rounded-full opacity-50 blur-3xl" style={{ background: MINT }} />
+        <div className="relative z-10 mx-auto max-w-3xl px-5 py-14 text-center sm:px-6 md:py-20">
+          <h2 className="text-balance text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
+            Ready to unlock your breakthrough?
+          </h2>
+          <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground sm:text-base">
+            Tap the mic. Speak for five minutes. Bramwell tells you exactly what the room hears.
+          </p>
+          <div className="mt-8 flex justify-center">
+            <CallOrb />
+          </div>
+          <p className="mt-5 text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:text-[11px]">
+            Start today
+          </p>
         </div>
-
-        <p className="mx-auto mt-5 max-w-[280px] text-[10px] uppercase tracking-[0.2em] text-muted-foreground sm:max-w-none sm:text-[11px] sm:tracking-[0.22em]">
-          5 min · Live voice · Free · No login · No card
-        </p>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
@@ -296,7 +338,7 @@ function SymptomCause() {
               />
               <p className="relative mt-5 text-sm leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: it.copy }} />
               <span className="relative mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--primary)" }}>
-                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Start the test <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                <Mic className="h-3.5 w-3.5" strokeWidth={2.5} /> Take the test <span className="transition-transform group-hover:translate-x-0.5">→</span>
               </span>
             </a>
           ))}
@@ -573,7 +615,7 @@ function Footer() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em]">Bramwell</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
-            <a href="/diagnostic?autostart=1" className="hover:text-foreground">Start the test</a>
+            <a href="/diagnostic?autostart=1" className="hover:text-foreground">Take the test</a>
             <a href="/program" className="hover:text-foreground">The Program</a>
             <a href="/founders" className="inline-flex items-center gap-2 hover:text-foreground">
               For Sales Teams
