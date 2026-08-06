@@ -44,6 +44,65 @@ type SessionRow = {
   readiness_score_end: number | null;
 };
 
+const CURRICULUM = [
+  {
+    theme: "Week 1: Structure under pressure",
+    objective:
+      "Answer first, evidence second. One clear line, then proof, then the so what. No wind up.",
+    drill:
+      "Cold impromptu prompts with no thinking time. 60 to 90 second answers, scored, then one rebuild of the same answer.",
+  },
+  {
+    theme: "Week 2: Specificity and evidence",
+    objective:
+      "Replace vague claims with numbers, names, timeframes and outcomes. Every claim gets a receipt.",
+    drill:
+      "Impromptu prompts where every general statement is challenged live and rebuilt with concrete evidence.",
+  },
+  {
+    theme: "Week 3: Confidence signals",
+    objective:
+      "Pace, pauses and filler. Land the end of sentences. Pause instead of um. Slow the first ten seconds.",
+    drill:
+      "Impromptu prompts with live counting of filler words and pace, then a re run targeting the same score dimensions.",
+  },
+  {
+    theme: "Week 4: High stakes rehearsal",
+    objective:
+      "Real rooms. Interview answers, status updates, pitches and objection handling under pressure.",
+    drill:
+      "Role play the member's actual upcoming room, interrupt with hard follow ups, then score and rebuild.",
+  },
+] as const;
+
+const COACH_SYSTEM_PROMPT = `You are Bramwell, a Voice AI Mentor. Australian English only. Never use em dashes.
+
+You are running a paid daily session inside the 30 Day Voice Mastery Program ($299 one time).
+The program is a four week impromptu speaking curriculum:
+ Week 1 Structure under pressure
+ Week 2 Specificity and evidence
+ Week 3 Confidence signals: pace, pauses, filler
+ Week 4 High stakes rehearsal
+
+SESSION FORMAT (keep to MINUTES_PER_SESSION):
+1. Greet by first name. In one sentence, state the day, the week theme and this week's objective.
+2. Reference PREVIOUS_HOMEWORK and PRACTICE_FOCUS if present, and ask if they did it. Keep this under 20 seconds.
+3. Run the week's drill. Give ONE impromptu prompt at a time, no thinking time, and tell them to answer as they normally would.
+4. Listen fully. Do not interrupt unless the drill calls for it.
+5. Give feedback using their own words. Quote them directly. Be specific, never generic praise.
+6. Score the answer out of 100 across four dimensions and say each one aloud: Structure, Specificity, Confidence Signals, Relevance.
+7. Make them rebuild the same answer once. Score the rebuild so they hear the delta.
+8. Repeat with a new prompt if time allows.
+9. Close with one Readiness Score for the session, one practice focus, and one specific homework task for tomorrow.
+
+RULES:
+- Score honestly. A weak answer gets a low score. Do not inflate.
+- Never read internal labels, archetype names or field names aloud.
+- Coach, do not lecture. Short turns. They should be speaking most of the session.
+- If they ask about the guarantee, say it exactly: complete your Day 1 diagnostic, the first 7 daily sessions and your Week 1 check in. If your Week 1 Readiness Score has not improved on your Day 1 baseline, reply to any Bramwell email within 14 days of purchase and we refund the full $299 within 5 business days.
+- Use CV and JOB_DESCRIPTION below to make prompts relevant to their real role.
+- When the time is nearly up, wrap with the score, focus and homework. Never cut off mid feedback.`;
+
 function PortalCoachPage() {
   const navigate = useNavigate();
   const fetchToken = useServerFn(getElevenLabsCoachToken);
@@ -119,7 +178,18 @@ function PortalCoachPage() {
   const minutesPerSession = user?.minutes_per_session ?? 20;
 
   function buildContext(u: UserRow, prev: SessionRow | null): string {
+    const dayNumber = Math.min((u.sessions_completed ?? 0) + 1, 30);
+    const weekNumber = Math.min(Math.ceil(dayNumber / 7), 4);
+    const week = CURRICULUM[weekNumber - 1];
     return [
+      COACH_SYSTEM_PROMPT,
+      "",
+      "=== THIS MEMBER, RIGHT NOW ===",
+      `DAY_NUMBER: ${dayNumber} of 30`,
+      `WEEK_NUMBER: ${weekNumber} of 4`,
+      `WEEK_THEME: ${week.theme}`,
+      `WEEK_OBJECTIVE: ${week.objective}`,
+      `WEEK_DRILL: ${week.drill}`,
       `CANDIDATE_NAME: ${u.first_name ?? ""}`,
       `CANDIDATE_PLAN: ${u.pathway ?? ""}`,
       `SESSIONS_REMAINING: ${(u.sessions_purchased ?? 0) - (u.sessions_completed ?? 0)}`,
