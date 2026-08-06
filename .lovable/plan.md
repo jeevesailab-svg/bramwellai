@@ -1,73 +1,70 @@
-# Bramwell v2: Brand Book to Build Plan
+# Bramwell: the simple version
 
-You asked for a revised plan with questions before any build. Here it is. Nothing has been built.
+You are right, it got complicated. Here is what I would keep, what I would kill, and the smallest build that makes money.
 
-## What the brand book changes
+## What I reject from the brand book
 
-The site today sells one thing: a $79/month AI communication mentor, with a free voice diagnostic as the hook. The brand book replaces that with a two-step ladder and a much stronger emotional spine.
+**Two paid tiers.** $197 and $497 side by side is a decision, and decisions kill conversion. Nobody knows if they need 28 days or 90 days. They pick neither. One offer.
 
-New commercial architecture:
+**The $300 upgrade path.** It only exists because there are two tiers. Gone with them.
 
-| Offer | B2C | B2B (10 seats) | Duration |
-| --- | --- | --- | --- |
-| Free diagnostic | $0 | $0 | 5 min |
-| 28-Day Reset / Sprint | $197 | $1,500 | 28 days |
-| 90-Day Transformation / Cohort | $497 | $3,500 | 90 days |
-| 28 to 90 upgrade | $300 | $2,000 | +62 days |
+**Four B2B SKUs.** You have zero B2B customers. You do not need seat pricing, a team dashboard or a cohort SKU. You need one form that says "talk to us" and you close them on a call at whatever price the room will bear. Build the pricing page when you have three logos.
 
-New spine: 28 days to a new you. The Readiness Score is the mirror. The before and after number is the proof.
+**Discord pods and weekly check-ins.** That is a human-delivered business with human churn. You cannot staff it, and it caps you at however many people you can personally hold. The whole point of Bramwell is that the coach never sleeps.
 
-## Decisions I need from you before I build
+**"42 to 65 in 28 days".** You cannot print that number until the score is measured rather than asserted. Printing it now is a refund liability and, worse, the thing a competitor screenshots.
 
-1. **Does $79/month survive?** The brand book has no monthly tier. My recommendation: kill it publicly, keep $197/month only as a graduate continuity offer sold inside the product, not on the pricing page. Confirm.
-2. **Score movement is a promise.** The book states 42 to 65 in 28 days and 42 to 71 in 90 days. Today the score is a single number the model asserts, not a measured metric. I will not ship those numbers as a guarantee until the score is deterministic. Do you want them shown as illustrative example journeys for launch, or held back until Wave 4 lands?
-3. **Currency.** Prices in the book are unmarked. AUD or USD? Site copy is Australian English but the audience skews US.
-4. **Cohort or self-paced?** 28 days with weekly check-ins and Discord pods implies real cohort scheduling. Are we launching with fixed start dates and pods, or self-paced starting on purchase with the community layer added later? This is the single biggest scope difference.
-5. **Existing $79 members.** Any live subscribers to grandfather or migrate?
+**494 ad hooks.** Pick three. Test them. The bank is a reference document, not a build input.
 
-## Build waves
+## What I keep, and why
 
-### Wave 1: the offer ladder (revenue-critical)
+**28 days to a new you.** This is the best line in the document. It is borrowed from a category that has spent billions proving it works, it is specific, and it has a built-in deadline. Everything else is decoration.
 
-- Two Stripe products, one-time: 28-Day Reset $197, 90-Day Transformation $497. Plus a $300 upgrade price. B2B seat products created but sold via the audit form, not self-serve checkout.
-- Pricing page rebuilt as a two-card ladder with the 28-day as the entry and the 90-day as the anchor. Remove every $79 and $197/month public reference.
-- Result page becomes the conversion moment: score, the mirror copy, then a B2C or B2B branch. Individual sees the two offers. Team leader sees the audit CTA.
-- Email capture before the result renders, session ID minted before the call so score, transcript and email are one record.
-- Refund promise stated on both offers and at checkout.
+**The mirror moment.** Free voice test, get a number, feel it. You already built this and it is your entire moat. Weight loss has the scale. Beauty has the mirror. You have the score.
 
-### Wave 2: copy and brand rewrite
+**The Invisible Expert Problem.** Best villain in the doc. Not "you lack confidence", which is insulting. "Your voice has not caught up to your expertise", which is flattering and true.
 
-- Homepage hero to the Worth or Explosive Transformation version, pending your pick.
-- Diagnostic page to the mirror moment framing: your voice has a score, most people have never measured it.
-- Villain section rewritten around The Invisible Expert Problem.
-- Waitlist and B2B page to the army of closers spine, with qualifying fields on the audit form.
-- Voice rules enforced across every route: no em dashes, no "lack confidence", Australian English, no hype and no begging.
+**Before and after as the proof.** The number moving is the testimonial. It is also the thing people post.
 
-### Wave 3: entitlement and program
+## The offer
 
-- Replace session-count gating with program enrolment: which program, which day, which week unlocked.
-- Schema for programs, enrolments, day and week unlocks, and baseline / mid / final assessments.
-- Post-purchase onboarding page: start date, what happens on day one, calendar add.
+One product. **The 28 Day Voice Reset. $197.**
 
-### Wave 4: defensible score
+Free score, then one price, then a deadline. No tiers, no upsell ladder, no decision.
 
-- Deterministic sub-scores from the transcript: filler count, words per minute, pause pattern, answer structure. The score becomes measurable, repeatable and comparable.
-- Before and after view. Day 1 versus Day 28. This is the proof the whole brand rests on and the asset people share.
-- Audio retention with explicit consent so the two sessions can be played back to back.
+Guarantee: complete the 28 days, retest, and if the number has not moved you get your money back. That guarantee is affordable because most people who pay $197 and are told to do five minutes a day will improve, and the ones who do nothing will not ask.
 
-### Wave 5: hygiene
+B2B is one line on the site: "Running a team? Talk to us." A form, not a price.
 
-- Patch the critical dependency advisory in the router and start packages.
+## The build
 
-## Voice agent changes
+### Step 1: one product, one price
 
-- Ask the scenario inside the conversation, never as a pre-call form.
-- Always deliver the spoken summary before the session ends.
-- Pass the B2C or B2B signal through to the result so the CTA branch is accurate.
+Kill $79/month. Create one Stripe product at $197 one-off. Pricing page becomes a single card with the guarantee under it. Every other price disappears from the site.
 
-## Technical notes
+### Step 2: the result page sells
 
-- Programs are one-time Stripe prices, promotion codes stay enabled.
-- The 28 to 90 upgrade is a separate price, gated to people with a completed 28-day enrolment.
-- Enrolment written by the Stripe webhook, keyed on user and program, environment scoped.
-- Sub-scores computed server side from the stored transcript so the same input always returns the same number.
+Right now the score is a dead end. It becomes: your number, what that number costs you, then one button to the 28 day reset. Email captured before the number renders. B2B visitors get the talk-to-us line instead.
+
+### Step 3: 28 days that actually run
+
+Buy, and you get day 1 immediately. A daily five minute session with Bramwell, a scenario per day, and a visible day counter. Day 28 is a retest against your day 1 score. That retest is the product.
+
+Self-paced, starts on purchase. No cohorts, no scheduling, no Discord.
+
+### Step 4: make the score real
+
+Filler count, words per minute, pause pattern, answer structure, all computed from the transcript so the same input always gives the same number. Day 1 versus day 28 side by side. Only after this ships do we print score movement claims in marketing.
+
+### Step 5: copy pass
+
+"28 days to a new you" as the spine. Mirror framing on the diagnostic. Invisible Expert as the villain. Three hooks, not three hundred. Australian English, no em dashes, no begging.
+
+### Step 6: patch the critical dependency advisory.
+
+## Two things I still need
+
+1. **Currency.** $197 AUD or USD?
+2. **Any live $79 subscribers** to grandfather before I remove the plan?
+
+I can start on Step 1 and 2 without either answer if you want to move.
