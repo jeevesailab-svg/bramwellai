@@ -119,7 +119,18 @@ function PortalCoachPage() {
   const minutesPerSession = user?.minutes_per_session ?? 20;
 
   function buildContext(u: UserRow, prev: SessionRow | null): string {
+    const dayNumber = Math.min((u.sessions_completed ?? 0) + 1, 30);
+    const weekNumber = Math.min(Math.ceil(dayNumber / 7), 4);
+    const week = CURRICULUM[weekNumber - 1];
     return [
+      COACH_SYSTEM_PROMPT,
+      "",
+      "=== THIS MEMBER, RIGHT NOW ===",
+      `DAY_NUMBER: ${dayNumber} of 30`,
+      `WEEK_NUMBER: ${weekNumber} of 4`,
+      `WEEK_THEME: ${week.theme}`,
+      `WEEK_OBJECTIVE: ${week.objective}`,
+      `WEEK_DRILL: ${week.drill}`,
       `CANDIDATE_NAME: ${u.first_name ?? ""}`,
       `CANDIDATE_PLAN: ${u.pathway ?? ""}`,
       `SESSIONS_REMAINING: ${(u.sessions_purchased ?? 0) - (u.sessions_completed ?? 0)}`,
