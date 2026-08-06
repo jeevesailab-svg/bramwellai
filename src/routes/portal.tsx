@@ -14,7 +14,9 @@ const PATHWAY_WELCOMES: Record<string, string> = {
 
 export const Route = createFileRoute("/portal")({
   component: PortalLayout,
-  validateSearch: (search: Record<string, unknown>) => ({
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { checkout?: string; pathway?: string; session_id?: string } => ({
     checkout: typeof search.checkout === "string" ? search.checkout : undefined,
     pathway: typeof search.pathway === "string" ? search.pathway : undefined,
     session_id: typeof search.session_id === "string" ? search.session_id : undefined,
