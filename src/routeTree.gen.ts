@@ -24,13 +24,17 @@ import { Route as PortalIndexRouteImport } from './routes/portal.index'
 import { Route as DiagnosticIndexRouteImport } from './routes/diagnostic.index'
 import { Route as PortalSetupRouteImport } from './routes/portal.setup'
 import { Route as PortalCoachRouteImport } from './routes/portal.coach'
+import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as DiagnosticResultRouteImport } from './routes/diagnostic.result'
+import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicQuizLeadRouteImport } from './routes/api/public/quiz-lead'
 import { Route as ApiPublicKlaviyoEventRouteImport } from './routes/api/public/klaviyo-event'
 import { Route as ApiPublicDiagnosticTokenRouteImport } from './routes/api/public/diagnostic-token'
 import { Route as ApiPublicDiagnosticResultRouteImport } from './routes/api/public/diagnostic-result'
 import { Route as ApiPublicDiagnosticIncompleteRouteImport } from './routes/api/public/diagnostic-incomplete'
 import { Route as ApiPublicDiagnosticEmailRouteImport } from './routes/api/public/diagnostic-email'
+import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 
@@ -109,9 +113,19 @@ const PortalCoachRoute = PortalCoachRouteImport.update({
   path: '/coach',
   getParentRoute: () => PortalRoute,
 } as any)
+const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
+  id: '/email/unsubscribe',
+  path: '/email/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DiagnosticResultRoute = DiagnosticResultRouteImport.update({
   id: '/diagnostic/result',
   path: '/diagnostic/result',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
+  id: '/lovable/email/suppression',
+  path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicQuizLeadRoute = ApiPublicQuizLeadRouteImport.update({
@@ -148,6 +162,18 @@ const ApiPublicDiagnosticEmailRoute =
     path: '/api/public/diagnostic-email',
     getParentRoute: () => rootRouteImport,
   } as any)
+const LovableEmailTransactionalSendRoute =
+  LovableEmailTransactionalSendRouteImport.update({
+    id: '/lovable/email/transactional/send',
+    path: '/lovable/email/transactional/send',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
     id: '/lovable/email/queue/process',
@@ -174,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/the-7-questions': typeof The7QuestionsRoute
   '/waitlist': typeof WaitlistRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
   '/diagnostic/': typeof DiagnosticIndexRoute
@@ -184,8 +211,11 @@ export interface FileRoutesByFullPath {
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -199,6 +229,7 @@ export interface FileRoutesByTo {
   '/the-7-questions': typeof The7QuestionsRoute
   '/waitlist': typeof WaitlistRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
   '/diagnostic': typeof DiagnosticIndexRoute
@@ -209,8 +240,11 @@ export interface FileRoutesByTo {
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -226,6 +260,7 @@ export interface FileRoutesById {
   '/the-7-questions': typeof The7QuestionsRoute
   '/waitlist': typeof WaitlistRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
   '/diagnostic/': typeof DiagnosticIndexRoute
@@ -236,8 +271,11 @@ export interface FileRoutesById {
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -254,6 +292,7 @@ export interface FileRouteTypes {
     | '/the-7-questions'
     | '/waitlist'
     | '/diagnostic/result'
+    | '/email/unsubscribe'
     | '/portal/coach'
     | '/portal/setup'
     | '/diagnostic/'
@@ -264,8 +303,11 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-token'
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
+    | '/lovable/email/suppression'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -279,6 +321,7 @@ export interface FileRouteTypes {
     | '/the-7-questions'
     | '/waitlist'
     | '/diagnostic/result'
+    | '/email/unsubscribe'
     | '/portal/coach'
     | '/portal/setup'
     | '/diagnostic'
@@ -289,8 +332,11 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-token'
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
+    | '/lovable/email/suppression'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
   id:
     | '__root__'
     | '/'
@@ -305,6 +351,7 @@ export interface FileRouteTypes {
     | '/the-7-questions'
     | '/waitlist'
     | '/diagnostic/result'
+    | '/email/unsubscribe'
     | '/portal/coach'
     | '/portal/setup'
     | '/diagnostic/'
@@ -315,8 +362,11 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-token'
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
+    | '/lovable/email/suppression'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -332,6 +382,7 @@ export interface RootRouteChildren {
   The7QuestionsRoute: typeof The7QuestionsRoute
   WaitlistRoute: typeof WaitlistRoute
   DiagnosticResultRoute: typeof DiagnosticResultRoute
+  EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   DiagnosticIndexRoute: typeof DiagnosticIndexRoute
   ApiPublicDiagnosticEmailRoute: typeof ApiPublicDiagnosticEmailRoute
   ApiPublicDiagnosticIncompleteRoute: typeof ApiPublicDiagnosticIncompleteRoute
@@ -339,8 +390,11 @@ export interface RootRouteChildren {
   ApiPublicDiagnosticTokenRoute: typeof ApiPublicDiagnosticTokenRoute
   ApiPublicKlaviyoEventRoute: typeof ApiPublicKlaviyoEventRoute
   ApiPublicQuizLeadRoute: typeof ApiPublicQuizLeadRoute
+  LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
+  LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -450,11 +504,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalCoachRouteImport
       parentRoute: typeof PortalRoute
     }
+    '/email/unsubscribe': {
+      id: '/email/unsubscribe'
+      path: '/email/unsubscribe'
+      fullPath: '/email/unsubscribe'
+      preLoaderRoute: typeof EmailUnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/diagnostic/result': {
       id: '/diagnostic/result'
       path: '/diagnostic/result'
       fullPath: '/diagnostic/result'
       preLoaderRoute: typeof DiagnosticResultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/suppression': {
+      id: '/lovable/email/suppression'
+      path: '/lovable/email/suppression'
+      fullPath: '/lovable/email/suppression'
+      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/quiz-lead': {
@@ -497,6 +565,20 @@ declare module '@tanstack/react-router' {
       path: '/api/public/diagnostic-email'
       fullPath: '/api/public/diagnostic-email'
       preLoaderRoute: typeof ApiPublicDiagnosticEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/send': {
+      id: '/lovable/email/transactional/send'
+      path: '/lovable/email/transactional/send'
+      fullPath: '/lovable/email/transactional/send'
+      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/queue/process': {
@@ -544,6 +626,7 @@ const rootRouteChildren: RootRouteChildren = {
   The7QuestionsRoute: The7QuestionsRoute,
   WaitlistRoute: WaitlistRoute,
   DiagnosticResultRoute: DiagnosticResultRoute,
+  EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   DiagnosticIndexRoute: DiagnosticIndexRoute,
   ApiPublicDiagnosticEmailRoute: ApiPublicDiagnosticEmailRoute,
   ApiPublicDiagnosticIncompleteRoute: ApiPublicDiagnosticIncompleteRoute,
@@ -551,8 +634,11 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicDiagnosticTokenRoute: ApiPublicDiagnosticTokenRoute,
   ApiPublicKlaviyoEventRoute: ApiPublicKlaviyoEventRoute,
   ApiPublicQuizLeadRoute: ApiPublicQuizLeadRoute,
+  LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
+  LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
