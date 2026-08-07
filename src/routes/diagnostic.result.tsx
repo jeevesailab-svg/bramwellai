@@ -598,13 +598,13 @@ function ReportContent({
         <MetricCard
           label="Pace & pauses"
           primary={
-            metrics?.pace?.words_per_minute != null
+            metrics?.pace?.words_per_minute
               ? String(Math.round(metrics.pace.words_per_minute))
               : ", "
           }
           unit="words / min"
           detail={
-            metrics?.pace
+            metrics?.pace?.words_per_minute
               ? `${metrics.pace.long_pauses_count ?? 0} long pauses · longest ${
                   metrics.pace.longest_pause_sec?.toFixed(1) ?? "0"
                 }s`
