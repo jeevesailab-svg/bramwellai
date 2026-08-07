@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/SiteChrome";
 import { CtaButton } from "@/components/site/CtaButton";
+import { useStripeCheckout } from "@/hooks/useStripeCheckout";
 
 export const Route = createFileRoute("/founders")({
   component: FoundersPage,
