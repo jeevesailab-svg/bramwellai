@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { computeMetrics, readinessFromSubScores } from "@/lib/scoring";
 
 const MetricsSchema = z
   .object({
@@ -119,6 +120,7 @@ const Schema = z.object({
   recommended_pathway_name: z.string().min(1).max(120).optional().default(PATHWAY.club.name),
   recommended_price: z.string().min(1).max(32).optional().default(PATHWAY.club.price),
   transcript: z.string().max(50000).optional().default(""),
+  duration_sec: z.number().min(0).max(3600).optional(),
   metrics: MetricsSchema.optional(),
 });
 
@@ -238,6 +240,18 @@ export const Route = createFileRoute("/api/public/diagnostic-result")({
         }
         const d = parsed.data;
 
+        // Deterministic scoring. The agent's own number is only a fallback:
+        // whenever we have enough of the user's own words, the score and the
+        // behavioural metrics are computed here so the same transcript always
+        // produces the same result and Day 1 can be compared to Day 30.
+        const computed = d.transcript ? computeMetrics(d.transcript, d.duration_sec) : null;
+        const readinessScore = computed
+          ? readinessFromSubScores(computed.sub_scores)
+          : d.readiness_score;
+        const mergedMetrics = computed
+          ? { ...(d.metrics ?? {}), ...computed }
+          : (d.metrics ?? null);
+
         const { error } = await supabaseAdmin
           .from("diagnostic_sessions")
           .update({
@@ -245,14 +259,14 @@ export const Route = createFileRoute("/api/public/diagnostic-result")({
             first_name: d.first_name ?? null,
             email: d.email?.toLowerCase() ?? null,
             communication_type: d.communication_type,
-            readiness_score: d.readiness_score,
+            readiness_score: readinessScore,
             gaps: d.gaps,
             career_moment: d.career_moment || null,
             recommended_pathway: d.recommended_pathway,
             recommended_pathway_name: d.recommended_pathway_name,
             recommended_price: d.recommended_price,
             transcript: d.transcript || null,
-            metrics: d.metrics ?? null,
+            metrics: mergedMetrics,
           })
           .eq("id", d.sessionId);
         if (error) {

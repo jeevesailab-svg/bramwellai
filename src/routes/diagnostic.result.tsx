@@ -53,6 +53,13 @@ type Metrics = {
     led_with_point?: boolean;
     ramble_score?: number;
   };
+  sub_scores?: {
+    structure: number;
+    specificity: number;
+    confidence: number;
+    relevance: number;
+  };
+  evidence?: { quote: string; dimension: string; note: string }[];
 };
 
 const STRIPE: Record<PathwayKey, string> = {
@@ -568,6 +575,8 @@ function ReportContent({
 
   return (
     <div className="space-y-6">
+      {metrics?.sub_scores && <SubScoreBars sub={metrics.sub_scores} />}
+
       <div className="grid gap-4 md:grid-cols-2">
         <MetricCard
           label="Filler words"
@@ -589,13 +598,13 @@ function ReportContent({
         <MetricCard
           label="Pace & pauses"
           primary={
-            metrics?.pace?.words_per_minute != null
+            metrics?.pace?.words_per_minute
               ? String(Math.round(metrics.pace.words_per_minute))
               : ", "
           }
           unit="words / min"
           detail={
-            metrics?.pace
+            metrics?.pace?.words_per_minute
               ? `${metrics.pace.long_pauses_count ?? 0} long pauses · longest ${
                   metrics.pace.longest_pause_sec?.toFixed(1) ?? "0"
                 }s`
@@ -662,12 +671,99 @@ function ReportContent({
         </ul>
       </div>
 
+      {!!metrics?.evidence?.length && <EvidenceList evidence={metrics.evidence} />}
+
       {unlocked && !hasMetrics && (
         <p className="text-center text-xs text-muted-foreground">
           Your full behavioural breakdown, filler words, pace, pauses, hedging
           and structure, is on its way to your inbox.
         </p>
       )}
+    </div>
+  );
+}
+
+const DIMENSION_LABELS: Record<string, string> = {
+  structure: "Structure",
+  specificity: "Specificity",
+  confidence: "Confidence signals",
+  relevance: "Relevance",
+};
+
+function SubScoreBars({
+  sub,
+}: {
+  sub: { structure: number; specificity: number; confidence: number; relevance: number };
+}) {
+  const rows = [
+    ["structure", sub.structure],
+    ["specificity", sub.specificity],
+    ["confidence", sub.confidence],
+    ["relevance", sub.relevance],
+  ] as const;
+
+  return (
+    <div className="rounded-2xl border border-border bg-foreground/[0.03] p-6 backdrop-blur">
+      <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+        Scored across four dimensions
+      </p>
+      <div className="mt-5 space-y-4">
+        {rows.map(([key, value]) => (
+          <div key={key}>
+            <div className="flex items-baseline justify-between">
+              <span className="text-sm font-medium text-foreground/90">
+                {DIMENSION_LABELS[key]}
+              </span>
+              <span className="text-sm font-semibold tabular-nums text-foreground">
+                {value}
+              </span>
+            </div>
+            <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-foreground/10">
+              <div
+                className="h-full rounded-full"
+                style={{
+                  width: `${Math.max(2, Math.min(100, value))}%`,
+                  background: "var(--gradient-gold)",
+                }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
+        Measured from your own words, not estimated. The same answer always
+        returns the same numbers, so Day 1 can be compared to Day 30.
+      </p>
+    </div>
+  );
+}
+
+function EvidenceList({
+  evidence,
+}: {
+  evidence: { quote: string; dimension: string; note: string }[];
+}) {
+  return (
+    <div>
+      <h3 className="text-center text-base font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+        In your own words
+      </h3>
+      <ul className="mt-4 grid gap-3">
+        {evidence.slice(0, 4).map((item, i) => (
+          <li
+            key={i}
+            className="rounded-xl border border-border bg-foreground/[0.03] p-5 backdrop-blur"
+          >
+            <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+              {DIMENSION_LABELS[item.dimension] ?? item.dimension}
+            </p>
+            <blockquote className="mt-2 border-l-2 border-foreground/20 pl-4 text-sm italic leading-relaxed text-foreground/90">
+              &ldquo;{item.quote}&rdquo;
+            </blockquote>
+            <p className="mt-3 text-sm leading-relaxed text-foreground/70">{item.note}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
