@@ -5,11 +5,11 @@ import { createPortalSession } from "@/lib/payments.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
 
 const PATHWAY_WELCOMES: Record<string, string> = {
-  graduate: "Welcome. Let us build the career story that lands you the role.",
-  comeback: "Welcome back. Let us get your voice and your confidence ready.",
-  confidence: "Let us get what you know out of your head and into the room.",
-  executive: "Let us make sure you sound as senior as you are.",
-  club: "You are on the Club. Bramwell is always here. What is coming up next?",
+  graduate: "Access confirmed. Your programme is calibrated to your target role.",
+  comeback: "Access confirmed. Your programme begins with the baseline assessment.",
+  confidence: "Access confirmed. Your programme begins with the baseline assessment.",
+  executive: "Access confirmed. Your programme is calibrated to executive level.",
+  club: "Accelerator access is active. Sessions are available on demand.",
 };
 
 export const Route = createFileRoute("/portal")({
