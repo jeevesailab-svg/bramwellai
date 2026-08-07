@@ -434,38 +434,6 @@ function ProgramPage() {
         </section>
       ) : null}
 
-      {/* Guarantee */}
-      <section className="bg-background py-16 md:py-20">
-        <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
-          <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>
-            The Bramwell Guarantee
-          </p>
-          <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Your score moves in Week 1, or you get all $299 back.
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground">
-            Here are the exact terms, so nobody has to guess.
-          </p>
-          <ul className="mx-auto mt-7 max-w-xl space-y-3 text-left text-sm text-muted-foreground">
-            {[
-              "Complete your Day 1 diagnostic to set a baseline Readiness Score.",
-              "Complete the first 7 daily sessions and your Week 1 check in.",
-              "If your Week 1 Readiness Score has not improved on your Day 1 baseline, reply to any Bramwell email within 14 days of purchase.",
-              "We refund the full $299 to your original payment method within 5 business days. No forms, no call, no questions.",
-            ].map((t) => (
-              <li key={t} className="flex gap-3">
-                <span
-                  aria-hidden
-                  className="mt-2 inline-block h-1.5 w-1.5 flex-none rounded-full"
-                  style={{ background: "var(--primary)" }}
-                />
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       {/* FAQ */}
       <section className="border-t border-border bg-background py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
