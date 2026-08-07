@@ -120,6 +120,7 @@ const Schema = z.object({
   recommended_pathway_name: z.string().min(1).max(120).optional().default(PATHWAY.club.name),
   recommended_price: z.string().min(1).max(32).optional().default(PATHWAY.club.price),
   transcript: z.string().max(50000).optional().default(""),
+  duration_sec: z.number().min(0).max(3600).optional(),
   metrics: MetricsSchema.optional(),
 });
 
