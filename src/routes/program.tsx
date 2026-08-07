@@ -360,26 +360,23 @@ function ProgramPage() {
               30 Day Voice Mastery Program
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              One human voice coach costs $300 an hour and gives you an opinion. Bramwell costs $299
+              One human voice coach costs $300 an hour and gives you an opinion. Bramwell costs $349
               once, trains you every day for 30 days, and gives you a score.
             </p>
 
             <div className="mt-6 flex items-baseline gap-3">
-              <span className="text-5xl font-semibold tracking-tight">$299</span>
+              <span className="text-5xl font-semibold tracking-tight">$349</span>
               <span className="text-sm text-muted-foreground">USD, one payment</span>
             </div>
             <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted-foreground">
-              30 scored sessions, 4 weeks, 1 curriculum
+              30 scored sessions, 5 phases, 7 steps
             </p>
 
             <ul className="mt-6 flex-1 space-y-3 text-sm">
               {[
                 "30 structured impromptu speaking sessions with Bramwell your Voice AI Mentor",
-                "A four week curriculum: Structure, Specificity, Confidence Signals, the real room",
+                "Five phases: Baseline, Structure, Command the Room, Move to Decision, Perform Under Pressure",
                 "Scored across Structure, Specificity, Confidence Signals and Relevance",
-                "Weekly check ins that track your Readiness Score",
-                "An accountability pod of 4 to 6 professionals",
-                "Your personal playbook, rewritten every week as you improve",
                 "Day 1 and Day 30 Readiness Score, so the change is a number",
               ].map((i) => (
                 <li key={i} className="flex gap-3 text-foreground/90">
@@ -398,8 +395,7 @@ function ProgramPage() {
                 Get started
               </CtaButton>
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                Cohort 1 begins {COHORT_START}. Secure checkout. Complete the first 7 sessions and
-                your Week 1 check in, and if your score has not moved we refund all $299.
+                Cohort 1 begins {COHORT_START}. Secure checkout.
               </p>
             </div>
           </article>
