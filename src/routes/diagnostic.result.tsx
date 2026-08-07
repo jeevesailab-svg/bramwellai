@@ -1,3 +1,4 @@
+import { getScoreBand, SCORE_SCALE } from "@/lib/scoreBand";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
@@ -352,6 +353,27 @@ function ResultBody({ result }: { result: Result }) {
         <p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted-foreground">
           Your Communication Readiness Score
         </p>
+        <div className="mx-auto mt-6 max-w-xl rounded-2xl border border-border bg-foreground/[0.03] p-6 text-left">
+          <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+            What {result.readiness_score} means
+          </p>
+          <p
+            className="mt-1 text-lg font-semibold"
+            style={{ color: "var(--primary)" }}
+          >
+            {getScoreBand(result.readiness_score).label}
+          </p>
+          <p className="mt-2 text-base leading-relaxed text-foreground/90">
+            {getScoreBand(result.readiness_score).meaning}
+          </p>
+          <p className="mt-3 text-sm text-foreground/90">
+            <span className="font-semibold">Next: </span>
+            {getScoreBand(result.readiness_score).next}
+          </p>
+          <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+            Scale: {SCORE_SCALE}
+          </p>
+        </div>
       </section>
 
       {/* SECTION 2, Type */}

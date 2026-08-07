@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { getElevenLabsCoachToken } from "@/lib/elevenlabs.functions";
 import { recordCompletedSession } from "@/lib/sessions.functions";
+import { ScoreCurve, type CurvePoint } from "@/components/portal/ScoreCurve";
 
 export const Route = createFileRoute("/portal/coach")({
   component: PortalCoachPage,
@@ -112,6 +113,7 @@ function PortalCoachPage() {
 
   const [user, setUser] = useState<UserRow | null>(null);
   const [lastSession, setLastSession] = useState<SessionRow | null>(null);
+  const [curve, setCurve] = useState<CurvePoint[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [starting, setStarting] = useState(false);
@@ -167,6 +169,13 @@ function PortalCoachPage() {
       if (cancelled) return;
       setUser(u as UserRow | null);
       setLastSession(s as SessionRow | null);
+      const { data: all } = await supabase
+        .from("sessions")
+        .select("session_number, readiness_score_end, created_at")
+        .eq("user_id", auth.user.id)
+        .order("created_at", { ascending: true });
+      if (cancelled) return;
+      setCurve((all ?? []) as CurvePoint[]);
       setLoading(false);
     })();
     return () => {
@@ -400,6 +409,18 @@ function PortalCoachPage() {
               {error && (
                 <p className="mt-4 text-sm text-destructive">{error}</p>
               )}
+            </div>
+
+            <div className="mx-auto mt-12 max-w-2xl">
+              <ScoreCurve
+                points={curve}
+                baseline={
+                  curve.some((p) => typeof p.readiness_score_end === "number")
+                    ? null
+                    : (user?.last_readiness_score ?? null)
+                }
+                totalSessions={user?.sessions_purchased ?? 30}
+              />
             </div>
           </>
         )}
