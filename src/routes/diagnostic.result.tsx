@@ -60,6 +60,7 @@ type Metrics = {
     relevance: number;
   };
   evidence?: { quote: string; dimension: string; note: string }[];
+  rewrite?: { original: string; rewritten: string; why: string };
 };
 
 const STRIPE: Record<PathwayKey, string> = {
@@ -396,6 +397,9 @@ function ResultBody({ result }: { result: Result }) {
         gaps={result.gaps}
         metrics={result.metrics ?? null}
       />
+
+      {/* SECTION 3b, Day 1 win: one line, rebuilt */}
+      <Day1Win sessionId={result.id} initial={result.metrics?.rewrite ?? null} />
 
       {/* SECTION 4, What changes */}
       <section>
@@ -888,5 +892,109 @@ function UnlockCard({
         {error && <p className="text-center text-xs text-destructive">{error}</p>}
       </form>
     </div>
+  );
+}
+/**
+ * Day 1 win. The user leaves with one of their own sentences rebuilt,
+ * so the score is felt as a change, not just a number.
+ */
+function Day1Win({
+  sessionId,
+  initial,
+}: {
+  sessionId: string;
+  initial: { original: string; rewritten: string; why: string } | null;
+}) {
+  const [rewrite, setRewrite] = useState(initial);
+  const [state, setState] = useState<"idle" | "loading" | "empty">(
+    initial ? "idle" : "loading",
+  );
+
+  useEffect(() => {
+    if (initial) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/public/diagnostic-rewrite", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId }),
+        });
+        const json = (await res.json()) as {
+          rewrite?: { original: string; rewritten: string; why: string } | null;
+        };
+        if (cancelled) return;
+        if (json.rewrite) {
+          setRewrite(json.rewrite);
+          setState("idle");
+        } else {
+          setState("empty");
+        }
+      } catch {
+        if (!cancelled) setState("empty");
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [sessionId, initial]);
+
+  if (state === "empty") return null;
+
+  return (
+    <section className="rounded-2xl border border-border bg-foreground/[0.03] p-8 backdrop-blur">
+      <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+        Your first win
+      </p>
+      <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">
+        One line of yours, rebuilt
+      </h2>
+
+      {state === "loading" || !rewrite ? (
+        <p className="mt-6 text-sm text-muted-foreground">
+          Bramwell is rebuilding your strongest line...
+        </p>
+      ) : (
+        <>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <div className="rounded-xl border border-border bg-background/40 p-5">
+              <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                What you said
+              </p>
+              <p className="mt-3 text-base italic leading-relaxed text-foreground/70">
+                "{rewrite.original}"
+              </p>
+            </div>
+            <div
+              className="rounded-xl border p-5"
+              style={{ borderColor: "var(--primary)", background: "color-mix(in oklab, var(--primary) 8%, transparent)" }}
+            >
+              <p className="text-xs uppercase tracking-[0.18em]" style={{ color: "var(--primary)" }}>
+                How it should land
+              </p>
+              <p className="mt-3 text-base font-medium leading-relaxed text-foreground">
+                "{rewrite.rewritten}"
+              </p>
+            </div>
+          </div>
+          {rewrite.why && (
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              {rewrite.why}
+            </p>
+          )}
+          <p className="mt-6 text-sm leading-relaxed text-foreground/90">
+            That is one line after one pass. The 30 day program does this to
+            every answer you will need, live, and scores the change.
+          </p>
+          <a
+            href="/program"
+            className="mt-5 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-background"
+            style={{ background: "var(--primary)" }}
+          >
+            See the 30 day program →
+          </a>
+        </>
+      )}
+    </section>
   );
 }
