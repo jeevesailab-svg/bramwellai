@@ -233,6 +233,11 @@ function scrollToApply() {
   document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" });
 }
 
+function scrollToBookCall() {
+  document.getElementById("book-call")?.scrollIntoView({ behavior: "smooth" });
+}
+
+
 function FoundersPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
