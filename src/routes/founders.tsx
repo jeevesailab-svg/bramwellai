@@ -534,23 +534,23 @@ function FoundersPage() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium">First name</label>
-                  <input id="firstName" name="firstName" className={field} value={form.firstName} onChange={(e) => update("firstName", e.target.value)} />
+                  <input id="firstName" name="firstName" ref={firstNameRef} defaultValue="" className={field} />
                 </div>
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium">Last name</label>
-                  <input id="lastName" name="lastName" className={field} value={form.lastName} onChange={(e) => update("lastName", e.target.value)} />
+                  <input id="lastName" name="lastName" ref={lastNameRef} defaultValue="" className={field} />
                 </div>
                 <div className="sm:col-span-2">
                   <label htmlFor="email" className="block text-sm font-medium">Work email</label>
-                  <input id="email" name="email" type="email" className={field} value={form.email} onChange={(e) => update("email", e.target.value)} />
+                  <input id="email" name="email" ref={emailRef} defaultValue="" type="email" className={field} />
                 </div>
                 <div className="sm:col-span-2">
                   <label htmlFor="company" className="block text-sm font-medium">Company</label>
-                  <input id="company" name="company" className={field} value={form.company} onChange={(e) => update("company", e.target.value)} />
+                  <input id="company" name="company" ref={companyRef} defaultValue="" className={field} />
                 </div>
                 <div>
                   <label htmlFor="teamSize" className="block text-sm font-medium">Sales team size</label>
-                  <select id="teamSize" name="teamSize" className={field} value={form.teamSize} onChange={(e) => update("teamSize", e.target.value)}>
+                  <select id="teamSize" name="teamSize" ref={teamSizeRef} defaultValue="" className={field}>
                     <option value="">Select</option>
                     {TEAM_SIZES.map((t) => (
                       <option key={t} value={t}>
@@ -561,7 +561,7 @@ function FoundersPage() {
                 </div>
                 <div>
                   <label htmlFor="role" className="block text-sm font-medium">Your role</label>
-                  <select id="role" name="role" className={field} value={form.role} onChange={(e) => update("role", e.target.value)}>
+                  <select id="role" name="role" ref={roleRef} defaultValue="" className={field}>
                     <option value="">Select</option>
                     {ROLES.map((r) => (
                       <option key={r} value={r}>
