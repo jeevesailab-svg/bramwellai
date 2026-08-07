@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/SiteChrome";
 import { CtaButton } from "@/components/site/CtaButton";
 
@@ -202,45 +202,50 @@ function FoundersPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    company: "",
-    teamSize: "",
-    role: "",
-  });
 
-  function update<K extends keyof typeof form>(k: K, v: string) {
-    setForm((f) => ({ ...f, [k]: v }));
-  }
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const companyRef = useRef<HTMLInputElement>(null);
+  const teamSizeRef = useRef<HTMLSelectElement>(null);
+  const roleRef = useRef<HTMLSelectElement>(null);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    if (!form.firstName || !form.lastName || !form.email || !form.company || !form.teamSize || !form.role) {
+
+    const firstName = firstNameRef.current?.value.trim() ?? "";
+    const lastName = lastNameRef.current?.value.trim() ?? "";
+    const email = emailRef.current?.value.trim() ?? "";
+    const company = companyRef.current?.value.trim() ?? "";
+    const teamSize = teamSizeRef.current?.value ?? "";
+    const role = roleRef.current?.value ?? "";
+
+    if (!firstName || !lastName || !email || !company || !teamSize || !role) {
       setError("Please complete every field so we can review your application.");
       return;
     }
+
     setSubmitting(true);
     try {
-      await fetch("/api/public/klaviyo-event", {
+      const res = await fetch("/api/public/founders-apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: form.email.trim(),
-          eventName: "Applied, Enterprise Waitlist",
-          pathway: "enterprise",
-          source: "waitlist_page",
-          properties: {
-            first_name: form.firstName.trim(),
-            last_name: form.lastName.trim(),
-            company: form.company.trim(),
-            team_size: form.teamSize,
-            role: form.role,
-          },
+          email,
+          firstName,
+          lastName,
+          company,
+          teamSize,
+          role,
+          source: "founders_page",
         }),
       });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({ error: "Submission failed" }));
+        setError(body?.error || "Submission failed. Please try again.");
+        return;
+      }
       setSubmitted(true);
     } catch {
       setError("Something went wrong. Please try again in a moment.");
@@ -495,35 +500,57 @@ function FoundersPage() {
           </p>
 
           {submitted ? (
-            <div className="mt-10 rounded-2xl border border-border bg-background p-8">
-              <h3 className="text-2xl font-semibold tracking-tight">Application received.</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                We review every application by hand. If your business is a fit you will hear from us
-                within two business days to arrange the qualification call.
+            <div className="mt-10 rounded-2xl border border-border bg-background p-8 md:p-10">
+              <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">Application received.</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
+                We review every application by hand. A confirmation email is on its way to you now.
+                If your business is a fit, we will be in touch within two business days to arrange
+                a 30-minute qualification call.
               </p>
+              <div className="mt-6 border-t border-border pt-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  What happens next
+                </p>
+                <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm text-muted-foreground md:text-base">
+                  <li>We review your application against current programme capacity.</li>
+                  <li>If you are a fit, we email you to book the qualification call.</li>
+                  <li>On the call we discuss your sales team, pipeline, and whether the programme is the right fit.</li>
+                </ol>
+              </div>
+              <div className="mt-8">
+                <a
+                  href="https://calendly.com/bramwellai/qualification-call"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-background px-7 text-sm font-semibold transition hover:bg-accent"
+                >
+                  Book your qualification call <span>→</span>
+                </a>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Optional: skip the wait and book directly if you already know this is a fit.
+                </p>
+              </div>
             </div>
           ) : (
             <form onSubmit={onSubmit} className="mt-10 rounded-2xl border border-border bg-background p-8">
               <div className="grid gap-5 sm:grid-cols-2">
-                <label className="block text-sm font-medium">
-                  First name
-                  <input className={field} value={form.firstName} onChange={(e) => update("firstName", e.target.value)} />
-                </label>
-                <label className="block text-sm font-medium">
-                  Last name
-                  <input className={field} value={form.lastName} onChange={(e) => update("lastName", e.target.value)} />
-                </label>
-                <label className="block text-sm font-medium sm:col-span-2">
-                  Work email
-                  <input type="email" className={field} value={form.email} onChange={(e) => update("email", e.target.value)} />
-                </label>
-                <label className="block text-sm font-medium sm:col-span-2">
-                  Company
-                  <input className={field} value={form.company} onChange={(e) => update("company", e.target.value)} />
-                </label>
-                <label className="block text-sm font-medium">
-                  Sales team size
-                  <select className={field} value={form.teamSize} onChange={(e) => update("teamSize", e.target.value)}>
+                <div>
+                  <label htmlFor="firstName" className="block text-sm font-medium">First name</label>
+                  <input id="firstName" name="firstName" ref={firstNameRef} className={field} suppressHydrationWarning />
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="block text-sm font-medium">Last name</label>
+                  <input id="lastName" name="lastName" ref={lastNameRef} className={field} suppressHydrationWarning />
+                </div>
+                <div className="sm:col-span-2">
+                  <label htmlFor="email" className="block text-sm font-medium">Work email</label>
+                  <input id="email" name="email" ref={emailRef} type="email" className={field} suppressHydrationWarning />
+                </div>
+                <div className="sm:col-span-2">
+                  <label htmlFor="company" className="block text-sm font-medium">Company</label>
+                  <input id="company" name="company" ref={companyRef} className={field} suppressHydrationWarning />
+                </div>
+                <div>
+                  <label htmlFor="teamSize" className="block text-sm font-medium">Sales team size</label>
+                  <select id="teamSize" name="teamSize" ref={teamSizeRef} className={field} suppressHydrationWarning>
                     <option value="">Select</option>
                     {TEAM_SIZES.map((t) => (
                       <option key={t} value={t}>
@@ -531,10 +558,10 @@ function FoundersPage() {
                       </option>
                     ))}
                   </select>
-                </label>
-                <label className="block text-sm font-medium">
-                  Your role
-                  <select className={field} value={form.role} onChange={(e) => update("role", e.target.value)}>
+                </div>
+                <div>
+                  <label htmlFor="role" className="block text-sm font-medium">Your role</label>
+                  <select id="role" name="role" ref={roleRef} className={field} suppressHydrationWarning>
                     <option value="">Select</option>
                     {ROLES.map((r) => (
                       <option key={r} value={r}>
@@ -542,7 +569,7 @@ function FoundersPage() {
                       </option>
                     ))}
                   </select>
-                </label>
+                </div>
               </div>
 
               {error ? <p className="mt-5 text-sm text-destructive">{error}</p> : null}

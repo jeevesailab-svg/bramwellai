@@ -33,6 +33,7 @@ import { Route as PortalSessionsSessionIdRouteImport } from './routes/portal.ses
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicQuizLeadRouteImport } from './routes/api/public/quiz-lead'
 import { Route as ApiPublicKlaviyoEventRouteImport } from './routes/api/public/klaviyo-event'
+import { Route as ApiPublicFoundersApplyRouteImport } from './routes/api/public/founders-apply'
 import { Route as ApiPublicDiagnosticTokenRouteImport } from './routes/api/public/diagnostic-token'
 import { Route as ApiPublicDiagnosticRewriteRouteImport } from './routes/api/public/diagnostic-rewrite'
 import { Route as ApiPublicDiagnosticResultRouteImport } from './routes/api/public/diagnostic-result'
@@ -164,6 +165,11 @@ const ApiPublicKlaviyoEventRoute = ApiPublicKlaviyoEventRouteImport.update({
   path: '/api/public/klaviyo-event',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicFoundersApplyRoute = ApiPublicFoundersApplyRouteImport.update({
+  id: '/api/public/founders-apply',
+  path: '/api/public/founders-apply',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicDiagnosticTokenRoute =
   ApiPublicDiagnosticTokenRouteImport.update({
     id: '/api/public/diagnostic-token',
@@ -250,6 +256,7 @@ export interface FileRoutesByFullPath {
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
   '/api/public/diagnostic-rewrite': typeof ApiPublicDiagnosticRewriteRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
+  '/api/public/founders-apply': typeof ApiPublicFoundersApplyRoute
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -285,6 +292,7 @@ export interface FileRoutesByTo {
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
   '/api/public/diagnostic-rewrite': typeof ApiPublicDiagnosticRewriteRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
+  '/api/public/founders-apply': typeof ApiPublicFoundersApplyRoute
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -322,6 +330,7 @@ export interface FileRoutesById {
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
   '/api/public/diagnostic-rewrite': typeof ApiPublicDiagnosticRewriteRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
+  '/api/public/founders-apply': typeof ApiPublicFoundersApplyRoute
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -360,6 +369,7 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-result'
     | '/api/public/diagnostic-rewrite'
     | '/api/public/diagnostic-token'
+    | '/api/public/founders-apply'
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
     | '/lovable/email/suppression'
@@ -395,6 +405,7 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-result'
     | '/api/public/diagnostic-rewrite'
     | '/api/public/diagnostic-token'
+    | '/api/public/founders-apply'
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
     | '/lovable/email/suppression'
@@ -431,6 +442,7 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-result'
     | '/api/public/diagnostic-rewrite'
     | '/api/public/diagnostic-token'
+    | '/api/public/founders-apply'
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
     | '/lovable/email/suppression'
@@ -464,6 +476,7 @@ export interface RootRouteChildren {
   ApiPublicDiagnosticResultRoute: typeof ApiPublicDiagnosticResultRoute
   ApiPublicDiagnosticRewriteRoute: typeof ApiPublicDiagnosticRewriteRoute
   ApiPublicDiagnosticTokenRoute: typeof ApiPublicDiagnosticTokenRoute
+  ApiPublicFoundersApplyRoute: typeof ApiPublicFoundersApplyRoute
   ApiPublicKlaviyoEventRoute: typeof ApiPublicKlaviyoEventRoute
   ApiPublicQuizLeadRoute: typeof ApiPublicQuizLeadRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
@@ -644,6 +657,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicKlaviyoEventRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/founders-apply': {
+      id: '/api/public/founders-apply'
+      path: '/api/public/founders-apply'
+      fullPath: '/api/public/founders-apply'
+      preLoaderRoute: typeof ApiPublicFoundersApplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/diagnostic-token': {
       id: '/api/public/diagnostic-token'
       path: '/api/public/diagnostic-token'
@@ -759,6 +779,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicDiagnosticResultRoute: ApiPublicDiagnosticResultRoute,
   ApiPublicDiagnosticRewriteRoute: ApiPublicDiagnosticRewriteRoute,
   ApiPublicDiagnosticTokenRoute: ApiPublicDiagnosticTokenRoute,
+  ApiPublicFoundersApplyRoute: ApiPublicFoundersApplyRoute,
   ApiPublicKlaviyoEventRoute: ApiPublicKlaviyoEventRoute,
   ApiPublicQuizLeadRoute: ApiPublicQuizLeadRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
