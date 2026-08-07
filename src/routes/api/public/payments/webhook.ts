@@ -71,6 +71,32 @@ export async function sendReceiptEmail(opts: {
     status: "pending",
   });
 
+  // Unsubscribe token (one per address) — required by the send API.
+  let unsubscribeToken: string | undefined;
+  const { data: existingToken } = await supabase
+    .from("email_unsubscribe_tokens")
+    .select("token")
+    .eq("email", recipient)
+    .maybeSingle();
+  if (existingToken?.token) {
+    unsubscribeToken = existingToken.token;
+  } else {
+    const bytes = new Uint8Array(32);
+    crypto.getRandomValues(bytes);
+    const generated = Array.from(bytes)
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+    await supabase
+      .from("email_unsubscribe_tokens")
+      .upsert({ token: generated, email: recipient }, { onConflict: "email", ignoreDuplicates: true });
+    const { data: stored } = await supabase
+      .from("email_unsubscribe_tokens")
+      .select("token")
+      .eq("email", recipient)
+      .maybeSingle();
+    unsubscribeToken = stored?.token || generated;
+  }
+
   const { error: enqueueError } = await supabase.rpc("enqueue_email", {
     queue_name: "transactional_emails",
     payload: {
@@ -84,6 +110,7 @@ export async function sendReceiptEmail(opts: {
       purpose: "transactional",
       label: "enrolment-confirmed",
       idempotency_key: messageId,
+      unsubscribe_token: unsubscribeToken,
       queued_at: new Date().toISOString(),
     },
   });
