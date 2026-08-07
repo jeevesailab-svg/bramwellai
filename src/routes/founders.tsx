@@ -7,17 +7,17 @@ export const Route = createFileRoute("/founders")({
   component: FoundersPage,
   head: () => ({
     meta: [
-      { title: "Elite Sales Team Voice AI Coach 30 Day Program | Bramwell AI" },
+      { title: "Elite Sales Voice AI Coach 30 Day Program | Bramwell AI" },
       {
         name: "description",
         content:
-          "We clone your best sales conversations into a private Voice AI coach, then run every salesperson through daily role-play and feedback on a platform where you see progress in real time.",
+          "Get your Elite Sales Voice AI Coach. Multiply profit, accelerate growth, and lead with certainty.",
       },
-      { property: "og:title", content: "Build and train the sales team that closes every deal." },
+      { property: "og:title", content: "Your best closer is you. Make them everyone." },
       {
         property: "og:description",
         content:
-          "We clone your best sales conversations into a private Voice AI coach, then run every salesperson through daily role-play and feedback on a platform where you see progress in real time.",
+          "Get your Elite Sales Voice AI Coach. Multiply profit, accelerate growth, and lead with certainty.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
