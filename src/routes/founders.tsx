@@ -196,7 +196,7 @@ function FoundersPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <SiteNav ctaLabel="Apply now" ctaHref="#apply" />
+      <SiteNav ctaLabel="Audit my team" ctaHref="#apply" />
 
       {/* Hero */}
       <section className="border-b border-border">
@@ -206,24 +206,72 @@ function FoundersPage() {
             Elite Sales Team Accelerator
           </span>
 
-          <h1 className="mt-8 max-w-4xl text-balance text-[44px] font-semibold leading-[0.96] tracking-[-0.035em] sm:text-6xl md:text-[84px]">
-            Build the sales team that drives your next stage of growth.
+          <h1 className="mt-8 max-w-5xl text-balance text-[44px] font-semibold leading-[0.96] tracking-[-0.035em] sm:text-6xl md:text-[84px]">
+            Your best closer is you. Make them everyone.
           </h1>
 
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            The market has changed. Guesswork will not build a high-performing sales team. Bramwell
-            analyses your highest-performing sales conversations, documents how your best people win
-            business, and builds a private AI coaching platform that trains every salesperson to the
-            same standard.
+            Find what is limiting your sales team's performance. Benchmark your organisation across
+            the six capabilities that drive consistent revenue growth.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-5">
             <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
-              Apply now
+              Audit my team <span>→</span>
             </CtaButton>
             <span className="text-sm text-muted-foreground">
-              Applications reviewed by hand. Limited implementations each quarter.
+              Free benchmark. No card. No pitch on the call.
             </span>
+          </div>
+        </div>
+      </section>
+
+      {/* From This... To This */}
+      <section className="border-b border-border py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
+            From This... To This.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+            The gap between your current team and an elite sales team is not talent. It is a system.
+          </p>
+
+          <div className="mt-14 overflow-hidden rounded-2xl border border-border">
+            <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-2">
+              <div className="bg-muted px-6 py-5 md:px-8 md:py-6">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  Old Sales Team
+                </p>
+              </div>
+              <div className="bg-foreground px-6 py-5 text-background md:px-8 md:py-6">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-70">
+                  Elite Sales Team
+                </p>
+              </div>
+
+              {CONTRAST.map((row, i) => (
+                <div key={i} className="contents">
+                  <div className="bg-background px-6 py-5 md:px-8 md:py-6">
+                    <p className="text-sm leading-relaxed text-muted-foreground">{row.current}</p>
+                  </div>
+                  <div className="bg-foreground/[0.03] px-6 py-5 md:px-8 md:py-6">
+                    <p className="text-sm font-medium leading-relaxed">{row.next}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-12 max-w-3xl">
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              Elite Sales Team Accelerator is Bramwell's done-for-you implementation programme. We
+              analyse your highest-performing sales conversations, interview your founder and top
+              performers, document your sales methodology, and build a private AI coaching platform
+              that trains every salesperson using your products, your customers and your sales process.
+            </p>
+            <p className="mt-6 text-lg font-medium leading-relaxed">
+              Built for implementation. Designed to become the standard your team sells to every day.
+            </p>
           </div>
         </div>
       </section>
@@ -232,10 +280,10 @@ function FoundersPage() {
       <section className="bg-foreground py-24 text-background md:py-32">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] opacity-50">
-            Where founder-led businesses build high-performing sales teams
+            Build the sales team that drives your next stage of growth
           </p>
           <h2 className="mt-6 text-balance text-[38px] font-semibold leading-[0.98] tracking-[-0.03em] md:text-7xl">
-            Growth eventually exposes every inconsistency.
+            The market has changed. Guesswork will not build a high-performing sales team.
           </h2>
           <ul className="mt-10 max-w-2xl space-y-4 text-lg leading-relaxed opacity-70">
             {[
@@ -252,62 +300,10 @@ function FoundersPage() {
           <p className="mt-10 text-2xl font-semibold tracking-tight md:text-3xl">
             Hope is not a sales strategy.
           </p>
-        </div>
-      </section>
-
-      {/* Current vs New Sales Team diagram */}
-      <section className="border-b border-border py-24 md:py-32">
-        <div className="mx-auto max-w-6xl px-6 md:px-10">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-            This is what your next stage of growth looks like
-          </p>
-          <h2 className="mt-6 max-w-3xl text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
-            One sales team before. A different company after.
-          </h2>
-
-          <div className="mt-14 overflow-hidden rounded-2xl border border-border">
-            <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-[220px_1fr_1fr]">
-              <div className="hidden bg-muted px-6 py-5 md:block" />
-              <div className="bg-muted px-6 py-5">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                  Current sales team
-                </p>
-              </div>
-              <div className="bg-foreground px-6 py-5 text-background">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-70">
-                  New sales team
-                </p>
-              </div>
-
-              {CONTRAST.map((row) => (
-                <div key={row.label} className="contents">
-                  <div className="bg-background px-6 py-5">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                      {row.label}
-                    </p>
-                  </div>
-                  <div className="bg-background px-6 py-5">
-                    <p className="text-sm leading-relaxed text-muted-foreground">{row.current}</p>
-                  </div>
-                  <div className="bg-foreground/[0.03] px-6 py-5">
-                    <p className="text-sm font-medium leading-relaxed">{row.next}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-12 max-w-3xl">
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              Elite Sales Team Accelerator is Bramwell's done-for-you implementation programme. We
-              analyse your highest-performing sales conversations, interview your founder and top
-              performers, document your sales methodology, and build a private AI coaching platform
-              that trains every salesperson using your products, your customers and your sales
-              process.
-            </p>
-            <p className="mt-6 text-lg font-medium leading-relaxed">
-              Built for implementation. Designed to become the standard your team sells to every day.
-            </p>
+          <div className="mt-10">
+            <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
+              Apply now <span>→</span>
+            </CtaButton>
           </div>
         </div>
       </section>
