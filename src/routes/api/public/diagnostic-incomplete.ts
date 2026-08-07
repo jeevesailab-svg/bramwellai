@@ -6,7 +6,7 @@ const PATHWAY = {
   comeback: { name: "Career Comeback Sprint", price: "$199 AUD" },
   confidence: { name: "Interview Confidence Sprint", price: "$249 AUD" },
   executive: { name: "Executive Communication Sprint", price: "$499 AUD" },
-  club: { name: "30 Day Voice Mastery Program", price: "$299 USD, one payment" },
+  club: { name: "30 Day Voice Mastery Program", price: "$349 USD, one payment" },
 } as const;
 
 type CommunicationType =

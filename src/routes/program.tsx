@@ -473,7 +473,7 @@ function ProgramPage() {
             Thirty days from now, they stop talking over you.
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-base opacity-70">
-            Cohort 1 starts {COHORT_START}. A structured 30 day curriculum. One payment of $299.
+            Cohort 1 starts {COHORT_START}. A structured 30 day curriculum. One payment of $349.
           </p>
           <div className="mt-9 flex justify-center">
             <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false}>
@@ -490,7 +490,7 @@ function ProgramPage() {
         <div className="flex items-center gap-3">
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-semibold">30 Day Voice Mastery</p>
-            <p className="truncate text-xs text-muted-foreground">$299 USD, one payment</p>
+            <p className="truncate text-xs text-muted-foreground">$349 USD, one payment</p>
           </div>
           <CtaButton as="button" onClick={startCheckout} size="sm" showIcon={false}>
             Get started
