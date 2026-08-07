@@ -413,22 +413,26 @@ function FoundersPage() {
                 </div>
               ))}
             </div>
-            <div className="mt-8 rounded-xl border border-border bg-background p-6">
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className="text-sm font-semibold">Want a real walkthrough?</p>
-                  <p className="text-sm text-muted-foreground">
-                    Book a 15-minute demo and see the platform on your own sales calls.
-                  </p>
-                </div>
-                <a
-                  href="https://calendar.app.google/QWKYUsrzx2k44UE76"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-foreground px-7 text-sm font-semibold text-background transition hover:opacity-90"
-                >
-                  Book a demo <span>→</span>
-                </a>
+            <div className="mt-8 overflow-hidden rounded-xl border border-border bg-background">
+              <div className="border-b border-border bg-muted p-6">
+                <p className="text-sm font-semibold">Book a 15-minute qualification call</p>
+                <p className="text-sm text-muted-foreground">
+                  Pick a time that works for you. We will walk through your sales calls and answer questions about the programme.
+                </p>
+              </div>
+              <div className="h-[640px] w-full">
+                <iframe
+                  src="https://calendar.app.google/QWKYUsrzx2k44UE76"
+                  title="Book a qualification call with Bramwell AI"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  scrolling="auto"
+                  className="h-full w-full"
+                />
               </div>
             </div>
+
           </div>
         </div>
       </section>
