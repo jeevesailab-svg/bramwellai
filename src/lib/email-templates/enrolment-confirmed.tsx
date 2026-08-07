@@ -40,16 +40,16 @@ const EnrolmentConfirmed = ({ firstName, productName, amount, portalUrl }: Props
   return (
     <Html lang="en" dir="ltr">
       <Head />
-      <Preview>Your enrolment is confirmed. Complete the baseline assessment before Day 1.</Preview>
+      <Preview>Your enrolment is confirmed. Complete your onboarding assessment before Day 1.</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Heading style={h1}>Welcome to the Speak Like a CEO program.</Heading>
+          <Heading style={h1}>Your enrolment is confirmed.</Heading>
           <Text style={body}>{greeting}</Text>
-          <Text style={body}>Your enrolment is confirmed.</Text>
-          <Text style={body}>Your first task is the Executive Communication Baseline Assessment.</Text>
+          <Text style={body}>Welcome to your Bramwell programme.</Text>
+          <Text style={body}>Your first task is the onboarding assessment.</Text>
           <Text style={body}>
-            The assessment measures your current communication profile and establishes the benchmark
-            for your personalised 30 day programme.
+            The assessment establishes your current baseline and confirms the benchmark for your
+            programme.
           </Text>
           <Text style={body}>
             Complete the assessment before Day 1. Allow 20 to 30 minutes and complete it in one sitting.
@@ -58,7 +58,7 @@ const EnrolmentConfirmed = ({ firstName, productName, amount, portalUrl }: Props
             Your programme unlocks automatically on completion.
           </Text>
           <Button href={url} style={cta}>
-            Begin the assessment
+            Begin onboarding
           </Button>
           <Text style={{ ...body, margin: '28px 0 0' }}>Bramwell</Text>
           {productName ? (
