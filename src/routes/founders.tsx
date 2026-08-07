@@ -479,7 +479,7 @@ function FoundersPage() {
       </section>
 
       {/* How it works: 30 day sequence */}
-      <section className="border-b border-border py-24 md:py-32">
+      <section className="border-b border-border py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             The 30 day programme
@@ -508,7 +508,7 @@ function FoundersPage() {
       </section>
 
       {/* Certainty */}
-      <section className="border-b border-border bg-muted py-24 md:py-32">
+      <section className="border-b border-border bg-muted py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Why this works when training does not
@@ -528,7 +528,7 @@ function FoundersPage() {
       </section>
 
       {/* Results */}
-      <section className="border-b border-border py-24 md:py-32">
+      <section className="border-b border-border py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Results
@@ -551,7 +551,7 @@ function FoundersPage() {
       </section>
 
       {/* Who it's for */}
-      <section className="border-b border-border py-24 md:py-32">
+      <section className="border-b border-border py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Who it is for
@@ -597,7 +597,7 @@ function FoundersPage() {
       </section>
 
       {/* ROI comparison */}
-      <section className="border-b border-border bg-muted py-24 md:py-32">
+      <section className="border-b border-border bg-muted py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Cost comparison
@@ -678,7 +678,7 @@ function FoundersPage() {
 
       {/* Investment */}
 
-      <section className="border-b border-border bg-background py-24 md:py-32">
+      <section className="border-b border-border bg-background py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Investment
@@ -773,7 +773,7 @@ function FoundersPage() {
       </section>
 
       {/* Risk reversal */}
-      <section className="border-b border-border py-24 md:py-32">
+      <section className="border-b border-border py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Risk reversal
@@ -830,7 +830,7 @@ function FoundersPage() {
 
       {/* Apply */}
 
-      <section id="apply" className="border-b border-border bg-muted py-24 md:py-32">
+      <section id="apply" className="border-b border-border bg-muted py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
             Get Started.
@@ -935,7 +935,7 @@ function FoundersPage() {
       </section>
 
       {/* FAQ */}
-      <section className="border-b border-border py-24 md:py-28">
+      <section className="border-b border-border py-16 md:py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-5xl">
             Frequently asked questions
