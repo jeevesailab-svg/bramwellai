@@ -6,16 +6,17 @@ export const Route = createFileRoute("/portal/welcome")({
   component: PortalWelcomePage,
   head: () => ({
     meta: [
-      { title: "You're in. Start Day 1, Bramwell AI" },
+      { title: "Enrolment confirmed, Bramwell AI" },
       {
         name: "description",
         content:
-          "Your 30 day Speak Like a CEO program is live. Three quick steps and your first scored session starts now.",
+          "Your enrolment in the Speak Like a CEO program is confirmed. Complete the Executive Communication Baseline Assessment to unlock your 30 day programme.",
       },
-      { property: "og:title", content: "You're in. Start Day 1, Bramwell AI" },
+      { property: "og:title", content: "Enrolment confirmed, Bramwell AI" },
       {
         property: "og:description",
-        content: "Three quick steps and your first scored session with Bramwell starts now.",
+        content:
+          "Complete the Executive Communication Baseline Assessment to unlock your 30 day programme.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -64,24 +65,24 @@ function PortalWelcomePage() {
     <main className="min-h-screen bg-background px-6 py-14">
       <div className="mx-auto w-full max-w-3xl">
         <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
-          Payment confirmed
+          Enrolment confirmed
         </p>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-foreground md:text-4xl">
-          {firstName ? `You're in, ${firstName}.` : "You're in."} Your first
-          scored session starts in the next five minutes.
+          {firstName ? `${firstName}, welcome to the Speak Like a CEO program.` : "Welcome to the Speak Like a CEO program."}
         </h1>
         <p className="mt-4 max-w-2xl text-base text-muted-foreground">
-          The 30 day program works because you speak on day one, not day seven.
-          Three quick steps below and Bramwell will have you rebuilt your first
-          answer before you close this tab.
+          Your first task is the Executive Communication Baseline Assessment. It
+          measures your current communication profile and sets the benchmark for
+          your personalised 30 day programme. Complete it before Day 1, in one
+          sitting.
         </p>
 
         {baseline !== null && (
           <div className="mt-6 rounded-xl border border-border bg-card px-5 py-4">
             <p className="text-sm text-muted-foreground">
-              Your starting influence score is{" "}
+              Your recorded baseline influence score is{" "}
               <span className="font-semibold text-foreground">{baseline}</span>.
-              Everything from here is measured against that number.
+              All subsequent sessions are measured against this benchmark.
             </p>
           </div>
         )}
@@ -89,8 +90,8 @@ function PortalWelcomePage() {
         <ol className="mt-10 space-y-4">
           <Step
             n={1}
-            title="Give Bramwell your context"
-            body="Paste your CV and the role or room you're preparing for. This is what makes the coaching specific instead of generic."
+            title="Submit your context"
+            body="Provide your CV and the role you are preparing for. Bramwell uses both to calibrate the assessment to your industry and level."
             done={setupDone === true}
             action={
               setupDone === true ? null : (
@@ -98,20 +99,20 @@ function PortalWelcomePage() {
                   to="/portal/setup"
                   className="inline-flex rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground transition hover:bg-muted"
                 >
-                  Add my context
+                  Submit context
                 </Link>
               )
             }
           />
           <Step
             n={2}
-            title="Run your first session, Week 1: Structure under pressure"
-            body="Answer first, evidence second, then the so what. Bramwell asks, you answer, he scores you across Structure, Specificity, Confidence signals and Relevance."
+            title="Complete the baseline assessment"
+            body="Bramwell asks, you respond as you normally would. Your response is scored across Structure, Specificity, Confidence Signals and Relevance. Allow 20 to 30 minutes."
           />
           <Step
             n={3}
-            title="Rebuild one answer before you leave"
-            body="You'll say the same answer twice. The second version is the one you take into the room. That is your day one win."
+            title="Receive your Day 1 rebuild"
+            body="One response is rebuilt to executive standard and returned to you verbatim. Your programme unlocks automatically on completion."
           />
         </ol>
 
@@ -126,19 +127,19 @@ function PortalWelcomePage() {
               color: "var(--primary-foreground)",
             }}
           >
-            {setupDone === false ? "Add my context, then start →" : "Start Day 1 now →"}
+            {setupDone === false ? "Submit context to begin" : "Begin the assessment"}
           </button>
           <Link
             to="/portal/coach"
             className="text-sm text-muted-foreground underline underline-offset-4 transition hover:text-foreground"
           >
-            Take me to the portal instead
+            Go to the portal
           </Link>
         </div>
 
         <p className="mt-8 text-sm text-muted-foreground">
-          Your receipt is on its way by email. You can manage billing any time
-          from the link at the top of the portal.
+          A receipt has been sent to your email. Billing can be managed from the
+          portal at any time.
         </p>
       </div>
     </main>
