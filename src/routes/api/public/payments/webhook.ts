@@ -25,11 +25,15 @@ export async function sendReceiptEmail(opts: {
   amountCents: number;
   currency: string;
   pathwayWelcome: string;
+  pathway?: string;
 }) {
   const SENDER_DOMAIN = "notify.bramwellai.com";
-  const portalUrl = process.env.PUBLIC_APP_URL
-    ? `${process.env.PUBLIC_APP_URL}/portal/welcome`
-    : "https://bramwellai.com/portal/welcome";
+  const isB2B = opts.pathway === "founders";
+  const portalUrl = isB2B
+    ? "https://calendar.app.google/QWKYUsrzx2k44UE76"
+    : process.env.PUBLIC_APP_URL
+      ? `${process.env.PUBLIC_APP_URL}/portal/welcome`
+      : "https://bramwellai.com/portal/welcome";
   const amount = `${opts.currency.toUpperCase()} $${(opts.amountCents / 100).toFixed(2)}`;
 
   const template = TEMPLATES["enrolment-confirmed"];
@@ -38,6 +42,10 @@ export async function sendReceiptEmail(opts: {
     productName: opts.productName,
     amount,
     portalUrl,
+    nextStepLabel: isB2B ? "Book your kickoff call" : undefined,
+    nextStepDescription: isB2B
+      ? "Your implementation begins with a 30-minute kickoff call. We will confirm your team size, sales process, and the recorded calls we need to analyse."
+      : undefined,
   };
   const element = React.createElement(template.component, templateData);
   const html = await render(element);
@@ -215,12 +223,14 @@ async function handleCheckoutCompleted(session: any, env: StripeEnv) {
   );
 
   // Grant access (requires userId)
-  let cfg = null;
-  if (userId) {
-    cfg = await grantAccess({ userId, priceId, customerId, subscriptionId: subId, email });
+  const cfg = getPathwayConfig(priceId);
+  if (userId && cfg) {
+    await grantAccess({ userId, priceId, customerId, subscriptionId: subId, email });
+  } else if (!cfg) {
+    console.error("Unknown priceId in fulfillment:", priceId);
   }
 
-  // Send receipt
+  // Send receipt (even without userId if we know the product config)
   if (email && cfg) {
     let firstName: string | null = null;
     if (userId) {
@@ -238,6 +248,7 @@ async function handleCheckoutCompleted(session: any, env: StripeEnv) {
       amountCents: full.amount_total ?? 0,
       currency: full.currency || "aud",
       pathwayWelcome: cfg.welcome,
+      pathway: cfg.pathway,
     });
   }
 }

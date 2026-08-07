@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/SiteChrome";
 import { CtaButton } from "@/components/site/CtaButton";
+import { useStripeCheckout } from "@/hooks/useStripeCheckout";
 
 export const Route = createFileRoute("/founders")({
   component: FoundersPage,
@@ -202,6 +203,7 @@ function FoundersPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { openCheckout, closeCheckout, isOpen: checkoutOpen, checkoutElement } = useStripeCheckout();
 
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
@@ -488,6 +490,99 @@ function FoundersPage() {
         </div>
       </section>
 
+      {/* Investment */}
+      <section className="border-b border-border bg-background py-24 md:py-32">
+        <div className="mx-auto max-w-5xl px-6 md:px-10">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            Investment
+          </p>
+          <h2 className="mt-6 max-w-3xl text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
+            One implementation. One standard. One team that closes.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+            For founder-led teams ready to install a repeatable sales standard without adding headcount.
+          </p>
+
+          <div className="mt-14 grid gap-6 md:grid-cols-2">
+            {/* Primary offer */}
+            <div className="rounded-2xl border border-border bg-foreground p-8 text-background md:p-10">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] opacity-60">
+                30 day programme
+              </p>
+              <p className="mt-4 text-5xl font-semibold tracking-tight md:text-6xl">
+                USD $3,500
+              </p>
+              <p className="mt-3 text-sm opacity-70">
+                One-time implementation. Built for teams of 5 or more salespeople.
+              </p>
+              <ul className="mt-8 space-y-3 text-sm opacity-90">
+                {INCLUDED.slice(0, 5).map((i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="opacity-60">✓</span>
+                    <span>{i}</span>
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                onClick={() =>
+                  openCheckout({
+                    priceId: "elite_sales_voice_ai_30day_onetime",
+                    returnUrl: `${window.location.origin}/founders-thanks?session_id={CHECKOUT_SESSION_ID}`,
+                  })
+                }
+                className="mt-10 inline-flex h-14 w-full items-center justify-center gap-3 rounded-full bg-background text-base font-semibold text-foreground transition hover:opacity-90"
+              >
+                Get Started <span>→</span>
+              </button>
+            </div>
+
+            {/* Retainer */}
+            <div className="rounded-2xl border border-border bg-muted p-8 md:p-10">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                Ongoing retraining
+              </p>
+              <p className="mt-4 text-5xl font-semibold tracking-tight md:text-6xl">
+                USD $1,500
+              </p>
+              <p className="mt-3 text-sm text-muted-foreground">
+                per month. Retraining, new scenarios, and platform maintenance.
+              </p>
+              <ul className="mt-8 space-y-3 text-sm text-muted-foreground">
+                {[
+                  "Monthly new coaching scenarios",
+                  "Refreshed objection handling",
+                  "Performance trend reviews",
+                  "Platform updates and support",
+                ].map((i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="text-muted-foreground">✓</span>
+                    <span>{i}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="https://calendar.app.google/QWKYUsrzx2k44UE76"
+                className="mt-10 inline-flex h-14 w-full items-center justify-center gap-3 rounded-full border border-border bg-background text-base font-semibold transition hover:bg-accent"
+              >
+                Book a qualification call <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <p className="mt-8 text-center text-xs text-muted-foreground">
+            Need a custom scope or larger rollout?{" "}
+            <a
+              href="https://calendar.app.google/QWKYUsrzx2k44UE76"
+              className="underline underline-offset-4"
+            >
+              Book a call
+            </a>{" "}
+            and we will scope it.
+          </p>
+        </div>
+      </section>
+
       {/* Apply */}
       <section id="apply" className="border-b border-border bg-muted py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
@@ -634,6 +729,22 @@ function FoundersPage() {
           </div>
         </div>
       </section>
+
+      {/* Checkout modal */}
+      {checkoutOpen ? (
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-foreground/40 p-4 backdrop-blur-sm">
+          <div className="relative mt-10 w-full max-w-xl rounded-2xl border border-border bg-background p-4">
+            <button
+              type="button"
+              onClick={closeCheckout}
+              className="absolute right-4 top-4 text-sm text-muted-foreground hover:text-foreground"
+            >
+              Close
+            </button>
+            <div className="pt-8">{checkoutElement}</div>
+          </div>
+        </div>
+      ) : null}
 
       <SiteFooter />
     </main>

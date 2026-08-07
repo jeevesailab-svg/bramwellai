@@ -139,6 +139,22 @@ export const PATHWAY_CONFIG = {
     welcome: 'Day one starts now. Four weeks of structured impromptu practice, thirty scored sessions, and you will not sound like this again.',
     productName: '30-Day Voice Mastery Program',
   },
+  elite_sales_voice_ai_30day_onetime: {
+    pathway: 'founders',
+    sessions: 9999,
+    minutes: 30,
+    accessDays: 30,
+    welcome: 'Your Elite Sales Team Voice AI Coach is being configured. We will contact you within one business day to schedule your implementation kickoff.',
+    productName: 'Elite Sales Team Voice AI Coach — 30 Day Program',
+  },
+  elite_sales_voice_ai_30day_maintenance: {
+    pathway: 'founders',
+    sessions: 9999,
+    minutes: 30,
+    accessDays: 31,
+    welcome: 'Your monthly retraining and maintenance access is active. We will contact you within one business day to confirm your next coaching cycle.',
+    productName: 'Elite Sales Team Voice AI Coach — Monthly Retraining',
+  },
 } as const;
 
 export type PriceId = keyof typeof PATHWAY_CONFIG;

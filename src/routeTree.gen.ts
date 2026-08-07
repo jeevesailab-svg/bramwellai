@@ -17,6 +17,7 @@ import { Route as ProgramRouteImport } from './routes/program'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as FoundersThanksRouteImport } from './routes/founders-thanks'
 import { Route as FoundersRouteImport } from './routes/founders'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AdvisorsRouteImport } from './routes/advisors'
@@ -83,6 +84,11 @@ const PortalRoute = PortalRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoundersThanksRoute = FoundersThanksRouteImport.update({
+  id: '/founders-thanks',
+  path: '/founders-thanks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FoundersRoute = FoundersRouteImport.update({
@@ -236,6 +242,7 @@ export interface FileRoutesByFullPath {
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
   '/founders': typeof FoundersRoute
+  '/founders-thanks': typeof FoundersThanksRoute
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
@@ -273,6 +280,7 @@ export interface FileRoutesByTo {
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
   '/founders': typeof FoundersRoute
+  '/founders-thanks': typeof FoundersThanksRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/program': typeof ProgramRoute
@@ -310,6 +318,7 @@ export interface FileRoutesById {
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
   '/founders': typeof FoundersRoute
+  '/founders-thanks': typeof FoundersThanksRoute
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
@@ -349,6 +358,7 @@ export interface FileRouteTypes {
     | '/advisors'
     | '/dashboard'
     | '/founders'
+    | '/founders-thanks'
     | '/login'
     | '/portal'
     | '/pricing'
@@ -386,6 +396,7 @@ export interface FileRouteTypes {
     | '/advisors'
     | '/dashboard'
     | '/founders'
+    | '/founders-thanks'
     | '/login'
     | '/pricing'
     | '/program'
@@ -422,6 +433,7 @@ export interface FileRouteTypes {
     | '/advisors'
     | '/dashboard'
     | '/founders'
+    | '/founders-thanks'
     | '/login'
     | '/portal'
     | '/pricing'
@@ -460,6 +472,7 @@ export interface RootRouteChildren {
   AdvisorsRoute: typeof AdvisorsRoute
   DashboardRoute: typeof DashboardRoute
   FoundersRoute: typeof FoundersRoute
+  FoundersThanksRoute: typeof FoundersThanksRoute
   LoginRoute: typeof LoginRoute
   PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
@@ -543,6 +556,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/founders-thanks': {
+      id: '/founders-thanks'
+      path: '/founders-thanks'
+      fullPath: '/founders-thanks'
+      preLoaderRoute: typeof FoundersThanksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/founders': {
@@ -763,6 +783,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdvisorsRoute: AdvisorsRoute,
   DashboardRoute: DashboardRoute,
   FoundersRoute: FoundersRoute,
+  FoundersThanksRoute: FoundersThanksRoute,
   LoginRoute: LoginRoute,
   PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,
@@ -792,13 +813,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

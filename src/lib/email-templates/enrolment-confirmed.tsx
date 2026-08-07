@@ -16,6 +16,8 @@ interface Props {
   productName?: string
   amount?: string
   portalUrl?: string
+  nextStepLabel?: string
+  nextStepDescription?: string
 }
 
 const main = { backgroundColor: '#ffffff', fontFamily: 'Helvetica, Arial, sans-serif' }
@@ -34,31 +36,36 @@ const cta = {
 }
 const small = { fontSize: '13px', color: '#6b7280', lineHeight: '1.6', margin: '20px 0 0' }
 
-const EnrolmentConfirmed = ({ firstName, productName, amount, portalUrl }: Props) => {
+const EnrolmentConfirmed = ({
+  firstName,
+  productName,
+  amount,
+  portalUrl,
+  nextStepLabel,
+  nextStepDescription,
+}: Props) => {
   const greeting = firstName?.trim() ? `${firstName.trim()},` : 'Hello,'
   const url = portalUrl || 'https://bramwellai.com/portal/welcome'
+  const isB2B = url.includes('calendar.app.google')
+  const label = nextStepLabel || (isB2B ? 'Book your kickoff call' : 'Begin onboarding')
+  const description =
+    nextStepDescription ||
+    (isB2B
+      ? 'Your implementation begins with a 30-minute kickoff call. We will confirm your team size, sales process, and the recorded calls we need to analyse.'
+      : 'Your first task is the onboarding assessment. The assessment establishes your current baseline and confirms the benchmark for your programme. Complete the assessment before Day 1. Allow 20 to 30 minutes and complete it in one sitting. Your programme unlocks automatically on completion.')
+
   return (
     <Html lang="en" dir="ltr">
       <Head />
-      <Preview>Your enrolment is confirmed. Complete the baseline assessment before Day 1.</Preview>
+      <Preview>Your enrolment is confirmed. Your next step is inside.</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Heading style={h1}>Welcome to the Speak Like a CEO program.</Heading>
+          <Heading style={h1}>Your enrolment is confirmed.</Heading>
           <Text style={body}>{greeting}</Text>
-          <Text style={body}>Your enrolment is confirmed.</Text>
-          <Text style={body}>Your first task is the Executive Communication Baseline Assessment.</Text>
-          <Text style={body}>
-            The assessment measures your current communication profile and establishes the benchmark
-            for your personalised 30 day programme.
-          </Text>
-          <Text style={body}>
-            Complete the assessment before Day 1. Allow 20 to 30 minutes and complete it in one sitting.
-          </Text>
-          <Text style={{ ...body, margin: '0 0 24px' }}>
-            Your programme unlocks automatically on completion.
-          </Text>
+          <Text style={body}>Welcome to your Bramwell programme.</Text>
+          <Text style={{ ...body, margin: '0 0 24px' }}>{description}</Text>
           <Button href={url} style={cta}>
-            Begin the assessment
+            {label}
           </Button>
           <Text style={{ ...body, margin: '28px 0 0' }}>Bramwell</Text>
           {productName ? (
