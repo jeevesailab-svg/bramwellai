@@ -410,6 +410,14 @@ function PortalCoachPage() {
                 <p className="mt-4 text-sm text-destructive">{error}</p>
               )}
             </div>
+
+            <div className="mx-auto mt-12 max-w-2xl">
+              <ScoreCurve
+                points={curve}
+                baseline={user?.last_readiness_score ?? null}
+                totalSessions={user?.sessions_purchased ?? 30}
+              />
+            </div>
           </>
         )}
       </section>
