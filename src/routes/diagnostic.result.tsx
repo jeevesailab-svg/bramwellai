@@ -353,6 +353,7 @@ function ResultBody({ result }: { result: Result }) {
         <p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted-foreground">
           Your Communication Readiness Score
         </p>
+        <CeoBenchmark score={result.readiness_score} />
         <div className="mx-auto mt-6 max-w-xl rounded-2xl border border-border bg-foreground/[0.03] p-6 text-left">
           <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
             What {result.readiness_score} means
