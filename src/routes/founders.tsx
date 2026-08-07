@@ -621,26 +621,23 @@ function FoundersPage() {
                 Reality
               </div>
               {ROI_COMPARISON.map((row, i) => (
-                <>
+                <Fragment key={row.label}>
                   <div
-                    key={`${row.label}-label`}
                     className={`bg-background px-6 py-5 text-base font-semibold ${i === ROI_COMPARISON.length - 1 ? "text-foreground" : ""}`}
                   >
                     {row.label}
                   </div>
                   <div
-                    key={`${row.label}-cost`}
                     className={`bg-background px-6 py-5 text-base ${i === ROI_COMPARISON.length - 1 ? "font-semibold text-foreground" : "text-muted-foreground"}`}
                   >
                     {row.cost}
                   </div>
                   <div
-                    key={`${row.label}-note`}
                     className={`bg-background px-6 py-5 text-sm leading-relaxed ${i === ROI_COMPARISON.length - 1 ? "text-foreground" : "text-muted-foreground"}`}
                   >
                     {row.note}
                   </div>
-                </>
+                </Fragment>
               ))}
             </div>
 
