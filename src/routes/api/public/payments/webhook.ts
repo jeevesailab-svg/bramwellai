@@ -248,6 +248,7 @@ async function handleCheckoutCompleted(session: any, env: StripeEnv) {
       amountCents: full.amount_total ?? 0,
       currency: full.currency || "aud",
       pathwayWelcome: cfg.welcome,
+      pathway: cfg.pathway,
     });
   }
 }
