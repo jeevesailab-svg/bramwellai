@@ -51,22 +51,21 @@ export function ContinuityBridge({
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
         {gained !== null && gained > 0 ? (
           <>
-            You have moved from {baselineScore} to {latestScore}, a gain of {gained} points.
-            Delivery is a habit, not a certificate. Members who keep practising every week keep
-            climbing. Members who stop drift back within a month.
+            Your influence score has progressed from {baselineScore} to {latestScore}. This can be
+            strengthened with continuous training sprints.
           </>
         ) : (
           <>
-            Delivery is a habit, not a certificate. Keep one live session a week with Bramwell and
-            your score keeps climbing instead of drifting back.
+            Your influence score is building. Keep one live sprint a week with Bramwell and your score
+            keeps climbing instead of drifting back.
           </>
         )}
       </p>
 
       <ul className="mt-5 space-y-2 text-sm">
         {[
-          "Weekly live voice sessions with Bramwell",
-          "Scored every session on Structure, Specificity, Confidence Signals and Relevance",
+          "Weekly live training sprints with Bramwell",
+          "Scored every sprint on Structure, Specificity, Confidence Signals and Relevance",
           "Your score curve keeps building past Day 30",
           "Fresh scenarios pulled from your real role",
         ].map((line) => (
