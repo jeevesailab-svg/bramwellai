@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { getElevenLabsCoachToken } from "@/lib/elevenlabs.functions";
 import { recordCompletedSession } from "@/lib/sessions.functions";
+import { ScoreCurve, type CurvePoint } from "@/components/portal/ScoreCurve";
 
 export const Route = createFileRoute("/portal/coach")({
   component: PortalCoachPage,
