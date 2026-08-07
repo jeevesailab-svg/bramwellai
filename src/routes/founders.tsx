@@ -254,7 +254,7 @@ function FoundersPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <SiteNav ctaLabel="Audit my team" ctaHref="#apply" />
+      <SiteNav ctaLabel="Get Started" ctaHref="#apply" />
 
       {/* Hero */}
       <section className="border-b border-border">
@@ -264,40 +264,22 @@ function FoundersPage() {
             Elite Sales Team Accelerator | 30 day programme
           </span>
 
-          <h1 className="mt-8 max-w-5xl text-balance text-[44px] font-semibold leading-[0.96] tracking-[-0.035em] sm:text-6xl md:text-[84px]">
-            Build and train the sales team that closes every deal.
+          <h1 className="mt-8 max-w-5xl text-balance text-5xl font-semibold leading-[0.96] tracking-[-0.04em] sm:text-7xl md:text-[96px] lg:text-[112px]">
+            The market has changed.
           </h1>
 
-          <p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            The market has changed. Guesswork will not build a high-performing sales team. Bramwell
-            analyses your highest-performing sales conversations, prescribes how you close, documents
-            how you win business, and builds a private AI coaching platform that trains and clones
-            every salesperson to the same standard.
+          <p className="mt-8 max-w-3xl text-2xl font-semibold leading-snug tracking-tight text-foreground md:text-3xl">
+            Guesswork will not build a high-performing sales team.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center gap-5">
-            <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
-              Audit my team <span>→</span>
-            </CtaButton>
-            <span className="text-sm text-muted-foreground">
-              Free benchmark. No card. No pitch on the call.
-            </span>
-          </div>
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            If you are not using AI to analyse your highest-performing sales conversations, document
+            exactly how your best people win business, and train every salesperson to that standard,
+            you are already behind.
+          </p>
 
-          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
-            {[
-              { k: "30 days", v: "From analysis to a trained team" },
-              { k: "15 min / day", v: "Practice per salesperson, in the field" },
-              { k: "1 standard", v: "Every conversation measured against it" },
-            ].map((s) => (
-              <div key={s.k} className="bg-background px-7 py-6">
-                <p className="text-2xl font-semibold tracking-tight md:text-3xl">{s.k}</p>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.v}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            Get your sales coach that never sleeps, trained on your proven sales methodology, with one goal:{
 
       {/* The problem */}
       <section className="bg-foreground py-24 text-background md:py-32">
