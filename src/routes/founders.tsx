@@ -154,15 +154,29 @@ const WHO_ITS_FOR = [
   "Your growth depends on a small number of top performers",
 ];
 
-const INCLUDED = [
-  "Founder and sales leadership workshops",
-  "Analysis of your highest-performing sales conversations",
-  "Documentation of your sales methodology",
-  "Private AI sales coach configured for your business",
-  "Daily AI role-play coaching for every salesperson",
-  "Manager dashboard and performance reporting",
-  "Ongoing platform updates and coaching scenarios",
+const ROI_COMPARISON = [
+  {
+    label: "One day sales trainer",
+    cost: "$8,000 - $15,000",
+    note: "One event. No daily reinforcement. No measurement.",
+  },
+  {
+    label: "Sales methodology consultant",
+    cost: "$25,000 - $60,000",
+    note: "3-6 month project. Delivered and gone. No ongoing coaching.",
+  },
+  {
+    label: "Full-time sales enablement hire",
+    cost: "$120,000 - $180,000 / year",
+    note: "Salary + overhead. Cannot coach every salesperson every day.",
+  },
+  {
+    label: "Bramwell AI Voice Coach",
+    cost: "$3,500 + $1,500 / month",
+    note: "Private coach, daily role-play, manager dashboard, documented methodology.",
+  },
 ];
+
 
 const FAQS = [
   {
