@@ -285,7 +285,7 @@ function FoundersPage() {
 
           <div className="mt-10 flex flex-wrap items-center gap-5">
             <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
-              Get Started <span>→</span>
+              Get Started
             </CtaButton>
             <span className="text-sm text-muted-foreground">
               30 day implementation. Done for you.
