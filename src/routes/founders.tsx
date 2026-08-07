@@ -528,24 +528,24 @@ function FoundersPage() {
           ) : (
             <form onSubmit={onSubmit} className="mt-10 rounded-2xl border border-border bg-background p-8">
               <div className="grid gap-5 sm:grid-cols-2">
-                <label htmlFor="firstName" className="block text-sm font-medium">
-                  First name
+                <div>
+                  <label htmlFor="firstName" className="block text-sm font-medium">First name</label>
                   <input id="firstName" name="firstName" className={field} value={form.firstName} onChange={(e) => update("firstName", e.target.value)} />
-                </label>
-                <label htmlFor="lastName" className="block text-sm font-medium">
-                  Last name
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="block text-sm font-medium">Last name</label>
                   <input id="lastName" name="lastName" className={field} value={form.lastName} onChange={(e) => update("lastName", e.target.value)} />
-                </label>
-                <label htmlFor="email" className="block text-sm font-medium sm:col-span-2">
-                  Work email
+                </div>
+                <div className="sm:col-span-2">
+                  <label htmlFor="email" className="block text-sm font-medium">Work email</label>
                   <input id="email" name="email" type="email" className={field} value={form.email} onChange={(e) => update("email", e.target.value)} />
-                </label>
-                <label htmlFor="company" className="block text-sm font-medium sm:col-span-2">
-                  Company
+                </div>
+                <div className="sm:col-span-2">
+                  <label htmlFor="company" className="block text-sm font-medium">Company</label>
                   <input id="company" name="company" className={field} value={form.company} onChange={(e) => update("company", e.target.value)} />
-                </label>
-                <label htmlFor="teamSize" className="block text-sm font-medium">
-                  Sales team size
+                </div>
+                <div>
+                  <label htmlFor="teamSize" className="block text-sm font-medium">Sales team size</label>
                   <select id="teamSize" name="teamSize" className={field} value={form.teamSize} onChange={(e) => update("teamSize", e.target.value)}>
                     <option value="">Select</option>
                     {TEAM_SIZES.map((t) => (
@@ -554,9 +554,9 @@ function FoundersPage() {
                       </option>
                     ))}
                   </select>
-                </label>
-                <label htmlFor="role" className="block text-sm font-medium">
-                  Your role
+                </div>
+                <div>
+                  <label htmlFor="role" className="block text-sm font-medium">Your role</label>
                   <select id="role" name="role" className={field} value={form.role} onChange={(e) => update("role", e.target.value)}>
                     <option value="">Select</option>
                     {ROLES.map((r) => (
@@ -565,7 +565,7 @@ function FoundersPage() {
                       </option>
                     ))}
                   </select>
-                </label>
+                </div>
               </div>
 
               {error ? <p className="mt-5 text-sm text-destructive">{error}</p> : null}
