@@ -17,6 +17,7 @@ import { Route as ProgramRouteImport } from './routes/program'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as FoundersThanksRouteImport } from './routes/founders-thanks'
 import { Route as FoundersRouteImport } from './routes/founders'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AdvisorsRouteImport } from './routes/advisors'
@@ -26,7 +27,6 @@ import { Route as DiagnosticIndexRouteImport } from './routes/diagnostic.index'
 import { Route as PortalWelcomeRouteImport } from './routes/portal.welcome'
 import { Route as PortalSetupRouteImport } from './routes/portal.setup'
 import { Route as PortalCoachRouteImport } from './routes/portal.coach'
-import { Route as FoundersThanksRouteImport } from './routes/founders.thanks'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as DiagnosticResultRouteImport } from './routes/diagnostic.result'
 import { Route as PortalSessionsIndexRouteImport } from './routes/portal.sessions.index'
@@ -86,6 +86,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FoundersThanksRoute = FoundersThanksRouteImport.update({
+  id: '/founders-thanks',
+  path: '/founders-thanks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FoundersRoute = FoundersRouteImport.update({
   id: '/founders',
   path: '/founders',
@@ -130,11 +135,6 @@ const PortalCoachRoute = PortalCoachRouteImport.update({
   id: '/coach',
   path: '/coach',
   getParentRoute: () => PortalRoute,
-} as any)
-const FoundersThanksRoute = FoundersThanksRouteImport.update({
-  id: '/thanks',
-  path: '/thanks',
-  getParentRoute: () => FoundersRoute,
 } as any)
 const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   id: '/email/unsubscribe',
@@ -241,7 +241,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
-  '/founders': typeof FoundersRouteWithChildren
+  '/founders': typeof FoundersRoute
+  '/founders-thanks': typeof FoundersThanksRoute
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
@@ -252,7 +253,6 @@ export interface FileRoutesByFullPath {
   '/waitlist': typeof WaitlistRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
-  '/founders/thanks': typeof FoundersThanksRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
   '/portal/welcome': typeof PortalWelcomeRoute
@@ -279,7 +279,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
-  '/founders': typeof FoundersRouteWithChildren
+  '/founders': typeof FoundersRoute
+  '/founders-thanks': typeof FoundersThanksRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/program': typeof ProgramRoute
@@ -289,7 +290,6 @@ export interface FileRoutesByTo {
   '/waitlist': typeof WaitlistRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
-  '/founders/thanks': typeof FoundersThanksRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
   '/portal/welcome': typeof PortalWelcomeRoute
@@ -317,7 +317,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/advisors': typeof AdvisorsRoute
   '/dashboard': typeof DashboardRoute
-  '/founders': typeof FoundersRouteWithChildren
+  '/founders': typeof FoundersRoute
+  '/founders-thanks': typeof FoundersThanksRoute
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
@@ -328,7 +329,6 @@ export interface FileRoutesById {
   '/waitlist': typeof WaitlistRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
-  '/founders/thanks': typeof FoundersThanksRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
   '/portal/welcome': typeof PortalWelcomeRoute
@@ -358,6 +358,7 @@ export interface FileRouteTypes {
     | '/advisors'
     | '/dashboard'
     | '/founders'
+    | '/founders-thanks'
     | '/login'
     | '/portal'
     | '/pricing'
@@ -368,7 +369,6 @@ export interface FileRouteTypes {
     | '/waitlist'
     | '/diagnostic/result'
     | '/email/unsubscribe'
-    | '/founders/thanks'
     | '/portal/coach'
     | '/portal/setup'
     | '/portal/welcome'
@@ -396,6 +396,7 @@ export interface FileRouteTypes {
     | '/advisors'
     | '/dashboard'
     | '/founders'
+    | '/founders-thanks'
     | '/login'
     | '/pricing'
     | '/program'
@@ -405,7 +406,6 @@ export interface FileRouteTypes {
     | '/waitlist'
     | '/diagnostic/result'
     | '/email/unsubscribe'
-    | '/founders/thanks'
     | '/portal/coach'
     | '/portal/setup'
     | '/portal/welcome'
@@ -433,6 +433,7 @@ export interface FileRouteTypes {
     | '/advisors'
     | '/dashboard'
     | '/founders'
+    | '/founders-thanks'
     | '/login'
     | '/portal'
     | '/pricing'
@@ -443,7 +444,6 @@ export interface FileRouteTypes {
     | '/waitlist'
     | '/diagnostic/result'
     | '/email/unsubscribe'
-    | '/founders/thanks'
     | '/portal/coach'
     | '/portal/setup'
     | '/portal/welcome'
@@ -471,7 +471,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdvisorsRoute: typeof AdvisorsRoute
   DashboardRoute: typeof DashboardRoute
-  FoundersRoute: typeof FoundersRouteWithChildren
+  FoundersRoute: typeof FoundersRoute
+  FoundersThanksRoute: typeof FoundersThanksRoute
   LoginRoute: typeof LoginRoute
   PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
@@ -557,6 +558,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/founders-thanks': {
+      id: '/founders-thanks'
+      path: '/founders-thanks'
+      fullPath: '/founders-thanks'
+      preLoaderRoute: typeof FoundersThanksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/founders': {
       id: '/founders'
       path: '/founders'
@@ -619,13 +627,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/portal/coach'
       preLoaderRoute: typeof PortalCoachRouteImport
       parentRoute: typeof PortalRoute
-    }
-    '/founders/thanks': {
-      id: '/founders/thanks'
-      path: '/thanks'
-      fullPath: '/founders/thanks'
-      preLoaderRoute: typeof FoundersThanksRouteImport
-      parentRoute: typeof FoundersRoute
     }
     '/email/unsubscribe': {
       id: '/email/unsubscribe'
@@ -756,18 +757,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface FoundersRouteChildren {
-  FoundersThanksRoute: typeof FoundersThanksRoute
-}
-
-const FoundersRouteChildren: FoundersRouteChildren = {
-  FoundersThanksRoute: FoundersThanksRoute,
-}
-
-const FoundersRouteWithChildren = FoundersRoute._addFileChildren(
-  FoundersRouteChildren,
-)
-
 interface PortalRouteChildren {
   PortalCoachRoute: typeof PortalCoachRoute
   PortalSetupRoute: typeof PortalSetupRoute
@@ -793,7 +782,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdvisorsRoute: AdvisorsRoute,
   DashboardRoute: DashboardRoute,
-  FoundersRoute: FoundersRouteWithChildren,
+  FoundersRoute: FoundersRoute,
+  FoundersThanksRoute: FoundersThanksRoute,
   LoginRoute: LoginRoute,
   PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,

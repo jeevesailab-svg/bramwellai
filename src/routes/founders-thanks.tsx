@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/SiteChrome";
 
-export const Route = createFileRoute("/founders/thanks")({
+export const Route = createFileRoute("/founders-thanks")({
   component: FoundersThanksPage,
   head: () => ({
     meta: [
