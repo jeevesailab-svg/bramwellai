@@ -301,7 +301,7 @@ function ProofSlots() {
 /* ───────────── Symptom → Cause ───────────── */
 function SymptomCause() {
   const items = [
-    { icon: Target, symptom: "Interview after interview, no offer?", cause: "It&apos;s most likely your delivery.", copy: "Graduate and early-career interviews are decided on delivery, not your transcript. Bramwell listens live and tells you exactly where you lose the panel.", accent: GOLD },
+    { icon: Target, symptom: "Interviews are decided in 8 seconds.", cause: "Discover what&apos;s holding you back.", copy: "Your CV opens the door. Your delivery closes the room. Bramwell listens live and tells you exactly where you lose the panel.", accent: GOLD },
     { icon: Heart, symptom: "People losing interest mid-sentence?", cause: "It&apos;s most likely your tone.", copy: "Pace, energy and pitch decide whether people lean in or check out. Bramwell trains all three, live.", accent: ELECTRIC },
     { icon: MessageCircle, symptom: "People talking over you?", cause: "It&apos;s most likely how you structure your sentences.", copy: "You&apos;re burying the point. Bramwell teaches the four-part answer that lands first and holds the floor.", accent: SUNRISE },
   ];
