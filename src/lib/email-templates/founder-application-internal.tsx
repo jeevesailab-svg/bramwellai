@@ -36,10 +36,11 @@ const FounderApplicationInternal = ({
   source,
 }: Props) => {
   const fullName = [firstName, lastName].filter(Boolean).join(' ') || 'Unknown'
+  const companyName = company || 'Unknown'
   return (
     <Html lang="en" dir="ltr">
       <Head />
-      <Preview>New founder application from {fullName} at {company}</Preview>
+      <Preview>New founder application from {fullName} at {companyName}</Preview>
       <Body style={main}>
         <Container style={container}>
           <Heading style={h1}>New founder application</Heading>
@@ -49,16 +50,16 @@ const FounderApplicationInternal = ({
           <Text style={body}>{fullName}</Text>
 
           <Text style={label}>Email</Text>
-          <Text style={body}>{email}</Text>
+          <Text style={body}>{email || 'Not provided'}</Text>
 
           <Text style={label}>Company</Text>
-          <Text style={body}>{company}</Text>
+          <Text style={body}>{companyName}</Text>
 
           <Text style={label}>Team size</Text>
-          <Text style={body}>{teamSize}</Text>
+          <Text style={body}>{teamSize || 'Not provided'}</Text>
 
           <Text style={label}>Role</Text>
-          <Text style={body}>{role}</Text>
+          <Text style={body}>{role || 'Not provided'}</Text>
 
           {source ? (
             <>
