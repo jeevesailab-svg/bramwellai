@@ -425,7 +425,7 @@ function FoundersPage() {
                   Pick a time that works for you. We will walk through your sales calls and answer questions about the programme.
                 </p>
               </div>
-              <div className="h-[640px] w-full">
+              <div className="h-[520px] w-full md:h-[640px]">
                 <iframe
                   src="https://calendar.app.google/QWKYUsrzx2k44UE76"
                   title="Book a qualification call with Bramwell AI"
