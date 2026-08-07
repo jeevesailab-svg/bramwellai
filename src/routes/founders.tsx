@@ -357,25 +357,57 @@ function FoundersPage() {
             A sales coach that listens, scores, and coaches every call.
           </h2>
           <p className="mt-5 max-w-2xl text-base text-muted-foreground md:text-lg">
-            Watch how recorded calls become a private training standard for every salesperson.
+            Recorded calls become a private training standard for every salesperson. Here is how the platform turns one winning conversation into team-wide consistency.
           </p>
-          <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-muted">
-            <video
-              src="/__l5e/assets-v1/d9900d06-3178-4102-8916-beb27ad90d43/founders-demo.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              controls
-              className="aspect-video w-full"
-              aria-label="Demo of the AI sales coach analysing a call and showing feedback"
-            />
+
+          <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-muted p-8 md:p-12">
+            <div className="grid gap-6 md:grid-cols-3">
+              {[
+                {
+                  step: "01",
+                  title: "Upload the call",
+                  body: "Drop in a recorded sales conversation your team already has.",
+                },
+                {
+                  step: "02",
+                  title: "Extract the standard",
+                  body: "Bramwell identifies the questions, framing and responses that won the deal.",
+                },
+                {
+                  step: "03",
+                  title: "Coach the team",
+                  body: "Every salesperson practises against that standard and receives scored feedback.",
+                },
+              ].map((s) => (
+                <div key={s.step} className="rounded-xl border border-border bg-background p-6">
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                    Step {s.step}
+                  </span>
+                  <h3 className="mt-3 text-lg font-semibold tracking-tight">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 rounded-xl border border-border bg-background p-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-sm font-semibold">Want a real walkthrough?</p>
+                  <p className="text-sm text-muted-foreground">
+                    Book a 15-minute demo and see the platform on your own sales calls.
+                  </p>
+                </div>
+                <a
+                  href="https://calendar.app.google/QWKYUsrzx2k44UE76"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-foreground px-7 text-sm font-semibold text-background transition hover:opacity-90"
+                >
+                  Book a demo <span>→</span>
+                </a>
+              </div>
+            </div>
           </div>
-          <p className="mt-4 text-center text-xs text-muted-foreground">
-            10-second demo. The real platform uses your sales calls, your customers, and your methodology.
-          </p>
         </div>
       </section>
+
 
       {/* The problem */}
 
