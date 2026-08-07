@@ -51,7 +51,6 @@ function Index() {
       <FourteenDays />
       <BlueOcean />
       <WhatYouLearn />
-      <ProofSlots />
       <PricingTease />
       <FAQ />
       <FinalCTA />
@@ -147,7 +146,7 @@ function Hero() {
             </p>
 
             <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              The room doesn't hear your potential. It hears your hesitation. In 5 minutes, Bramwell will identify the exact delivery pattern that's holding you back and the fastest way to fix it.
+              Discover the one thing holding you back and the hidden beliefs and habits quietly sabotaging your progress. Take the test.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -171,13 +170,13 @@ function Hero() {
                 alt="Executive pausing before she speaks"
                 className="h-[320px] w-full object-cover object-[60%_35%] md:h-[520px]"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent px-6 pb-7 pt-20 md:px-8 md:pb-8 md:pt-28">
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
-                  Conquer inner critics
-                </p>
-                <p className="mt-1 max-w-sm text-lg font-semibold leading-tight tracking-tight text-white md:text-xl">
-                  Stop fear, self-doubt, and insecurity from holding you back, once and for all.
-                </p>
+            </div>
+            <div className="mt-5 rounded-3xl border border-border bg-white p-6 md:p-7" style={{ boxShadow: "var(--shadow-soft)" }}>
+              <p className="text-lg font-semibold leading-tight tracking-tight text-foreground md:text-xl">
+                Is fear, self-doubt, and insecurity holding you back?
+              </p>
+              <div className="mt-4">
+                <PrimaryCTA size="sm" />
               </div>
             </div>
           </div>
@@ -262,41 +261,6 @@ function VillainBand() {
   );
 }
 
-/* ───────────── Proof slots (real stories only) ───────────── */
-function ProofSlots() {
-  return (
-    <section className="border-y border-border bg-white py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-6 md:px-10">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">Graduate stories</p>
-          <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Real sessions.{" "}
-            <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>Real words.</span>
-          </h2>
-          <p className="mt-4 text-sm text-muted-foreground">
-            We only publish stories from people who have actually run a free diagnostic. These slots fill as they come in.
-          </p>
-        </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="flex min-h-[180px] flex-col justify-between rounded-3xl border border-dashed border-border bg-background/60 p-8"
-            >
-              <span aria-hidden className="text-4xl leading-none text-muted-foreground/30">&ldquo;</span>
-              <p className="text-sm text-muted-foreground/70">
-                Your story here, after your first free session.
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-10 flex justify-center">
-          <PrimaryCTA />
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ───────────── Symptom → Cause ───────────── */
 function SymptomCause() {
