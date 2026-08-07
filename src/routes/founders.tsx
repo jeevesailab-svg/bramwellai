@@ -463,7 +463,7 @@ function FoundersPage() {
       <section id="apply" className="border-b border-border bg-muted py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
-            Apply for an implementation.
+            Get Started.
           </h2>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground">
             Tell us about your sales team. We review every application by hand and take on a limited
