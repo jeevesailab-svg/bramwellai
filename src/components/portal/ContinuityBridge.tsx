@@ -64,8 +64,8 @@ export function ContinuityBridge({
 
       <ul className="mt-5 space-y-2 text-sm">
         {[
-          "Weekly live voice sessions with Bramwell",
-          "Scored every session on Structure, Specificity, Confidence Signals and Relevance",
+          "Weekly live training sprints with Bramwell",
+          "Scored every sprint on Structure, Specificity, Confidence Signals and Relevance",
           "Your score curve keeps building past Day 30",
           "Fresh scenarios pulled from your real role",
         ].map((line) => (
