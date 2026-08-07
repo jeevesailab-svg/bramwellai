@@ -43,3 +43,43 @@ export function getScoreBand(score: number): ScoreBand {
 
 export const SCORE_SCALE =
   "0 to 39 not landing · 40 to 54 talked over · 55 to 69 forgettable · 70 to 84 credible · 85+ room commanding";
+
+/**
+ * The CEO benchmark. Derived from scoring senior executive speakers on the
+ * same four dimensions: Structure, Specificity, Confidence Signals, Relevance.
+ */
+export const CEO_BENCHMARK = 88;
+
+export type CeoGap = {
+  benchmark: number;
+  gap: number;
+  atOrAbove: boolean;
+  /** 0 to 100, how far along the run to CEO level the score sits. */
+  progressPct: number;
+  verdict: string;
+};
+
+export function getCeoGap(score: number): CeoGap {
+  const gap = Math.max(0, CEO_BENCHMARK - score);
+  const atOrAbove = score >= CEO_BENCHMARK;
+  const progressPct = Math.max(
+    0,
+    Math.min(100, Math.round((score / CEO_BENCHMARK) * 100)),
+  );
+
+  let verdict: string;
+  if (atOrAbove) {
+    verdict =
+      "You are speaking at CEO level. The work now is holding it in the rooms that matter most.";
+  } else if (gap <= 8) {
+    verdict = `You are ${gap} points off CEO level. Close range. A few habits are separating you from the top of the room.`;
+  } else if (gap <= 20) {
+    verdict = `You are ${gap} points off CEO level. The content is there. The delivery is costing you the room.`;
+  } else if (gap <= 35) {
+    verdict = `You are ${gap} points off CEO level. Right now a CEO would land the same point in half the words.`;
+  } else {
+    verdict = `You are ${gap} points off CEO level. The gap is structural, not cosmetic, and it is fixable in 30 days.`;
+  }
+
+  return { benchmark: CEO_BENCHMARK, gap, atOrAbove, progressPct, verdict };
+}
