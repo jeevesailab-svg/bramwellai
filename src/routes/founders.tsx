@@ -434,7 +434,7 @@ function FoundersPage() {
           </p>
           <div className="mt-10">
             <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
-              Get Started <span>→</span>
+              Get Started
             </CtaButton>
           </div>
         </div>
