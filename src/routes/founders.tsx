@@ -578,7 +578,7 @@ function FoundersPage() {
               onClick={scrollToApply}
               className="inline-flex h-14 items-center justify-center gap-3 rounded-full bg-background px-9 text-base font-semibold text-foreground transition hover:-translate-y-0.5 hover:opacity-90"
             >
-              Apply now <span>→</span>
+              Get Started <span>→</span>
             </button>
           </div>
         </div>
