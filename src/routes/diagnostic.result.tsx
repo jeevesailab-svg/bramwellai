@@ -575,6 +575,8 @@ function ReportContent({
 
   return (
     <div className="space-y-6">
+      {metrics?.sub_scores && <SubScoreBars sub={metrics.sub_scores} />}
+
       <div className="grid gap-4 md:grid-cols-2">
         <MetricCard
           label="Filler words"
