@@ -295,76 +295,71 @@ function ProgramPage() {
 
 
 
-      {/* The Bramwell Method */}
-      <section className="border-y border-border bg-foreground/[0.02] py-20 md:py-28">
-        <div className="mx-auto max-w-5xl px-6 md:px-10">
-          <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>
-            The Bramwell Method
-          </p>
-          <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Our proven system for voice transformation.
-          </h2>
-          <p className="mt-4 max-w-2xl text-base text-muted-foreground">
-            Your Voice AI Mentor practises with you daily, scores every response, and proves your
-            progress.
-          </p>
-          <ol className="mt-12 grid gap-5 md:grid-cols-2">
-            {METHOD.map((m, i) => (
-              <li key={m.step} className="rounded-2xl border border-border bg-background p-7">
-                <span
-                  className="text-xs font-semibold uppercase tracking-[0.18em]"
-                  style={{ color: "var(--primary)" }}
-                >
-                  0{i + 1}
-                </span>
-                <h3 className="mt-3 text-xl font-semibold tracking-tight">{m.step}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Curriculum */}
+      {/* The 5 phases, the calendar */}
       <section className="bg-background py-20 md:py-28">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
           <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>
-            The 30 day curriculum
+            The 30 day calendar
           </p>
           <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Four weeks. One skill layered on the last.
+            Five phases. Seven steps taught inside them.
           </h2>
           <p className="mt-4 max-w-2xl text-base text-muted-foreground">
-            Every session is impromptu. No scripts, no slides, no rehearsing in the shower. Your
-            Mentor sets a cold prompt, you answer, you get scored, you run it again. That is how
-            speaking actually improves.
+            The phases are your calendar. The seven steps are the content, drilled in the phase
+            where they matter most. Every session is impromptu and scored.
           </p>
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {CURRICULUM.map((w) => (
-              <article key={w.week} className="rounded-2xl border border-border bg-foreground/[0.02] p-7">
-                <div className="flex items-baseline justify-between gap-4">
+          <ol className="mt-12 space-y-4">
+            {PHASES.map((p) => (
+              <li
+                key={p.n}
+                className="grid gap-3 rounded-2xl border border-border bg-foreground/[0.02] p-7 md:grid-cols-[180px_1fr]"
+              >
+                <div>
                   <span
                     className="text-xs font-semibold uppercase tracking-[0.18em]"
                     style={{ color: "var(--primary)" }}
                   >
-                    {w.week}
+                    {p.n}
                   </span>
-                  <span className="text-xs text-muted-foreground">{w.focus}</span>
+                  <p className="mt-1 text-xs text-muted-foreground">{p.days}</p>
                 </div>
-                <h3 className="mt-3 text-xl font-semibold tracking-tight">{w.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{w.body}</p>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {w.drills.map((d) => (
-                    <li
-                      key={d}
-                      className="rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/80"
-                    >
-                      {d}
-                    </li>
-                  ))}
-                </ul>
-              </article>
+                <div>
+                  <h3 className="text-xl font-semibold tracking-tight">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {p.steps.map((s) => (
+                      <li
+                        key={s}
+                        className="rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/80"
+                      >
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
             ))}
+          </ol>
+
+          <div className="mt-14 rounded-2xl border border-border bg-background p-7">
+            <h3 className="text-lg font-semibold tracking-tight">The seven steps</h3>
+            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {STEPS.map((s) => (
+                <div key={s.n}>
+                  <div className="flex items-baseline gap-2">
+                    <span
+                      className="text-xs font-semibold uppercase tracking-[0.18em]"
+                      style={{ color: "var(--primary)" }}
+                    >
+                      {s.n}
+                    </span>
+                    <span className="text-[11px] text-muted-foreground">{s.phase}</span>
+                  </div>
+                  <p className="mt-1 text-sm font-semibold tracking-tight">{s.title}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
