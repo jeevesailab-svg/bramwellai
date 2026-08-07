@@ -7,7 +7,7 @@ export const Route = createFileRoute("/founders")({
   component: FoundersPage,
   head: () => ({
     meta: [
-      { title: "Elite Sales Team Accelerator | Bramwell AI" },
+      { title: "Elite Sales Team Voice AI Coach 30 Day Program | Bramwell AI" },
       {
         name: "description",
         content:
