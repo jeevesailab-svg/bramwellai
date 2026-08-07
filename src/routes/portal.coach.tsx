@@ -113,6 +113,7 @@ function PortalCoachPage() {
 
   const [user, setUser] = useState<UserRow | null>(null);
   const [lastSession, setLastSession] = useState<SessionRow | null>(null);
+  const [curve, setCurve] = useState<CurvePoint[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [starting, setStarting] = useState(false);
@@ -168,6 +169,13 @@ function PortalCoachPage() {
       if (cancelled) return;
       setUser(u as UserRow | null);
       setLastSession(s as SessionRow | null);
+      const { data: all } = await supabase
+        .from("sessions")
+        .select("session_number, readiness_score_end, created_at")
+        .eq("user_id", auth.user.id)
+        .order("created_at", { ascending: true });
+      if (cancelled) return;
+      setCurve((all ?? []) as CurvePoint[]);
       setLoading(false);
     })();
     return () => {
