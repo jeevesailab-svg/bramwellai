@@ -11,13 +11,13 @@ export const Route = createFileRoute("/founders")({
       {
         name: "description",
         content:
-          "We analyse your best sales conversations, document your winning process, and build a private AI coach that trains every salesperson to the same standard — in 30 days.",
+          "We clone your best sales conversations into a private Voice AI coach, then run every salesperson through daily role-play and feedback on a platform where you see progress in real time.",
       },
       { property: "og:title", content: "Build and train the sales team that closes every deal." },
       {
         property: "og:description",
         content:
-          "A done-for-you 30-day implementation. Your sales methodology, documented and turned into daily AI coaching for every salesperson.",
+          "We clone your best sales conversations into a private Voice AI coach, then run every salesperson through daily role-play and feedback on a platform where you see progress in real time.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -269,7 +269,7 @@ function FoundersPage() {
           </h1>
 
           <p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            We analyse your best sales conversations, document your winning process, and build a private AI coach that trains every salesperson to the same standard — in 30 days.
+            We clone your best sales conversations into a private Voice AI coach, then run every salesperson through daily role-play and feedback on a platform where you can see progress in real time.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-5">
@@ -290,6 +290,39 @@ function FoundersPage() {
               <div key={s.k} className="bg-background px-7 py-6">
                 <p className="text-2xl font-semibold tracking-tight md:text-3xl">{s.k}</p>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.v}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* The mechanism */}
+      <section className="border-b border-border bg-muted py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
+            {[
+              {
+                k: "Clone",
+                title: "Clone your best closer",
+                body: "We analyse the conversations your top performers win, then encode their language, questions and objection handling into a private Voice AI coach.",
+              },
+              {
+                k: "Coach",
+                title: "Daily AI role-play",
+                body: "Every salesperson practises in 15-minute voice sessions with realistic buyers, real objections and instant feedback tuned to your standard.",
+              },
+              {
+                k: "Track",
+                title: "See progress on a dashboard",
+                body: "Managers see daily practice, scoring and improvement trends for every salesperson, so coaching goes where the data says it is needed.",
+              },
+            ].map((m) => (
+              <div key={m.k} className="bg-background p-8 md:p-10">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  {m.k}
+                </span>
+                <h3 className="mt-4 text-xl font-semibold tracking-tight">{m.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
               </div>
             ))}
           </div>
