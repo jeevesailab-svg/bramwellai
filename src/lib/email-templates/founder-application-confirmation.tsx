@@ -66,6 +66,6 @@ export const template = {
   displayName: 'Founder application confirmation',
   previewData: {
     firstName: 'Sarah',
-    bookingUrl: 'https://calendly.com/bramwellai/qualification-call',
+    bookingUrl: 'https://calendar.app.google/QWKYUsrzx2k44UE76',
   },
 } satisfies TemplateEntry

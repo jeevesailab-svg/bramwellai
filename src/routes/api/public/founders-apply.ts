@@ -102,7 +102,7 @@ export const Route = createFileRoute("/api/public/founders-apply")({
           idempotencyKey: `founders-apply-confirm-${normalizedEmail}-${Date.now()}`,
           templateData: {
             firstName: data.firstName,
-            bookingUrl: "https://calendly.com/bramwellai/qualification-call",
+            bookingUrl: "https://calendar.app.google/QWKYUsrzx2k44UE76",
           },
         });
         if (!confirmation.ok) {
