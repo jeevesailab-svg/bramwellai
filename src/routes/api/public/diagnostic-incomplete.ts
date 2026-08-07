@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { computeMetrics, readinessFromSubScores } from "@/lib/scoring";
 
 const PATHWAY = {
   graduate: { name: "Graduate Interview Sprint", price: "$99 AUD" },
@@ -22,6 +23,7 @@ type PathwayKey = keyof typeof PATHWAY;
 const Schema = z.object({
   sessionId: z.string().uuid(),
   transcript: z.string().max(50000).optional().default(""),
+  duration_sec: z.number().min(0).max(3600).optional(),
 });
 
 function words(text: string): string[] {
@@ -205,7 +207,21 @@ export const Route = createFileRoute("/api/public/diagnostic-incomplete")({
           return Response.json({ error: "Invalid body" }, { status: 400 });
         }
 
-        const fallback = scoreFromTranscript(parsed.transcript);
+        const heuristic = scoreFromTranscript(parsed.transcript);
+        // Same engine as the primary path, so a session that ends without the
+        // agent submitting still produces numbers comparable to Day 30.
+        const computed = parsed.transcript
+          ? computeMetrics(parsed.transcript, parsed.duration_sec)
+          : null;
+        const fallback = heuristic
+          ? computed
+            ? {
+                ...heuristic,
+                readiness_score: readinessFromSubScores(computed.sub_scores),
+                metrics: { ...heuristic.metrics, ...computed },
+              }
+            : heuristic
+          : null;
 
         if (fallback) {
           const { error } = await supabaseAdmin

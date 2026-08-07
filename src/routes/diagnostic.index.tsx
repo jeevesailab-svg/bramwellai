@@ -168,6 +168,19 @@ function DiagnosticPage() {
   const resultSubmittedAtRef = useRef<number | null>(null);
   const lastAgentResponseAtRef = useRef<number | null>(null);
   const resultReadyRef = useRef(false);
+  // Accumulated wall-clock time where the agent was NOT speaking while the
+  // call was live. This is the only honest proxy we have for the user's own
+  // speaking time, and the scorer discards it when the resulting rate is
+  // physically implausible, so a noisy estimate can never skew the score.
+  const listeningMsRef = useRef(0);
+  const listeningSinceRef = useRef<number | null>(null);
+
+  const userSpeakingSec = useCallback(() => {
+    const open = listeningSinceRef.current;
+    const total = listeningMsRef.current + (open ? Date.now() - open : 0);
+    const sec = Math.round(total / 1000);
+    return sec > 5 ? Math.min(3600, sec) : undefined;
+  }, []);
 
   useEffect(() => {
     phaseRef.current = phase;
@@ -220,6 +233,7 @@ function DiagnosticPage() {
             recommended_pathway_name: pathway.name,
             recommended_price: pathway.price,
             transcript: transcriptRef.current.join("\n"),
+            duration_sec: userSpeakingSec(),
             metrics: input.metrics,
           }),
         });
@@ -251,7 +265,7 @@ function DiagnosticPage() {
       setResultReadyId(sessionId);
       setPendingNavigateId(sessionId);
       return "Result captured";
-    }, []);
+    }, [userSpeakingSec]);
 
   const handleDiagnosticToolCall = useCallback(async (params: SubmitInput) => {
     // Guard: ignore tool calls that fire before the session is actually live
@@ -301,6 +315,7 @@ function DiagnosticPage() {
       body: JSON.stringify({
         sessionId,
         transcript: transcriptRef.current.join("\n"),
+        duration_sec: userSpeakingSec(),
       }),
     }).catch(() => null);
 
@@ -314,7 +329,7 @@ function DiagnosticPage() {
     setResultReadyId(sessionId);
     setPendingNavigateId(sessionId);
     return true;
-  }, []);
+  }, [userSpeakingSec]);
 
   const conversation = useConversation({
     onConnect: () => {
@@ -409,6 +424,21 @@ function DiagnosticPage() {
   useEffect(() => {
     conversationRef.current = conversation;
   }, [conversation]);
+
+  // Track how long the agent is silent while the call is live. Those windows
+  // are when the user is talking, and they give the scorer a real pace signal.
+  useEffect(() => {
+    const live = phase === "live";
+    const agentSpeaking = Boolean(conversation.isSpeaking);
+    if (live && !agentSpeaking) {
+      listeningSinceRef.current ??= Date.now();
+      return;
+    }
+    if (listeningSinceRef.current !== null) {
+      listeningMsRef.current += Date.now() - listeningSinceRef.current;
+      listeningSinceRef.current = null;
+    }
+  }, [phase, conversation.isSpeaking]);
 
   useEffect(() => {
     const ignoreMalformedElevenLabsError = (event: PromiseRejectionEvent) => {
@@ -602,6 +632,8 @@ function DiagnosticPage() {
     timeWarningSentRef.current = false;
     resultSubmittedAtRef.current = null;
     lastAgentResponseAtRef.current = null;
+    listeningMsRef.current = 0;
+    listeningSinceRef.current = null;
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
 
