@@ -496,12 +496,34 @@ function FoundersPage() {
           </p>
 
           {submitted ? (
-            <div className="mt-10 rounded-2xl border border-border bg-background p-8">
-              <h3 className="text-2xl font-semibold tracking-tight">Application received.</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                We review every application by hand. If your business is a fit you will hear from us
-                within two business days to arrange the qualification call.
+            <div className="mt-10 rounded-2xl border border-border bg-background p-8 md:p-10">
+              <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">Application received.</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
+                We review every application by hand. A confirmation email is on its way to you now.
+                If your business is a fit, we will be in touch within two business days to arrange
+                a 30-minute qualification call.
               </p>
+              <div className="mt-6 border-t border-border pt-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  What happens next
+                </p>
+                <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm text-muted-foreground md:text-base">
+                  <li>We review your application against current programme capacity.</li>
+                  <li>If you are a fit, we email you to book the qualification call.</li>
+                  <li>On the call we discuss your sales team, pipeline, and whether the programme is the right fit.</li>
+                </ol>
+              </div>
+              <div className="mt-8">
+                <a
+                  href="https://calendly.com/bramwellai/qualification-call"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-background px-7 text-sm font-semibold transition hover:bg-accent"
+                >
+                  Book your qualification call <span>→</span>
+                </a>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Optional: skip the wait and book directly if you already know this is a fit.
+                </p>
+              </div>
             </div>
           ) : (
             <form onSubmit={onSubmit} className="mt-10 rounded-2xl border border-border bg-background p-8">
