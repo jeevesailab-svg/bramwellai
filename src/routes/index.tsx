@@ -142,8 +142,15 @@ function Hero() {
               Speak like a CEO.
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Find out why you're being ignored.
+            <p className="mt-4 text-balance text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
+              Get Anything You Want.
+            </p>
+
+            <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+              Create a competitive edge and understand your roadblocks. Get a deep dive
+              into the limiting beliefs that keep you from experiencing the exponential
+              growth you want. Build a roadmap for success and become a master of
+              influence in any setting. Take the test.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -165,7 +172,7 @@ function Hero() {
               <img
                 src={heroPortrait.url}
                 alt="Executive pausing before she speaks"
-                className="h-[320px] w-full object-cover object-[60%_20%] md:h-[520px]"
+                className="h-[320px] w-full object-cover object-[60%_35%] md:h-[520px]"
               />
             </div>
           </div>
@@ -182,7 +189,8 @@ function Hero() {
             Ready to unlock your breakthrough?
           </h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground sm:text-base">
-            Tap the mic. Speak for five minutes. Bramwell tells you exactly what the room hears.
+            Bramwell gives you a deep dive into the limiting beliefs that keep you from
+            experiencing the exponential growth you want.
           </p>
           <div className="mt-8 flex justify-center">
             <CallOrb />
@@ -241,7 +249,8 @@ function VillainBand() {
       <p className="mx-auto mt-3 max-w-4xl text-balance px-6 text-center text-base font-medium leading-relaxed text-foreground md:px-10 md:text-lg">
         Your CV got you the interview. Delivery under pressure is what loses it.{" "}
         <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>
-          Bramwell rehearses you, step by step, until you sound like the most capable person in the room.
+          With regular sessions you'll have the accountability you need to see consistent
+          change in the right direction in 30 days.
         </span>
       </p>
     </section>
