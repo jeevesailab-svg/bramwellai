@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { createClient } from "@supabase/supabase-js";
+import * as React from "react";
+import { render } from "@react-email/render";
+import { TEMPLATES } from "@/lib/email-templates/registry";
 import {
   type StripeEnv,
   createStripeClient,
@@ -23,48 +26,104 @@ export async function sendReceiptEmail(opts: {
   currency: string;
   pathwayWelcome: string;
 }) {
-  const RESEND_API_KEY = process.env.RESEND_API_KEY;
-  const LOVABLE_API_KEY = process.env.LOVABLE_API_KEY;
-  if (!RESEND_API_KEY || !LOVABLE_API_KEY) {
-    console.warn("Resend not configured; skipping receipt email");
-    return;
-  }
-  const from = process.env.RESEND_FROM_EMAIL || "Bramwell AI <onboarding@resend.dev>";
+  const SENDER_DOMAIN = "notify.bramwellai.com";
   const portalUrl = process.env.PUBLIC_APP_URL
     ? `${process.env.PUBLIC_APP_URL}/portal/welcome`
-    : "https://bramwellai.lovable.app/portal/welcome";
-  const amount = (opts.amountCents / 100).toFixed(2);
-  const greeting = opts.firstName ? `${opts.firstName},` : "Hello,";
-  const html = `<!doctype html><html><body style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#ffffff;color:#0a0a0a;padding:32px;max-width:560px;margin:0 auto;">
-    <h1 style="font-size:20px;margin:0 0 20px;font-weight:600;">Welcome to the Speak Like a CEO program.</h1>
-    <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">${greeting}</p>
-    <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">Your enrolment is confirmed.</p>
-    <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">Your first task is the Executive Communication Baseline Assessment.</p>
-    <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">The assessment measures your current communication profile and establishes the benchmark for your personalised 30 day programme.</p>
-    <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">Complete the assessment before Day 1. Allow 20 to 30 minutes and complete it in one sitting.</p>
-    <p style="font-size:15px;line-height:1.7;margin:0 0 24px;">Your programme unlocks automatically on completion.</p>
-    <a href="${portalUrl}" style="display:inline-block;background:#0a0a0a;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;">Begin the assessment</a>
-    <p style="font-size:14px;line-height:1.7;margin:28px 0 0;">Bramwell</p>
-    <p style="font-size:13px;line-height:1.6;margin:20px 0 0;color:#666;">Enrolment record: ${opts.productName}, ${opts.currency.toUpperCase()} $${amount}.</p>
-    <p style="font-size:12px;color:#999;margin-top:32px;">Bramwell AI</p>
-  </body></html>`;
+    : "https://bramwellai.com/portal/welcome";
+  const amount = `${opts.currency.toUpperCase()} $${(opts.amountCents / 100).toFixed(2)}`;
 
-  const res = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${LOVABLE_API_KEY}`,
-      "X-Connection-Api-Key": RESEND_API_KEY,
-    },
-    body: JSON.stringify({
-      from,
-      to: [opts.to],
-      subject: `Enrolment confirmed: ${opts.productName}`,
-      html,
-    }),
+  const template = TEMPLATES["enrolment-confirmed"];
+  const templateData = {
+    firstName: opts.firstName || undefined,
+    productName: opts.productName,
+    amount,
+    portalUrl,
+  };
+  const element = React.createElement(template.component, templateData);
+  const html = await render(element);
+  const text = await render(element, { plainText: true });
+  const subject =
+    typeof template.subject === "function" ? template.subject(templateData) : template.subject;
+
+  const supabase = getSupabase();
+  const messageId = crypto.randomUUID();
+  const recipient = opts.to.toLowerCase();
+
+  const { data: suppressed } = await supabase
+    .from("suppressed_emails")
+    .select("id")
+    .eq("email", recipient)
+    .maybeSingle();
+  if (suppressed) {
+    await supabase.from("email_send_log").insert({
+      message_id: messageId,
+      template_name: "enrolment-confirmed",
+      recipient_email: opts.to,
+      status: "suppressed",
+    });
+    return;
+  }
+
+  await supabase.from("email_send_log").insert({
+    message_id: messageId,
+    template_name: "enrolment-confirmed",
+    recipient_email: opts.to,
+    status: "pending",
   });
-  if (!res.ok) {
-    console.error("Resend send failed", res.status, await res.text());
+
+  // Unsubscribe token (one per address) — required by the send API.
+  let unsubscribeToken: string | undefined;
+  const { data: existingToken } = await supabase
+    .from("email_unsubscribe_tokens")
+    .select("token")
+    .eq("email", recipient)
+    .maybeSingle();
+  if (existingToken?.token) {
+    unsubscribeToken = existingToken.token;
+  } else {
+    const bytes = new Uint8Array(32);
+    crypto.getRandomValues(bytes);
+    const generated = Array.from(bytes)
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+    await supabase
+      .from("email_unsubscribe_tokens")
+      .upsert({ token: generated, email: recipient }, { onConflict: "email", ignoreDuplicates: true });
+    const { data: stored } = await supabase
+      .from("email_unsubscribe_tokens")
+      .select("token")
+      .eq("email", recipient)
+      .maybeSingle();
+    unsubscribeToken = stored?.token || generated;
+  }
+
+  const { error: enqueueError } = await supabase.rpc("enqueue_email", {
+    queue_name: "transactional_emails",
+    payload: {
+      message_id: messageId,
+      to: opts.to,
+      from: `Bramwell AI <noreply@${SENDER_DOMAIN}>`,
+      sender_domain: SENDER_DOMAIN,
+      subject,
+      html,
+      text,
+      purpose: "transactional",
+      label: "enrolment-confirmed",
+      idempotency_key: messageId,
+      unsubscribe_token: unsubscribeToken,
+      queued_at: new Date().toISOString(),
+    },
+  });
+
+  if (enqueueError) {
+    console.error("Failed to enqueue enrolment email", enqueueError);
+    await supabase.from("email_send_log").insert({
+      message_id: messageId,
+      template_name: "enrolment-confirmed",
+      recipient_email: opts.to,
+      status: "failed",
+      error_message: "Failed to enqueue email",
+    });
   }
 }
 
