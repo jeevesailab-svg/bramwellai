@@ -53,6 +53,13 @@ type Metrics = {
     led_with_point?: boolean;
     ramble_score?: number;
   };
+  sub_scores?: {
+    structure: number;
+    specificity: number;
+    confidence: number;
+    relevance: number;
+  };
+  evidence?: { quote: string; dimension: string; note: string }[];
 };
 
 const STRIPE: Record<PathwayKey, string> = {
