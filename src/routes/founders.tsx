@@ -587,7 +587,88 @@ function FoundersPage() {
         </div>
       </section>
 
+      {/* ROI comparison */}
+      <section className="border-b border-border bg-muted py-24 md:py-32">
+        <div className="mx-auto max-w-5xl px-6 md:px-10">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            Cost comparison
+          </p>
+          <h2 className="mt-6 max-w-3xl text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
+            A full-time coach for less than a single trainer day.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+            Sales training is expensive and fades. A private Voice AI Coach is always available, scales to every salesperson, and costs a fraction of the alternatives.
+          </p>
+
+          <div className="mt-14 overflow-hidden rounded-2xl border border-border bg-background">
+            <div className="hidden md:grid md:grid-cols-[1fr_200px_1fr] md:gap-px md:bg-border">
+              <div className="bg-background px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Option
+              </div>
+              <div className="bg-background px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Cost
+              </div>
+              <div className="bg-background px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Reality
+              </div>
+              {ROI_COMPARISON.map((row, i) => (
+                <>
+                  <div
+                    key={`${row.label}-label`}
+                    className={`bg-background px-6 py-5 text-base font-semibold ${i === ROI_COMPARISON.length - 1 ? "text-foreground" : ""}`}
+                  >
+                    {row.label}
+                  </div>
+                  <div
+                    key={`${row.label}-cost`}
+                    className={`bg-background px-6 py-5 text-base ${i === ROI_COMPARISON.length - 1 ? "font-semibold text-foreground" : "text-muted-foreground"}`}
+                  >
+                    {row.cost}
+                  </div>
+                  <div
+                    key={`${row.label}-note`}
+                    className={`bg-background px-6 py-5 text-sm leading-relaxed ${i === ROI_COMPARISON.length - 1 ? "text-foreground" : "text-muted-foreground"}`}
+                  >
+                    {row.note}
+                  </div>
+                </>
+              ))}
+            </div>
+
+            <div className="md:hidden">
+              {ROI_COMPARISON.map((row, i) => (
+                <div
+                  key={row.label}
+                  className={`border-b border-border p-6 last:border-b-0 ${i === ROI_COMPARISON.length - 1 ? "bg-muted/50" : ""}`}
+                >
+                  <p className="text-base font-semibold">{row.label}</p>
+                  <p className={`mt-1 text-base ${i === ROI_COMPARISON.length - 1 ? "font-semibold text-foreground" : "text-muted-foreground"}`}>
+                    {row.cost}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{row.note}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-10 rounded-2xl border border-border bg-background p-8 md:p-10">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="text-base font-semibold">What this means for a 10-person sales team</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  A single sales trainer day costs roughly the same as a full year of daily AI coaching per person. With Bramwell, every salesperson practises every day, not once a quarter.
+                </p>
+              </div>
+              <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
+                Get Started
+              </CtaButton>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Investment */}
+
       <section className="border-b border-border bg-background py-24 md:py-32">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
