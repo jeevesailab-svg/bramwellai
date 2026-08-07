@@ -215,12 +215,14 @@ async function handleCheckoutCompleted(session: any, env: StripeEnv) {
   );
 
   // Grant access (requires userId)
-  let cfg = null;
-  if (userId) {
-    cfg = await grantAccess({ userId, priceId, customerId, subscriptionId: subId, email });
+  const cfg = getPathwayConfig(priceId);
+  if (userId && cfg) {
+    await grantAccess({ userId, priceId, customerId, subscriptionId: subId, email });
+  } else if (!cfg) {
+    console.error("Unknown priceId in fulfillment:", priceId);
   }
 
-  // Send receipt
+  // Send receipt (even without userId if we know the product config)
   if (email && cfg) {
     let firstName: string | null = null;
     if (userId) {
