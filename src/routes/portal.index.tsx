@@ -15,10 +15,14 @@ function PortalGate() {
       if (cancelled || !userData.user) return;
       const { data: row } = await supabase
         .from("users")
-        .select("cv_text, jd_text")
+        .select("cv_text, jd_text, welcome_shown")
         .eq("id", userData.user.id)
         .maybeSingle();
       if (cancelled) return;
+      if (row?.welcome_shown === false) {
+        navigate({ to: "/portal/welcome", replace: true });
+        return;
+      }
       const ready =
         !!row?.cv_text && row.cv_text.trim().length >= 50 &&
         !!row?.jd_text && row.jd_text.trim().length >= 50;

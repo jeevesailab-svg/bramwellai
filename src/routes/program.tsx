@@ -157,7 +157,7 @@ function ProgramPage() {
       priceId: PRICE_ID,
       customerEmail: user.email ?? undefined,
       userId: user.id,
-      returnUrl: `${window.location.origin}/portal?checkout=success&pathway=mastery&session_id={CHECKOUT_SESSION_ID}`,
+      returnUrl: `${window.location.origin}/portal/welcome?checkout=success&pathway=mastery&session_id={CHECKOUT_SESSION_ID}`,
     });
   };
 
