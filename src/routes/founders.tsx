@@ -296,6 +296,39 @@ function FoundersPage() {
         </div>
       </section>
 
+      {/* The mechanism */}
+      <section className="border-b border-border bg-muted py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
+            {[
+              {
+                k: "Clone",
+                title: "Clone your best closer",
+                body: "We analyse the conversations your top performers win, then encode their language, questions and objection handling into a private Voice AI coach.",
+              },
+              {
+                k: "Coach",
+                title: "Daily AI role-play",
+                body: "Every salesperson practises in 15-minute voice sessions with realistic buyers, real objections and instant feedback tuned to your standard.",
+              },
+              {
+                k: "Track",
+                title: "See progress on a dashboard",
+                body: "Managers see daily practice, scoring and improvement trends for every salesperson, so coaching goes where the data says it is needed.",
+              },
+            ].map((m) => (
+              <div key={m.k} className="bg-background p-8 md:p-10">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  {m.k}
+                </span>
+                <h3 className="mt-4 text-xl font-semibold tracking-tight">{m.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* The problem */}
       <section className="bg-foreground py-24 text-background md:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
