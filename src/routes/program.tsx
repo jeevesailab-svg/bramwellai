@@ -26,13 +26,13 @@ export const Route = createFileRoute("/program")({
       {
         name: "description",
         content:
-          "Bramwell your Voice AI Mentor in your pocket. Change your voice, change your life in 30 days. Daily practice, every session scored, your progress proven. $299 USD.",
+          "Bramwell your Voice AI Mentor in your pocket. Change your voice, change your life in 30 days. Daily practice, every session scored, your progress proven. $349 USD.",
       },
       { property: "og:title", content: "30 Day Voice Mastery Program | Bramwell your Voice AI Mentor" },
       {
         property: "og:description",
         content:
-          "Your Voice AI Mentor trains you daily, scores every session, and proves your progress. 30 days. $299 USD.",
+          "Your Voice AI Mentor trains you daily, scores every session, and proves your progress. 30 days. $349 USD.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -40,54 +40,56 @@ export const Route = createFileRoute("/program")({
   }),
 });
 
-const METHOD = [
+/**
+ * The calendar is the 5 phases. The 7 steps are the content taught inside
+ * them, cross referenced by number so the two never read as separate systems.
+ */
+const PHASES = [
   {
-    step: "Diagnose",
-    body: "Take the free test. Speak with Bramwell your Voice AI Mentor for 5 minutes. Get your Readiness Score. Most people have never measured their voice. The number might sting. That is the point.",
+    n: "Phase 1",
+    days: "Days 1 to 5",
+    title: "Set the Baseline",
+    body: "You record your Day 1 diagnostic and get a Readiness Score across Structure, Specificity, Confidence Signals and Relevance. You learn to open with the answer instead of the run up.",
+    steps: ["Step 1", "Step 2"],
   },
   {
-    step: "Practise",
-    body: "One structured session a day, built around impromptu speaking. Your Mentor sets the prompt, you answer cold, it scores the answer and you run it again. 30 sessions. 4 weekly check ins. A pod that holds you to it.",
+    n: "Phase 2",
+    days: "Days 6 to 12",
+    title: "Structure Your Thinking",
+    body: "Cold prompts, no prep. You drill one repeatable frame until a clear point, three supports and a close come out under pressure every time.",
+    steps: ["Step 2", "Step 3"],
   },
   {
-    step: "Perform",
-    body: "Week by week your score moves. Week 1: 47. Week 2: 53. Week 3: 59. Week 4: 65. Your Mentor tracks every session and you feel the difference in your next meeting.",
+    n: "Phase 3",
+    days: "Days 13 to 19",
+    title: "Command the Room",
+    body: "Steady pace, deliberate pauses and a calm response to interruption. Filler count and words per minute are tracked every session so you can hear and see the change.",
+    steps: ["Step 4", "Step 5"],
   },
   {
-    step: "Prove",
-    body: "Day 30. You retake the diagnostic with your Voice AI Mentor. Your score went from 42 to 65. You can see it. You can share it. You can prove it.",
+    n: "Phase 4",
+    days: "Days 20 to 26",
+    title: "Move to Decision",
+    body: "You practise changing what the listener thinks or does: a direct recommendation, the evidence behind it, and a clear ask that ends the conversation with a decision.",
+    steps: ["Step 6", "Step 7"],
+  },
+  {
+    n: "Phase 5",
+    days: "Days 27 to 30",
+    title: "Perform Under Pressure",
+    body: "Live style simulations of the interview, the board update and the hostile question. Day 30 you retake the diagnostic and compare it with Day 1.",
+    steps: ["All 7 steps"],
   },
 ];
 
-const CURRICULUM = [
-  {
-    week: "Week 1",
-    title: "Structure under pressure",
-    focus: "Answer first, then evidence",
-    body: "Days 1 to 7. Cold prompts with no prep time. You learn one repeatable answer frame and drill it until you lead with the point instead of the run up. Day 1 sets your baseline Readiness Score.",
-    drills: ["60 second impromptu answers", "Point first re takes", "Kill the preamble"],
-  },
-  {
-    week: "Week 2",
-    title: "Specificity and evidence",
-    focus: "Numbers, names, outcomes",
-    body: "Days 8 to 14. Harder prompts drawn from your real work. Your Mentor pushes back until vague claims are replaced with concrete evidence a decision maker can act on.",
-    drills: ["Story to number", "The so what test", "Handling the challenge question"],
-  },
-  {
-    week: "Week 3",
-    title: "Confidence signals",
-    focus: "Pace, pauses, filler, landing",
-    body: "Days 15 to 21. Measured delivery work. Filler count, words per minute and pause pattern are tracked every session so you can hear the difference and see it in the numbers.",
-    drills: ["Pause instead of um", "Pace control reps", "Land the last line"],
-  },
-  {
-    week: "Week 4",
-    title: "The real room",
-    focus: "High stakes rehearsal",
-    body: "Days 22 to 30. Full scenario rehearsal: the status update, the pitch, the interview, the pushback from the person who does not agree with you. Day 30 you retake the diagnostic and compare.",
-    drills: ["Executive update in 90 seconds", "Pitch and objection", "Day 30 retest"],
-  },
+const STEPS = [
+  { n: "Step 1", title: "Lead with the answer", phase: "Phase 1", body: "The point first, the context after. Kill the preamble." },
+  { n: "Step 2", title: "Structure in three", phase: "Phases 1 and 2", body: "One repeatable frame that holds under pressure." },
+  { n: "Step 3", title: "Evidence that lands", phase: "Phase 2", body: "Numbers, names and outcomes instead of vague claims." },
+  { n: "Step 4", title: "Pace and pause", phase: "Phase 3", body: "Slow the delivery, replace filler with silence." },
+  { n: "Step 5", title: "Hold the interruption", phase: "Phase 3", body: "Stay calm, finish the thought, keep the room." },
+  { n: "Step 6", title: "Make the recommendation", phase: "Phase 4", body: "Say what you would do and why, without hedging." },
+  { n: "Step 7", title: "Close with the ask", phase: "Phases 4 and 5", body: "End on a decision, not a trailing sentence." },
 ];
 
 const TESTIMONIALS = [
@@ -100,7 +102,7 @@ const TESTIMONIALS = [
 const FAQS = [
   {
     q: "What is the 30 Day Voice Mastery Program?",
-    a: "A 30 day structured voice training program with Bramwell your Voice AI Mentor. You speak with your Mentor daily, get scored across four dimensions, and receive weekly check ins with a before and after Readiness Score. You diagnose on Day 1, practise for 30 days, and prove the change on Day 30.",
+    a: "A 30 day structured voice training program with Bramwell your Voice AI Mentor. You speak with your Mentor daily and get scored across four dimensions. You diagnose on Day 1, practise for 30 days across five phases, and prove the change on Day 30.",
   },
   {
     q: "Who is the program for?",
@@ -108,39 +110,19 @@ const FAQS = [
   },
   {
     q: "What can I expect to learn?",
-    a: "A four week curriculum built on impromptu speaking. Week 1 structure under pressure, Week 2 specificity and evidence, Week 3 confidence signals like pace, pauses and filler, Week 4 high stakes rehearsal. Every session is scored across Structure, Specificity, Confidence Signals and Relevance, with weekly check ins, an accountability pod, and a Day 1 and Day 30 Readiness Score.",
-  },
-  {
-    q: "How long is the program?",
-    a: "30 days, run as four themed weeks. One scored session a day, a 15 minute check in each week, and a final retest on Day 30 that gives you a before and after number.",
-  },
-  {
-    q: "What are the refund terms exactly?",
-    a: "Complete your Day 1 diagnostic, the first 7 daily sessions and your Week 1 check in. If your Week 1 Readiness Score has not improved on your Day 1 baseline, reply to any Bramwell email within 14 days of purchase and we refund the full $299 to your original payment method within 5 business days.",
+    a: "Five phases across 30 days: Set the Baseline, Structure Your Thinking, Command the Room, Move to Decision and Perform Under Pressure. The seven steps of the method are taught inside those phases. Every session is scored across Structure, Specificity, Confidence Signals and Relevance, with a Day 1 and Day 30 Readiness Score.",
   },
   {
     q: "I have never done voice training before, is this for me?",
     a: "Yes. Most participants have never measured their voice. The diagnostic gives you a baseline score on Day 1 and the program builds from there. No experience required.",
   },
   {
-    q: "Are there any prerequisites?",
-    a: "You take the free test first. That gives you your Readiness Score. If your score is below 60 the program is designed to move it. If it is above 60 the program will push you higher.",
-  },
-  {
     q: "I manage a sales team, how can this help me?",
     a: "The team version clones your founder's pitch into AI practice scenarios every rep trains against. 30 days. $1,500 for 10 seats. Manager dashboard and team benchmarking included.",
   },
   {
-    q: "Is there a community component?",
-    a: "Yes. Accountability pods of 4 to 6 people. You are not alone, you are in a cohort of professionals on the same journey.",
-  },
-  {
     q: "What makes this different from other voice coaching?",
     a: "Three things: your Voice AI Mentor, the score, and the timeline. Your Mentor practises with you daily, listening, scoring and giving real time feedback. Your voice has a number. In 30 days you retake the test and watch the number change.",
-  },
-  {
-    q: "How will this help me in my career?",
-    a: "Your voice decides if they listen or forget, if you sound confident or unsure, if you get heard or get overlooked. In 30 days of daily practice with your Voice AI Mentor your Readiness Score moves from 42 to 65, and that number moves with you into every meeting.",
   },
 ];
 
@@ -222,17 +204,16 @@ function ProgramPage() {
             Change your life.
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            A structured 30 day program with Bramwell, your Voice AI Mentor. Four weeks of impromptu
-            speaking drills, one scored session a day, weekly check ins. On Day 30 the number proves
-            it.
+            A structured 30 day program with Bramwell, your Voice AI Mentor. Five phases, one
+            scored session a day. On Day 30 the number proves it.
           </p>
 
           <div className="mt-9 flex flex-col items-center gap-3">
             <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false}>
-              Get started, $299
+            Get started, $349
             </CtaButton>
             <p className="text-xs text-muted-foreground">
-              One payment. Complete Week 1 and if your score has not moved, we refund all $299.{" "}
+              One payment, $349 USD.{" "}
               <a href="/diagnostic?autostart=1" className="font-medium text-foreground underline underline-offset-4">
                 Or take the free 5 minute test first
               </a>
@@ -293,76 +274,71 @@ function ProgramPage() {
 
 
 
-      {/* The Bramwell Method */}
-      <section className="border-y border-border bg-foreground/[0.02] py-20 md:py-28">
-        <div className="mx-auto max-w-5xl px-6 md:px-10">
-          <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>
-            The Bramwell Method
-          </p>
-          <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Our proven system for voice transformation.
-          </h2>
-          <p className="mt-4 max-w-2xl text-base text-muted-foreground">
-            Your Voice AI Mentor practises with you daily, scores every response, and proves your
-            progress.
-          </p>
-          <ol className="mt-12 grid gap-5 md:grid-cols-2">
-            {METHOD.map((m, i) => (
-              <li key={m.step} className="rounded-2xl border border-border bg-background p-7">
-                <span
-                  className="text-xs font-semibold uppercase tracking-[0.18em]"
-                  style={{ color: "var(--primary)" }}
-                >
-                  0{i + 1}
-                </span>
-                <h3 className="mt-3 text-xl font-semibold tracking-tight">{m.step}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Curriculum */}
+      {/* The 5 phases, the calendar */}
       <section className="bg-background py-20 md:py-28">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
           <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>
-            The 30 day curriculum
+            The 30 day calendar
           </p>
           <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Four weeks. One skill layered on the last.
+            Five phases. Seven steps taught inside them.
           </h2>
           <p className="mt-4 max-w-2xl text-base text-muted-foreground">
-            Every session is impromptu. No scripts, no slides, no rehearsing in the shower. Your
-            Mentor sets a cold prompt, you answer, you get scored, you run it again. That is how
-            speaking actually improves.
+            The phases are your calendar. The seven steps are the content, drilled in the phase
+            where they matter most. Every session is impromptu and scored.
           </p>
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {CURRICULUM.map((w) => (
-              <article key={w.week} className="rounded-2xl border border-border bg-foreground/[0.02] p-7">
-                <div className="flex items-baseline justify-between gap-4">
+          <ol className="mt-12 space-y-4">
+            {PHASES.map((p) => (
+              <li
+                key={p.n}
+                className="grid gap-3 rounded-2xl border border-border bg-foreground/[0.02] p-7 md:grid-cols-[180px_1fr]"
+              >
+                <div>
                   <span
                     className="text-xs font-semibold uppercase tracking-[0.18em]"
                     style={{ color: "var(--primary)" }}
                   >
-                    {w.week}
+                    {p.n}
                   </span>
-                  <span className="text-xs text-muted-foreground">{w.focus}</span>
+                  <p className="mt-1 text-xs text-muted-foreground">{p.days}</p>
                 </div>
-                <h3 className="mt-3 text-xl font-semibold tracking-tight">{w.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{w.body}</p>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {w.drills.map((d) => (
-                    <li
-                      key={d}
-                      className="rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/80"
-                    >
-                      {d}
-                    </li>
-                  ))}
-                </ul>
-              </article>
+                <div>
+                  <h3 className="text-xl font-semibold tracking-tight">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {p.steps.map((s) => (
+                      <li
+                        key={s}
+                        className="rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/80"
+                      >
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
             ))}
+          </ol>
+
+          <div className="mt-14 rounded-2xl border border-border bg-background p-7">
+            <h3 className="text-lg font-semibold tracking-tight">The seven steps</h3>
+            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {STEPS.map((s) => (
+                <div key={s.n}>
+                  <div className="flex items-baseline gap-2">
+                    <span
+                      className="text-xs font-semibold uppercase tracking-[0.18em]"
+                      style={{ color: "var(--primary)" }}
+                    >
+                      {s.n}
+                    </span>
+                    <span className="text-[11px] text-muted-foreground">{s.phase}</span>
+                  </div>
+                  <p className="mt-1 text-sm font-semibold tracking-tight">{s.title}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -384,26 +360,23 @@ function ProgramPage() {
               30 Day Voice Mastery Program
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              One human voice coach costs $300 an hour and gives you an opinion. Bramwell costs $299
+              One human voice coach costs $300 an hour and gives you an opinion. Bramwell costs $349
               once, trains you every day for 30 days, and gives you a score.
             </p>
 
             <div className="mt-6 flex items-baseline gap-3">
-              <span className="text-5xl font-semibold tracking-tight">$299</span>
+              <span className="text-5xl font-semibold tracking-tight">$349</span>
               <span className="text-sm text-muted-foreground">USD, one payment</span>
             </div>
             <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted-foreground">
-              30 scored sessions, 4 weeks, 1 curriculum
+              30 scored sessions, 5 phases, 7 steps
             </p>
 
             <ul className="mt-6 flex-1 space-y-3 text-sm">
               {[
                 "30 structured impromptu speaking sessions with Bramwell your Voice AI Mentor",
-                "A four week curriculum: Structure, Specificity, Confidence Signals, the real room",
+                "Five phases: Baseline, Structure, Command the Room, Move to Decision, Perform Under Pressure",
                 "Scored across Structure, Specificity, Confidence Signals and Relevance",
-                "Weekly check ins that track your Readiness Score",
-                "An accountability pod of 4 to 6 professionals",
-                "Your personal playbook, rewritten every week as you improve",
                 "Day 1 and Day 30 Readiness Score, so the change is a number",
               ].map((i) => (
                 <li key={i} className="flex gap-3 text-foreground/90">
@@ -422,8 +395,7 @@ function ProgramPage() {
                 Get started
               </CtaButton>
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                Cohort 1 begins {COHORT_START}. Secure checkout. Complete the first 7 sessions and
-                your Week 1 check in, and if your score has not moved we refund all $299.
+                Cohort 1 begins {COHORT_START}. Secure checkout.
               </p>
             </div>
           </article>
@@ -461,38 +433,6 @@ function ProgramPage() {
           </div>
         </section>
       ) : null}
-
-      {/* Guarantee */}
-      <section className="bg-background py-16 md:py-20">
-        <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
-          <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--primary)" }}>
-            The Bramwell Guarantee
-          </p>
-          <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-            Your score moves in Week 1, or you get all $299 back.
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground">
-            Here are the exact terms, so nobody has to guess.
-          </p>
-          <ul className="mx-auto mt-7 max-w-xl space-y-3 text-left text-sm text-muted-foreground">
-            {[
-              "Complete your Day 1 diagnostic to set a baseline Readiness Score.",
-              "Complete the first 7 daily sessions and your Week 1 check in.",
-              "If your Week 1 Readiness Score has not improved on your Day 1 baseline, reply to any Bramwell email within 14 days of purchase.",
-              "We refund the full $299 to your original payment method within 5 business days. No forms, no call, no questions.",
-            ].map((t) => (
-              <li key={t} className="flex gap-3">
-                <span
-                  aria-hidden
-                  className="mt-2 inline-block h-1.5 w-1.5 flex-none rounded-full"
-                  style={{ background: "var(--primary)" }}
-                />
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
 
       {/* FAQ */}
       <section className="border-t border-border bg-background py-20 md:py-24">
@@ -533,7 +473,7 @@ function ProgramPage() {
             Thirty days from now, they stop talking over you.
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-base opacity-70">
-            Cohort 1 starts {COHORT_START}. A structured 30 day curriculum. One payment of $299.
+            Cohort 1 starts {COHORT_START}. A structured 30 day curriculum. One payment of $349.
           </p>
           <div className="mt-9 flex justify-center">
             <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false}>
@@ -550,7 +490,7 @@ function ProgramPage() {
         <div className="flex items-center gap-3">
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-semibold">30 Day Voice Mastery</p>
-            <p className="truncate text-xs text-muted-foreground">$299 USD, one payment</p>
+            <p className="truncate text-xs text-muted-foreground">$349 USD, one payment</p>
           </div>
           <CtaButton as="button" onClick={startCheckout} size="sm" showIcon={false}>
             Get started

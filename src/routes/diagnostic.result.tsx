@@ -444,7 +444,7 @@ function ResultBody({ result }: { result: Result }) {
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: "var(--gradient-gold)" }}
             >
-              $299
+              $349
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-muted-foreground">
@@ -461,7 +461,7 @@ function ResultBody({ result }: { result: Result }) {
                 "0 20px 60px -15px color-mix(in oklab, var(--primary) 70%, transparent), 0 0 0 1px color-mix(in oklab, var(--primary) 50%, transparent) inset",
             }}
           >
-            <span>Get started, $299</span>
+            <span>Get started, $349</span>
             <span aria-hidden className="transition group-hover:translate-x-1">→</span>
           </a>
 
