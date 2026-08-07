@@ -11,7 +11,7 @@ export const Route = createFileRoute("/founders")({
       {
         name: "description",
         content:
-          "We analyse your best sales conversations, document your winning process, and build a private AI coach that trains every salesperson to the same standard — in 30 days.",
+          "We clone your best sales conversations into a private Voice AI coach, then run every salesperson through daily role-play and feedback on a platform where you see progress in real time.",
       },
       { property: "og:title", content: "Build and train the sales team that closes every deal." },
       {
