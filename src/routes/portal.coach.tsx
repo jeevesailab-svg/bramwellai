@@ -425,6 +425,22 @@ function PortalCoachPage() {
                 totalSessions={user?.sessions_purchased ?? 30}
               />
             </div>
+
+            {user ? (
+              <ContinuityBridge
+                userId={user.id}
+                email={authEmail ?? undefined}
+                sessionsCompleted={user.sessions_completed ?? 0}
+                sessionsPurchased={user.sessions_purchased ?? 30}
+                latestScore={
+                  [...curve]
+                    .reverse()
+                    .find((p) => typeof p.readiness_score_end === "number")
+                    ?.readiness_score_end ?? null
+                }
+                baselineScore={user.last_readiness_score ?? null}
+              />
+            ) : null}
           </>
         )}
       </section>
