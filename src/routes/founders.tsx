@@ -7,13 +7,13 @@ export const Route = createFileRoute("/founders")({
   component: FoundersPage,
   head: () => ({
     meta: [
-      { title: "Elite Sales Team Accelerator | Bramwell for Founder-Led Businesses" },
+      { title: "Elite Sales Team Accelerator | Bramwell AI" },
       {
         name: "description",
         content:
-          "Bramwell analyses your highest-performing sales conversations, documents how your best people win business, and builds a private AI coaching platform that trains every salesperson to the same standard.",
+          "Bramwell analyses your highest-performing sales conversations, documents exactly how your best people win business, and trains every salesperson to that standard with a private AI coach that never sleeps.",
       },
-      { property: "og:title", content: "Build the Sales Team That Drives Your Next Stage of Growth" },
+      { property: "og:title", content: "The market has changed. Build a high-performing sales team." },
       {
         property: "og:description",
         content:
@@ -254,7 +254,7 @@ function FoundersPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <SiteNav ctaLabel="Audit my team" ctaHref="#apply" />
+      <SiteNav ctaLabel="Get Started" ctaHref="#apply" />
 
       {/* Hero */}
       <section className="border-b border-border">
@@ -264,23 +264,31 @@ function FoundersPage() {
             Elite Sales Team Accelerator | 30 day programme
           </span>
 
-          <h1 className="mt-8 max-w-5xl text-balance text-[44px] font-semibold leading-[0.96] tracking-[-0.035em] sm:text-6xl md:text-[84px]">
-            Build and train the sales team that closes every deal.
+          <h1 className="mt-8 max-w-5xl text-balance text-5xl font-semibold leading-[0.96] tracking-[-0.04em] sm:text-7xl md:text-[96px] lg:text-[112px]">
+            The market has changed.
           </h1>
 
-          <p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            The market has changed. Guesswork will not build a high-performing sales team. Bramwell
-            analyses your highest-performing sales conversations, prescribes how you close, documents
-            how you win business, and builds a private AI coaching platform that trains and clones
-            every salesperson to the same standard.
+          <p className="mt-8 max-w-3xl text-2xl font-semibold leading-snug tracking-tight text-foreground md:text-3xl">
+            Guesswork will not build a high-performing sales team.
+          </p>
+
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            If you are not using AI to analyse your highest-performing sales conversations, document
+            exactly how your best people win business, and train every salesperson to that standard,
+            you are already behind.
+          </p>
+
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            Get your sales coach that never sleeps, trained on your proven sales methodology, with one goal:{" "}
+            <span className="text-foreground">get your team to close.</span> All done for you.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-5">
             <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
-              Audit my team <span>→</span>
+              Get Started
             </CtaButton>
             <span className="text-sm text-muted-foreground">
-              Free benchmark. No card. No pitch on the call.
+              30 day implementation. Done for you.
             </span>
           </div>
 
@@ -288,7 +296,7 @@ function FoundersPage() {
             {[
               { k: "30 days", v: "From analysis to a trained team" },
               { k: "15 min / day", v: "Practice per salesperson, in the field" },
-              { k: "1 standard", v: "Every conversation measured against it" },
+              { k: "1 goal", v: "Get your team to close" },
             ].map((s) => (
               <div key={s.k} className="bg-background px-7 py-6">
                 <p className="text-2xl font-semibold tracking-tight md:text-3xl">{s.k}</p>
@@ -327,7 +335,7 @@ function FoundersPage() {
           </p>
           <div className="mt-10">
             <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
-              Audit my team <span>→</span>
+              Get Started
             </CtaButton>
           </div>
         </div>
@@ -426,7 +434,7 @@ function FoundersPage() {
           </p>
           <div className="mt-10">
             <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
-              Apply now
+              Get Started
             </CtaButton>
           </div>
         </div>
@@ -455,7 +463,7 @@ function FoundersPage() {
       <section id="apply" className="border-b border-border bg-muted py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
-            Apply for an implementation.
+            Get Started.
           </h2>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground">
             Tell us about your sales team. We review every application by hand and take on a limited
@@ -522,7 +530,7 @@ function FoundersPage() {
                   className="inline-flex h-14 w-full items-center justify-center gap-3 rounded-full text-base font-semibold text-primary-foreground transition hover:-translate-y-0.5 hover:opacity-90 disabled:opacity-60"
                   style={{ background: "var(--gradient-cta)", boxShadow: "var(--shadow-cta)" }}
                 >
-                  {submitting ? "Sending" : "Apply now"} <span>→</span>
+                  {submitting ? "Sending" : "Get Started"} <span>→</span>
                 </button>
               </div>
               <p className="mt-4 text-xs text-muted-foreground">
@@ -570,7 +578,7 @@ function FoundersPage() {
               onClick={scrollToApply}
               className="inline-flex h-14 items-center justify-center gap-3 rounded-full bg-background px-9 text-base font-semibold text-foreground transition hover:-translate-y-0.5 hover:opacity-90"
             >
-              Apply now <span>→</span>
+              Get Started <span>→</span>
             </button>
           </div>
         </div>
