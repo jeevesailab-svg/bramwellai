@@ -51,14 +51,13 @@ export function ContinuityBridge({
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
         {gained !== null && gained > 0 ? (
           <>
-            You have moved from {baselineScore} to {latestScore}, a gain of {gained} points.
-            Delivery is a habit, not a certificate. Members who keep practising every week keep
-            climbing. Members who stop drift back within a month.
+            Your influence score has progressed from {baselineScore} to {latestScore}. This can be
+            strengthened with continuous training sprints.
           </>
         ) : (
           <>
-            Delivery is a habit, not a certificate. Keep one live session a week with Bramwell and
-            your score keeps climbing instead of drifting back.
+            Your influence score is building. Keep one live sprint a week with Bramwell and your score
+            keeps climbing instead of drifting back.
           </>
         )}
       </p>
