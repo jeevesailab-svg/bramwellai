@@ -1,4 +1,4 @@
-import { getScoreBand, SCORE_SCALE } from "@/lib/scoreBand";
+import { getScoreBand, SCORE_SCALE, getCeoGap } from "@/lib/scoreBand";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
@@ -327,6 +327,53 @@ function DiagnosticResultPage() {
 }
 
 function ResultBody({ result }: { result: Result }) {
+  return <ResultBodyInner result={result} />;
+}
+
+function CeoBenchmark({ score }: { score: number }) {
+  const { benchmark, gap, atOrAbove, progressPct, verdict } = getCeoGap(score);
+  return (
+    <div className="mx-auto mt-8 max-w-xl rounded-2xl border border-border bg-foreground/[0.03] p-6 text-left">
+      <div className="flex items-baseline justify-between gap-4">
+        <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+          Distance from CEO level
+        </p>
+        <p
+          className="text-sm font-semibold"
+          style={{ color: "var(--primary)" }}
+        >
+          {atOrAbove ? "At benchmark" : `${gap} points to go`}
+        </p>
+      </div>
+
+      <div className="relative mt-5 h-2 w-full rounded-full bg-foreground/10">
+        <div
+          className="absolute inset-y-0 left-0 rounded-full"
+          style={{
+            width: `${progressPct}%`,
+            backgroundImage: "var(--gradient-gold)",
+          }}
+        />
+        <div className="absolute -top-1 h-4 w-px bg-foreground/50" style={{ left: "100%" }} />
+      </div>
+
+      <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
+        <span>You: {score}</span>
+        <span>CEO benchmark: {benchmark}</span>
+      </div>
+
+      <p className="mt-4 text-base leading-relaxed text-foreground/90">
+        {verdict}
+      </p>
+      <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+        The CEO benchmark is the average score of senior executives on the same
+        four dimensions: Structure, Specificity, Confidence Signals, Relevance.
+      </p>
+    </div>
+  );
+}
+
+function ResultBodyInner({ result }: { result: Result }) {
   const pathwayKey = result.recommended_pathway;
   const stripeHref = STRIPE[pathwayKey];
   const isStubStripe = stripeHref === "#";
@@ -353,6 +400,7 @@ function ResultBody({ result }: { result: Result }) {
         <p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted-foreground">
           Your Communication Readiness Score
         </p>
+        <CeoBenchmark score={result.readiness_score} />
         <div className="mx-auto mt-6 max-w-xl rounded-2xl border border-border bg-foreground/[0.03] p-6 text-left">
           <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
             What {result.readiness_score} means
