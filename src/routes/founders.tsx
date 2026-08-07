@@ -729,7 +729,7 @@ function FoundersPage() {
               <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
                 Ongoing retraining
               </p>
-              <p className="mt-4 text-5xl font-semibold tracking-tight md:text-6xl">
+              <p className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
                 USD $1,500
               </p>
               <p className="mt-3 text-sm text-muted-foreground">
