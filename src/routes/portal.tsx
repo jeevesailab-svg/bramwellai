@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Outlet, useNavigate, useSearch } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { createPortalSession } from "@/lib/payments.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
@@ -26,6 +26,8 @@ export const Route = createFileRoute("/portal")({
 function PortalLayout() {
   const navigate = useNavigate();
   const { checkout, pathway: pathwayParam } = useSearch({ from: "/portal" });
+  const { pathname } = useLocation();
+  const onWelcome = pathname.startsWith("/portal/welcome");
   const [ready, setReady] = useState(false);
   const [welcome, setWelcome] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
@@ -68,7 +70,7 @@ function PortalLayout() {
       const justPaid = checkout === "success";
       const shouldShow = justPaid || row?.welcome_shown === false;
       const pwKey = (pathwayParam || row?.pathway) as string | undefined;
-      if (shouldShow && pwKey && PATHWAY_WELCOMES[pwKey]) {
+      if (!onWelcome && shouldShow && pwKey && PATHWAY_WELCOMES[pwKey]) {
         setWelcome(PATHWAY_WELCOMES[pwKey]);
       }
 
@@ -77,7 +79,7 @@ function PortalLayout() {
     return () => {
       cancelled = true;
     };
-  }, [navigate, checkout, pathwayParam]);
+  }, [navigate, checkout, pathwayParam, onWelcome]);
 
   const dismissWelcome = async () => {
     setWelcome(null);
