@@ -45,37 +45,14 @@ const ROLES = [
 ];
 
 /** Before / after contrast used for the Current vs New Sales Team diagram. */
-const CONTRAST: { label: string; current: string; next: string }[] = [
-  {
-    label: "Sales methodology",
-    current: "Lives in the founder's head",
-    next: "Documented, taught and measurable",
-  },
-  {
-    label: "Questions asked",
-    current: "Different in every conversation",
-    next: "One proven questioning framework",
-  },
-  {
-    label: "Onboarding",
-    current: "Shadow someone and hope",
-    next: "Structured daily practice from day one",
-  },
-  {
-    label: "Coaching",
-    current: "When the manager finds time",
-    next: "Every salesperson, every day",
-  },
-  {
-    label: "Performance visibility",
-    current: "Pipeline reports after the fact",
-    next: "Live view of who is improving and where",
-  },
-  {
-    label: "Revenue",
-    current: "Carried by a handful of individuals",
-    next: "Produced by a repeatable sales system",
-  },
+const CONTRAST: { current: string; next: string }[] = [
+  { current: "Founder closes the biggest deals.", next: "Every salesperson closes with confidence." },
+  { current: "Revenue depends on a handful of top performers.", next: "Sales performance is consistent across the team." },
+  { current: "New hires take months to become productive.", next: "New hires practise and perform from day one." },
+  { current: "Every salesperson tells a different story.", next: "Every salesperson follows one proven sales methodology." },
+  { current: "Coaching is inconsistent and reactive.", next: "Every salesperson receives structured coaching every day." },
+  { current: "Sales managers repeat the same feedback.", next: "Coaching is standardised, measured and reinforced." },
+  { current: "Great sales calls are lost forever.", next: "Every winning sales conversation strengthens the team." },
 ];
 
 const RESULTS = [
