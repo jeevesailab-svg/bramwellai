@@ -31,17 +31,21 @@ async function sendReceiptEmail(opts: {
   }
   const from = process.env.RESEND_FROM_EMAIL || "Bramwell AI <onboarding@resend.dev>";
   const portalUrl = process.env.PUBLIC_APP_URL
-    ? `${process.env.PUBLIC_APP_URL}/portal`
-    : "https://bramwellai.lovable.app/portal";
+    ? `${process.env.PUBLIC_APP_URL}/portal/welcome`
+    : "https://bramwellai.lovable.app/portal/welcome";
   const amount = (opts.amountCents / 100).toFixed(2);
-  const greeting = opts.firstName ? `Hi ${opts.firstName},` : "Hi,";
+  const greeting = opts.firstName ? `${opts.firstName},` : "Hello,";
   const html = `<!doctype html><html><body style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#ffffff;color:#0a0a0a;padding:32px;max-width:560px;margin:0 auto;">
-    <h1 style="font-size:22px;margin:0 0 16px;">You're in. Welcome to Bramwell.</h1>
-    <p style="font-size:15px;line-height:1.6;margin:0 0 16px;">${greeting}</p>
-    <p style="font-size:15px;line-height:1.6;margin:0 0 16px;">${opts.pathwayWelcome}</p>
-    <p style="font-size:15px;line-height:1.6;margin:0 0 24px;">Your purchase: <strong>${opts.productName}</strong>, ${opts.currency.toUpperCase()} $${amount}.</p>
-    <a href="${portalUrl}" style="display:inline-block;background:#0a0a0a;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;">Open your portal →</a>
-    <p style="font-size:13px;line-height:1.6;margin:32px 0 0;color:#666;">Reply to this email if anything is off, a real human reads it.</p>
+    <h1 style="font-size:20px;margin:0 0 20px;font-weight:600;">Welcome to the Speak Like a CEO program.</h1>
+    <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">${greeting}</p>
+    <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">Your enrolment is confirmed.</p>
+    <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">Your first task is the Executive Communication Baseline Assessment.</p>
+    <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">The assessment measures your current communication profile and establishes the benchmark for your personalised 30 day programme.</p>
+    <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">Complete the assessment before Day 1. Allow 20 to 30 minutes and complete it in one sitting.</p>
+    <p style="font-size:15px;line-height:1.7;margin:0 0 24px;">Your programme unlocks automatically on completion.</p>
+    <a href="${portalUrl}" style="display:inline-block;background:#0a0a0a;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;">Begin the assessment</a>
+    <p style="font-size:14px;line-height:1.7;margin:28px 0 0;">Bramwell</p>
+    <p style="font-size:13px;line-height:1.6;margin:20px 0 0;color:#666;">Enrolment record: ${opts.productName}, ${opts.currency.toUpperCase()} $${amount}.</p>
     <p style="font-size:12px;color:#999;margin-top:32px;">Bramwell AI</p>
   </body></html>`;
 
@@ -55,7 +59,7 @@ async function sendReceiptEmail(opts: {
     body: JSON.stringify({
       from,
       to: [opts.to],
-      subject: `Welcome to Bramwell, your ${opts.productName} is ready`,
+      subject: `Enrolment confirmed: ${opts.productName}`,
       html,
     }),
   });
