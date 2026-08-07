@@ -398,6 +398,9 @@ function ResultBody({ result }: { result: Result }) {
         metrics={result.metrics ?? null}
       />
 
+      {/* SECTION 3b, Day 1 win: one line, rebuilt */}
+      <Day1Win sessionId={result.id} initial={result.metrics?.rewrite ?? null} />
+
       {/* SECTION 4, What changes */}
       <section>
         <h2 className="text-center text-2xl font-semibold tracking-tight md:text-3xl">
