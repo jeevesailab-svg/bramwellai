@@ -383,7 +383,7 @@ function FoundersPage() {
       </section>
 
       {/* Results */}
-      <section className="border-b border-border bg-muted py-24 md:py-32">
+      <section className="border-b border-border py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Results
