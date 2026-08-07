@@ -152,6 +152,8 @@ const WHO_ITS_FOR = [
   "Every new hire develops different habits",
   "Sales performance varies from one person to the next",
   "Your growth depends on a small number of top performers",
+];
+
 const INCLUDED = [
   "Founder and sales leadership workshops",
   "Analysis of your highest-performing sales conversations",
