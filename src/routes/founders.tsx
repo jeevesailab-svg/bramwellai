@@ -264,23 +264,12 @@ function FoundersPage() {
             Elite Sales Team Accelerator | 30 day programme
           </span>
 
-          <h1 className="mt-8 max-w-5xl text-balance text-5xl font-semibold leading-[0.96] tracking-[-0.04em] sm:text-7xl md:text-[96px] lg:text-[112px]">
-            The market has changed.
+          <h1 className="mt-8 max-w-5xl text-balance text-4xl font-semibold leading-[0.96] tracking-[-0.04em] sm:text-6xl md:text-[80px] lg:text-[96px]">
+            Build and train the sales team that closes every deal.
           </h1>
 
-          <p className="mt-8 max-w-3xl text-2xl font-semibold leading-snug tracking-tight text-foreground md:text-3xl">
-            Guesswork will not build a high-performing sales team.
-          </p>
-
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            If you are not using AI to analyse your highest-performing sales conversations, document
-            exactly how your best people win business, and train every salesperson to that standard,
-            you are already behind.
-          </p>
-
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Get your sales coach that never sleeps, trained on your proven sales methodology, with one goal:{" "}
-            <span className="text-foreground">get your team to close.</span> All done for you.
+          <p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            We analyse your best sales conversations, document your winning process, and build a private AI coach that trains every salesperson to the same standard — in 30 days.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-5">
