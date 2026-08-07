@@ -147,10 +147,7 @@ function Hero() {
             </p>
 
             <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Create a competitive edge and understand your roadblocks. Get a deep dive
-              into the limiting beliefs that keep you from experiencing the exponential
-              growth you want. Build a roadmap for success and become a master of
-              influence in any setting. Take the test.
+              The room doesn't hear your potential. It hears your hesitation. In 5 minutes, Bramwell will identify the exact delivery pattern that's holding you back and the fastest way to fix it.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
