@@ -7,13 +7,13 @@ export const Route = createFileRoute("/founders")({
   component: FoundersPage,
   head: () => ({
     meta: [
-      { title: "Elite Sales Team Accelerator | Bramwell for Founder-Led Businesses" },
+      { title: "Elite Sales Team Accelerator | Bramwell AI" },
       {
         name: "description",
         content:
-          "Bramwell analyses your highest-performing sales conversations, documents how your best people win business, and builds a private AI coaching platform that trains every salesperson to the same standard.",
+          "Bramwell analyses your highest-performing sales conversations, documents exactly how your best people win business, and trains every salesperson to that standard with a private AI coach that never sleeps.",
       },
-      { property: "og:title", content: "Build the Sales Team That Drives Your Next Stage of Growth" },
+      { property: "og:title", content: "The market has changed. Build a high-performing sales team." },
       {
         property: "og:description",
         content:
