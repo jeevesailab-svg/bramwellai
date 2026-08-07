@@ -17,7 +17,7 @@ export const Route = createFileRoute("/founders")({
       {
         property: "og:description",
         content:
-          "A done-for-you 30-day implementation. Your sales methodology, documented and turned into daily AI coaching for every salesperson.",
+          "We clone your best sales conversations into a private Voice AI coach, then run every salesperson through daily role-play and feedback on a platform where you see progress in real time.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
