@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useRef } from "react";
+import { Fragment, useState, useRef } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/SiteChrome";
 import { CtaButton } from "@/components/site/CtaButton";
 import { useStripeCheckout } from "@/hooks/useStripeCheckout";
@@ -164,6 +164,31 @@ const INCLUDED = [
   "Ongoing platform updates and coaching scenarios",
 ];
 
+const ROI_COMPARISON = [
+  {
+    label: "One day sales trainer",
+    cost: "$8,000 - $15,000",
+    note: "One event. No daily reinforcement. No measurement.",
+  },
+  {
+    label: "Sales methodology consultant",
+    cost: "$25,000 - $60,000",
+    note: "3-6 month project. Delivered and gone. No ongoing coaching.",
+  },
+  {
+    label: "Full-time sales enablement hire",
+    cost: "$120,000 - $180,000 / year",
+    note: "Salary + overhead. Cannot coach every salesperson every day.",
+  },
+  {
+    label: "Bramwell AI Voice Coach",
+    cost: "$3,500 + $1,500 / month",
+    note: "Private coach, daily role-play, manager dashboard, documented methodology.",
+  },
+];
+
+
+
 const FAQS = [
   {
     q: "What is the Elite Sales Team Voice AI Coach 30 Day Program?",
@@ -207,6 +232,11 @@ const FAQS = [
 function scrollToApply() {
   document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" });
 }
+
+function scrollToBookCall() {
+  document.getElementById("book-call")?.scrollIntoView({ behavior: "smooth" });
+}
+
 
 function FoundersPage() {
   const [submitting, setSubmitting] = useState(false);
@@ -274,7 +304,7 @@ function FoundersPage() {
 
       {/* Hero */}
       <section className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-6 pb-16 pt-14 md:px-10 md:pb-24 md:pt-20">
+        <div className="mx-auto max-w-6xl px-6 pb-12 pt-12 md:px-10 md:pb-24 md:pt-20">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-foreground" />
             Elite Sales Voice AI Coach 30 Day Program
@@ -388,22 +418,26 @@ function FoundersPage() {
                 </div>
               ))}
             </div>
-            <div className="mt-8 rounded-xl border border-border bg-background p-6">
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className="text-sm font-semibold">Want a real walkthrough?</p>
-                  <p className="text-sm text-muted-foreground">
-                    Book a 15-minute demo and see the platform on your own sales calls.
-                  </p>
-                </div>
-                <a
-                  href="https://calendar.app.google/QWKYUsrzx2k44UE76"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-foreground px-7 text-sm font-semibold text-background transition hover:opacity-90"
-                >
-                  Book a demo <span>→</span>
-                </a>
+            <div id="book-call" className="mt-8 overflow-hidden rounded-xl border border-border bg-background">
+              <div className="border-b border-border bg-muted p-6">
+                <p className="text-sm font-semibold">Book a 15-minute qualification call</p>
+                <p className="text-sm text-muted-foreground">
+                  Pick a time that works for you. We will walk through your sales calls and answer questions about the programme.
+                </p>
+              </div>
+              <div className="h-[520px] w-full md:h-[640px]">
+                <iframe
+                  src="https://calendar.app.google/QWKYUsrzx2k44UE76"
+                  title="Book a qualification call with Bramwell AI"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  scrolling="auto"
+                  className="h-full w-full"
+                />
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -445,7 +479,7 @@ function FoundersPage() {
       </section>
 
       {/* How it works: 30 day sequence */}
-      <section className="border-b border-border py-24 md:py-32">
+      <section className="border-b border-border py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             The 30 day programme
@@ -474,7 +508,7 @@ function FoundersPage() {
       </section>
 
       {/* Certainty */}
-      <section className="border-b border-border bg-muted py-24 md:py-32">
+      <section className="border-b border-border bg-muted py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Why this works when training does not
@@ -494,7 +528,7 @@ function FoundersPage() {
       </section>
 
       {/* Results */}
-      <section className="border-b border-border py-24 md:py-32">
+      <section className="border-b border-border py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Results
@@ -517,7 +551,7 @@ function FoundersPage() {
       </section>
 
       {/* Who it's for */}
-      <section className="border-b border-border py-24 md:py-32">
+      <section className="border-b border-border py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Who it is for
@@ -562,8 +596,86 @@ function FoundersPage() {
         </div>
       </section>
 
+      {/* ROI comparison */}
+      <section className="border-b border-border bg-muted py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-5xl px-6 md:px-10">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            Cost comparison
+          </p>
+          <h2 className="mt-6 max-w-3xl text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
+            A full-time coach for less than a single trainer day.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+            Sales training is expensive and fades. A private Voice AI Coach is always available, scales to every salesperson, and costs a fraction of the alternatives.
+          </p>
+
+          <div className="mt-14 overflow-hidden rounded-2xl border border-border bg-background">
+            <div className="hidden md:grid md:grid-cols-[1fr_200px_1fr] md:gap-px md:bg-border">
+              <div className="bg-background px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Option
+              </div>
+              <div className="bg-background px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Cost
+              </div>
+              <div className="bg-background px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Reality
+              </div>
+              {ROI_COMPARISON.map((row, i) => (
+                <Fragment key={row.label}>
+                  <div
+                    className={`bg-background px-6 py-5 text-base font-semibold ${i === ROI_COMPARISON.length - 1 ? "text-foreground" : ""}`}
+                  >
+                    {row.label}
+                  </div>
+                  <div
+                    className={`bg-background px-6 py-5 text-base ${i === ROI_COMPARISON.length - 1 ? "font-semibold text-foreground" : "text-muted-foreground"}`}
+                  >
+                    {row.cost}
+                  </div>
+                  <div
+                    className={`bg-background px-6 py-5 text-sm leading-relaxed ${i === ROI_COMPARISON.length - 1 ? "text-foreground" : "text-muted-foreground"}`}
+                  >
+                    {row.note}
+                  </div>
+                </Fragment>
+              ))}
+            </div>
+
+            <div className="md:hidden">
+              {ROI_COMPARISON.map((row, i) => (
+                <div
+                  key={row.label}
+                  className={`border-b border-border p-6 last:border-b-0 ${i === ROI_COMPARISON.length - 1 ? "bg-muted/50" : ""}`}
+                >
+                  <p className="text-base font-semibold">{row.label}</p>
+                  <p className={`mt-1 text-base ${i === ROI_COMPARISON.length - 1 ? "font-semibold text-foreground" : "text-muted-foreground"}`}>
+                    {row.cost}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{row.note}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-10 rounded-2xl border border-border bg-background p-8 md:p-10">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="text-base font-semibold">What this means for a 10-person sales team</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  A single sales trainer day costs roughly the same as a full year of daily AI coaching per person. With Bramwell, every salesperson practises every day, not once a quarter.
+                </p>
+              </div>
+              <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
+                Get Started
+              </CtaButton>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Investment */}
-      <section className="border-b border-border bg-background py-24 md:py-32">
+
+      <section className="border-b border-border bg-background py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Investment
@@ -581,7 +693,7 @@ function FoundersPage() {
               <p className="text-[10px] font-semibold uppercase tracking-[0.24em] opacity-60">
                 30 day programme
               </p>
-              <p className="mt-4 text-5xl font-semibold tracking-tight md:text-6xl">
+              <p className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
                 USD $3,500
               </p>
               <p className="mt-3 text-sm opacity-70">
@@ -614,7 +726,7 @@ function FoundersPage() {
               <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
                 Ongoing retraining
               </p>
-              <p className="mt-4 text-5xl font-semibold tracking-tight md:text-6xl">
+              <p className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
                 USD $1,500
               </p>
               <p className="mt-3 text-sm text-muted-foreground">
@@ -633,30 +745,32 @@ function FoundersPage() {
                   </li>
                 ))}
               </ul>
-              <a
-                href="https://calendar.app.google/QWKYUsrzx2k44UE76"
+              <button
+                type="button"
+                onClick={scrollToBookCall}
                 className="mt-10 inline-flex h-14 w-full items-center justify-center gap-3 rounded-full border border-border bg-background text-base font-semibold transition hover:bg-accent"
               >
                 Book a qualification call <span>→</span>
-              </a>
+              </button>
             </div>
           </div>
 
           <p className="mt-8 text-center text-xs text-muted-foreground">
             Need a custom scope or larger rollout?{" "}
-            <a
-              href="https://calendar.app.google/QWKYUsrzx2k44UE76"
+            <button
+              type="button"
+              onClick={scrollToBookCall}
               className="underline underline-offset-4"
             >
               Book a call
-            </a>{" "}
+            </button>{" "}
             and we will scope it.
           </p>
         </div>
       </section>
 
       {/* Risk reversal */}
-      <section className="border-b border-border py-24 md:py-32">
+      <section className="border-b border-border py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Risk reversal
@@ -713,7 +827,7 @@ function FoundersPage() {
 
       {/* Apply */}
 
-      <section id="apply" className="border-b border-border bg-muted py-24 md:py-32">
+      <section id="apply" className="border-b border-border bg-muted py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
             Get Started.
@@ -742,12 +856,13 @@ function FoundersPage() {
                 </ol>
               </div>
               <div className="mt-8">
-                <a
-                  href="https://calendar.app.google/QWKYUsrzx2k44UE76"
+                <button
+                  type="button"
+                  onClick={scrollToBookCall}
                   className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-background px-7 text-sm font-semibold transition hover:bg-accent"
                 >
                   Book your qualification call <span>→</span>
-                </a>
+                </button>
                 <p className="mt-2 text-xs text-muted-foreground">
                   Optional: skip the wait and book directly if you already know this is a fit.
                 </p>
@@ -817,7 +932,7 @@ function FoundersPage() {
       </section>
 
       {/* FAQ */}
-      <section className="border-b border-border py-24 md:py-28">
+      <section className="border-b border-border py-16 md:py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-5xl">
             Frequently asked questions
