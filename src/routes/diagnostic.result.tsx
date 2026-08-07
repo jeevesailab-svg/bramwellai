@@ -671,6 +671,8 @@ function ReportContent({
         </ul>
       </div>
 
+      {!!metrics?.evidence?.length && <EvidenceList evidence={metrics.evidence} />}
+
       {unlocked && !hasMetrics && (
         <p className="text-center text-xs text-muted-foreground">
           Your full behavioural breakdown, filler words, pace, pauses, hedging
