@@ -44,15 +44,73 @@ const ROLES = [
   "Other",
 ];
 
-/** Before / after contrast used for the Current vs New Sales Team diagram. */
-const CONTRAST: { current: string; next: string }[] = [
-  { current: "Founder closes the biggest deals.", next: "Every salesperson closes with confidence." },
-  { current: "Revenue depends on a handful of top performers.", next: "Sales performance is consistent across the team." },
-  { current: "New hires take months to become productive.", next: "New hires practise and perform from day one." },
-  { current: "Every salesperson tells a different story.", next: "Every salesperson follows one proven sales methodology." },
-  { current: "Coaching is inconsistent and reactive.", next: "Every salesperson receives structured coaching every day." },
-  { current: "Sales managers repeat the same feedback.", next: "Coaching is standardised, measured and reinforced." },
-  { current: "Great sales calls are lost forever.", next: "Every winning sales conversation strengthens the team." },
+/** The four pressures a founder feels before they call us. */
+const PRESSURES = [
+  {
+    k: "Deals stall",
+    body: "Your team runs good conversations that never convert. The pipeline looks healthy and the revenue does not follow.",
+  },
+  {
+    k: "Sales are flat",
+    body: "Growth has plateaued at the ceiling of what you personally can sell. Adding headcount has not moved the number.",
+  },
+  {
+    k: "Competitors are winning",
+    body: "You are losing deals to businesses with a weaker product and a stronger sales conversation.",
+  },
+  {
+    k: "Motivation is slipping",
+    body: "Salespeople lose confidence after losses they cannot explain. Nobody has time to coach them through it.",
+  },
+];
+
+/** The 30-day implementation sequence. */
+const PHASES = [
+  {
+    n: "Days 1-5",
+    title: "Analyse how you win",
+    body: "We review your recorded sales conversations and interview you and your top performers. We identify the exact questions, framing and objection responses that separate the deals you win from the deals you lose.",
+  },
+  {
+    n: "Days 6-10",
+    title: "Document your sales methodology",
+    body: "Your winning process is written down: discovery structure, qualification criteria, objection responses, pricing conversation and close. One standard, in your language, specific to your customers.",
+  },
+  {
+    n: "Days 11-15",
+    title: "Build your private AI sales coach",
+    body: "We configure a private AI coach trained on your products, your buyers, your objections and your methodology. It role-plays your real deals, not generic sales scenarios.",
+  },
+  {
+    n: "Days 16-30",
+    title: "Train and clone every salesperson",
+    body: "Every salesperson practises daily in 15-minute sessions. Every role play is scored against your standard, with specific coaching on what to change in the next live call.",
+  },
+  {
+    n: "Day 30",
+    title: "Measure the change",
+    body: "You receive a performance report for every salesperson: starting benchmark, current score, movement, and where coaching is still required.",
+  },
+];
+
+/** Certainty: what we commit to. */
+const CERTAINTY = [
+  {
+    t: "Your methodology, not ours",
+    b: "We do not install a generic framework. The standard is extracted from the conversations your business already wins.",
+  },
+  {
+    t: "Coaching happens without you",
+    b: "You do not run the training. The platform coaches every salesperson daily, whether or not you have the time that week.",
+  },
+  {
+    t: "Fifteen minutes a day per salesperson",
+    b: "No offsites, no workshops out of the field, no week away from the pipeline.",
+  },
+  {
+    t: "Performance is measured, not assumed",
+    b: "Every salesperson has a score against your standard and a visible trend line. Coaching goes where the data says it is needed.",
+  },
 ];
 
 const RESULTS = [
@@ -203,16 +261,18 @@ function FoundersPage() {
         <div className="mx-auto max-w-6xl px-6 pb-16 pt-14 md:px-10 md:pb-24 md:pt-20">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-foreground" />
-            Elite Sales Team Accelerator
+            Elite Sales Team Accelerator | 30 day programme
           </span>
 
           <h1 className="mt-8 max-w-5xl text-balance text-[44px] font-semibold leading-[0.96] tracking-[-0.035em] sm:text-6xl md:text-[84px]">
-            Your best closer is you. Make them everyone.
+            Build and train the sales team that closes every deal.
           </h1>
 
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Find what is limiting your sales team's performance. Benchmark your organisation across
-            the six capabilities that drive consistent revenue growth.
+          <p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            The market has changed. Guesswork will not build a high-performing sales team. Bramwell
+            analyses your highest-performing sales conversations, prescribes how you close, documents
+            how you win business, and builds a private AI coaching platform that trains and clones
+            every salesperson to the same standard.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-5">
@@ -223,93 +283,107 @@ function FoundersPage() {
               Free benchmark. No card. No pitch on the call.
             </span>
           </div>
-        </div>
-      </section>
 
-      {/* From This... To This */}
-      <section className="border-b border-border py-24 md:py-32">
-        <div className="mx-auto max-w-6xl px-6 md:px-10">
-          <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
-            From This... To This.
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            The gap between your current team and an elite sales team is not talent. It is a system.
-          </p>
-
-          <div className="mt-14 overflow-hidden rounded-2xl border border-border">
-            <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-2">
-              <div className="bg-muted px-6 py-5 md:px-8 md:py-6">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                  Old Sales Team
-                </p>
+          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
+            {[
+              { k: "30 days", v: "From analysis to a trained team" },
+              { k: "15 min / day", v: "Practice per salesperson, in the field" },
+              { k: "1 standard", v: "Every conversation measured against it" },
+            ].map((s) => (
+              <div key={s.k} className="bg-background px-7 py-6">
+                <p className="text-2xl font-semibold tracking-tight md:text-3xl">{s.k}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.v}</p>
               </div>
-              <div className="bg-foreground px-6 py-5 text-background md:px-8 md:py-6">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-70">
-                  Elite Sales Team
-                </p>
-              </div>
-
-              {CONTRAST.map((row, i) => (
-                <div key={i} className="contents">
-                  <div className="bg-background px-6 py-5 md:px-8 md:py-6">
-                    <p className="text-sm leading-relaxed text-muted-foreground">{row.current}</p>
-                  </div>
-                  <div className="bg-foreground/[0.03] px-6 py-5 md:px-8 md:py-6">
-                    <p className="text-sm font-medium leading-relaxed">{row.next}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-12 max-w-3xl">
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              Elite Sales Team Accelerator is Bramwell's done-for-you implementation programme. We
-              analyse your highest-performing sales conversations, interview your founder and top
-              performers, document your sales methodology, and build a private AI coaching platform
-              that trains every salesperson using your products, your customers and your sales process.
-            </p>
-            <p className="mt-6 text-lg font-medium leading-relaxed">
-              Built for implementation. Designed to become the standard your team sells to every day.
-            </p>
+            ))}
           </div>
         </div>
       </section>
 
       {/* The problem */}
       <section className="bg-foreground py-24 text-background md:py-32">
-        <div className="mx-auto max-w-5xl px-6 md:px-10">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] opacity-50">
-            Build the sales team that drives your next stage of growth
+            Why growth stalls
           </p>
-          <h2 className="mt-6 text-balance text-[38px] font-semibold leading-[0.98] tracking-[-0.03em] md:text-7xl">
-            The market has changed. Guesswork will not build a high-performing sales team.
+          <h2 className="mt-6 max-w-4xl text-balance text-[38px] font-semibold leading-[0.98] tracking-[-0.03em] md:text-7xl">
+            You do not have a lead problem. You have a conversation problem.
           </h2>
-          <ul className="mt-10 max-w-2xl space-y-4 text-lg leading-relaxed opacity-70">
-            {[
-              "Different salespeople ask different questions.",
-              "Different conversations produce different outcomes.",
-              "Revenue becomes dependent on a handful of individuals instead of a repeatable sales system.",
-            ].map((l) => (
-              <li key={l} className="flex gap-4">
-                <span aria-hidden className="mt-3 inline-block h-1.5 w-1.5 flex-none rounded-full bg-background/60" />
-                {l}
-              </li>
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed opacity-70">
+            Deals are not lost in the pipeline. They are lost in the twenty minutes where one
+            salesperson asks the right question and another does not.
+          </p>
+
+          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-background/20 sm:grid-cols-2">
+            {PRESSURES.map((p) => (
+              <div key={p.k} className="bg-foreground px-7 py-8 md:px-9 md:py-10">
+                <h3 className="text-xl font-semibold tracking-tight">{p.k}</h3>
+                <p className="mt-3 text-sm leading-relaxed opacity-70">{p.body}</p>
+              </div>
             ))}
-          </ul>
-          <p className="mt-10 text-2xl font-semibold tracking-tight md:text-3xl">
+          </div>
+
+          <p className="mt-12 text-2xl font-semibold tracking-tight md:text-3xl">
             Hope is not a sales strategy.
           </p>
           <div className="mt-10">
             <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
-              Apply now <span>→</span>
+              Audit my team <span>→</span>
             </CtaButton>
           </div>
         </div>
       </section>
 
-      {/* Results */}
+      {/* How it works: 30 day sequence */}
+      <section className="border-b border-border py-24 md:py-32">
+        <div className="mx-auto max-w-5xl px-6 md:px-10">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            The 30 day programme
+          </p>
+          <h2 className="mt-6 max-w-3xl text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
+            Done for you. Implemented in thirty days.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+            You do not run this. We do. Your team keeps selling while the system is built around them.
+          </p>
+
+          <ol className="mt-16 border-t border-border">
+            {PHASES.map((p) => (
+              <li key={p.n} className="grid gap-4 border-b border-border py-8 md:grid-cols-[160px_1fr] md:gap-10 md:py-10">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground md:pt-1">
+                  {p.n}
+                </span>
+                <div>
+                  <h3 className="text-2xl font-semibold tracking-tight">{p.title}</h3>
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Certainty */}
       <section className="border-b border-border bg-muted py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            Why this works when training does not
+          </p>
+          <h2 className="mt-6 max-w-3xl text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
+            Training is an event. This is infrastructure.
+          </h2>
+          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
+            {CERTAINTY.map((c) => (
+              <div key={c.t} className="bg-background p-8 md:p-10">
+                <h3 className="text-xl font-semibold tracking-tight">{c.t}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.b}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Results */}
+      <section className="border-b border-border py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Results
