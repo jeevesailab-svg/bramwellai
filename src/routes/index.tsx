@@ -171,6 +171,14 @@ function Hero() {
                 alt="Executive pausing before she speaks"
                 className="h-[320px] w-full object-cover object-[60%_35%] md:h-[520px]"
               />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent px-6 pb-7 pt-20 md:px-8 md:pb-8 md:pt-28">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
+                  Conquer inner critics
+                </p>
+                <p className="mt-1 max-w-sm text-lg font-semibold leading-tight tracking-tight text-white md:text-xl">
+                  Stop fear, self-doubt, and insecurity from holding you back, once and for all.
+                </p>
+              </div>
             </div>
           </div>
         </div>
