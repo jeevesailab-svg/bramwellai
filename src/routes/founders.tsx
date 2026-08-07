@@ -748,23 +748,25 @@ function FoundersPage() {
                   </li>
                 ))}
               </ul>
-              <a
-                href="https://calendar.app.google/QWKYUsrzx2k44UE76"
+              <button
+                type="button"
+                onClick={scrollToBookCall}
                 className="mt-10 inline-flex h-14 w-full items-center justify-center gap-3 rounded-full border border-border bg-background text-base font-semibold transition hover:bg-accent"
               >
                 Book a qualification call <span>→</span>
-              </a>
+              </button>
             </div>
           </div>
 
           <p className="mt-8 text-center text-xs text-muted-foreground">
             Need a custom scope or larger rollout?{" "}
-            <a
-              href="https://calendar.app.google/QWKYUsrzx2k44UE76"
+            <button
+              type="button"
+              onClick={scrollToBookCall}
               className="underline underline-offset-4"
             >
               Book a call
-            </a>{" "}
+            </button>{" "}
             and we will scope it.
           </p>
         </div>
