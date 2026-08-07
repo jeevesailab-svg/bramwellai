@@ -152,6 +152,14 @@ const WHO_ITS_FOR = [
   "Every new hire develops different habits",
   "Sales performance varies from one person to the next",
   "Your growth depends on a small number of top performers",
+const INCLUDED = [
+  "Founder and sales leadership workshops",
+  "Analysis of your highest-performing sales conversations",
+  "Documentation of your sales methodology",
+  "Private AI sales coach configured for your business",
+  "Daily AI role-play coaching for every salesperson",
+  "Manager dashboard and performance reporting",
+  "Ongoing platform updates and coaching scenarios",
 ];
 
 const ROI_COMPARISON = [
@@ -176,6 +184,7 @@ const ROI_COMPARISON = [
     note: "Private coach, daily role-play, manager dashboard, documented methodology.",
   },
 ];
+
 
 
 const FAQS = [
