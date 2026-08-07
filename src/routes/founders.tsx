@@ -279,7 +279,33 @@ function FoundersPage() {
           </p>
 
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Get your sales coach that never sleeps, trained on your proven sales methodology, with one goal:{
+            Get your sales coach that never sleeps, trained on your proven sales methodology, with one goal:{" "}
+            <span className="text-foreground">get your team to close.</span> All done for you.
+          </p>
+
+          <div className="mt-10 flex flex-wrap items-center gap-5">
+            <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
+              Get Started <span>→</span>
+            </CtaButton>
+            <span className="text-sm text-muted-foreground">
+              30 day implementation. Done for you.
+            </span>
+          </div>
+
+          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
+            {[
+              { k: "30 days", v: "From analysis to a trained team" },
+              { k: "15 min / day", v: "Practice per salesperson, in the field" },
+              { k: "1 goal", v: "Get your team to close" },
+            ].map((s) => (
+              <div key={s.k} className="bg-background px-7 py-6">
+                <p className="text-2xl font-semibold tracking-tight md:text-3xl">{s.k}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.v}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* The problem */}
       <section className="bg-foreground py-24 text-background md:py-32">
@@ -309,7 +335,7 @@ function FoundersPage() {
           </p>
           <div className="mt-10">
             <CtaButton as="button" onClick={scrollToApply} size="lg" showIcon={false}>
-              Audit my team <span>→</span>
+              Get Started <span>→</span>
             </CtaButton>
           </div>
         </div>
