@@ -139,8 +139,11 @@ export function computeMetrics(transcript: string, durationSec?: number): Comput
   const effectiveDuration =
     durationSec && durationSec > 5 ? durationSec : Math.max(10, (wordCount / 140) * 60);
   const wpm = Math.round((wordCount / effectiveDuration) * 60);
+  // Words-per-second based on the speaker's own rate, capped so a long
+  // session with a short answer cannot manufacture an absurd delay.
+  const secPerWord = Math.min(0.6, Math.max(0.25, effectiveDuration / Math.max(1, wordCount)));
   const timeToPointSec =
-    Math.round((wordsBeforePoint / Math.max(1, wordCount)) * effectiveDuration * 10) / 10;
+    Math.round(Math.min(60, wordsBeforePoint * secPerWord) * 10) / 10;
   const ledWithPoint = pointSentenceIndex === 0;
 
   const avgSentenceWords = wordCount / Math.max(1, sents.length);
@@ -166,17 +169,26 @@ export function computeMetrics(transcript: string, durationSec?: number): Comput
     "i'm asking", "the decision", "recommend we", "so my ask",
   ].some((m) => closing.includes(m));
 
+  // Pace only counts when we were given a reliable speaking duration and the
+  // resulting rate is physically plausible. Otherwise it must not move the
+  // score in either direction.
+  const paceReliable = !!durationSec && durationSec > 5 && wpm >= 60 && wpm <= 260;
+  const pacePenalty = paceReliable ? Math.abs(wpm - 145) * 0.25 : 0;
+
   // ---- Sub-scores -------------------------------------------------------
-  const structure = clamp(
+  // Banded 15..98: a floor of zero is neither credible nor coachable, and a
+  // perfect 100 leaves nothing to sell.
+  const band = (n: number) => clamp(n, 15, 98);
+  const structure = band(
     100 - timeToPointSec * 2.2 - Math.max(0, avgSentenceWords - 16) * 2 + (ledWithPoint ? 12 : 0),
   );
-  const specificity = clamp(
+  const specificity = band(
     35 + concreteMarkers * 7 + firstPersonRatio * 25 - Math.max(0, 25 - wordCount / 8),
   );
-  const confidence = clamp(
-    100 - per100(hedgeTotal) * 6 - per100(fillerTotal) * 4 - Math.abs(wpm - 145) * 0.25,
+  const confidence = band(
+    100 - per100(hedgeTotal) * 6 - per100(fillerTotal) * 4 - pacePenalty,
   );
-  const relevance = clamp(
+  const relevance = band(
     45 + (hasNextStep ? 30 : 0) + (ledWithPoint ? 10 : 0) + Math.min(15, concreteMarkers * 3),
   );
 
