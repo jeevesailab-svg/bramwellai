@@ -859,12 +859,13 @@ function FoundersPage() {
                 </ol>
               </div>
               <div className="mt-8">
-                <a
-                  href="https://calendar.app.google/QWKYUsrzx2k44UE76"
+                <button
+                  type="button"
+                  onClick={scrollToBookCall}
                   className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-background px-7 text-sm font-semibold transition hover:bg-accent"
                 >
                   Book your qualification call <span>→</span>
-                </a>
+                </button>
                 <p className="mt-2 text-xs text-muted-foreground">
                   Optional: skip the wait and book directly if you already know this is a fit.
                 </p>
