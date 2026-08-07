@@ -222,32 +222,33 @@ function FoundersPage() {
       setError("Please complete every field so we can review your application.");
       return;
     }
-    setSubmitting(true);
-    try {
-      await fetch("/api/public/klaviyo-event", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: form.email.trim(),
-          eventName: "Applied, Enterprise Waitlist",
-          pathway: "enterprise",
-          source: "waitlist_page",
-          properties: {
-            first_name: form.firstName.trim(),
-            last_name: form.lastName.trim(),
+      setSubmitting(true);
+      try {
+        const res = await fetch("/api/public/founders-apply", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: form.email.trim(),
+            firstName: form.firstName.trim(),
+            lastName: form.lastName.trim(),
             company: form.company.trim(),
-            team_size: form.teamSize,
+            teamSize: form.teamSize,
             role: form.role,
-          },
-        }),
-      });
-      setSubmitted(true);
-    } catch {
-      setError("Something went wrong. Please try again in a moment.");
-    } finally {
-      setSubmitting(false);
+            source: "founders_page",
+          }),
+        });
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({ error: "Submission failed" }));
+          setError(body?.error || "Submission failed. Please try again.");
+          return;
+        }
+        setSubmitted(true);
+      } catch {
+        setError("Something went wrong. Please try again in a moment.");
+      } finally {
+        setSubmitting(false);
+      }
     }
-  }
 
   const field =
     "mt-2 h-12 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition focus:border-foreground";
