@@ -261,15 +261,15 @@ function FoundersPage() {
         <div className="mx-auto max-w-6xl px-6 pb-16 pt-14 md:px-10 md:pb-24 md:pt-20">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-foreground" />
-            Elite Sales Team Voice AI Coach 30 Day Program
+            Elite Sales Voice AI Coach 30 Day Program
           </span>
 
           <h1 className="mt-8 max-w-5xl text-balance text-4xl font-semibold leading-[0.96] tracking-[-0.04em] sm:text-6xl md:text-[80px] lg:text-[96px]">
-            Build and train the sales team that closes every deal.
+            Your best closer is you. Make them everyone.
           </h1>
 
           <p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            We clone your best sales conversations into a private Voice AI coach, then run every salesperson through daily role-play and feedback on a platform where you can see progress in real time.
+            Get your Elite Sales Voice AI Coach. Multiply profit, accelerate growth, and lead with certainty.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-5">
