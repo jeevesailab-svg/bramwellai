@@ -26,13 +26,13 @@ export const Route = createFileRoute("/program")({
       {
         name: "description",
         content:
-          "Bramwell your Voice AI Mentor in your pocket. Change your voice, change your life in 30 days. Daily practice, every session scored, your progress proven. $299 USD.",
+          "Bramwell your Voice AI Mentor in your pocket. Change your voice, change your life in 30 days. Daily practice, every session scored, your progress proven. $349 USD.",
       },
       { property: "og:title", content: "30 Day Voice Mastery Program | Bramwell your Voice AI Mentor" },
       {
         property: "og:description",
         content:
-          "Your Voice AI Mentor trains you daily, scores every session, and proves your progress. 30 days. $299 USD.",
+          "Your Voice AI Mentor trains you daily, scores every session, and proves your progress. 30 days. $349 USD.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -40,54 +40,56 @@ export const Route = createFileRoute("/program")({
   }),
 });
 
-const METHOD = [
+/**
+ * The calendar is the 5 phases. The 7 steps are the content taught inside
+ * them, cross referenced by number so the two never read as separate systems.
+ */
+const PHASES = [
   {
-    step: "Diagnose",
-    body: "Take the free test. Speak with Bramwell your Voice AI Mentor for 5 minutes. Get your Readiness Score. Most people have never measured their voice. The number might sting. That is the point.",
+    n: "Phase 1",
+    days: "Days 1 to 5",
+    title: "Set the Baseline",
+    body: "You record your Day 1 diagnostic and get a Readiness Score across Structure, Specificity, Confidence Signals and Relevance. You learn to open with the answer instead of the run up.",
+    steps: ["Step 1", "Step 2"],
   },
   {
-    step: "Practise",
-    body: "One structured session a day, built around impromptu speaking. Your Mentor sets the prompt, you answer cold, it scores the answer and you run it again. 30 sessions. 4 weekly check ins. A pod that holds you to it.",
+    n: "Phase 2",
+    days: "Days 6 to 12",
+    title: "Structure Your Thinking",
+    body: "Cold prompts, no prep. You drill one repeatable frame until a clear point, three supports and a close come out under pressure every time.",
+    steps: ["Step 2", "Step 3"],
   },
   {
-    step: "Perform",
-    body: "Week by week your score moves. Week 1: 47. Week 2: 53. Week 3: 59. Week 4: 65. Your Mentor tracks every session and you feel the difference in your next meeting.",
+    n: "Phase 3",
+    days: "Days 13 to 19",
+    title: "Command the Room",
+    body: "Steady pace, deliberate pauses and a calm response to interruption. Filler count and words per minute are tracked every session so you can hear and see the change.",
+    steps: ["Step 4", "Step 5"],
   },
   {
-    step: "Prove",
-    body: "Day 30. You retake the diagnostic with your Voice AI Mentor. Your score went from 42 to 65. You can see it. You can share it. You can prove it.",
+    n: "Phase 4",
+    days: "Days 20 to 26",
+    title: "Move to Decision",
+    body: "You practise changing what the listener thinks or does: a direct recommendation, the evidence behind it, and a clear ask that ends the conversation with a decision.",
+    steps: ["Step 6", "Step 7"],
+  },
+  {
+    n: "Phase 5",
+    days: "Days 27 to 30",
+    title: "Perform Under Pressure",
+    body: "Live style simulations of the interview, the board update and the hostile question. Day 30 you retake the diagnostic and compare it with Day 1.",
+    steps: ["All 7 steps"],
   },
 ];
 
-const CURRICULUM = [
-  {
-    week: "Week 1",
-    title: "Structure under pressure",
-    focus: "Answer first, then evidence",
-    body: "Days 1 to 7. Cold prompts with no prep time. You learn one repeatable answer frame and drill it until you lead with the point instead of the run up. Day 1 sets your baseline Readiness Score.",
-    drills: ["60 second impromptu answers", "Point first re takes", "Kill the preamble"],
-  },
-  {
-    week: "Week 2",
-    title: "Specificity and evidence",
-    focus: "Numbers, names, outcomes",
-    body: "Days 8 to 14. Harder prompts drawn from your real work. Your Mentor pushes back until vague claims are replaced with concrete evidence a decision maker can act on.",
-    drills: ["Story to number", "The so what test", "Handling the challenge question"],
-  },
-  {
-    week: "Week 3",
-    title: "Confidence signals",
-    focus: "Pace, pauses, filler, landing",
-    body: "Days 15 to 21. Measured delivery work. Filler count, words per minute and pause pattern are tracked every session so you can hear the difference and see it in the numbers.",
-    drills: ["Pause instead of um", "Pace control reps", "Land the last line"],
-  },
-  {
-    week: "Week 4",
-    title: "The real room",
-    focus: "High stakes rehearsal",
-    body: "Days 22 to 30. Full scenario rehearsal: the status update, the pitch, the interview, the pushback from the person who does not agree with you. Day 30 you retake the diagnostic and compare.",
-    drills: ["Executive update in 90 seconds", "Pitch and objection", "Day 30 retest"],
-  },
+const STEPS = [
+  { n: "Step 1", title: "Lead with the answer", phase: "Phase 1", body: "The point first, the context after. Kill the preamble." },
+  { n: "Step 2", title: "Structure in three", phase: "Phases 1 and 2", body: "One repeatable frame that holds under pressure." },
+  { n: "Step 3", title: "Evidence that lands", phase: "Phase 2", body: "Numbers, names and outcomes instead of vague claims." },
+  { n: "Step 4", title: "Pace and pause", phase: "Phase 3", body: "Slow the delivery, replace filler with silence." },
+  { n: "Step 5", title: "Hold the interruption", phase: "Phase 3", body: "Stay calm, finish the thought, keep the room." },
+  { n: "Step 6", title: "Make the recommendation", phase: "Phase 4", body: "Say what you would do and why, without hedging." },
+  { n: "Step 7", title: "Close with the ask", phase: "Phases 4 and 5", body: "End on a decision, not a trailing sentence." },
 ];
 
 const TESTIMONIALS = [
