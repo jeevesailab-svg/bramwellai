@@ -534,23 +534,23 @@ function FoundersPage() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium">First name</label>
-                  <input id="firstName" name="firstName" ref={firstNameRef} className={field} />
+                  <input id="firstName" name="firstName" ref={firstNameRef} className={field} suppressHydrationWarning />
                 </div>
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium">Last name</label>
-                  <input id="lastName" name="lastName" ref={lastNameRef} className={field} />
+                  <input id="lastName" name="lastName" ref={lastNameRef} className={field} suppressHydrationWarning />
                 </div>
                 <div className="sm:col-span-2">
                   <label htmlFor="email" className="block text-sm font-medium">Work email</label>
-                  <input id="email" name="email" ref={emailRef} type="email" className={field} />
+                  <input id="email" name="email" ref={emailRef} type="email" className={field} suppressHydrationWarning />
                 </div>
                 <div className="sm:col-span-2">
                   <label htmlFor="company" className="block text-sm font-medium">Company</label>
-                  <input id="company" name="company" ref={companyRef} className={field} />
+                  <input id="company" name="company" ref={companyRef} className={field} suppressHydrationWarning />
                 </div>
                 <div>
                   <label htmlFor="teamSize" className="block text-sm font-medium">Sales team size</label>
-                  <select id="teamSize" name="teamSize" ref={teamSizeRef} className={field}>
+                  <select id="teamSize" name="teamSize" ref={teamSizeRef} className={field} suppressHydrationWarning>
                     <option value="">Select</option>
                     {TEAM_SIZES.map((t) => (
                       <option key={t} value={t}>
@@ -561,7 +561,7 @@ function FoundersPage() {
                 </div>
                 <div>
                   <label htmlFor="role" className="block text-sm font-medium">Your role</label>
-                  <select id="role" name="role" ref={roleRef} className={field}>
+                  <select id="role" name="role" ref={roleRef} className={field} suppressHydrationWarning>
                     <option value="">Select</option>
                     {ROLES.map((r) => (
                       <option key={r} value={r}>
