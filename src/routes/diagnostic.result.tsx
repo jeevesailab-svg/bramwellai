@@ -60,6 +60,7 @@ type Metrics = {
     relevance: number;
   };
   evidence?: { quote: string; dimension: string; note: string }[];
+  rewrite?: { original: string; rewritten: string; why: string };
 };
 
 const STRIPE: Record<PathwayKey, string> = {

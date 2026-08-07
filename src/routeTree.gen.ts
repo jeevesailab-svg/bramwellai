@@ -31,6 +31,7 @@ import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/em
 import { Route as ApiPublicQuizLeadRouteImport } from './routes/api/public/quiz-lead'
 import { Route as ApiPublicKlaviyoEventRouteImport } from './routes/api/public/klaviyo-event'
 import { Route as ApiPublicDiagnosticTokenRouteImport } from './routes/api/public/diagnostic-token'
+import { Route as ApiPublicDiagnosticRewriteRouteImport } from './routes/api/public/diagnostic-rewrite'
 import { Route as ApiPublicDiagnosticResultRouteImport } from './routes/api/public/diagnostic-result'
 import { Route as ApiPublicDiagnosticIncompleteRouteImport } from './routes/api/public/diagnostic-incomplete'
 import { Route as ApiPublicDiagnosticEmailRouteImport } from './routes/api/public/diagnostic-email'
@@ -150,6 +151,12 @@ const ApiPublicDiagnosticTokenRoute =
     path: '/api/public/diagnostic-token',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicDiagnosticRewriteRoute =
+  ApiPublicDiagnosticRewriteRouteImport.update({
+    id: '/api/public/diagnostic-rewrite',
+    path: '/api/public/diagnostic-rewrite',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicDiagnosticResultRoute =
   ApiPublicDiagnosticResultRouteImport.update({
     id: '/api/public/diagnostic-result',
@@ -215,6 +222,7 @@ export interface FileRoutesByFullPath {
   '/api/public/diagnostic-email': typeof ApiPublicDiagnosticEmailRoute
   '/api/public/diagnostic-incomplete': typeof ApiPublicDiagnosticIncompleteRoute
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
+  '/api/public/diagnostic-rewrite': typeof ApiPublicDiagnosticRewriteRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
@@ -245,6 +253,7 @@ export interface FileRoutesByTo {
   '/api/public/diagnostic-email': typeof ApiPublicDiagnosticEmailRoute
   '/api/public/diagnostic-incomplete': typeof ApiPublicDiagnosticIncompleteRoute
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
+  '/api/public/diagnostic-rewrite': typeof ApiPublicDiagnosticRewriteRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
@@ -277,6 +286,7 @@ export interface FileRoutesById {
   '/api/public/diagnostic-email': typeof ApiPublicDiagnosticEmailRoute
   '/api/public/diagnostic-incomplete': typeof ApiPublicDiagnosticIncompleteRoute
   '/api/public/diagnostic-result': typeof ApiPublicDiagnosticResultRoute
+  '/api/public/diagnostic-rewrite': typeof ApiPublicDiagnosticRewriteRoute
   '/api/public/diagnostic-token': typeof ApiPublicDiagnosticTokenRoute
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
@@ -310,6 +320,7 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-email'
     | '/api/public/diagnostic-incomplete'
     | '/api/public/diagnostic-result'
+    | '/api/public/diagnostic-rewrite'
     | '/api/public/diagnostic-token'
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
@@ -340,6 +351,7 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-email'
     | '/api/public/diagnostic-incomplete'
     | '/api/public/diagnostic-result'
+    | '/api/public/diagnostic-rewrite'
     | '/api/public/diagnostic-token'
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
@@ -371,6 +383,7 @@ export interface FileRouteTypes {
     | '/api/public/diagnostic-email'
     | '/api/public/diagnostic-incomplete'
     | '/api/public/diagnostic-result'
+    | '/api/public/diagnostic-rewrite'
     | '/api/public/diagnostic-token'
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
@@ -400,6 +413,7 @@ export interface RootRouteChildren {
   ApiPublicDiagnosticEmailRoute: typeof ApiPublicDiagnosticEmailRoute
   ApiPublicDiagnosticIncompleteRoute: typeof ApiPublicDiagnosticIncompleteRoute
   ApiPublicDiagnosticResultRoute: typeof ApiPublicDiagnosticResultRoute
+  ApiPublicDiagnosticRewriteRoute: typeof ApiPublicDiagnosticRewriteRoute
   ApiPublicDiagnosticTokenRoute: typeof ApiPublicDiagnosticTokenRoute
   ApiPublicKlaviyoEventRoute: typeof ApiPublicKlaviyoEventRoute
   ApiPublicQuizLeadRoute: typeof ApiPublicQuizLeadRoute
@@ -566,6 +580,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicDiagnosticTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/diagnostic-rewrite': {
+      id: '/api/public/diagnostic-rewrite'
+      path: '/api/public/diagnostic-rewrite'
+      fullPath: '/api/public/diagnostic-rewrite'
+      preLoaderRoute: typeof ApiPublicDiagnosticRewriteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/diagnostic-result': {
       id: '/api/public/diagnostic-result'
       path: '/api/public/diagnostic-result'
@@ -652,6 +673,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicDiagnosticEmailRoute: ApiPublicDiagnosticEmailRoute,
   ApiPublicDiagnosticIncompleteRoute: ApiPublicDiagnosticIncompleteRoute,
   ApiPublicDiagnosticResultRoute: ApiPublicDiagnosticResultRoute,
+  ApiPublicDiagnosticRewriteRoute: ApiPublicDiagnosticRewriteRoute,
   ApiPublicDiagnosticTokenRoute: ApiPublicDiagnosticTokenRoute,
   ApiPublicKlaviyoEventRoute: ApiPublicKlaviyoEventRoute,
   ApiPublicQuizLeadRoute: ApiPublicQuizLeadRoute,
