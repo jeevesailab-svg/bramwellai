@@ -269,7 +269,7 @@ function FoundersPage() {
           </h1>
 
           <p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            We analyse your best sales conversations, document your winning process, and build a private AI coach that trains every salesperson to the same standard — in 30 days.
+            We clone your best sales conversations into a private Voice AI coach, then run every salesperson through daily role-play and feedback on a platform where you can see progress in real time.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-5">
