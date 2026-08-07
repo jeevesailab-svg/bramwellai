@@ -265,11 +265,13 @@ function FoundersPage() {
           </span>
 
           <h1 className="mt-8 max-w-5xl text-balance text-4xl font-semibold leading-[0.96] tracking-[-0.04em] sm:text-6xl md:text-[80px] lg:text-[96px]">
-            Your best closer is you. Make them everyone.
+            Clone your best salesperson across the whole team.
           </h1>
 
           <p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Get your Elite Sales Voice AI Coach. Multiply profit, accelerate growth, and lead with certainty.
+            A private Sales Voice AI Coach that never sleeps: it analyses every call, gives each
+            salesperson actionable feedback, and trains your whole team to the same proven standard
+            — in 30 days.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-5">
