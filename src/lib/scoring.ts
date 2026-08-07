@@ -247,7 +247,11 @@ export function computeMetrics(transcript: string, durationSec?: number): Comput
       per_100_words: per100(fillerTotal),
       top: fillerCounts.slice(0, 5),
     },
-    pace: { words_per_minute: wpm, word_count: wordCount, duration_sec: Math.round(effectiveDuration) },
+    pace: {
+      words_per_minute: paceReliable ? wpm : 0,
+      word_count: wordCount,
+      duration_sec: Math.round(effectiveDuration),
+    },
     hedging: { total: hedgeTotal, per_100_words: per100(hedgeTotal), samples: hedgeSamples },
     structure: {
       time_to_point_sec: timeToPointSec,
