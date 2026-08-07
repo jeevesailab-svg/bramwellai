@@ -27,6 +27,8 @@ import { Route as PortalSetupRouteImport } from './routes/portal.setup'
 import { Route as PortalCoachRouteImport } from './routes/portal.coach'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as DiagnosticResultRouteImport } from './routes/diagnostic.result'
+import { Route as PortalSessionsIndexRouteImport } from './routes/portal.sessions.index'
+import { Route as PortalSessionsSessionIdRouteImport } from './routes/portal.sessions.$sessionId'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicQuizLeadRouteImport } from './routes/api/public/quiz-lead'
 import { Route as ApiPublicKlaviyoEventRouteImport } from './routes/api/public/klaviyo-event'
@@ -130,6 +132,16 @@ const DiagnosticResultRoute = DiagnosticResultRouteImport.update({
   path: '/diagnostic/result',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalSessionsIndexRoute = PortalSessionsIndexRouteImport.update({
+  id: '/sessions/',
+  path: '/sessions/',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalSessionsSessionIdRoute = PortalSessionsSessionIdRouteImport.update({
+  id: '/sessions/$sessionId',
+  path: '/sessions/$sessionId',
+  getParentRoute: () => PortalRoute,
+} as any)
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
@@ -227,6 +239,8 @@ export interface FileRoutesByFullPath {
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/portal/sessions/$sessionId': typeof PortalSessionsSessionIdRoute
+  '/portal/sessions/': typeof PortalSessionsIndexRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -258,6 +272,8 @@ export interface FileRoutesByTo {
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/portal/sessions/$sessionId': typeof PortalSessionsSessionIdRoute
+  '/portal/sessions': typeof PortalSessionsIndexRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -291,6 +307,8 @@ export interface FileRoutesById {
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/portal/sessions/$sessionId': typeof PortalSessionsSessionIdRoute
+  '/portal/sessions/': typeof PortalSessionsIndexRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -325,6 +343,8 @@ export interface FileRouteTypes {
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
     | '/lovable/email/suppression'
+    | '/portal/sessions/$sessionId'
+    | '/portal/sessions/'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -356,6 +376,8 @@ export interface FileRouteTypes {
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
     | '/lovable/email/suppression'
+    | '/portal/sessions/$sessionId'
+    | '/portal/sessions'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -388,6 +410,8 @@ export interface FileRouteTypes {
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
     | '/lovable/email/suppression'
+    | '/portal/sessions/$sessionId'
+    | '/portal/sessions/'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -552,6 +576,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DiagnosticResultRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portal/sessions/': {
+      id: '/portal/sessions/'
+      path: '/sessions'
+      fullPath: '/portal/sessions/'
+      preLoaderRoute: typeof PortalSessionsIndexRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/sessions/$sessionId': {
+      id: '/portal/sessions/$sessionId'
+      path: '/sessions/$sessionId'
+      fullPath: '/portal/sessions/$sessionId'
+      preLoaderRoute: typeof PortalSessionsSessionIdRouteImport
+      parentRoute: typeof PortalRoute
+    }
     '/lovable/email/suppression': {
       id: '/lovable/email/suppression'
       path: '/lovable/email/suppression'
@@ -643,12 +681,16 @@ interface PortalRouteChildren {
   PortalCoachRoute: typeof PortalCoachRoute
   PortalSetupRoute: typeof PortalSetupRoute
   PortalIndexRoute: typeof PortalIndexRoute
+  PortalSessionsSessionIdRoute: typeof PortalSessionsSessionIdRoute
+  PortalSessionsIndexRoute: typeof PortalSessionsIndexRoute
 }
 
 const PortalRouteChildren: PortalRouteChildren = {
   PortalCoachRoute: PortalCoachRoute,
   PortalSetupRoute: PortalSetupRoute,
   PortalIndexRoute: PortalIndexRoute,
+  PortalSessionsSessionIdRoute: PortalSessionsSessionIdRoute,
+  PortalSessionsIndexRoute: PortalSessionsIndexRoute,
 }
 
 const PortalRouteWithChildren =
@@ -686,13 +728,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -326,6 +326,12 @@ function PortalCoachPage() {
             >
               Update CV / JD
             </Link>
+            <Link
+              to="/portal/sessions"
+              className="text-muted-foreground hover:text-foreground"
+            >
+              History
+            </Link>
             <button
               onClick={async () => {
                 if (isConnected) await conversation.endSession();
@@ -424,6 +430,16 @@ function PortalCoachPage() {
                 }
                 totalSessions={user?.sessions_purchased ?? 30}
               />
+              {curve.length > 0 && (
+                <div className="mt-4 text-left">
+                  <Link
+                    to="/portal/sessions"
+                    className="text-sm font-semibold underline underline-offset-4"
+                  >
+                    See what changed in every session →
+                  </Link>
+                </div>
+              )}
             </div>
 
             {user ? (
