@@ -42,6 +42,7 @@ import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lova
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
+import { Route as ApiPublicPaymentsTestEmailRouteImport } from './routes/api/public/payments/test-email'
 
 const WaitlistRoute = WaitlistRouteImport.update({
   id: '/waitlist',
@@ -217,6 +218,12 @@ const ApiPublicPaymentsWebhookRoute =
     path: '/api/public/payments/webhook',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicPaymentsTestEmailRoute =
+  ApiPublicPaymentsTestEmailRouteImport.update({
+    id: '/api/public/payments/test-email',
+    path: '/api/public/payments/test-email',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -248,6 +255,7 @@ export interface FileRoutesByFullPath {
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/portal/sessions/$sessionId': typeof PortalSessionsSessionIdRoute
   '/portal/sessions/': typeof PortalSessionsIndexRoute
+  '/api/public/payments/test-email': typeof ApiPublicPaymentsTestEmailRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -282,6 +290,7 @@ export interface FileRoutesByTo {
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/portal/sessions/$sessionId': typeof PortalSessionsSessionIdRoute
   '/portal/sessions': typeof PortalSessionsIndexRoute
+  '/api/public/payments/test-email': typeof ApiPublicPaymentsTestEmailRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -318,6 +327,7 @@ export interface FileRoutesById {
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/portal/sessions/$sessionId': typeof PortalSessionsSessionIdRoute
   '/portal/sessions/': typeof PortalSessionsIndexRoute
+  '/api/public/payments/test-email': typeof ApiPublicPaymentsTestEmailRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -355,6 +365,7 @@ export interface FileRouteTypes {
     | '/lovable/email/suppression'
     | '/portal/sessions/$sessionId'
     | '/portal/sessions/'
+    | '/api/public/payments/test-email'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -389,6 +400,7 @@ export interface FileRouteTypes {
     | '/lovable/email/suppression'
     | '/portal/sessions/$sessionId'
     | '/portal/sessions'
+    | '/api/public/payments/test-email'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -424,6 +436,7 @@ export interface FileRouteTypes {
     | '/lovable/email/suppression'
     | '/portal/sessions/$sessionId'
     | '/portal/sessions/'
+    | '/api/public/payments/test-email'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -454,6 +467,7 @@ export interface RootRouteChildren {
   ApiPublicKlaviyoEventRoute: typeof ApiPublicKlaviyoEventRoute
   ApiPublicQuizLeadRoute: typeof ApiPublicQuizLeadRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicPaymentsTestEmailRoute: typeof ApiPublicPaymentsTestEmailRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
@@ -693,6 +707,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/payments/test-email': {
+      id: '/api/public/payments/test-email'
+      path: '/api/public/payments/test-email'
+      fullPath: '/api/public/payments/test-email'
+      preLoaderRoute: typeof ApiPublicPaymentsTestEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -741,6 +762,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicKlaviyoEventRoute: ApiPublicKlaviyoEventRoute,
   ApiPublicQuizLeadRoute: ApiPublicQuizLeadRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicPaymentsTestEmailRoute: ApiPublicPaymentsTestEmailRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
@@ -749,3 +771,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
