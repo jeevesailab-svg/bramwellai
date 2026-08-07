@@ -110,39 +110,19 @@ const FAQS = [
   },
   {
     q: "What can I expect to learn?",
-    a: "A four week curriculum built on impromptu speaking. Week 1 structure under pressure, Week 2 specificity and evidence, Week 3 confidence signals like pace, pauses and filler, Week 4 high stakes rehearsal. Every session is scored across Structure, Specificity, Confidence Signals and Relevance, with weekly check ins, an accountability pod, and a Day 1 and Day 30 Readiness Score.",
-  },
-  {
-    q: "How long is the program?",
-    a: "30 days, run as four themed weeks. One scored session a day, a 15 minute check in each week, and a final retest on Day 30 that gives you a before and after number.",
-  },
-  {
-    q: "What are the refund terms exactly?",
-    a: "Complete your Day 1 diagnostic, the first 7 daily sessions and your Week 1 check in. If your Week 1 Readiness Score has not improved on your Day 1 baseline, reply to any Bramwell email within 14 days of purchase and we refund the full $299 to your original payment method within 5 business days.",
+    a: "Five phases across 30 days: Set the Baseline, Structure Your Thinking, Command the Room, Move to Decision and Perform Under Pressure. The seven steps of the method are taught inside those phases. Every session is scored across Structure, Specificity, Confidence Signals and Relevance, with a Day 1 and Day 30 Readiness Score.",
   },
   {
     q: "I have never done voice training before, is this for me?",
     a: "Yes. Most participants have never measured their voice. The diagnostic gives you a baseline score on Day 1 and the program builds from there. No experience required.",
   },
   {
-    q: "Are there any prerequisites?",
-    a: "You take the free test first. That gives you your Readiness Score. If your score is below 60 the program is designed to move it. If it is above 60 the program will push you higher.",
-  },
-  {
     q: "I manage a sales team, how can this help me?",
     a: "The team version clones your founder's pitch into AI practice scenarios every rep trains against. 30 days. $1,500 for 10 seats. Manager dashboard and team benchmarking included.",
   },
   {
-    q: "Is there a community component?",
-    a: "Yes. Accountability pods of 4 to 6 people. You are not alone, you are in a cohort of professionals on the same journey.",
-  },
-  {
     q: "What makes this different from other voice coaching?",
     a: "Three things: your Voice AI Mentor, the score, and the timeline. Your Mentor practises with you daily, listening, scoring and giving real time feedback. Your voice has a number. In 30 days you retake the test and watch the number change.",
-  },
-  {
-    q: "How will this help me in my career?",
-    a: "Your voice decides if they listen or forget, if you sound confident or unsure, if you get heard or get overlooked. In 30 days of daily practice with your Voice AI Mentor your Readiness Score moves from 42 to 65, and that number moves with you into every meeting.",
   },
 ];
 
