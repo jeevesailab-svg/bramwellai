@@ -413,7 +413,7 @@ function FoundersPage() {
                 </div>
               ))}
             </div>
-            <div className="mt-8 overflow-hidden rounded-xl border border-border bg-background">
+            <div id="book-call" className="mt-8 overflow-hidden rounded-xl border border-border bg-background">
               <div className="border-b border-border bg-muted p-6">
                 <p className="text-sm font-semibold">Book a 15-minute qualification call</p>
                 <p className="text-sm text-muted-foreground">
