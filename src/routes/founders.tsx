@@ -11,13 +11,13 @@ export const Route = createFileRoute("/founders")({
       {
         name: "description",
         content:
-          "A private Sales Voice AI Coach that never sleeps, analyses every call, and trains every salesperson to your proven standard in 30 days.",
+          "A private Sales Voice AI Coach that never sleeps: it analyses every call, gives each salesperson actionable feedback, and trains your whole team to the same proven standard. Accelerate growth and lead with certainty in 30 days.",
       },
       { property: "og:title", content: "Clone your best salesperson across the whole team." },
       {
         property: "og:description",
         content:
-          "A private Sales Voice AI Coach that never sleeps, analyses every call, and trains every salesperson to your proven standard in 30 days.",
+          "A private Sales Voice AI Coach that never sleeps: it analyses every call, gives each salesperson actionable feedback, and trains your whole team to the same proven standard. Accelerate growth and lead with certainty in 30 days.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -270,8 +270,8 @@ function FoundersPage() {
 
           <p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
             A private Sales Voice AI Coach that never sleeps: it analyses every call, gives each
-            salesperson actionable feedback, and trains your whole team to the same proven standard
-            — in 30 days.
+            salesperson actionable feedback, and trains your whole team to the same proven
+            standard. Accelerate growth and lead with certainty in 30 days.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-5">
