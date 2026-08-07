@@ -102,7 +102,7 @@ const TESTIMONIALS = [
 const FAQS = [
   {
     q: "What is the 30 Day Voice Mastery Program?",
-    a: "A 30 day structured voice training program with Bramwell your Voice AI Mentor. You speak with your Mentor daily, get scored across four dimensions, and receive weekly check ins with a before and after Readiness Score. You diagnose on Day 1, practise for 30 days, and prove the change on Day 30.",
+    a: "A 30 day structured voice training program with Bramwell your Voice AI Mentor. You speak with your Mentor daily and get scored across four dimensions. You diagnose on Day 1, practise for 30 days across five phases, and prove the change on Day 30.",
   },
   {
     q: "Who is the program for?",
@@ -204,17 +204,16 @@ function ProgramPage() {
             Change your life.
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            A structured 30 day program with Bramwell, your Voice AI Mentor. Four weeks of impromptu
-            speaking drills, one scored session a day, weekly check ins. On Day 30 the number proves
-            it.
+            A structured 30 day program with Bramwell, your Voice AI Mentor. Five phases, one
+            scored session a day. On Day 30 the number proves it.
           </p>
 
           <div className="mt-9 flex flex-col items-center gap-3">
             <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false}>
-              Get started, $299
+            Get started, $349
             </CtaButton>
             <p className="text-xs text-muted-foreground">
-              One payment. Complete Week 1 and if your score has not moved, we refund all $299.{" "}
+              One payment, $349 USD.{" "}
               <a href="/diagnostic?autostart=1" className="font-medium text-foreground underline underline-offset-4">
                 Or take the free 5 minute test first
               </a>
