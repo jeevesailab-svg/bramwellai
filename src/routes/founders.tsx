@@ -528,25 +528,25 @@ function FoundersPage() {
           ) : (
             <form onSubmit={onSubmit} className="mt-10 rounded-2xl border border-border bg-background p-8">
               <div className="grid gap-5 sm:grid-cols-2">
-                <label className="block text-sm font-medium">
+                <label htmlFor="firstName" className="block text-sm font-medium">
                   First name
-                  <input className={field} value={form.firstName} onChange={(e) => update("firstName", e.target.value)} />
+                  <input id="firstName" name="firstName" className={field} value={form.firstName} onChange={(e) => update("firstName", e.target.value)} />
                 </label>
-                <label className="block text-sm font-medium">
+                <label htmlFor="lastName" className="block text-sm font-medium">
                   Last name
-                  <input className={field} value={form.lastName} onChange={(e) => update("lastName", e.target.value)} />
+                  <input id="lastName" name="lastName" className={field} value={form.lastName} onChange={(e) => update("lastName", e.target.value)} />
                 </label>
-                <label className="block text-sm font-medium sm:col-span-2">
+                <label htmlFor="email" className="block text-sm font-medium sm:col-span-2">
                   Work email
-                  <input type="email" className={field} value={form.email} onChange={(e) => update("email", e.target.value)} />
+                  <input id="email" name="email" type="email" className={field} value={form.email} onChange={(e) => update("email", e.target.value)} />
                 </label>
-                <label className="block text-sm font-medium sm:col-span-2">
+                <label htmlFor="company" className="block text-sm font-medium sm:col-span-2">
                   Company
-                  <input className={field} value={form.company} onChange={(e) => update("company", e.target.value)} />
+                  <input id="company" name="company" className={field} value={form.company} onChange={(e) => update("company", e.target.value)} />
                 </label>
-                <label className="block text-sm font-medium">
+                <label htmlFor="teamSize" className="block text-sm font-medium">
                   Sales team size
-                  <select className={field} value={form.teamSize} onChange={(e) => update("teamSize", e.target.value)}>
+                  <select id="teamSize" name="teamSize" className={field} value={form.teamSize} onChange={(e) => update("teamSize", e.target.value)}>
                     <option value="">Select</option>
                     {TEAM_SIZES.map((t) => (
                       <option key={t} value={t}>
@@ -555,9 +555,9 @@ function FoundersPage() {
                     ))}
                   </select>
                 </label>
-                <label className="block text-sm font-medium">
+                <label htmlFor="role" className="block text-sm font-medium">
                   Your role
-                  <select className={field} value={form.role} onChange={(e) => update("role", e.target.value)}>
+                  <select id="role" name="role" className={field} value={form.role} onChange={(e) => update("role", e.target.value)}>
                     <option value="">Select</option>
                     {ROLES.map((r) => (
                       <option key={r} value={r}>
