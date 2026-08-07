@@ -1,3 +1,4 @@
+import { getScoreBand, SCORE_SCALE } from "@/lib/scoreBand";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
