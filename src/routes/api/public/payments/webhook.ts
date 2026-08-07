@@ -15,7 +15,7 @@ function getSupabase(): any {
   return _supabase;
 }
 
-async function sendReceiptEmail(opts: {
+export async function sendReceiptEmail(opts: {
   to: string;
   firstName: string | null;
   productName: string;
