@@ -347,7 +347,38 @@ function FoundersPage() {
         </div>
       </section>
 
+      {/* Demo */}
+      <section className="border-b border-border py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-6 md:px-10">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            See it in action
+          </p>
+          <h2 className="mt-6 max-w-3xl text-balance text-[32px] font-semibold leading-[1] tracking-[-0.03em] md:text-5xl">
+            A sales coach that listens, scores, and coaches every call.
+          </h2>
+          <p className="mt-5 max-w-2xl text-base text-muted-foreground md:text-lg">
+            Watch how recorded calls become a private training standard for every salesperson.
+          </p>
+          <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-muted">
+            <video
+              src="/__l5e/assets-v1/d9900d06-3178-4102-8916-beb27ad90d43/founders-demo.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              className="aspect-video w-full"
+              aria-label="Demo of the AI sales coach analysing a call and showing feedback"
+            />
+          </div>
+          <p className="mt-4 text-center text-xs text-muted-foreground">
+            10-second demo. The real platform uses your sales calls, your customers, and your methodology.
+          </p>
+        </div>
+      </section>
+
       {/* The problem */}
+
       <section className="bg-foreground py-24 text-background md:py-32">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] opacity-50">
