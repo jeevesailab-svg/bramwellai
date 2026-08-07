@@ -471,7 +471,7 @@ function PricingTease() {
             <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD }}>practice.</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Thirty structured sessions with Bramwell. Complete Week 1 and if your Readiness Score has not moved, we refund all $349.
+            Thirty structured sessions with Bramwell across five phases. One payment of $349 USD.
           </p>
         </div>
 
@@ -505,7 +505,7 @@ function PricingTease() {
         </div>
 
         <p className="mt-8 text-center text-xs text-muted-foreground">
-          Take the free 5 minute test first, no card, no login. Refund terms: complete your Day 1 diagnostic, the first 7 sessions and your Week 1 check in. If your Week 1 Readiness Score has not improved, reply to any Bramwell email within 14 days and we refund the full $349.
+          Take the free 5 minute test first. No card, no login.
         </p>
       </div>
     </section>
@@ -518,7 +518,7 @@ function FAQ() {
     { q: "Is this really live voice?", a: "Yes. You speak. Bramwell listens and responds in real time, like a phone call with a coach." },
     { q: "Do I need to prepare anything?", a: "No. Just click and talk. Bramwell leads the session and tells you exactly what to fix." },
     { q: "Will I sound scripted?", a: "The opposite. Bramwell trains your natural voice to be sharper, warmer and more structured, not robotic." },
-    { q: "What if it is not for me?", a: "Complete your Day 1 diagnostic, the first 7 daily sessions and your Week 1 check in. If your Week 1 Readiness Score has not improved on your Day 1 baseline, reply to any Bramwell email within 14 days of purchase and we refund the full $349 to your original payment method within 5 business days." },
+    { q: "What do I actually get?", a: "Thirty scored sessions with Bramwell across five phases: Set the Baseline, Structure Your Thinking, Command the Room, Move to Decision and Perform Under Pressure. A Day 1 and Day 30 Readiness Score proves the change." },
     { q: "How is this different from ChatGPT?", a: "ChatGPT can write. Bramwell can hear. Bramwell scores how you sound, not just what you say, and coaches the delivery." },
   ];
   return (
