@@ -118,7 +118,7 @@ const FAQS = [
   },
   {
     q: "I manage a sales team, how can this help me?",
-    a: "The team version clones your founder's pitch into AI practice scenarios every rep trains against. 30 days. $1,500 for 10 seats. Manager dashboard and team benchmarking included.",
+    a: "The Elite Sales Team Accelerator is our done-for-you implementation programme. We document your sales methodology and build a private AI coaching platform that trains every salesperson to the same standard, with a manager dashboard and performance reporting.",
   },
   {
     q: "What makes this different from other voice coaching?",
@@ -459,7 +459,7 @@ function ProgramPage() {
           <p className="mt-10 text-sm text-muted-foreground">
             Leading a team?{" "}
             <Link to="/founders" className="font-medium text-foreground underline-offset-4 hover:underline">
-              See the 30 Day Team Voice Mastery Program
+              See the Elite Sales Team Accelerator
             </Link>
             .
           </p>
