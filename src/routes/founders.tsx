@@ -166,7 +166,7 @@ const INCLUDED = [
 
 const FAQS = [
   {
-    q: "What is the Elite Sales Team Accelerator?",
+    q: "What is the Elite Sales Team Voice AI Coach 30 Day Program?",
     a: "A done-for-you implementation programme. We analyse your highest-performing sales conversations, interview your founder and top performers, document your sales methodology, and build a private AI coaching platform that trains every salesperson using your products, your customers and your sales process.",
   },
   {
@@ -190,10 +190,19 @@ const FAQS = [
     a: "A dashboard showing daily practice, coaching feedback and performance movement for every salesperson, so coaching goes where it is needed instead of where it is convenient.",
   },
   {
+    q: "Do you guarantee results?",
+    a: "We do not guarantee revenue or market outcomes — no one can. We guarantee delivery: your private Voice AI Coach, your documented methodology, and daily coaching access for every enrolled salesperson within 30 days. If we do not deliver that, you do not pay for the implementation.",
+  },
+  {
+    q: "Is our sales call data private?",
+    a: "Yes. Recorded calls and your methodology are used only to build your private coach. They are never shared, sold, or used to train public models.",
+  },
+  {
     q: "Who is it not for?",
     a: "Businesses without a sales team yet, or leaders looking for a one-off workshop. This is an implementation programme for founder-led businesses scaling beyond themselves.",
   },
 ];
+
 
 function scrollToApply() {
   document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" });
@@ -583,7 +592,64 @@ function FoundersPage() {
         </div>
       </section>
 
+      {/* Risk reversal */}
+      <section className="border-b border-border py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            Risk reversal
+          </p>
+          <h2 className="mt-6 max-w-3xl text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
+            We guarantee the work, not the market.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+            We cannot promise your product will sell itself. We can promise the system will be built
+            and your team will be trained.
+          </p>
+
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            <div className="md:col-span-2 rounded-2xl border border-border bg-foreground p-8 text-background md:p-10">
+              <h3 className="text-2xl font-semibold tracking-tight">30-day delivery guarantee</h3>
+              <p className="mt-4 text-sm leading-relaxed opacity-80">
+                If we do not deliver your private Voice AI Coach, document your sales methodology,
+                and give every enrolled salesperson access to personalised coaching within 30 days,
+                you do not pay for the implementation.
+              </p>
+              <ul className="mt-6 space-y-2 text-sm opacity-90">
+                {[
+                  "Private AI coach configured to your business",
+                  "Sales methodology documented in your language",
+                  "Daily coaching access for every enrolled salesperson",
+                ].map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="opacity-60">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-6">
+              <div className="rounded-2xl border border-border bg-muted p-8">
+                <h3 className="text-lg font-semibold tracking-tight">No ongoing lock-in</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  The retainer is month-to-month. You keep your methodology and coach data if you
+                  ever leave.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-border bg-muted p-8">
+                <h3 className="text-lg font-semibold tracking-tight">Your data stays private</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Recorded calls and methodology are used only to train your private coach. They
+                  are never shared or used to train a public model.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Apply */}
+
       <section id="apply" className="border-b border-border bg-muted py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-balance text-[38px] font-semibold leading-[1] tracking-[-0.03em] md:text-6xl">
