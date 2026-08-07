@@ -202,53 +202,57 @@ function FoundersPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    company: "",
-    teamSize: "",
-    role: "",
-  });
 
-  function update<K extends keyof typeof form>(k: K, v: string) {
-    setForm((f) => ({ ...f, [k]: v }));
-  }
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const companyRef = useRef<HTMLInputElement>(null);
+  const teamSizeRef = useRef<HTMLSelectElement>(null);
+  const roleRef = useRef<HTMLSelectElement>(null);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    if (!form.firstName || !form.lastName || !form.email || !form.company || !form.teamSize || !form.role) {
+
+    const firstName = firstNameRef.current?.value.trim() ?? "";
+    const lastName = lastNameRef.current?.value.trim() ?? "";
+    const email = emailRef.current?.value.trim() ?? "";
+    const company = companyRef.current?.value.trim() ?? "";
+    const teamSize = teamSizeRef.current?.value ?? "";
+    const role = roleRef.current?.value ?? "";
+
+    if (!firstName || !lastName || !email || !company || !teamSize || !role) {
       setError("Please complete every field so we can review your application.");
       return;
     }
-      setSubmitting(true);
-      try {
-        const res = await fetch("/api/public/founders-apply", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: form.email.trim(),
-            firstName: form.firstName.trim(),
-            lastName: form.lastName.trim(),
-            company: form.company.trim(),
-            teamSize: form.teamSize,
-            role: form.role,
-            source: "founders_page",
-          }),
-        });
-        if (!res.ok) {
-          const body = await res.json().catch(() => ({ error: "Submission failed" }));
-          setError(body?.error || "Submission failed. Please try again.");
-          return;
-        }
-        setSubmitted(true);
-      } catch {
-        setError("Something went wrong. Please try again in a moment.");
-      } finally {
-        setSubmitting(false);
+
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/public/founders-apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          firstName,
+          lastName,
+          company,
+          teamSize,
+          role,
+          source: "founders_page",
+        }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({ error: "Submission failed" }));
+        setError(body?.error || "Submission failed. Please try again.");
+        return;
       }
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again in a moment.");
+    } finally {
+      setSubmitting(false);
     }
+  }
 
   const field =
     "mt-2 h-12 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition focus:border-foreground";
