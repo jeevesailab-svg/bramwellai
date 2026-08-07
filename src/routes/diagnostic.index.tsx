@@ -632,6 +632,8 @@ function DiagnosticPage() {
     timeWarningSentRef.current = false;
     resultSubmittedAtRef.current = null;
     lastAgentResponseAtRef.current = null;
+    listeningMsRef.current = 0;
+    listeningSinceRef.current = null;
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
 
