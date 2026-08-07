@@ -100,7 +100,10 @@ export const Route = createFileRoute("/api/public/founders-apply")({
           templateName: "founder-application-confirmation",
           recipientEmail: normalizedEmail,
           idempotencyKey: `founders-apply-confirm-${normalizedEmail}-${Date.now()}`,
-          templateData: { firstName: data.firstName },
+          templateData: {
+            firstName: data.firstName,
+            bookingUrl: "https://calendly.com/bramwellai/qualification-call",
+          },
         });
         if (!confirmation.ok) {
           console.warn("Founder confirmation email failed", confirmation.reason);
