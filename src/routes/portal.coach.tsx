@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { getElevenLabsCoachToken } from "@/lib/elevenlabs.functions";
 import { recordCompletedSession } from "@/lib/sessions.functions";
 import { ScoreCurve, type CurvePoint } from "@/components/portal/ScoreCurve";
+import { ContinuityBridge } from "@/components/portal/ContinuityBridge";
 
 export const Route = createFileRoute("/portal/coach")({
   component: PortalCoachPage,
@@ -114,6 +115,7 @@ function PortalCoachPage() {
   const [user, setUser] = useState<UserRow | null>(null);
   const [lastSession, setLastSession] = useState<SessionRow | null>(null);
   const [curve, setCurve] = useState<CurvePoint[]>([]);
+  const [authEmail, setAuthEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [starting, setStarting] = useState(false);
@@ -148,6 +150,7 @@ function PortalCoachPage() {
         navigate({ to: "/login", replace: true });
         return;
       }
+      setAuthEmail(auth.user.email ?? null);
       const [{ data: u }, { data: s }] = await Promise.all([
         supabase
           .from("users")
@@ -422,6 +425,22 @@ function PortalCoachPage() {
                 totalSessions={user?.sessions_purchased ?? 30}
               />
             </div>
+
+            {user ? (
+              <ContinuityBridge
+                userId={user.id}
+                email={authEmail ?? undefined}
+                sessionsCompleted={user.sessions_completed ?? 0}
+                sessionsPurchased={user.sessions_purchased ?? 30}
+                latestScore={
+                  [...curve]
+                    .reverse()
+                    .find((p) => typeof p.readiness_score_end === "number")
+                    ?.readiness_score_end ?? null
+                }
+                baselineScore={user.last_readiness_score ?? null}
+              />
+            ) : null}
           </>
         )}
       </section>
