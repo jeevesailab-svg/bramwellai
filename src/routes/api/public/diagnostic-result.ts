@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { computeMetrics, readinessFromSubScores } from "@/lib/scoring";
 
 const MetricsSchema = z
   .object({
