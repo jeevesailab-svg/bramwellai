@@ -730,6 +730,22 @@ function FoundersPage() {
         </div>
       </section>
 
+      {/* Checkout modal */}
+      {checkoutOpen ? (
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-foreground/40 p-4 backdrop-blur-sm">
+          <div className="relative mt-10 w-full max-w-xl rounded-2xl border border-border bg-background p-4">
+            <button
+              type="button"
+              onClick={closeCheckout}
+              className="absolute right-4 top-4 text-sm text-muted-foreground hover:text-foreground"
+            >
+              Close
+            </button>
+            <div className="pt-8">{checkoutElement}</div>
+          </div>
+        </div>
+      ) : null}
+
       <SiteFooter />
     </main>
   );
