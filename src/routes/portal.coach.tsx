@@ -326,6 +326,12 @@ function PortalCoachPage() {
             >
               Update CV / JD
             </Link>
+            <Link
+              to="/portal/sessions"
+              className="text-muted-foreground hover:text-foreground"
+            >
+              History
+            </Link>
             <button
               onClick={async () => {
                 if (isConnected) await conversation.endSession();
