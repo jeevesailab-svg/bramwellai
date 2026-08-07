@@ -11,13 +11,13 @@ export const Route = createFileRoute("/founders")({
       {
         name: "description",
         content:
-          "Bramwell analyses your highest-performing sales conversations, documents exactly how your best people win business, and trains every salesperson to that standard with a private AI coach that never sleeps.",
+          "We analyse your best sales conversations, document your winning process, and build a private AI coach that trains every salesperson to the same standard — in 30 days.",
       },
-      { property: "og:title", content: "The market has changed. Build a high-performing sales team." },
+      { property: "og:title", content: "Build and train the sales team that closes every deal." },
       {
         property: "og:description",
         content:
-          "A done-for-you implementation programme. Your sales methodology, documented and turned into daily AI coaching for every salesperson.",
+          "A done-for-you 30-day implementation. Your sales methodology, documented and turned into daily AI coaching for every salesperson.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
