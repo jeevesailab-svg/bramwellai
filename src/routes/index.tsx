@@ -147,10 +147,7 @@ function Hero() {
             </p>
 
             <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Create a competitive edge and understand your roadblocks. Get a deep dive
-              into the limiting beliefs that keep you from experiencing the exponential
-              growth you want. Build a roadmap for success and become a master of
-              influence in any setting. Take the test.
+              The room doesn't hear your potential. It hears your hesitation. In 5 minutes, Bramwell will identify the exact delivery pattern that's holding you back and the fastest way to fix it.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -174,6 +171,14 @@ function Hero() {
                 alt="Executive pausing before she speaks"
                 className="h-[320px] w-full object-cover object-[60%_35%] md:h-[520px]"
               />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent px-6 pb-7 pt-20 md:px-8 md:pb-8 md:pt-28">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
+                  Conquer inner critics
+                </p>
+                <p className="mt-1 max-w-sm text-lg font-semibold leading-tight tracking-tight text-white md:text-xl">
+                  Stop fear, self-doubt, and insecurity from holding you back, once and for all.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -296,7 +301,7 @@ function ProofSlots() {
 /* ───────────── Symptom → Cause ───────────── */
 function SymptomCause() {
   const items = [
-    { icon: Target, symptom: "Interview after interview, no offer?", cause: "It&apos;s most likely your delivery.", copy: "Graduate and early-career interviews are decided on delivery, not your transcript. Bramwell listens live and tells you exactly where you lose the panel.", accent: GOLD },
+    { icon: Target, symptom: "Interviews are decided in 8 seconds.", cause: "Discover what&apos;s holding you back.", copy: "Your CV opens the door. Your delivery closes the room. Bramwell listens live and tells you exactly where you lose the panel.", accent: GOLD },
     { icon: Heart, symptom: "People losing interest mid-sentence?", cause: "It&apos;s most likely your tone.", copy: "Pace, energy and pitch decide whether people lean in or check out. Bramwell trains all three, live.", accent: ELECTRIC },
     { icon: MessageCircle, symptom: "People talking over you?", cause: "It&apos;s most likely how you structure your sentences.", copy: "You&apos;re burying the point. Bramwell teaches the four-part answer that lands first and holds the floor.", accent: SUNRISE },
   ];
