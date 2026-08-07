@@ -7,11 +7,11 @@ export const Route = createFileRoute("/portal/setup")({
   component: PortalSetupPage,
   head: () => ({
     meta: [
-      { title: "Coaching setup, Bramwell AI" },
+      { title: "Submit your context, Bramwell AI" },
       {
         name: "description",
         content:
-          "Upload your CV and the job description so Bramwell can coach you on the exact role you're going for.",
+          "Submit your CV and the target role description so Bramwell can calibrate your assessment and 30 day programme.",
       },
     ],
   }),
@@ -139,14 +139,15 @@ function PortalSetupPage() {
         />
         <div className="relative mx-auto max-w-3xl px-6 pb-16 pt-14 text-center md:px-10 md:pt-20">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-            Step 1 of 2, Coaching setup
+            Step 1 of 2, Context
           </p>
           <h1 className="text-balance text-3xl font-semibold leading-tight md:text-5xl">
-            Give Bramwell the two things it needs to coach you.
+            Submit the two documents required to calibrate your programme.
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-balance text-base text-muted-foreground md:text-lg">
-            Your CV and the job description for the role you're going for. Bramwell uses them to
-            ask the questions you'll actually be asked, in the language of the role.
+            Your CV and the description of the role you are targeting. Both are used to
+            calibrate the assessment questions to your industry, level and the language
+            of the role.
           </p>
         </div>
       </section>
@@ -155,14 +156,14 @@ function PortalSetupPage() {
         <form onSubmit={save} className="space-y-8">
           <Card
             title="Your CV"
-            subtitle="Paste the full text. If you have a PDF, copy and paste from it."
+            subtitle="Paste the full text. Copy directly from a PDF if required."
             ready={cvReady}
           >
             <textarea
               value={cvText}
               onChange={(e) => setCvText(e.target.value.slice(0, MAX_CHARS))}
               rows={12}
-              placeholder="Paste your CV here…"
+              placeholder="Paste your CV here"
               className="w-full resize-y rounded-lg border border-border/60 bg-card/50 p-4 text-sm leading-relaxed text-foreground outline-none transition focus:border-primary/60 focus:ring-2 focus:ring-primary/20"
               disabled={!authChecked}
             />
@@ -174,15 +175,15 @@ function PortalSetupPage() {
           </Card>
 
           <Card
-            title="The job description"
-            subtitle="Paste the full posting, Bramwell mines it for the exact phrases interviewers will use."
+            title="Target role description"
+            subtitle="Paste the full posting. Key phrases are extracted and used in your assessment."
             ready={jdReady}
           >
             <textarea
               value={jdText}
               onChange={(e) => setJdText(e.target.value.slice(0, MAX_CHARS))}
               rows={12}
-              placeholder="Paste the job description here…"
+              placeholder="Paste the role description here"
               className="w-full resize-y rounded-lg border border-border/60 bg-card/50 p-4 text-sm leading-relaxed text-foreground outline-none transition focus:border-primary/60 focus:ring-2 focus:ring-primary/20"
               disabled={!authChecked}
             />
@@ -201,7 +202,7 @@ function PortalSetupPage() {
 
           <div className="flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-muted-foreground">
-              We store these on your private profile. Only you and Bramwell can read them.
+              Stored on your private profile. Accessible only to you and Bramwell.
             </p>
             <button
               type="submit"
@@ -209,7 +210,7 @@ function PortalSetupPage() {
               className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition hover:opacity-90 disabled:opacity-50"
               style={{ background: "var(--gradient-gold)" }}
             >
-              {saving ? "Saving…" : savedAt ? "Saved, update" : "Save and continue"}
+              {saving ? "Saving" : savedAt ? "Update" : "Save and continue"}
             </button>
           </div>
 
@@ -219,10 +220,10 @@ function PortalSetupPage() {
               style={{ boxShadow: "var(--shadow-elegant)" }}
             >
               <p className="font-semibold text-foreground">
-                Both saved. Bramwell is ready when you are.
+                Context received.
               </p>
               <p className="mt-1 text-muted-foreground">
-                The live coaching widget will activate on the next step.
+                Your assessment is calibrated and unlocks on the next step.
               </p>
             </div>
           )}
