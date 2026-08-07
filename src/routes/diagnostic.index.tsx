@@ -425,6 +425,21 @@ function DiagnosticPage() {
     conversationRef.current = conversation;
   }, [conversation]);
 
+  // Track how long the agent is silent while the call is live. Those windows
+  // are when the user is talking, and they give the scorer a real pace signal.
+  useEffect(() => {
+    const live = phase === "live";
+    const agentSpeaking = Boolean(conversation.isSpeaking);
+    if (live && !agentSpeaking) {
+      listeningSinceRef.current ??= Date.now();
+      return;
+    }
+    if (listeningSinceRef.current !== null) {
+      listeningMsRef.current += Date.now() - listeningSinceRef.current;
+      listeningSinceRef.current = null;
+    }
+  }, [phase, conversation.isSpeaking]);
+
   useEffect(() => {
     const ignoreMalformedElevenLabsError = (event: PromiseRejectionEvent) => {
       const message =
