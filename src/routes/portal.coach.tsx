@@ -414,7 +414,11 @@ function PortalCoachPage() {
             <div className="mx-auto mt-12 max-w-2xl">
               <ScoreCurve
                 points={curve}
-                baseline={user?.last_readiness_score ?? null}
+                baseline={
+                  curve.some((p) => typeof p.readiness_score_end === "number")
+                    ? null
+                    : (user?.last_readiness_score ?? null)
+                }
                 totalSessions={user?.sessions_purchased ?? 30}
               />
             </div>
