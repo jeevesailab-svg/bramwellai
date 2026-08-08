@@ -48,7 +48,7 @@ function Index() {
       <SymptomCause />
       <PainChecklist />
       <StatBar />
-      <FourteenDays />
+      <ThirtyDays />
       <BlueOcean />
       <WhatYouLearn />
       <PricingTease />
