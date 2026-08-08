@@ -11,12 +11,12 @@ const PATHWAY = {
 } as const;
 
 type CommunicationType =
-  | "invisible_achiever"
-  | "over_explainer"
-  | "under_seller"
-  | "rambler"
-  | "apologiser"
-  | "next_level_leader";
+  | "signal_gap"
+  | "concision_gap"
+  | "conviction_gap"
+  | "structure_gap"
+  | "authority_gap"
+  | "command_edge";
 
 type PathwayKey = keyof typeof PATHWAY;
 
@@ -131,16 +131,16 @@ function scoreFromTranscript(transcript: string) {
 
   const communication_type: CommunicationType =
     readiness_score >= 80
-      ? "next_level_leader"
+      ? "command_edge"
       : hedgeTotal >= 3 || /\bsorry\b/.test(lower)
-        ? "apologiser"
+        ? "authority_gap"
         : rambleScore >= 55
-          ? "rambler"
+          ? "structure_gap"
           : wordCount > 110 && specificitySignals < 4
-            ? "over_explainer"
+            ? "concision_gap"
             : specificitySignals < 3
-              ? "under_seller"
-              : "invisible_achiever";
+              ? "conviction_gap"
+              : "signal_gap";
 
   const gaps = [
     !ledWithPoint

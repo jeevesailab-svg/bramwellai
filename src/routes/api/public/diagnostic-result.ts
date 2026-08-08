@@ -53,12 +53,12 @@ const PATHWAY = {
 } as const;
 
 type CommunicationType =
-  | "invisible_achiever"
-  | "over_explainer"
-  | "under_seller"
-  | "rambler"
-  | "apologiser"
-  | "next_level_leader";
+  | "signal_gap"
+  | "concision_gap"
+  | "conviction_gap"
+  | "structure_gap"
+  | "authority_gap"
+  | "command_edge";
 
 type PathwayKey = keyof typeof PATHWAY;
 
@@ -71,17 +71,24 @@ function normalizeCommunicationType(value: unknown): CommunicationType | null {
     .replace(/^_+|_+$/g, "");
 
   const aliases: Record<string, CommunicationType> = {
-    invisible_achiever: "invisible_achiever",
-    invisible_achievers: "invisible_achiever",
-    over_explainer: "over_explainer",
-    overexplainer: "over_explainer",
-    under_seller: "under_seller",
-    underseller: "under_seller",
-    rambler: "rambler",
-    apologiser: "apologiser",
-    apologizer: "apologiser",
-    next_level_leader: "next_level_leader",
-    nextlevelleader: "next_level_leader",
+    signal_gap: "signal_gap",
+    concision_gap: "concision_gap",
+    conviction_gap: "conviction_gap",
+    structure_gap: "structure_gap",
+    authority_gap: "authority_gap",
+    command_edge: "command_edge",
+    // Legacy archetype labels map onto the CEO readiness gaps.
+    invisible_achiever: "signal_gap",
+    invisible_achievers: "signal_gap",
+    over_explainer: "concision_gap",
+    overexplainer: "concision_gap",
+    under_seller: "conviction_gap",
+    underseller: "conviction_gap",
+    rambler: "structure_gap",
+    apologiser: "authority_gap",
+    apologizer: "authority_gap",
+    next_level_leader: "command_edge",
+    nextlevelleader: "command_edge",
   };
 
   return aliases[normalized] ?? null;
@@ -103,6 +110,13 @@ const Schema = z.object({
   first_name: z.string().min(1).max(80).optional(),
   email: z.string().email().max(255).optional(),
   communication_type: z.enum([
+    "signal_gap",
+    "concision_gap",
+    "conviction_gap",
+    "structure_gap",
+    "authority_gap",
+    "command_edge",
+    // Accepted for backwards compatibility, normalised before storage.
     "invisible_achiever",
     "over_explainer",
     "under_seller",
