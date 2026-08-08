@@ -7,8 +7,8 @@ import { CtaButton } from "@/components/site/CtaButton";
 import { SiteNav, SiteFooter } from "@/components/site/SiteChrome";
 
 const PRICE_ID = "voice_mastery_30day_once";
-const COHORT_START = "15 August 2026";
 const SHOW_TESTIMONIALS = true;
+
 
 type ProgramSearch = { resume?: string; score?: number };
 
@@ -196,8 +196,9 @@ function ProgramPage() {
         />
         <div className="relative mx-auto max-w-4xl px-6 text-center md:px-10">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] backdrop-blur">
-            Cohort 1 starts {COHORT_START}
+            30 days · 30 scored sessions · One payment
           </span>
+
           <h1 className="mt-7 text-balance text-5xl font-semibold leading-[0.95] tracking-tight md:text-7xl">
             Change your voice.
             <br />
@@ -354,8 +355,9 @@ function ProgramPage() {
               className="absolute -top-3 right-5 inline-flex items-center rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]"
               style={{ background: "var(--gradient-gold)", color: "var(--primary-foreground)" }}
             >
-              Cohort 1, {COHORT_START}
+              Most popular
             </span>
+
             <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">
               30 Day Voice Mastery Program
             </h3>
@@ -395,7 +397,8 @@ function ProgramPage() {
                 Get started
               </CtaButton>
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                Cohort 1 begins {COHORT_START}. Secure checkout.
+                Secure checkout. Begin today.
+
               </p>
             </div>
           </article>
@@ -473,7 +476,8 @@ function ProgramPage() {
             Thirty days from now, they stop talking over you.
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-base opacity-70">
-            Cohort 1 starts {COHORT_START}. A structured 30 day curriculum. One payment of $349.
+            A structured 30 day curriculum. Begin today. One payment of $349.
+
           </p>
           <div className="mt-9 flex justify-center">
             <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false}>
