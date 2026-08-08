@@ -140,9 +140,9 @@ const PATHWAY_OUTCOMES: Record<PathwayKey, string[]> = {
     "You speak with the authority of the level above.",
   ],
   club: [
-    "You are always ready for the next high-stakes moment.",
-    "Every conversation, interview, negotiation, presentation, feels like home ground.",
-    "Bramwell stays with you for every interview, every pitch, every year.",
+    "You know your baseline Readiness Score and the exact gap to CEO level.",
+    "You complete 30 days of structured, scored practice with your Voice AI Coach.",
+    "You retake the diagnostic on Day 30 and prove the change with a new number.",
   ],
 };
 
