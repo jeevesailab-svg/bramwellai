@@ -21,22 +21,23 @@ export const Route = createFileRoute("/program")({
       : {}),
   }),
   head: () => ({
-    meta: [
-      { title: "30 Day Voice Mastery Program | Bramwell your Voice AI Mentor" },
-      {
-        name: "description",
-        content:
-          "Bramwell your Voice AI Mentor in your pocket. Change your voice, change your life in 30 days. Daily practice, every session scored, your progress proven. $349 USD.",
-      },
-      { property: "og:title", content: "30 Day Voice Mastery Program | Bramwell your Voice AI Mentor" },
-      {
-        property: "og:description",
-        content:
-          "Your Voice AI Mentor trains you daily, scores every session, and proves your progress. 30 days. $349 USD.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+      meta: [
+        { title: "Speak like a CEO | 30 Day Voice Mastery Program | Bramwell AI" },
+        {
+          name: "description",
+          content:
+            "Bramwell your Voice AI Mentor. Speak like a CEO in 30 days. Daily practice, every session scored, your progress proven. $349 USD.",
+        },
+        { property: "og:title", content: "Speak like a CEO | 30 Day Voice Mastery Program | Bramwell AI" },
+        {
+          property: "og:description",
+          content:
+            "Your Voice AI Mentor trains you daily, scores every session, and proves your progress. 30 days. $349 USD.",
+        },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+
   }),
 });
 
