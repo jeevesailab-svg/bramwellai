@@ -14,8 +14,16 @@ export const Route = createFileRoute("/diagnostic/result")({
       {
         name: "description",
         content:
-          "Your communication type, three biggest gaps, and Readiness Score, and the Bramwell pathway built for you.",
+          "Your Communication Readiness Score, distance from CEO level, and the three gaps to fix. From Bramwell AI.",
       },
+      { property: "og:title", content: "Your Bramwell Readiness Score" },
+      {
+        property: "og:description",
+        content:
+          "Your Communication Readiness Score, distance from CEO level, and the three gaps to fix.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
 });
