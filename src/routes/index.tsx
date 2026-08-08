@@ -71,7 +71,7 @@ function Nav() {
       </a>
       <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
         <a href="#learn" className="hover:text-foreground">What you learn</a>
-        <a href="#14days" className="hover:text-foreground">In 14 days</a>
+        <a href="#30days" className="hover:text-foreground">In 30 days</a>
         <a href="/program" className="hover:text-foreground">The Program</a>
         <a href="/founders" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
           For Sales Teams
@@ -99,7 +99,7 @@ function Nav() {
                 <a href="#learn" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">What you learn</a>
               </SheetClose>
               <SheetClose asChild>
-                <a href="#14days" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">In 14 days</a>
+                <a href="#30days" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">In 30 days</a>
               </SheetClose>
               <SheetClose asChild>
                 <a href="/program" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">The Program</a>
