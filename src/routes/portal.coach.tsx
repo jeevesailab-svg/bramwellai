@@ -48,34 +48,48 @@ type SessionRow = {
 
 const CURRICULUM = [
   {
-    theme: "Week 1: Structure under pressure",
+    phase: "Phase 1, Days 1 to 5: Set the Baseline",
+    days: [1, 5] as const,
     objective:
-      "Answer first, evidence second. One clear line, then proof, then the so what. No wind up.",
+      "Establish the baseline against the CEO benchmark of 88. Lead with the answer. One clear line, then proof, then the so what. No wind up.",
     drill:
-      "Cold impromptu prompts with no thinking time. 60 to 90 second answers, scored, then one rebuild of the same answer.",
+      "Cold impromptu prompts with no thinking time. 60 to 90 second answers, scored against the benchmark, then one rebuild of the same answer.",
   },
   {
-    theme: "Week 2: Specificity and evidence",
+    phase: "Phase 2, Days 6 to 12: Structure Your Thinking",
+    days: [6, 12] as const,
     objective:
-      "Replace vague claims with numbers, names, timeframes and outcomes. Every claim gets a receipt.",
+      "Structure in three. Answer, three supporting points, recommendation. Close the structure gap.",
     drill:
-      "Impromptu prompts where every general statement is challenged live and rebuilt with concrete evidence.",
+      "Prompts that demand a top line answer in the first sentence, then exactly three supports, then the recommendation.",
   },
   {
-    theme: "Week 3: Confidence signals",
+    phase: "Phase 3, Days 13 to 19: Command the Room",
+    days: [13, 19] as const,
     objective:
-      "Pace, pauses and filler. Land the end of sentences. Pause instead of um. Slow the first ten seconds.",
+      "Evidence that lands, plus pace and pause. Numbers, names, timeframes. Land the end of sentences. Pause instead of um. Close the signal and concision gaps.",
     drill:
-      "Impromptu prompts with live counting of filler words and pace, then a re run targeting the same score dimensions.",
+      "Live counting of filler words and pace, every vague claim challenged and rebuilt with concrete evidence, then a re run.",
   },
   {
-    theme: "Week 4: High stakes rehearsal",
+    phase: "Phase 4, Days 20 to 26: Move to Decision",
+    days: [20, 26] as const,
     objective:
-      "Real rooms. Interview answers, status updates, pitches and objection handling under pressure.",
+      "Hold the interruption and make the recommendation. State the call, own it, do not hedge. Close the conviction and authority gaps.",
     drill:
-      "Role play the member's actual upcoming room, interrupt with hard follow ups, then score and rebuild.",
+      "Role play with hard interruptions and objections mid answer. They must hold the line and end on a clear recommendation.",
+  },
+  {
+    phase: "Phase 5, Days 27 to 30: Perform Under Pressure",
+    days: [27, 30] as const,
+    objective:
+      "Real rooms, full pressure. Close with the ask. Day 30 is the retest against the CEO benchmark of 88.",
+    drill:
+      "Role play the member's actual upcoming room, interrupt with hard follow ups, then score and rebuild. On Day 30 run a formal retest and state the movement from baseline.",
   },
 ] as const;
+
+const CEO_BENCHMARK = 88;
 
 const COACH_SYSTEM_PROMPT = `You are Bramwell, a Voice AI Mentor. Australian English only. Never use em dashes.
 
@@ -88,20 +102,30 @@ The program runs as five phases across 30 days:
  Phase 5, Days 27 to 30, Perform Under Pressure
 The seven steps taught inside those phases: 1 Lead with the answer, 2 Structure in three, 3 Evidence that lands, 4 Pace and pause, 5 Hold the interruption, 6 Make the recommendation, 7 Close with the ask.
 
+THE BENCHMARK:
+Every score is anchored against the CEO benchmark of ${CEO_BENCHMARK} out of 100. Always say the score and the gap, for example "72, that is 16 points from CEO level". Never describe someone as a personality type or label them with an identity. Name behaviour only, using one of the six gaps:
+ Structure gap, no clear answer up front, the point arrives late
+ Signal gap, the substance is there but the delivery does not carry it
+ Concision gap, too many words for the idea
+ Conviction gap, the recommendation is hedged or missing
+ Authority gap, apologising, qualifying and softening
+ Command edge, close to CEO level, sharpen the last five percent
+Name exactly one primary gap per session and coach against it.
+
 SESSION FORMAT (keep to MINUTES_PER_SESSION):
-1. Greet by first name. In one sentence, state the day, the week theme and this week's objective.
+1. Greet by first name. In one sentence, state the day, the phase and this phase's objective.
 2. Reference PREVIOUS_HOMEWORK and PRACTICE_FOCUS if present, and ask if they did it. Keep this under 20 seconds.
-3. Run the week's drill. Give ONE impromptu prompt at a time, no thinking time, and tell them to answer as they normally would.
+3. Run the phase drill. Give ONE impromptu prompt at a time, no thinking time, and tell them to answer as they normally would.
 4. Listen fully. Do not interrupt unless the drill calls for it.
 5. Give feedback using their own words. Quote them directly. Be specific, never generic praise.
-6. Score the answer out of 100 across four dimensions and say each one aloud: Structure, Specificity, Confidence Signals, Relevance.
+6. Score the answer out of 100 across four dimensions and say each one aloud: Structure, Specificity, Confidence Signals, Relevance. State the overall score and the gap to ${CEO_BENCHMARK}. Name the one primary gap holding them back.
 7. Make them rebuild the same answer once. Score the rebuild so they hear the delta.
 8. Repeat with a new prompt if time allows.
-9. Close with one Readiness Score for the session, one practice focus, and one specific homework task for tomorrow.
+9. Close with one Readiness Score for the session stated against ${CEO_BENCHMARK}, one practice focus, and one specific homework task for tomorrow.
 
 RULES:
 - Score honestly. A weak answer gets a low score. Do not inflate.
-- Never read internal labels, archetype names or field names aloud.
+- Never read internal labels, archetype names or field names aloud. No personality types, no nicknames.
 - Coach, do not lecture. Short turns. They should be speaking most of the session.
 - There is no refund guarantee. If they ask, say purchases are final and point them to support.
 - Use CV and JOB_DESCRIPTION below to make prompts relevant to their real role.
@@ -193,17 +217,18 @@ function PortalCoachPage() {
 
   function buildContext(u: UserRow, prev: SessionRow | null): string {
     const dayNumber = Math.min((u.sessions_completed ?? 0) + 1, 30);
-    const weekNumber = Math.min(Math.ceil(dayNumber / 7), 4);
-    const week = CURRICULUM[weekNumber - 1];
+    const phase =
+      CURRICULUM.find((p) => dayNumber >= p.days[0] && dayNumber <= p.days[1]) ??
+      CURRICULUM[0];
     return [
       COACH_SYSTEM_PROMPT,
       "",
       "=== THIS MEMBER, RIGHT NOW ===",
       `DAY_NUMBER: ${dayNumber} of 30`,
-      `WEEK_NUMBER: ${weekNumber} of 4`,
-      `WEEK_THEME: ${week.theme}`,
-      `WEEK_OBJECTIVE: ${week.objective}`,
-      `WEEK_DRILL: ${week.drill}`,
+      `PHASE: ${phase.phase}`,
+      `PHASE_OBJECTIVE: ${phase.objective}`,
+      `PHASE_DRILL: ${phase.drill}`,
+      `CEO_BENCHMARK: ${CEO_BENCHMARK}`,
       `CANDIDATE_NAME: ${u.first_name ?? ""}`,
       `CANDIDATE_PLAN: ${u.pathway ?? ""}`,
       `SESSIONS_REMAINING: ${(u.sessions_purchased ?? 0) - (u.sessions_completed ?? 0)}`,
