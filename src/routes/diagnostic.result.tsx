@@ -532,16 +532,6 @@ function ResultBodyInner({ result }: { result: Result }) {
             boxShadow: "var(--shadow-elegant)",
           }}
         >
-          <span
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-foreground/80"
-          >
-            <span
-              aria-hidden
-              className="inline-block h-1.5 w-1.5 animate-pulse rounded-full"
-              style={{ background: "var(--primary)" }}
-            />
-            Cohort 1, 15 August 2026
-          </span>
           <h2 className="mt-5 text-balance text-3xl font-semibold leading-[1.05] tracking-tight md:text-4xl">
             Move this score in 30 days for{" "}
             <span
