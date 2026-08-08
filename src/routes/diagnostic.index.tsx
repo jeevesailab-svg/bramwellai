@@ -155,7 +155,7 @@ function DiagnosticRoute() {
 
 function DiagnosticPage() {
   const [phase, setPhase] = useState<"intro" | "connecting" | "live" | "wrapping" | "error">(
-    "connecting",
+    "intro",
   );
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [rateLimited, setRateLimited] = useState(false);
