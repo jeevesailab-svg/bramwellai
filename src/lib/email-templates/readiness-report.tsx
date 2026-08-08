@@ -11,6 +11,7 @@ import {
   Section,
   Text,
 } from '@react-email/components'
+import { getCeoGap, getScoreBand } from '@/lib/scoreBand'
 import type { TemplateEntry } from './registry'
 
 interface Props {
@@ -18,6 +19,7 @@ interface Props {
   score?: number
   communicationType?: string
   gaps?: Array<string>
+  sessionId?: string
 }
 
 const main = { backgroundColor: '#ffffff', fontFamily: 'Helvetica, Arial, sans-serif' }
@@ -52,11 +54,16 @@ const cta = {
 }
 const small = { fontSize: '12px', color: '#6b7280', lineHeight: '1.6' }
 
-const ReadinessReport = ({ firstName, score, communicationType, gaps }: Props) => {
+const ReadinessReport = ({ firstName, score, communicationType, gaps, sessionId }: Props) => {
   const name = firstName?.trim() || 'there'
   const value = typeof score === 'number' ? score : 0
   const type = (communicationType || '').replace(/_/g, ' ').trim()
   const list = Array.isArray(gaps) ? gaps.filter(Boolean).slice(0, 5) : []
+  const ceo = getCeoGap(value)
+  const band = getScoreBand(value)
+  const resultUrl = sessionId
+    ? `https://www.bramwellai.com/diagnostic/result?id=${sessionId}`
+    : 'https://www.bramwellai.com/program'
 
   return (
     <Html lang="en" dir="ltr">
@@ -74,6 +81,15 @@ const ReadinessReport = ({ firstName, score, communicationType, gaps }: Props) =
             </Text>
             <Text style={{ ...eyebrow, margin: '12px 0 0' }}>Communication readiness</Text>
           </Section>
+
+          <Text style={body}>
+            <strong>{ceo.atOrAbove ? 'At CEO benchmark' : `${ceo.gap} points from CEO level`}</strong>.{' '}
+            {ceo.verdict}
+          </Text>
+
+          <Text style={body}>
+            <strong>{band.label}.</strong> {band.meaning} Next: {band.next}
+          </Text>
 
           {type ? (
             <>
@@ -103,16 +119,23 @@ const ReadinessReport = ({ firstName, score, communicationType, gaps }: Props) =
             Your next step
           </Heading>
           <Text style={body}>
-            The 30 Day Voice Mastery Program is a structured four week curriculum with Bramwell,
-            your Voice AI Mentor: structure under pressure, specificity and evidence, confidence
-            signals, then high stakes rehearsal. Every session is impromptu and scored, with weekly
-            check ins and a Day 30 retest that proves the change. One payment of $349 USD.
+            The 30 Day Voice Mastery Program is a structured four-week curriculum with Bramwell,
+            your Voice AI Coach: structure under pressure, specificity and evidence, confidence
+            signals, then high-stakes rehearsal. Every session is impromptu and scored, with weekly
+            check-ins and a Day 30 retest that proves the change. One payment of $349 USD.
           </Text>
-          <Button href="https://www.bramwellai.com/program" style={cta}>
+          <Button href="https://www.bramwellai.com/program?resume=mastery" style={cta}>
             Get started, $349
           </Button>
 
           <Text style={{ ...small, marginTop: '28px' }}>
+            View your full result at any time:{' '}
+            <a href={resultUrl} style={{ color: '#0b0b0f', textDecoration: 'underline' }}>
+              {resultUrl}
+            </a>
+          </Text>
+
+          <Text style={{ ...small, marginTop: '16px' }}>
             You are receiving this because you completed a Bramwell voice test.
           </Text>
         </Container>
@@ -129,11 +152,12 @@ export const template = {
   previewData: {
     firstName: 'Alex',
     score: 62,
-    communicationType: 'the fast talker',
+    communicationType: 'signal gap',
     gaps: [
       'You open with context instead of the answer',
       'Filler words spike when you are challenged',
       'You trail off instead of landing the close',
     ],
+    sessionId: '00000000-0000-0000-0000-000000000000',
   },
 } satisfies TemplateEntry
