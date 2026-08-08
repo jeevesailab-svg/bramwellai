@@ -73,27 +73,41 @@ const STRIPE: Record<PathwayKey, string> = {
 };
 
 const TYPE_DESCRIPTIONS: Record<string, string> = {
-  rambler:
+  structure_gap:
     "Your ideas are strong. The problem is structure. You'll learn the communication frameworks that senior professionals use to organise their thinking on the spot, so your point arrives clearly, and the room remembers it.",
-  under_seller:
+  conviction_gap:
     "You've done the work. The gap is between what you've delivered and how you're describing it. You'll learn the system that translates your results into precise, confident language, so what you say in the room reflects what you've actually achieved.",
-  over_explainer:
+  concision_gap:
     "You have command of the detail. The challenge is knowing when to use it. You give the room the full picture when they need the headline. We'll train you to lead with your conclusion, hold the detail in reserve, and become the person leadership turns to when they need clarity under pressure.",
-  apologiser:
+  authority_gap:
     "You have the credentials, the experience, and the track record. What needs work is how that comes across under pressure. We'll close the gap between your capability and your delivery, so the room hears your authority from the first sentence.",
-  invisible_achiever:
+  signal_gap:
     "You're operating at a high level. The problem is visibility. You've been focused on the work while others have been focused on being seen doing it. We'll make sure the people who matter know exactly what you're contributing, because impact that isn't communicated doesn't advance a career.",
-  next_level_leader:
+  command_edge:
     "You already present well and hold the room. What we're refining now is the difference between competent and commanding, the precision, the timing, the presence that makes people stop and listen. That's the final edge.",
 };
 
 const TYPE_LABELS: Record<string, string> = {
-  rambler: "Storyteller",
-  under_seller: "Understater",
-  over_explainer: "Deep-Diver",
-  apologiser: "Permission-Seeker",
-  invisible_achiever: "Hidden Operator",
-  next_level_leader: "Unheard Leader",
+  structure_gap: "Structure gap",
+  conviction_gap: "Conviction gap",
+  concision_gap: "Concision gap",
+  authority_gap: "Authority gap",
+  signal_gap: "Signal gap",
+  command_edge: "Command edge",
+};
+
+const TYPE_ALIASES: Record<string, string> = {
+  rambler: "structure_gap",
+  under_seller: "conviction_gap",
+  underseller: "conviction_gap",
+  over_explainer: "concision_gap",
+  overexplainer: "concision_gap",
+  apologiser: "authority_gap",
+  apologizer: "authority_gap",
+  invisible_achiever: "signal_gap",
+  invisible_achievers: "signal_gap",
+  next_level_leader: "command_edge",
+  nextlevelleader: "command_edge",
 };
 
 const PATHWAY_OUTCOMES: Record<PathwayKey, string[]> = {
@@ -148,22 +162,23 @@ function describeType(type: string): string {
 }
 
 function normalizeTypeKey(type: string): string {
-  return type
+  const key = type
     .toLowerCase()
     .replace(/^the\s+/i, "")
     .trim()
     .replace(/[\s-]+/g, "_");
+  return TYPE_ALIASES[key] ?? key;
 }
 
 function formatType(type: string): string {
   const cleaned = normalizeTypeKey(type).replace(/_/g, " ");
   const key = normalizeTypeKey(type);
-  if (TYPE_LABELS[key]) return `The ${TYPE_LABELS[key]}`;
+  if (TYPE_LABELS[key]) return TYPE_LABELS[key];
   const titled = cleaned
     .split(" ")
     .map((w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w))
     .join(" ");
-  return `The ${titled}`;
+  return titled;
 }
 
 function DiagnosticResultPage() {
