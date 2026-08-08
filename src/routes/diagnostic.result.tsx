@@ -309,7 +309,7 @@ function DiagnosticResultPage() {
                       color: "var(--primary-foreground)",
                     }}
                   >
-                    Try the diagnostic again
+                    Take the free test again
                   </Link>
                 </>
               ) : (
@@ -319,7 +319,7 @@ function DiagnosticResultPage() {
                     to="/diagnostic" search={{}}
                     className="mt-6 inline-flex h-11 items-center justify-center rounded-full border border-border bg-foreground/5 px-6 text-sm font-medium transition hover:bg-foreground/10"
                   >
-                    Take the diagnostic
+                    Take the free test
                   </Link>
                 </>
               )}
