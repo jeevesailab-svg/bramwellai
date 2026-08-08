@@ -697,14 +697,14 @@ function DiagnosticPage() {
     }
   }, [conversation]);
 
-  // Always auto-start immediately - no intro page. The CTA opens ElevenLabs directly.
-  useSearch({ from: "/diagnostic/" });
+  const search = useSearch({ from: "/diagnostic/" });
   const autoStartedRef = useRef(false);
   useEffect(() => {
     if (autoStartedRef.current) return;
+    if (search.autostart !== "1") return;
     autoStartedRef.current = true;
     void startDiagnostic();
-  }, [startDiagnostic]);
+  }, [search.autostart, startDiagnostic]);
 
   const endEarly = useCallback(async () => {
     intentionallyEndingRef.current = true;
