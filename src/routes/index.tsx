@@ -484,9 +484,10 @@ function PricingTease() {
             >
               {p.featured && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white" style={{ background: GOLD }}>
-                  Cohort 1, 15 August 2026
+                  Most popular
                 </span>
               )}
+
               <p className="text-sm font-semibold uppercase tracking-[0.2em] bg-clip-text text-transparent" style={{ backgroundImage: p.accent }}>{p.name}</p>
               <div className="mt-4 flex items-baseline gap-1">
                 <span className="text-5xl font-semibold tracking-tight">{p.price}</span>
