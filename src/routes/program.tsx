@@ -201,10 +201,11 @@ function ProgramPage() {
           </span>
 
           <h1 className="mt-7 text-balance text-5xl font-semibold leading-[0.95] tracking-tight md:text-7xl">
-            Change your voice.
+            Speak like a CEO.
             <br />
-            Change your life.
+            In 30 days.
           </h1>
+
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
             A structured 30 day program with Bramwell, your Voice AI Mentor. Five phases, one
             scored session a day. On Day 30 the number proves it.
