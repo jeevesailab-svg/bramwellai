@@ -155,7 +155,7 @@ function DiagnosticRoute() {
 
 function DiagnosticPage() {
   const [phase, setPhase] = useState<"intro" | "connecting" | "live" | "wrapping" | "error">(
-    "connecting",
+    "intro",
   );
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [rateLimited, setRateLimited] = useState(false);
@@ -697,14 +697,14 @@ function DiagnosticPage() {
     }
   }, [conversation]);
 
-  // Always auto-start immediately - no intro page. The CTA opens ElevenLabs directly.
-  useSearch({ from: "/diagnostic/" });
+  const search = useSearch({ from: "/diagnostic/" });
   const autoStartedRef = useRef(false);
   useEffect(() => {
     if (autoStartedRef.current) return;
+    if (search.autostart !== "1") return;
     autoStartedRef.current = true;
     void startDiagnostic();
-  }, [startDiagnostic]);
+  }, [search.autostart, startDiagnostic]);
 
   const endEarly = useCallback(async () => {
     intentionallyEndingRef.current = true;
@@ -759,7 +759,7 @@ function DiagnosticPage() {
                     className="inline-block h-1.5 w-1.5 animate-pulse rounded-full"
                     style={{ background: "var(--primary)" }}
                   />
-                  Free · Live · No card required
+                  Free · 5 minutes · No card
                 </span>
               </div>
               <h1
@@ -770,67 +770,21 @@ function DiagnosticPage() {
                   fontWeight: 800,
                 }}
               >
-                Ready to unlock your voice breakthrough?
+                You're losing rooms you should be winning.
               </h1>
               <p className="mx-auto mt-6 max-w-[620px] text-[18px] leading-relaxed text-muted-foreground">
-                Do you ever feel stuck, frustrated or invisible when it comes to how you sound? The
-                number one thing holding most people back is not their expertise or how hard they
-                prepare. It is the hidden patterns in their voice quietly sabotaging their authority.
+                Find out why in five minutes. Bramwell scores your voice against the same four
+                dimensions senior executives are measured on: Structure, Specificity, Confidence
+                Signals, Relevance.
               </p>
               <div className="mt-8 flex justify-center">
                 <CtaButton as="button" onClick={startDiagnostic} size="lg" showArrow={false}>
-                  Take the test ↓
+                  Take the free test ↓
                 </CtaButton>
               </div>
               <p className="mt-4 text-xs text-muted-foreground">
-                Free · Live · No card · 5 minutes with your Voice AI Mentor
+                You will receive a Readiness Score and a short report by email.
               </p>
-
-              <div className="mx-auto mt-10 max-w-xl rounded-2xl border border-border bg-foreground/[0.03] p-6 text-left backdrop-blur">
-                <p className="text-base font-semibold text-white">
-                  Your voice has a score. Most people have never measured it.
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  30 days to a new you. In 5 minutes with Bramwell your Voice AI Mentor you will know
-                  exactly where you stand. The number might sting. Most people feel it. That is the point.
-                </p>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  This is the mirror moment. You speak with your Voice AI Mentor. It listens. It scores.
-                  It is not comfortable. It is necessary. The score is the proof there is a gap, and that
-                  the gap is closeable.
-                </p>
-              </div>
-
-              <ul className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-3 text-left sm:grid-cols-2">
-                {[
-                  { r: "0 to 39", t: "Your voice is costing you.", b: "Every meeting you shrink in, every opportunity you pass on. Now you know, and knowing is the first step." },
-                  { r: "40 to 59", t: "You are in the majority.", b: "Most professionals have never measured their voice. You just did. The gap is closeable. In 30 days this number moves." },
-                  { r: "60 to 79", t: "You sound competent.", b: "Competent is not the same as undeniable. You are close. Let us push you past the tipping point." },
-                  { r: "80 to 100", t: "You sound like the person they ask to present.", b: "Do not stop now. You are the benchmark. Let us make you the coach." },
-                ].map((item) => (
-                  <li key={item.r} className="rounded-xl border border-border bg-foreground/[0.03] px-5 py-4 backdrop-blur">
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--primary)" }}>{item.r}</span>
-                    <p className="mt-2 text-sm font-semibold text-white">{item.t}</p>
-                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{item.b}</p>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mx-auto mt-10 max-w-xl border-t border-border/60 pt-6">
-                <p
-                  className="text-[10px] font-semibold uppercase"
-                  style={{ letterSpacing: "0.24em", color: "var(--primary)" }}
-                >
-                  You are not alone
-                </p>
-                <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
-                  <span className="font-semibold text-white">21.2% of people</span> have a lifetime
-                  fear of public speaking. Most never measure it, they just feel it. Source: NCS-R,
-                  National Comorbidity Survey Replication. Bramwell your Voice AI Mentor does not just
-                  help you measure it, it helps you change it. Daily practice, real time scoring, and in
-                  30 days a score that proves it.
-                </p>
-              </div>
             </>
           )}
 

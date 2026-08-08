@@ -48,7 +48,7 @@ function Index() {
       <SymptomCause />
       <PainChecklist />
       <StatBar />
-      <FourteenDays />
+      <ThirtyDays />
       <BlueOcean />
       <WhatYouLearn />
       <PricingTease />
@@ -71,7 +71,7 @@ function Nav() {
       </a>
       <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
         <a href="#learn" className="hover:text-foreground">What you learn</a>
-        <a href="#14days" className="hover:text-foreground">In 14 days</a>
+        <a href="#30days" className="hover:text-foreground">In 30 days</a>
         <a href="/program" className="hover:text-foreground">The Program</a>
         <a href="/founders" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
           For Sales Teams
@@ -99,7 +99,7 @@ function Nav() {
                 <a href="#learn" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">What you learn</a>
               </SheetClose>
               <SheetClose asChild>
-                <a href="#14days" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">In 14 days</a>
+                <a href="#30days" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">In 30 days</a>
               </SheetClose>
               <SheetClose asChild>
                 <a href="/program" className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">The Program</a>
@@ -354,20 +354,20 @@ function WhatYouLearn() {
   );
 }
 
-/* ───────────── 14 days ───────────── */
-function FourteenDays() {
+/* ───────────── 30 days ───────────── */
+function ThirtyDays() {
   const days: { d: string; t: string; c: string; icon: typeof Mic; accent: string }[] = [
     { d: "Day 1", t: "Assess", c: "Bramwell hears you. You hear yourself. Baseline set.", icon: Mic, accent: ELECTRIC },
-    { d: "Day 3", t: "Structure", c: "The four-part answer becomes muscle memory.", icon: Target, accent: MINT },
-    { d: "Day 7", t: "Tone", c: "Pace, warmth, pitch, all dialled in.", icon: Wand2, accent: SUNRISE },
-    { d: "Day 14", t: "Own the room", c: "You&apos;re persuasive, commanding, unmistakable.", icon: Trophy, accent: GOLD },
+    { d: "Day 7", t: "Structure", c: "The four-part answer becomes muscle memory.", icon: Target, accent: MINT },
+    { d: "Day 14", t: "Tone", c: "Pace, warmth, pitch, all dialled in.", icon: Wand2, accent: SUNRISE },
+    { d: "Day 30", t: "Retest", c: "Your Readiness Score proves the shift.", icon: Trophy, accent: GOLD },
   ];
   return (
-    <section id="14days" className="border-y border-border bg-white py-24 md:py-32">
+    <section id="30days" className="border-y border-border bg-white py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em]" style={{ color: "var(--color-coral)" }}>
-            <Rocket className="h-3.5 w-3.5" /> 14 days from now
+            <Rocket className="h-3.5 w-3.5" /> 30 days from now
           </div>
           <h2 className="mt-6 text-balance text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
             You&apos;ll walk into your next room{" "}
@@ -377,6 +377,7 @@ function FourteenDays() {
             Not motivational. Measurable. A structured 30 day curriculum of impromptu speaking drills with Bramwell, and you&apos;ll hear the difference by day seven.
           </p>
         </div>
+
 
         <ol className="relative mt-16 grid gap-6 md:grid-cols-4">
           <div aria-hidden className="pointer-events-none absolute left-0 right-0 top-6 hidden h-px md:block" style={{ background: "var(--gradient-rainbow)", opacity: 0.5 }} />
@@ -484,9 +485,10 @@ function PricingTease() {
             >
               {p.featured && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white" style={{ background: GOLD }}>
-                  Cohort 1, 15 August 2026
+                  Most popular
                 </span>
               )}
+
               <p className="text-sm font-semibold uppercase tracking-[0.2em] bg-clip-text text-transparent" style={{ backgroundImage: p.accent }}>{p.name}</p>
               <div className="mt-4 flex items-baseline gap-1">
                 <span className="text-5xl font-semibold tracking-tight">{p.price}</span>

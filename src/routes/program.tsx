@@ -7,8 +7,8 @@ import { CtaButton } from "@/components/site/CtaButton";
 import { SiteNav, SiteFooter } from "@/components/site/SiteChrome";
 
 const PRICE_ID = "voice_mastery_30day_once";
-const COHORT_START = "15 August 2026";
 const SHOW_TESTIMONIALS = true;
+
 
 type ProgramSearch = { resume?: string; score?: number };
 
@@ -21,22 +21,23 @@ export const Route = createFileRoute("/program")({
       : {}),
   }),
   head: () => ({
-    meta: [
-      { title: "30 Day Voice Mastery Program | Bramwell your Voice AI Mentor" },
-      {
-        name: "description",
-        content:
-          "Bramwell your Voice AI Mentor in your pocket. Change your voice, change your life in 30 days. Daily practice, every session scored, your progress proven. $349 USD.",
-      },
-      { property: "og:title", content: "30 Day Voice Mastery Program | Bramwell your Voice AI Mentor" },
-      {
-        property: "og:description",
-        content:
-          "Your Voice AI Mentor trains you daily, scores every session, and proves your progress. 30 days. $349 USD.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+      meta: [
+        { title: "Speak like a CEO | 30 Day Voice Mastery Program | Bramwell AI" },
+        {
+          name: "description",
+          content:
+            "Bramwell your Voice AI Mentor. Speak like a CEO in 30 days. Daily practice, every session scored, your progress proven. $349 USD.",
+        },
+        { property: "og:title", content: "Speak like a CEO | 30 Day Voice Mastery Program | Bramwell AI" },
+        {
+          property: "og:description",
+          content:
+            "Your Voice AI Mentor trains you daily, scores every session, and proves your progress. 30 days. $349 USD.",
+        },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+
   }),
 });
 
@@ -118,7 +119,7 @@ const FAQS = [
   },
   {
     q: "I manage a sales team, how can this help me?",
-    a: "The Elite Sales Team Accelerator is our done-for-you implementation programme. We document your sales methodology and build a private AI coaching platform that trains every salesperson to the same standard, with a manager dashboard and performance reporting.",
+    a: "The Elite Sales Team Voice AI Coach 30 Day Program is our done-for-you implementation. We document your sales methodology and build a private AI coaching platform that trains every salesperson to the same standard, with a manager dashboard and performance reporting.",
   },
   {
     q: "What makes this different from other voice coaching?",
@@ -196,13 +197,15 @@ function ProgramPage() {
         />
         <div className="relative mx-auto max-w-4xl px-6 text-center md:px-10">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] backdrop-blur">
-            Cohort 1 starts {COHORT_START}
+            30 days · 30 scored sessions · One payment
           </span>
+
           <h1 className="mt-7 text-balance text-5xl font-semibold leading-[0.95] tracking-tight md:text-7xl">
-            Change your voice.
+            Speak like a CEO.
             <br />
-            Change your life.
+            In 30 days.
           </h1>
+
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
             A structured 30 day program with Bramwell, your Voice AI Mentor. Five phases, one
             scored session a day. On Day 30 the number proves it.
@@ -354,8 +357,9 @@ function ProgramPage() {
               className="absolute -top-3 right-5 inline-flex items-center rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]"
               style={{ background: "var(--gradient-gold)", color: "var(--primary-foreground)" }}
             >
-              Cohort 1, {COHORT_START}
+              Most popular
             </span>
+
             <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">
               30 Day Voice Mastery Program
             </h3>
@@ -395,7 +399,8 @@ function ProgramPage() {
                 Get started
               </CtaButton>
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                Cohort 1 begins {COHORT_START}. Secure checkout.
+                Secure checkout. Begin today.
+
               </p>
             </div>
           </article>
@@ -459,7 +464,7 @@ function ProgramPage() {
           <p className="mt-10 text-sm text-muted-foreground">
             Leading a team?{" "}
             <Link to="/founders" className="font-medium text-foreground underline-offset-4 hover:underline">
-              See the Elite Sales Team Accelerator
+              See the Elite Sales Team Voice AI Coach 30 Day Program
             </Link>
             .
           </p>
@@ -473,7 +478,8 @@ function ProgramPage() {
             Thirty days from now, they stop talking over you.
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-base opacity-70">
-            Cohort 1 starts {COHORT_START}. A structured 30 day curriculum. One payment of $349.
+            A structured 30 day curriculum. Begin today. One payment of $349.
+
           </p>
           <div className="mt-9 flex justify-center">
             <CtaButton as="button" onClick={startCheckout} size="lg" showIcon={false}>

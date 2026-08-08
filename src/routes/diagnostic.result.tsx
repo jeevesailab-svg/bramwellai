@@ -14,8 +14,16 @@ export const Route = createFileRoute("/diagnostic/result")({
       {
         name: "description",
         content:
-          "Your communication type, three biggest gaps, and Readiness Score, and the Bramwell pathway built for you.",
+          "Your Communication Readiness Score, distance from CEO level, and the three gaps to fix. From Bramwell AI.",
       },
+      { property: "og:title", content: "Your Bramwell Readiness Score" },
+      {
+        property: "og:description",
+        content:
+          "Your Communication Readiness Score, distance from CEO level, and the three gaps to fix.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
 });
@@ -132,9 +140,9 @@ const PATHWAY_OUTCOMES: Record<PathwayKey, string[]> = {
     "You speak with the authority of the level above.",
   ],
   club: [
-    "You are always ready for the next high-stakes moment.",
-    "Every conversation, interview, negotiation, presentation, feels like home ground.",
-    "Bramwell stays with you for every interview, every pitch, every year.",
+    "You know your baseline Readiness Score and the exact gap to CEO level.",
+    "You complete 30 days of structured, scored practice with your Voice AI Coach.",
+    "You retake the diagnostic on Day 30 and prove the change with a new number.",
   ],
 };
 
@@ -524,16 +532,6 @@ function ResultBodyInner({ result }: { result: Result }) {
             boxShadow: "var(--shadow-elegant)",
           }}
         >
-          <span
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-foreground/80"
-          >
-            <span
-              aria-hidden
-              className="inline-block h-1.5 w-1.5 animate-pulse rounded-full"
-              style={{ background: "var(--primary)" }}
-            />
-            Cohort 1, 15 August 2026
-          </span>
           <h2 className="mt-5 text-balance text-3xl font-semibold leading-[1.05] tracking-tight md:text-4xl">
             Move this score in 30 days for{" "}
             <span

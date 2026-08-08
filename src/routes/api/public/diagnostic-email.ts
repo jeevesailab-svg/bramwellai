@@ -57,6 +57,7 @@ export const Route = createFileRoute("/api/public/diagnostic-email")({
                 gaps: Array.isArray(row.gaps)
                   ? (row.gaps as unknown[]).map(String)
                   : [],
+                sessionId: d.sessionId,
               },
             });
             if (!result.ok) {
