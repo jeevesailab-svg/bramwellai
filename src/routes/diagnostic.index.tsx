@@ -701,7 +701,10 @@ function DiagnosticPage() {
   const autoStartedRef = useRef(false);
   useEffect(() => {
     if (autoStartedRef.current) return;
-    if (search.autostart !== "1") return;
+    const fromUrl =
+      typeof window !== "undefined" &&
+      new URLSearchParams(window.location.search).get("autostart") === "1";
+    if (search.autostart !== "1" && !fromUrl) return;
     autoStartedRef.current = true;
     void startDiagnostic();
   }, [search.autostart, startDiagnostic]);
