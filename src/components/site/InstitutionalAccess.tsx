@@ -193,7 +193,7 @@ export function InstitutionalAccess() {
 
         <div className="mt-8">
           <a
-            href="/diagnostic?autostart=1"
+            href="/diagnostic"
             className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
           >
             Or try the free diagnostic yourself

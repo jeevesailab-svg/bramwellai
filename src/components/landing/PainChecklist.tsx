@@ -70,7 +70,7 @@ export function PainChecklist() {
         </div>
 
         <div className="mt-12 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-          <CtaButton href="/diagnostic?autostart=1" size="md">
+          <CtaButton href="/diagnostic" size="md">
             Take the test
           </CtaButton>
           <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80">

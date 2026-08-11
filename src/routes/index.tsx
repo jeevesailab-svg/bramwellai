@@ -35,7 +35,7 @@ const HERO = "var(--gradient-hero)";
 const MINT = "var(--gradient-mint)";
 const SUNRISE = "var(--gradient-sunrise)";
 
-function PrimaryCTA({ label = "Take the test", href = "/diagnostic?autostart=1", size = "md" as "md" | "lg" | "sm" }) {
+function PrimaryCTA({ label = "Take the test", href = "/diagnostic", size = "md" as "md" | "lg" | "sm" }) {
   return <CtaButton href={href} size={size}>{label}</CtaButton>;
 }
 
@@ -150,7 +150,7 @@ function Hero() {
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <CtaButton href="/diagnostic?autostart=1" size="lg">
+              <CtaButton href="/diagnostic" size="lg">
                 Take the test
               </CtaButton>
               <a href="/program" className="text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-foreground">
@@ -211,7 +211,7 @@ function Hero() {
 function CallOrb() {
   return (
     <a
-      href="/diagnostic?autostart=1"
+      href="/diagnostic"
       aria-label="Give Bramwell a call"
       className="group relative flex h-48 w-48 items-center justify-center sm:h-56 sm:w-56 md:h-64 md:w-64"
     >
@@ -284,7 +284,7 @@ function SymptomCause() {
           {items.map((it) => (
             <a
               key={it.symptom}
-              href="/diagnostic?autostart=1"
+              href="/diagnostic"
               className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/40 sm:p-8"
               style={{ boxShadow: "var(--shadow-soft)" }}
             >
@@ -583,7 +583,7 @@ function Footer() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em]">Bramwell</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
-            <a href="/diagnostic?autostart=1" className="hover:text-foreground">Take the test</a>
+            <a href="/diagnostic" className="hover:text-foreground">Take the test</a>
             <a href="/program" className="hover:text-foreground">The Program</a>
             <a href="/founders" className="inline-flex items-center gap-2 hover:text-foreground">
               For Sales Teams

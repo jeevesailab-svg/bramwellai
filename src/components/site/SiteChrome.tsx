@@ -14,7 +14,7 @@ const navLinks = [
   { label: "Sign In", href: "/login" },
 ];
 
-export function SiteNav({ ctaLabel = "Start your coaching now", ctaHref = "/diagnostic?autostart=1" }: { ctaLabel?: string; ctaHref?: string }) {
+export function SiteNav({ ctaLabel = "Start your coaching now", ctaHref = "/diagnostic" }: { ctaLabel?: string; ctaHref?: string }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -173,7 +173,7 @@ export function SiteFooter() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">Bramwell</p>
           <nav className="mt-4 flex flex-col gap-2 text-sm text-muted-foreground">
-            <a href="/diagnostic?autostart=1" className="transition-colors hover:text-foreground">Start your coaching now</a>
+            <a href="/diagnostic" className="transition-colors hover:text-foreground">Start your coaching now</a>
             <a href="/#pathways" className="transition-colors hover:text-foreground">Pathways</a>
             <a href="/program" className="transition-colors hover:text-foreground">The Program</a>
             <a href="/founders" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
