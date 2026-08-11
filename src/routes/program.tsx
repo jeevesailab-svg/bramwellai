@@ -217,7 +217,7 @@ function ProgramPage() {
             </CtaButton>
             <p className="text-xs text-muted-foreground">
               One payment, $349 USD.{" "}
-              <a href="/diagnostic?autostart=1" className="font-medium text-foreground underline underline-offset-4">
+              <a href="/diagnostic" className="font-medium text-foreground underline underline-offset-4">
                 Or take the free 5 minute test first
               </a>
             </p>
@@ -408,7 +408,7 @@ function ProgramPage() {
           <p className="mx-auto mt-8 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
             Not ready?{" "}
             <a
-              href="/diagnostic?autostart=1"
+              href="/diagnostic"
               className="font-medium text-foreground underline underline-offset-4"
             >
               Take the free 5 minute test
