@@ -11,7 +11,10 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import { initGA, trackPageView } from "@/lib/analytics";
+import { initGA, trackPageView, trackFunnel } from "@/lib/analytics";
+import { captureAttribution } from "@/lib/attribution";
+
+const SITE_URL = "https://www.bramwellai.com";
 
 function NotFoundComponent() {
   return (
@@ -82,14 +85,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Bramwell.ai | Not a course. A coach." },
       { property: "og:description", content: "Meet Bramwell. The AI coach that teaches you to speak like a CEO. Try a free 5-minute voice session." },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://bramwellai.com/og-image.png" },
+      { property: "og:image", content: `${SITE_URL}/og-image.png` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "Bramwell.ai | Not a course. A coach." },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Bramwell.ai | Not a course. A coach." },
       { name: "twitter:description", content: "Meet Bramwell. The AI coach that teaches you to speak like a CEO. Try a free 5-minute voice session." },
-      { name: "twitter:image", content: "https://bramwellai.com/og-image.png" },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.png` },
       { name: "theme-color", content: "#FBF7EF" },
     ],
     links: [
@@ -99,6 +102,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "apple-touch-icon", href: "/logo-mark.svg" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Bramwell AI",
+          url: SITE_URL,
+          logo: `${SITE_URL}/logo-mark.svg`,
+          description:
+            "Bramwell is a live AI voice coach that scores how you speak and trains you to sound clear, calm and impossible to ignore.",
+          sameAs: [],
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -127,10 +145,12 @@ function RootComponent() {
 
   useEffect(() => {
     initGA();
+    captureAttribution();
   }, []);
 
   useEffect(() => {
     trackPageView(pathname);
+    void trackFunnel("page_view", { path: pathname });
   }, [pathname]);
 
   return (
