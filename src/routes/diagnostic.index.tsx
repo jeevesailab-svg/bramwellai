@@ -2,7 +2,7 @@ import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CtaButton } from "@/components/site/CtaButton";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent, trackFunnel } from "@/lib/analytics";
 
 export const Route = createFileRoute("/diagnostic/")({
   component: DiagnosticRoute,
@@ -168,6 +168,10 @@ function DiagnosticPage() {
   const hasConnectedRef = useRef(false);
   const intentionallyEndingRef = useRef(false);
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [leadError, setLeadError] = useState<string | null>(null);
+  const leadRef = useRef<{ firstName: string; email: string }>({ firstName: "", email: "" });
   const [resultReadyId, setResultReadyId] = useState<string | null>(null);
   const [pendingNavigateId, setPendingNavigateId] = useState<string | null>(null);
   const conversationRef = useRef<ConversationHandle | null>(null);
@@ -626,6 +630,8 @@ function DiagnosticPage() {
 
   const startDiagnostic = useCallback(async () => {
     trackEvent("started_diagnostic");
+    const lead = leadRef.current;
+    void trackFunnel("diagnostic_start", { has_email: Boolean(lead.email) }, { email: lead.email });
     setErrorMsg(null);
     setRateLimited(false);
     setPhase("connecting");
@@ -648,6 +654,8 @@ function DiagnosticPage() {
 
       const res = await fetch("/api/public/diagnostic-token", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: lead.email, firstName: lead.firstName }),
       });
       if (!res.ok) {
         const body = (await res.json().catch(() => ({}))) as { error?: string };
@@ -668,12 +676,16 @@ function DiagnosticPage() {
       sessionIdRef.current = sessionId;
       setCurrentSessionId(sessionId);
       window.sessionStorage.setItem("bramwell-diagnostic-session-id", sessionId);
+      void trackFunnel("diagnostic_session_created", {}, {
+        email: lead.email,
+        diagnosticSessionId: sessionId,
+      });
       transcriptRef.current = [];
       submittedRef.current = false;
       const dynamicVariables = {
         sessionId,
         session_id: sessionId,
-        user_first_name: "there",
+        user_first_name: lead.firstName || "there",
       };
 
       if (authMode === "signed-url" && signedUrl) {
@@ -700,16 +712,53 @@ function DiagnosticPage() {
   }, [conversation]);
 
   const search = useSearch({ from: "/diagnostic/" });
+
+  const submitLead = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      const cleanEmail = email.trim().toLowerCase();
+      const cleanName = firstName.trim();
+      if (!cleanName) {
+        setLeadError("Please add your first name.");
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+        setLeadError("Please enter a valid email address.");
+        return;
+      }
+      setLeadError(null);
+      leadRef.current = { firstName: cleanName, email: cleanEmail };
+      try {
+        window.sessionStorage.setItem("bramwell_lead_email", cleanEmail);
+        window.sessionStorage.setItem("bramwell_lead_name", cleanName);
+      } catch {
+        /* noop */
+      }
+      void trackFunnel("email_captured", { source: "diagnostic_gate" }, { email: cleanEmail });
+      void fetch("/api/public/klaviyo-event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: cleanEmail,
+          eventName: "Started Diagnostic",
+          pathway: "diagnostic",
+          source: "diagnostic_gate",
+          properties: { first_name: cleanName },
+        }),
+      }).catch(() => undefined);
+      await startDiagnostic();
+    },
+    [email, firstName, startDiagnostic],
+  );
+
   const autoStartedRef = useRef(false);
   useEffect(() => {
     if (autoStartedRef.current) return;
-    const fromUrl =
-      typeof window !== "undefined" &&
-      new URLSearchParams(window.location.search).get("autostart") === "1";
-    if (search.autostart !== "1" && !fromUrl) return;
     autoStartedRef.current = true;
-    void startDiagnostic();
-  }, [search.autostart, startDiagnostic]);
+    // Autostart is intentionally disabled: the email gate must be completed
+    // first, and browsers only grant microphone access after a user gesture.
+    void search.autostart;
+  }, [search.autostart]);
 
   const endEarly = useCallback(async () => {
     intentionallyEndingRef.current = true;
@@ -782,14 +831,45 @@ function DiagnosticPage() {
                 dimensions senior executives are measured on: Structure, Specificity, Confidence
                 Signals, Relevance.
               </p>
-              <div className="mt-8 flex justify-center">
-                <CtaButton as="button" onClick={startDiagnostic} size="lg" showArrow={false}>
-                  Take the free test ↓
-                </CtaButton>
-              </div>
-              <p className="mt-4 text-xs text-muted-foreground">
-                You will receive a Readiness Score and a short report by email.
-              </p>
+              <form
+                onSubmit={submitLead}
+                className="mx-auto mt-8 w-full max-w-md rounded-2xl border border-border bg-foreground/[0.04] p-5 text-left backdrop-blur"
+              >
+                <label className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  First name
+                </label>
+                <input
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  autoComplete="given-name"
+                  placeholder="Alex"
+                  className="mt-2 h-11 w-full rounded-full border border-border bg-background/60 px-4 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
+                />
+                <label className="mt-4 block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  Where should we send your report?
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="email"
+                  placeholder="you@company.com"
+                  className="mt-2 h-11 w-full rounded-full border border-border bg-background/60 px-4 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
+                />
+                {leadError ? (
+                  <p className="mt-3 text-xs text-destructive">{leadError}</p>
+                ) : null}
+                <div className="mt-5 flex justify-center">
+                  <CtaButton as="button" size="lg" showArrow={false} className="w-full">
+                    Start the free test ↓
+                  </CtaButton>
+                </div>
+                <p className="mt-3 text-center text-xs text-muted-foreground">
+                  Your Readiness Score and written report are sent here the moment the
+                  session ends. No card, no spam, unsubscribe any time.
+                </p>
+              </form>
             </>
           )}
 
