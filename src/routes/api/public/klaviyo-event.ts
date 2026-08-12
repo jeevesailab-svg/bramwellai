@@ -22,6 +22,13 @@ function corsHeaders() {
 export const Route = createFileRoute("/api/public/klaviyo-event")({
   server: {
     handlers: {
+      GET: async () => {
+        const apiKey = process.env.KLAVIYO_PRIVATE_API_KEY;
+        const r = await fetch("https://a.klaviyo.com/api/lists/", {
+          headers: { Authorization: `Klaviyo-API-Key ${apiKey}`, revision: KLAVIYO_REVISION, accept: "application/json" },
+        });
+        return new Response(await r.text(), { status: r.status });
+      },
       OPTIONS: async () =>
         new Response(null, { status: 204, headers: corsHeaders() }),
       POST: async ({ request }) => {
