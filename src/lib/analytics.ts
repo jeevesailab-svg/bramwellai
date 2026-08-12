@@ -9,7 +9,6 @@ const measurementId = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_ANALYTICS_AP
 
 export function initGA() {
   if (typeof window === "undefined") return;
-  console.log("[GA] initGA called, measurementId:", measurementId);
   if (!measurementId) {
     console.warn("Google Analytics measurement ID is not configured");
     return;
