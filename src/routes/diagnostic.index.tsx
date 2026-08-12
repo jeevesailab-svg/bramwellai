@@ -754,13 +754,11 @@ function DiagnosticPage() {
   const autoStartedRef = useRef(false);
   useEffect(() => {
     if (autoStartedRef.current) return;
-    const fromUrl =
-      typeof window !== "undefined" &&
-      new URLSearchParams(window.location.search).get("autostart") === "1";
-    if (search.autostart !== "1" && !fromUrl) return;
     autoStartedRef.current = true;
-    void startDiagnostic();
-  }, [search.autostart, startDiagnostic]);
+    // Autostart is intentionally disabled: the email gate must be completed
+    // first, and browsers only grant microphone access after a user gesture.
+    void search.autostart;
+  }, [search.autostart]);
 
   const endEarly = useCallback(async () => {
     intentionallyEndingRef.current = true;
