@@ -712,6 +712,45 @@ function DiagnosticPage() {
   }, [conversation]);
 
   const search = useSearch({ from: "/diagnostic/" });
+
+  const submitLead = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      const cleanEmail = email.trim().toLowerCase();
+      const cleanName = firstName.trim();
+      if (!cleanName) {
+        setLeadError("Please add your first name.");
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+        setLeadError("Please enter a valid email address.");
+        return;
+      }
+      setLeadError(null);
+      leadRef.current = { firstName: cleanName, email: cleanEmail };
+      try {
+        window.sessionStorage.setItem("bramwell_lead_email", cleanEmail);
+        window.sessionStorage.setItem("bramwell_lead_name", cleanName);
+      } catch {
+        /* noop */
+      }
+      void trackFunnel("email_captured", { source: "diagnostic_gate" }, { email: cleanEmail });
+      void fetch("/api/public/klaviyo-event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: cleanEmail,
+          eventName: "Started Diagnostic",
+          pathway: "diagnostic",
+          source: "diagnostic_gate",
+          properties: { first_name: cleanName },
+        }),
+      }).catch(() => undefined);
+      await startDiagnostic();
+    },
+    [email, firstName, startDiagnostic],
+  );
+
   const autoStartedRef = useRef(false);
   useEffect(() => {
     if (autoStartedRef.current) return;
