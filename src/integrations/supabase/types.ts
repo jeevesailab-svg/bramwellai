@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      articles: {
+        Row: {
+          answer: string | null
+          body_md: string
+          cluster: string | null
+          created_at: string
+          description: string
+          diagnostic_starts: number
+          faq: Json
+          id: string
+          published: boolean
+          published_at: string | null
+          slug: string
+          target_keyword: string | null
+          title: string
+          updated_at: string
+          views: number
+        }
+        Insert: {
+          answer?: string | null
+          body_md: string
+          cluster?: string | null
+          created_at?: string
+          description: string
+          diagnostic_starts?: number
+          faq?: Json
+          id?: string
+          published?: boolean
+          published_at?: string | null
+          slug: string
+          target_keyword?: string | null
+          title: string
+          updated_at?: string
+          views?: number
+        }
+        Update: {
+          answer?: string | null
+          body_md?: string
+          cluster?: string | null
+          created_at?: string
+          description?: string
+          diagnostic_starts?: number
+          faq?: Json
+          id?: string
+          published?: boolean
+          published_at?: string | null
+          slug?: string
+          target_keyword?: string | null
+          title?: string
+          updated_at?: string
+          views?: number
+        }
+        Relationships: []
+      }
       diagnostic_sessions: {
         Row: {
           career_moment: string | null
@@ -161,6 +215,57 @@ export type Database = {
         }
         Relationships: []
       }
+      funnel_events: {
+        Row: {
+          created_at: string
+          diagnostic_session_id: string | null
+          email: string | null
+          event_name: string
+          id: string
+          path: string | null
+          properties: Json
+          referral_code: string | null
+          referrer: string | null
+          session_id: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+        }
+        Insert: {
+          created_at?: string
+          diagnostic_session_id?: string | null
+          email?: string | null
+          event_name: string
+          id?: string
+          path?: string | null
+          properties?: Json
+          referral_code?: string | null
+          referrer?: string | null
+          session_id?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Update: {
+          created_at?: string
+          diagnostic_session_id?: string | null
+          email?: string | null
+          event_name?: string
+          id?: string
+          path?: string | null
+          properties?: Json
+          referral_code?: string | null
+          referrer?: string | null
+          session_id?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Relationships: []
+      }
       quiz_leads: {
         Row: {
           career_moment: string | null
@@ -200,6 +305,36 @@ export type Database = {
           recommended_price?: string | null
           source?: string | null
           urgency?: string | null
+        }
+        Relationships: []
+      }
+      referrals: {
+        Row: {
+          clicks: number
+          code: string
+          created_at: string
+          id: string
+          owner_email: string | null
+          owner_user_id: string | null
+          signups: number
+        }
+        Insert: {
+          clicks?: number
+          code: string
+          created_at?: string
+          id?: string
+          owner_email?: string | null
+          owner_user_id?: string | null
+          signups?: number
+        }
+        Update: {
+          clicks?: number
+          code?: string
+          created_at?: string
+          id?: string
+          owner_email?: string | null
+          owner_user_id?: string | null
+          signups?: number
         }
         Relationships: []
       }
