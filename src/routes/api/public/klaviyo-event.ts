@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { subscribeToNurture } from "@/lib/klaviyo.server";
 
 const Schema = z.object({
   email: z.string().trim().email().max(255).optional(),
@@ -59,6 +60,11 @@ export const Route = createFileRoute("/api/public/klaviyo-event")({
             { headers: corsHeaders() },
           );
         }
+
+        await subscribeToNurture(email, (properties?.first_name as string) ?? null, {
+          pathway,
+          source: source ?? "cta_click",
+        });
 
         const body = {
           data: {

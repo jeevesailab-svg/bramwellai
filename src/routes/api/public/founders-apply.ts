@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { subscribeToNurture } from "@/lib/klaviyo.server";
 import { sendTransactionalServerSide } from "@/lib/email/send.server";
 
 const Schema = z.object({
@@ -42,6 +43,13 @@ export const Route = createFileRoute("/api/public/founders-apply")({
         const data = parsed.data;
         const normalizedEmail = data.email.toLowerCase();
         const eventSource = data.source ?? "founders_page";
+
+        await subscribeToNurture(normalizedEmail, data.firstName, {
+          company: data.company,
+          team_size: data.teamSize,
+          role: data.role,
+          pathway: "enterprise",
+        });
 
         // Track in Klaviyo if configured
         const apiKey = process.env.KLAVIYO_PRIVATE_API_KEY;
