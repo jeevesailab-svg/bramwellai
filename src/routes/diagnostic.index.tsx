@@ -26,6 +26,7 @@ export const Route = createFileRoute("/diagnostic/")({
           "One free 5-minute voice session with Bramwell. Get your Readiness Score, communication type, and the three biggest gaps to fix. No login, no card.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://bramwellai.com/diagnostic" }],
   }),
 });
 
