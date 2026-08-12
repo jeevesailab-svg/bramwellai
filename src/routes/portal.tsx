@@ -5,7 +5,7 @@ import { createPortalSession } from "@/lib/payments.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
 
 const PATHWAY_WELCOMES: Record<string, string> = {
-  graduate: "Access confirmed. Your programme is calibrated to your target role.",
+  graduate: "Access confirmed. Your Speak Like a CEO programme begins with the baseline assessment.",
   comeback: "Access confirmed. Your programme begins with the baseline assessment.",
   confidence: "Access confirmed. Your programme begins with the baseline assessment.",
   executive: "Access confirmed. Your programme is calibrated to executive level.",
