@@ -45,3 +45,52 @@ export function trackEvent(
   if (typeof window === "undefined" || !window.gtag) return;
   window.gtag("event", name, params ?? {});
 }
+
+/**
+ * Dual-write tracking: GA4 for the marketing UI, our own database for the
+ * growth dashboard so analysis never depends on an external tool.
+ */
+export async function trackFunnel(
+  eventName: string,
+  properties?: Record<string, string | number | boolean | null>,
+  opts?: { email?: string; diagnosticSessionId?: string }
+) {
+  if (typeof window === "undefined") return;
+
+  const clean = Object.fromEntries(
+    Object.entries(properties ?? {}).filter(([, v]) => v !== null && v !== undefined)
+  ) as Record<string, string | number | boolean>;
+
+  trackEvent(eventName, clean);
+
+  try {
+    const { getAttribution, anonId } = await import("@/lib/attribution");
+    const attr = getAttribution();
+    const body = JSON.stringify({
+      eventName,
+      sessionId: anonId(),
+      diagnosticSessionId: opts?.diagnosticSessionId,
+      email: opts?.email,
+      path: window.location.pathname,
+      referrer: attr.referrer,
+      utm_source: attr.utm_source,
+      utm_medium: attr.utm_medium,
+      utm_campaign: attr.utm_campaign,
+      utm_content: attr.utm_content,
+      referral_code: attr.referral_code,
+      properties: clean,
+    });
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon("/api/public/track", new Blob([body], { type: "application/json" }));
+    } else {
+      void fetch("/api/public/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body,
+        keepalive: true,
+      });
+    }
+  } catch {
+    // never block the user
+  }
+}
