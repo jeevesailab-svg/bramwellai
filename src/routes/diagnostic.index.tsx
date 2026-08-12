@@ -831,14 +831,45 @@ function DiagnosticPage() {
                 dimensions senior executives are measured on: Structure, Specificity, Confidence
                 Signals, Relevance.
               </p>
-              <div className="mt-8 flex justify-center">
-                <CtaButton as="button" onClick={startDiagnostic} size="lg" showArrow={false}>
-                  Take the free test ↓
-                </CtaButton>
-              </div>
-              <p className="mt-4 text-xs text-muted-foreground">
-                You will receive a Readiness Score and a short report by email.
-              </p>
+              <form
+                onSubmit={submitLead}
+                className="mx-auto mt-8 w-full max-w-md rounded-2xl border border-border bg-foreground/[0.04] p-5 text-left backdrop-blur"
+              >
+                <label className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  First name
+                </label>
+                <input
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  autoComplete="given-name"
+                  placeholder="Alex"
+                  className="mt-2 h-11 w-full rounded-full border border-border bg-background/60 px-4 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
+                />
+                <label className="mt-4 block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  Where should we send your report?
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="email"
+                  placeholder="you@company.com"
+                  className="mt-2 h-11 w-full rounded-full border border-border bg-background/60 px-4 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
+                />
+                {leadError ? (
+                  <p className="mt-3 text-xs text-destructive">{leadError}</p>
+                ) : null}
+                <div className="mt-5 flex justify-center">
+                  <CtaButton as="button" size="lg" showArrow={false} className="w-full">
+                    Start the free test ↓
+                  </CtaButton>
+                </div>
+                <p className="mt-3 text-center text-xs text-muted-foreground">
+                  Your Readiness Score and written report are sent here the moment the
+                  session ends. No card, no spam, unsubscribe any time.
+                </p>
+              </form>
             </>
           )}
 
