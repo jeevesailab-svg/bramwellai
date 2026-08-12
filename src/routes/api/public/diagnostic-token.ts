@@ -24,6 +24,26 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const ip = clientIp(request);
 
+        // Optional lead details captured before the session starts. Storing them
+        // here means an abandoned session still leaves a contactable record.
+        let lead: { email?: string; firstName?: string } = {};
+        try {
+          const body = (await request.json()) as { email?: unknown; firstName?: unknown };
+          const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
+          const firstName = typeof body?.firstName === "string" ? body.firstName.trim() : "";
+          lead = {
+            email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 255 ? email : undefined,
+            firstName: firstName ? firstName.slice(0, 80) : undefined,
+          };
+        } catch {
+          lead = {};
+        }
+        const sessionRow = {
+          ip_address: ip,
+          ...(lead.email ? { email: lead.email } : {}),
+          ...(lead.firstName ? { first_name: lead.firstName } : {}),
+        };
+
         const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
 
         // 1. Per-IP STARTS cap - the real cost guard. Every mint of a signed URL costs
@@ -106,7 +126,7 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
           if (signed_url) {
             const { data: row, error: insertErr } = await supabaseAdmin
               .from("diagnostic_sessions")
-              .insert({ ip_address: ip })
+              .insert(sessionRow)
               .select("id")
               .single();
             if (insertErr || !row) {
@@ -172,7 +192,7 @@ export const Route = createFileRoute("/api/public/diagnostic-token")({
         // Record this attempt so any diagnostic result can be attached to it.
         const { data: row, error: insertErr } = await supabaseAdmin
           .from("diagnostic_sessions")
-          .insert({ ip_address: ip })
+          .insert(sessionRow)
           .select("id")
           .single();
         if (insertErr || !row) {
