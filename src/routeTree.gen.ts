@@ -17,6 +17,7 @@ import { Route as ProgramRouteImport } from './routes/program'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as GrowthRouteImport } from './routes/growth'
 import { Route as FoundersThanksRouteImport } from './routes/founders-thanks'
 import { Route as FoundersRouteImport } from './routes/founders'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -85,6 +86,11 @@ const PortalRoute = PortalRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GrowthRoute = GrowthRouteImport.update({
+  id: '/growth',
+  path: '/growth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FoundersThanksRoute = FoundersThanksRouteImport.update({
@@ -249,6 +255,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/founders': typeof FoundersRoute
   '/founders-thanks': typeof FoundersThanksRoute
+  '/growth': typeof GrowthRoute
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
@@ -288,6 +295,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/founders': typeof FoundersRoute
   '/founders-thanks': typeof FoundersThanksRoute
+  '/growth': typeof GrowthRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/program': typeof ProgramRoute
@@ -327,6 +335,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/founders': typeof FoundersRoute
   '/founders-thanks': typeof FoundersThanksRoute
+  '/growth': typeof GrowthRoute
   '/login': typeof LoginRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
@@ -368,6 +377,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/founders'
     | '/founders-thanks'
+    | '/growth'
     | '/login'
     | '/portal'
     | '/pricing'
@@ -407,6 +417,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/founders'
     | '/founders-thanks'
+    | '/growth'
     | '/login'
     | '/pricing'
     | '/program'
@@ -445,6 +456,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/founders'
     | '/founders-thanks'
+    | '/growth'
     | '/login'
     | '/portal'
     | '/pricing'
@@ -485,6 +497,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   FoundersRoute: typeof FoundersRoute
   FoundersThanksRoute: typeof FoundersThanksRoute
+  GrowthRoute: typeof GrowthRoute
   LoginRoute: typeof LoginRoute
   PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
@@ -569,6 +582,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/growth': {
+      id: '/growth'
+      path: '/growth'
+      fullPath: '/growth'
+      preLoaderRoute: typeof GrowthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/founders-thanks': {
@@ -804,6 +824,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   FoundersRoute: FoundersRoute,
   FoundersThanksRoute: FoundersThanksRoute,
+  GrowthRoute: GrowthRoute,
   LoginRoute: LoginRoute,
   PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,
