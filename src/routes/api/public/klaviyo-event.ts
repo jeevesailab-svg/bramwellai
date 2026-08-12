@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { subscribeToNurture } from "@/lib/klaviyo.server";
 
 const Schema = z.object({
   email: z.string().trim().email().max(255).optional(),
@@ -22,15 +23,6 @@ function corsHeaders() {
 export const Route = createFileRoute("/api/public/klaviyo-event")({
   server: {
     handlers: {
-      GET: async () => {
-        const apiKey = process.env.KLAVIYO_PRIVATE_API_KEY;
-        const r = await fetch("https://a.klaviyo.com/api/lists/", {
-          method: "POST",
-          headers: { Authorization: `Klaviyo-API-Key ${apiKey}`, revision: KLAVIYO_REVISION, accept: "application/json", "Content-Type": "application/json" },
-          body: JSON.stringify({ data: { type: "list", attributes: { name: "Bramwell Diagnostic Leads" } } }),
-        });
-        return new Response(await r.text(), { status: r.status });
-      },
       OPTIONS: async () =>
         new Response(null, { status: 204, headers: corsHeaders() }),
       POST: async ({ request }) => {
@@ -68,6 +60,11 @@ export const Route = createFileRoute("/api/public/klaviyo-event")({
             { headers: corsHeaders() },
           );
         }
+
+        await subscribeToNurture(email, (properties?.first_name as string) ?? null, {
+          pathway,
+          source: source ?? "cta_click",
+        });
 
         const body = {
           data: {

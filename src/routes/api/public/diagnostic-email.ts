@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { subscribeToNurture } from "@/lib/klaviyo.server";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const Schema = z.object({
@@ -101,6 +102,11 @@ export const Route = createFileRoute("/api/public/diagnostic-email")({
             console.warn("Zapier diagnostic webhook failed", msg);
           }
         }
+
+        await subscribeToNurture(row.email as string, (row.first_name as string) ?? null, {
+          pathway: (row.recommended_pathway ?? "unknown") as string,
+          readiness_score: row.readiness_score,
+        });
 
         // Fire Klaviyo "Completed Diagnostic" event tagged with recommended pathway
         const klaviyoKey = process.env.KLAVIYO_PRIVATE_API_KEY;
