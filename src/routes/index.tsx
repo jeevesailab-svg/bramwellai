@@ -20,6 +20,7 @@ export const Route = createFileRoute("/")({
             "Find out why you're being ignored. Take the free 5-minute test with Bramwell, your Voice AI Mentor.",
         },
         { property: "og:title", content: "Speak like a CEO | Bramwell.ai Voice AI Mentor" },
+        { property: "og:url", content: "https://bramwellai.com/" },
         {
           property: "og:description",
           content:
