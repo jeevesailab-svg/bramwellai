@@ -29,12 +29,7 @@ export const Route = createFileRoute("/diagnostic/result")({
   }),
 });
 
-type PathwayKey =
-  | "graduate"
-  | "comeback"
-  | "confidence"
-  | "executive"
-  | "club";
+type PathwayKey = "ceo";
 
 type Result = {
   id: string;
@@ -73,13 +68,6 @@ type Metrics = {
   rewrite?: { original: string; rewritten: string; why: string };
 };
 
-const STRIPE: Record<PathwayKey, string> = {
-  graduate: import.meta.env.VITE_STRIPE_GRADUATE ?? "#",
-  comeback: import.meta.env.VITE_STRIPE_COMEBACK ?? "#",
-  confidence: import.meta.env.VITE_STRIPE_CONFIDENCE ?? "#",
-  executive: import.meta.env.VITE_STRIPE_EXECUTIVE ?? "#",
-  club: import.meta.env.VITE_STRIPE_CLUB ?? "#",
-};
 
 const TYPE_DESCRIPTIONS: Record<string, string> = {
   structure_gap:
@@ -120,30 +108,10 @@ const TYPE_ALIASES: Record<string, string> = {
 };
 
 const PATHWAY_OUTCOMES: Record<PathwayKey, string[]> = {
-  graduate: [
-    "You stop sounding like a student and start sounding like a professional.",
-    "Your Tell Me About Yourself lands in under 90 seconds.",
-    "You walk in knowing your answer is ready.",
-  ],
-  comeback: [
-    "You explain your gap without sounding defensive.",
-    "You reconnect with your professional value.",
-    "You walk in with your confidence and your story back.",
-  ],
-  confidence: [
-    "You lead with your strongest point every time.",
-    "You stop rambling under pressure.",
-    "You sound as capable as you actually are.",
-  ],
-  executive: [
-    "You sound as senior as your experience.",
-    "You own the room before you finish your first sentence.",
-    "You speak with the authority of the level above.",
-  ],
-  club: [
-    "You know your baseline Readiness Score and the exact gap to CEO level.",
-    "You complete 30 days of structured, scored practice with your Voice AI Coach.",
-    "You retake the diagnostic on Day 30 and prove the change with a new number.",
+  ceo: [
+    "You close the gap between your score and the 88 CEO benchmark with a structured 30 day plan.",
+    "You lead with the answer, back it with evidence, and finish with a clear ask under pressure.",
+    "You retake the diagnostic on Day 30 and prove the change with a new Readiness Score.",
   ],
 };
 
@@ -407,10 +375,7 @@ function CeoBenchmark({ score }: { score: number }) {
 }
 
 function ResultBodyInner({ result }: { result: Result }) {
-  const pathwayKey = result.recommended_pathway;
-  const stripeHref = STRIPE[pathwayKey];
-  const isStubStripe = stripeHref === "#";
-  const outcomes = PATHWAY_OUTCOMES[pathwayKey];
+  const outcomes = PATHWAY_OUTCOMES[result.recommended_pathway];
 
   return (
     <div className="space-y-12">

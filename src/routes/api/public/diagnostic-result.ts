@@ -45,11 +45,7 @@ const MetricsSchema = z
   .partial();
 
 const PATHWAY = {
-  graduate: { name: "Graduate Interview Sprint", price: "$99 AUD" },
-  comeback: { name: "Career Comeback Sprint", price: "$199 AUD" },
-  confidence: { name: "Interview Confidence Sprint", price: "$249 AUD" },
-  executive: { name: "Executive Communication Sprint", price: "$499 AUD" },
-  club: { name: "30 Day Voice Mastery Program", price: "$349 USD, one payment" },
+  ceo: { name: "Speak Like a CEO 30 Day Program", price: "$349 USD, one payment" },
 } as const;
 
 type CommunicationType =
@@ -99,10 +95,8 @@ function routePathway(input: {
   readiness_score: number;
   career_moment?: string;
 }): { key: PathwayKey; name: string; price: string } {
-  // Simple monthly pricing is the default primary recommendation for every
-  // archetype. Career-moment hints still surface in the result copy, but the
-  // purchase path is a single, low-friction subscription.
-  return { key: "club", ...PATHWAY.club };
+  // Every diagnostic now leads to the single CEO readiness program.
+  return { key: "ceo", ...PATHWAY.ceo };
 }
 
 const Schema = z.object({
@@ -128,11 +122,11 @@ const Schema = z.object({
   gaps: z.array(z.string().min(1).max(280)).min(1).max(5),
   career_moment: z.string().max(120).optional().default(""),
   recommended_pathway: z
-    .enum(["graduate", "comeback", "confidence", "executive", "club"])
+    .enum(["ceo"])
     .optional()
-    .default("club"),
-  recommended_pathway_name: z.string().min(1).max(120).optional().default(PATHWAY.club.name),
-  recommended_price: z.string().min(1).max(32).optional().default(PATHWAY.club.price),
+    .default("ceo"),
+  recommended_pathway_name: z.string().min(1).max(120).optional().default(PATHWAY.ceo.name),
+  recommended_price: z.string().min(1).max(32).optional().default(PATHWAY.ceo.price),
   transcript: z.string().max(50000).optional().default(""),
   duration_sec: z.number().min(0).max(3600).optional(),
   metrics: MetricsSchema.optional(),

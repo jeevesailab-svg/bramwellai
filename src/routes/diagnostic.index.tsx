@@ -29,13 +29,9 @@ export const Route = createFileRoute("/diagnostic/")({
   }),
 });
 
-// Pathway routing, mirrors src/routes/pricing.tsx keys.
+// Every diagnostic leads to the single CEO readiness program.
 const PATHWAY = {
-  graduate: { name: "Graduate Interview Sprint", price: "$99 AUD" },
-  comeback: { name: "Career Comeback Sprint", price: "$199 AUD" },
-  confidence: { name: "Interview Confidence Sprint", price: "$249 AUD" },
-  executive: { name: "Executive Communication Sprint", price: "$499 AUD" },
-  club: { name: "30 Day Voice Mastery Program", price: "$349 USD, one payment" },
+  ceo: { name: "Speak Like a CEO 30 Day Program", price: "$349 USD, one payment" },
 } as const;
 type PathwayKey = keyof typeof PATHWAY;
 
@@ -122,28 +118,10 @@ function normalizeReadinessScore(value: SubmitInput["readiness_score"]): number 
 }
 
 function routePathway(
-  input: SubmitInput,
+  _input: SubmitInput,
 ): { key: PathwayKey; name: string; price: string } {
-  const moment = (input.career_moment ?? "").toLowerCase();
-  const type = normalizeCommunicationType(input.communication_type) ?? "";
-  const score = normalizeReadinessScore(input.readiness_score) ?? 0;
-
-  // Career-moment overrides win.
-  if (/(executive|board|c-?suite|cxo|director)/.test(moment)) {
-    return { key: "executive", ...PATHWAY.executive };
-  }
-  if (/(graduate|student|university|college)/.test(moment)) {
-    return { key: "graduate", ...PATHWAY.graduate };
-  }
-  if (/(redundan|career gap|career break|return to work|maternity)/.test(moment)) {
-    return { key: "comeback", ...PATHWAY.comeback };
-  }
-
-  // Simple monthly pricing as the default recommendation: every archetype
-  // flows into the Career Confidence Club, with sprints available as upsells
-  // on the pricing page. Career-moment hints are still surfaced in the result
-  // copy, but the purchase path is a single, low-friction subscription.
-  return { key: "club", ...PATHWAY.club };
+  // Every diagnostic leads to the single CEO readiness program.
+  return { key: "ceo", ...PATHWAY.ceo };
 }
 
 function DiagnosticRoute() {

@@ -3,11 +3,7 @@ import { z } from "zod";
 import { computeMetrics, readinessFromSubScores } from "@/lib/scoring";
 
 const PATHWAY = {
-  graduate: { name: "Graduate Interview Sprint", price: "$99 AUD" },
-  comeback: { name: "Career Comeback Sprint", price: "$199 AUD" },
-  confidence: { name: "Interview Confidence Sprint", price: "$249 AUD" },
-  executive: { name: "Executive Communication Sprint", price: "$499 AUD" },
-  club: { name: "30 Day Voice Mastery Program", price: "$349 USD, one payment" },
+  ceo: { name: "Speak Like a CEO 30 Day Program", price: "$349 USD, one payment" },
 } as const;
 
 type CommunicationType =
@@ -46,14 +42,12 @@ function extractUserAnswer(transcript: string): string {
   return transcript.trim();
 }
 
-function routePathway(input: {
+function routePathway(_input: {
   communication_type: CommunicationType;
   readiness_score: number;
 }): { key: PathwayKey; name: string; price: string } {
-  // Simple monthly pricing is the default primary recommendation for every
-  // archetype. Career-moment hints surface in copy, but the purchase path
-  // is the low-friction Career Confidence Club subscription.
-  return { key: "club", ...PATHWAY.club };
+  // Every diagnostic leads to the single CEO readiness program.
+  return { key: "ceo", ...PATHWAY.ceo };
 }
 
 function scoreFromTranscript(transcript: string) {
