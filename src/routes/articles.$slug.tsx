@@ -2,15 +2,17 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getArticleBySlug } from "@/lib/articles.functions";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { queryOptions } from "@tanstack/react-query";
-import { Helmet } from "react-helmet-async";
-import React from "react";
+import { CtaButton } from "@/components/site/CtaButton";
 
 const SITE_URL = "https://www.bramwellai.com";
 
-const articleQueryOptions = (slug: string) => queryOptions({
-  queryKey: ["article", slug],
-  queryFn: () => getArticleBySlug({ data: slug }),
-});
+type FAQItem = { question: string; answer: string };
+
+const articleQueryOptions = (slug: string) =>
+  queryOptions({
+    queryKey: ["article", slug],
+    queryFn: () => getArticleBySlug({ data: slug }),
+  });
 
 export const Route = createFileRoute("/articles/$slug")({
   loader: async ({ context, params }) => {
@@ -18,19 +20,45 @@ export const Route = createFileRoute("/articles/$slug")({
     if (!article) {
       throw notFound();
     }
+    return article;
   },
-  errorComponent: ({ error }) => {
-    return (
-      <div className="container mx-auto px-4 py-32 text-center">
-        <h1 className="text-4xl font-bold mb-4">Article Not Found</h1>
-        <p className="text-xl text-muted-foreground mb-8">
-          The article you are looking for does not exist or has been removed.
-        </p>
-        <Link to="/articles" className="text-primary hover:underline">
-          Back to all articles
-        </Link>
-      </div>
-    );
+  head: ({ loaderData }) => {
+    const article = loaderData;
+    const url = `${SITE_URL}/articles/${article?.slug ?? ""}`;
+    return {
+      meta: [
+        { title: `${article?.title ?? "Article"} | Bramwell AI` },
+        { name: "description", content: article?.description ?? "" },
+        { property: "og:title", content: article?.title ?? "Article" },
+        { property: "og:url", content: url },
+        { property: "og:description", content: article?.description ?? "" },
+        { property: "og:type", content: "article" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: article
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Article",
+                headline: article.title,
+                description: article.description,
+                author: { "@type": "Organization", name: "Bramwell AI" },
+                publisher: {
+                  "@type": "Organization",
+                  name: "Bramwell AI",
+                  logo: { "@type": "ImageObject", url: `${SITE_URL}/logo-horizontal.svg` },
+                },
+                datePublished: article.published_at,
+                dateModified: article.updated_at,
+                mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/articles/${article.slug}` },
+              }),
+            },
+          ]
+        : [],
+    };
   },
   component: ArticlePage,
 });
@@ -41,110 +69,77 @@ function ArticlePage() {
 
   if (!article) return null;
 
-  const faq = Array.isArray(article.faq) ? article.faq : [];
-  
+  const faq = Array.isArray(article.faq) ? (article.faq as FAQItem[]) : [];
+
   const renderBody = (text: string) => {
     return text.split("\n\n").map((block, i) => {
       if (block.startsWith("## ")) {
-        return <h2 key={i} className="text-2xl font-bold mt-8 mb-4">{block.replace("## ", "")}</h2>;
+        return (
+          <h2 key={i} className="mt-10 mb-4 text-2xl font-semibold tracking-tight">
+            {block.replace("## ", "")}
+          </h2>
+        );
       }
-      return <p key={i} className="mb-4 leading-relaxed">{block}</p>;
+      return (
+        <p key={i} className="mb-4 leading-relaxed text-foreground/90">
+          {block}
+        </p>
+      );
     });
   };
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": article.title,
-    "description": article.description,
-    "author": {
-      "@type": "Organization",
-      "name": "Bramwell AI"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Bramwell AI",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "${SITE_URL}/logo-horizontal.svg"
-      }
-    },
-    "datePublished": article.published_at,
-    "dateModified": article.updated_at,
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "${SITE_URL}/articles/${article.slug}"
-    }
-  };
-
   return (
-    <article className="min-h-screen bg-background">
-      <Helmet>
-        <title>{`${article.title} | Bramwell AI`}</title>
-        <meta name="description" content={article.description} />
-        <link rel="canonical" href={`${SITE_URL}/articles/${article.slug}`} />
-        <meta property="og:url" content={`${SITE_URL}/articles/${article.slug}`} />
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={article.title} />
-        <meta property="og:description" content={article.description} />
-        <script type="application/ld+json">
-          {JSON.stringify(jsonLd)}
-        </script>
-      </Helmet>
-
-      <div className="container max-w-3xl mx-auto px-4 py-16">
-        <Link to="/articles" className="text-sm text-muted-foreground hover:text-primary mb-8 inline-block">
+    <main className="min-h-screen bg-background px-6 py-16 text-foreground md:px-10">
+      <div className="mx-auto max-w-3xl">
+        <Link to="/articles" className="mb-8 inline-block text-sm text-muted-foreground hover:text-primary">
           &larr; Back to articles
         </Link>
 
-        <header className="mb-12">
-          {article.cluster && (
-            <span className="text-sm font-medium text-primary uppercase tracking-wider mb-2 block">
-              {article.cluster}
-            </span>
-          )}
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">{article.title}</h1>
-          
-          {article.answer && (
-            <div className="p-6 bg-muted rounded-xl mb-8 italic text-lg border-l-4 border-primary">
-              {article.answer}
-            </div>
-          )}
-        </header>
+        <article>
+          <header className="mb-10">
+            {article.cluster ? (
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                {article.cluster}
+              </span>
+            ) : null}
+            <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">{article.title}</h1>
 
-        <div className="prose prose-slate max-w-none dark:prose-invert">
-          {renderBody(article.body_md)}
-        </div>
+            {article.answer ? (
+              <div className="mt-8 rounded-2xl border-l-4 border-primary bg-foreground/[0.03] p-6 text-lg italic text-foreground/90">
+                {article.answer}
+              </div>
+            ) : null}
+          </header>
 
-        {faq.length > 0 && (
-          <section className="mt-16 border-t pt-16">
-            <h2 className="text-3xl font-bold mb-8">Frequently Asked Questions</h2>
-            <div className="space-y-8">
-              {faq.map((item: any, i: number) => (
-                <div key={i} className="bg-card p-6 rounded-lg border">
-                  <h3 className="text-lg font-bold mb-2">{item.question}</h3>
-                  <p className="text-muted-foreground">{item.answer}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+          <div className="text-foreground/90">{renderBody(article.body_md)}</div>
 
-        <div className="mt-20 sticky bottom-8 left-0 right-0 z-10 px-4">
-          <div className="max-w-xl mx-auto p-6 bg-primary text-primary-foreground rounded-xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4 border border-white/10 backdrop-blur-sm bg-opacity-95">
-            <div className="text-center md:text-left">
-              <p className="font-bold text-lg">Ready to command the room?</p>
-              <p className="text-sm opacity-90">Get your personalized communication score.</p>
-            </div>
-            <Link
-              to="/diagnostic"
-              className="whitespace-nowrap rounded-md bg-background px-6 py-2 text-sm font-medium text-primary hover:bg-background/90 transition-colors"
-            >
+          {faq.length > 0 ? (
+            <section className="mt-16 border-t border-border pt-12">
+              <h2 className="mb-8 text-2xl font-semibold tracking-tight">Frequently Asked Questions</h2>
+              <div className="space-y-6">
+                {faq.map((item, i) => (
+                  <div key={i} className="rounded-2xl border border-border bg-foreground/[0.02] p-6">
+                    <h3 className="text-lg font-semibold tracking-tight">{item.question}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
+        </article>
+
+        <section className="mt-20 rounded-2xl border border-border bg-foreground/[0.02] p-8 text-center md:p-12">
+          <h2 className="text-2xl font-semibold tracking-tight">Ready to command the room?</h2>
+          <p className="mx-auto mt-3 max-w-lg text-muted-foreground">
+            Get your personalised communication score and a clear roadmap to speak like a CEO.
+          </p>
+          <div className="mt-6 flex justify-center">
+            <CtaButton href="/diagnostic" size="lg">
               Take the free diagnostic
-            </Link>
+            </CtaButton>
           </div>
-        </div>
+        </section>
       </div>
-    </article>
+    </main>
   );
 }

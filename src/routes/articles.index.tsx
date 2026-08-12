@@ -84,7 +84,7 @@ function ArticlesIndex() {
             Get a personalised assessment of your executive presence and a clear roadmap for improvement.
           </p>
           <div className="mt-8 flex justify-center">
-            <CtaButton to="/diagnostic" size="lg">
+            <CtaButton href="/diagnostic" size="lg">
               Take the free diagnostic
             </CtaButton>
           </div>

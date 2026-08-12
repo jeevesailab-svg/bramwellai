@@ -20,14 +20,14 @@ export const Route = createFileRoute("/")({
             "Find out why you're being ignored. Take the free 5-minute test with Bramwell, your Voice AI Mentor.",
         },
         { property: "og:title", content: "Speak like a CEO | Bramwell.ai Voice AI Mentor" },
-        { property: "og:url", content: "https://bramwellai.com/" },
+        { property: "og:url", content: "https://www.bramwellai.com/" },
         {
           property: "og:description",
           content:
             "Find out why you're being ignored. Take the free 5-minute test with Bramwell, your Voice AI Mentor.",
         },
       ],
-    links: [{ rel: "canonical", href: "https://bramwellai.com/" }],
+    links: [{ rel: "canonical", href: "https://www.bramwellai.com/" }],
     scripts: [
       {
         type: "application/ld+json",

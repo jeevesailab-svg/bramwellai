@@ -99,7 +99,7 @@ Development is not an overnight process. It requires consistent effort and, ofte
 
 Take the free diagnostic to identify your specific areas for growth.',
   'Executive presence',
-  'how-to-develop-executive-presence',
+  'how to develop executive presence',
   '[
     {"question": "What is the fastest way to improve presence?", "answer": "Improving your vocal clarity and eliminating filler words often yields the most immediate results."},
     {"question": "Should I change my personality?", "answer": "No. Development is about refining your existing personality to be more effective, not changing who you are."},
@@ -146,7 +146,7 @@ The pause is one of the most powerful tools in a leader''s arsenal. It allows yo
 
 Clear speech ensures your message is never lost. Coaching helps you eliminate mumbling and ensures every word has impact.
 
-## The Australian Context
+## The Role of Authenticity
 
 In Australia, a voice that sounds too "theatrical" or overly polished can sometimes be met with skepticism. Effective voice coaching for the Australian market focuses on natural, authentic authority—speaking with clarity and purpose without losing your personal connection to the audience.
 
