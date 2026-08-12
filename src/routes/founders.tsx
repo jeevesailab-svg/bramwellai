@@ -710,12 +710,13 @@ function FoundersPage() {
               </ul>
               <button
                 type="button"
-                onClick={() =>
+                onClick={() => {
+                  trackEvent("begin_checkout", { product: "elite_sales_team_accelerator" });
                   openCheckout({
                     priceId: "elite_sales_voice_ai_30day_onetime",
                     returnUrl: `${window.location.origin}/founders-thanks?session_id={CHECKOUT_SESSION_ID}`,
-                  })
-                }
+                  });
+                }}
                 className="mt-10 inline-flex h-14 w-full items-center justify-center gap-3 rounded-full bg-background text-base font-semibold text-foreground transition hover:opacity-90"
               >
                 Get Started <span>→</span>

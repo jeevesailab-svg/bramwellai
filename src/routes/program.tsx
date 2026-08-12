@@ -146,6 +146,7 @@ function ProgramPage() {
   }, []);
 
   const startCheckout = () => {
+    trackEvent("begin_checkout", { product: "voice_mastery_30day" });
     if (!user) {
       try {
         sessionStorage.setItem("bramwell_pending_purchase", "mastery");
