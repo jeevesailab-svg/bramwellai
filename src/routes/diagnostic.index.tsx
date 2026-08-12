@@ -168,6 +168,10 @@ function DiagnosticPage() {
   const hasConnectedRef = useRef(false);
   const intentionallyEndingRef = useRef(false);
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [leadError, setLeadError] = useState<string | null>(null);
+  const leadRef = useRef<{ firstName: string; email: string }>({ firstName: "", email: "" });
   const [resultReadyId, setResultReadyId] = useState<string | null>(null);
   const [pendingNavigateId, setPendingNavigateId] = useState<string | null>(null);
   const conversationRef = useRef<ConversationHandle | null>(null);
