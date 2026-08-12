@@ -1,7 +1,7 @@
 declare global {
   interface Window {
-    dataLayer: unknown[];
-    gtag: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -22,7 +22,7 @@ export function initGA() {
 
   window.dataLayer = window.dataLayer || [];
   function gtag(...args: unknown[]) {
-    window.dataLayer.push(args);
+    window.dataLayer!.push(args);
   }
   window.gtag = gtag;
   gtag("js", new Date());
