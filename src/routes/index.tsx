@@ -20,12 +20,49 @@ export const Route = createFileRoute("/")({
             "Find out why you're being ignored. Take the free 5-minute test with Bramwell, your Voice AI Mentor.",
         },
         { property: "og:title", content: "Speak like a CEO | Bramwell.ai Voice AI Mentor" },
+        { property: "og:url", content: "https://bramwellai.com/" },
         {
           property: "og:description",
           content:
             "Find out why you're being ignored. Take the free 5-minute test with Bramwell, your Voice AI Mentor.",
         },
       ],
+    links: [{ rel: "canonical", href: "https://bramwellai.com/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "What is executive presence?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Executive presence is the signal your voice sends in the first eight seconds: whether you lead with the point, hold a steady pace, and speak without hedging. It is measurable behaviour, not personality, which is why it can be trained.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "How do you learn to speak like a CEO?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Speak the point first, cut filler and hedging, keep answers under 90 seconds, and rehearse out loud under pressure. Bramwell scores each attempt against a CEO benchmark of 88 and tells you which behaviour to fix next.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Is the Bramwell diagnostic free?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Yes. The five minute voice diagnostic is free, needs no login or credit card, and returns a readiness score out of 100 plus your primary communication gap.",
+              },
+            },
+          ],
+        }),
+      },
+    ],
   }),
 });
 
