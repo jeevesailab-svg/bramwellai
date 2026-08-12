@@ -3,13 +3,15 @@ import { CtaButton } from "@/components/site/CtaButton";
 
 type Pathway = "graduate" | "comeback" | "returner" | "pivot" | "executive" | "advisors";
 
+const CEO_PROGRAM = "Speak Like a CEO 30 Day Program";
+
 const PATHWAY_LABELS: Record<Pathway, string> = {
-  graduate: "Graduate",
-  comeback: "Comeback",
-  returner: "Returner",
-  pivot: "Pivot",
-  executive: "Executive",
-  advisors: "Advisors",
+  graduate: CEO_PROGRAM,
+  comeback: CEO_PROGRAM,
+  returner: CEO_PROGRAM,
+  pivot: CEO_PROGRAM,
+  executive: CEO_PROGRAM,
+  advisors: CEO_PROGRAM,
 };
 
 async function fireKlaviyo(args: {
