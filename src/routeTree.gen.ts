@@ -25,11 +25,13 @@ import { Route as AdvisorsRouteImport } from './routes/advisors'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PortalIndexRouteImport } from './routes/portal.index'
 import { Route as DiagnosticIndexRouteImport } from './routes/diagnostic.index'
+import { Route as ArticlesIndexRouteImport } from './routes/articles.index'
 import { Route as PortalWelcomeRouteImport } from './routes/portal.welcome'
 import { Route as PortalSetupRouteImport } from './routes/portal.setup'
 import { Route as PortalCoachRouteImport } from './routes/portal.coach'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as DiagnosticResultRouteImport } from './routes/diagnostic.result'
+import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
 import { Route as PortalSessionsIndexRouteImport } from './routes/portal.sessions.index'
 import { Route as PortalSessionsSessionIdRouteImport } from './routes/portal.sessions.$sessionId'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
@@ -128,6 +130,11 @@ const DiagnosticIndexRoute = DiagnosticIndexRouteImport.update({
   path: '/diagnostic/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
+  id: '/articles/',
+  path: '/articles/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortalWelcomeRoute = PortalWelcomeRouteImport.update({
   id: '/welcome',
   path: '/welcome',
@@ -151,6 +158,11 @@ const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
 const DiagnosticResultRoute = DiagnosticResultRouteImport.update({
   id: '/diagnostic/result',
   path: '/diagnostic/result',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
+  id: '/articles/$slug',
+  path: '/articles/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortalSessionsIndexRoute = PortalSessionsIndexRouteImport.update({
@@ -264,11 +276,13 @@ export interface FileRoutesByFullPath {
   '/the-7-questions': typeof The7QuestionsRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/waitlist': typeof WaitlistRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
   '/portal/welcome': typeof PortalWelcomeRoute
+  '/articles/': typeof ArticlesIndexRoute
   '/diagnostic/': typeof DiagnosticIndexRoute
   '/portal/': typeof PortalIndexRoute
   '/api/public/diagnostic-email': typeof ApiPublicDiagnosticEmailRoute
@@ -303,11 +317,13 @@ export interface FileRoutesByTo {
   '/the-7-questions': typeof The7QuestionsRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/waitlist': typeof WaitlistRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
   '/portal/welcome': typeof PortalWelcomeRoute
+  '/articles': typeof ArticlesIndexRoute
   '/diagnostic': typeof DiagnosticIndexRoute
   '/portal': typeof PortalIndexRoute
   '/api/public/diagnostic-email': typeof ApiPublicDiagnosticEmailRoute
@@ -344,11 +360,13 @@ export interface FileRoutesById {
   '/the-7-questions': typeof The7QuestionsRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/waitlist': typeof WaitlistRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/portal/coach': typeof PortalCoachRoute
   '/portal/setup': typeof PortalSetupRoute
   '/portal/welcome': typeof PortalWelcomeRoute
+  '/articles/': typeof ArticlesIndexRoute
   '/diagnostic/': typeof DiagnosticIndexRoute
   '/portal/': typeof PortalIndexRoute
   '/api/public/diagnostic-email': typeof ApiPublicDiagnosticEmailRoute
@@ -386,11 +404,13 @@ export interface FileRouteTypes {
     | '/the-7-questions'
     | '/unsubscribe'
     | '/waitlist'
+    | '/articles/$slug'
     | '/diagnostic/result'
     | '/email/unsubscribe'
     | '/portal/coach'
     | '/portal/setup'
     | '/portal/welcome'
+    | '/articles/'
     | '/diagnostic/'
     | '/portal/'
     | '/api/public/diagnostic-email'
@@ -425,11 +445,13 @@ export interface FileRouteTypes {
     | '/the-7-questions'
     | '/unsubscribe'
     | '/waitlist'
+    | '/articles/$slug'
     | '/diagnostic/result'
     | '/email/unsubscribe'
     | '/portal/coach'
     | '/portal/setup'
     | '/portal/welcome'
+    | '/articles'
     | '/diagnostic'
     | '/portal'
     | '/api/public/diagnostic-email'
@@ -465,11 +487,13 @@ export interface FileRouteTypes {
     | '/the-7-questions'
     | '/unsubscribe'
     | '/waitlist'
+    | '/articles/$slug'
     | '/diagnostic/result'
     | '/email/unsubscribe'
     | '/portal/coach'
     | '/portal/setup'
     | '/portal/welcome'
+    | '/articles/'
     | '/diagnostic/'
     | '/portal/'
     | '/api/public/diagnostic-email'
@@ -506,8 +530,10 @@ export interface RootRouteChildren {
   The7QuestionsRoute: typeof The7QuestionsRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   WaitlistRoute: typeof WaitlistRoute
+  ArticlesSlugRoute: typeof ArticlesSlugRoute
   DiagnosticResultRoute: typeof DiagnosticResultRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
+  ArticlesIndexRoute: typeof ArticlesIndexRoute
   DiagnosticIndexRoute: typeof DiagnosticIndexRoute
   ApiPublicDiagnosticEmailRoute: typeof ApiPublicDiagnosticEmailRoute
   ApiPublicDiagnosticIncompleteRoute: typeof ApiPublicDiagnosticIncompleteRoute
@@ -640,6 +666,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DiagnosticIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/articles/': {
+      id: '/articles/'
+      path: '/articles'
+      fullPath: '/articles/'
+      preLoaderRoute: typeof ArticlesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portal/welcome': {
       id: '/portal/welcome'
       path: '/welcome'
@@ -673,6 +706,13 @@ declare module '@tanstack/react-router' {
       path: '/diagnostic/result'
       fullPath: '/diagnostic/result'
       preLoaderRoute: typeof DiagnosticResultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/articles/$slug': {
+      id: '/articles/$slug'
+      path: '/articles/$slug'
+      fullPath: '/articles/$slug'
+      preLoaderRoute: typeof ArticlesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portal/sessions/': {
@@ -833,8 +873,10 @@ const rootRouteChildren: RootRouteChildren = {
   The7QuestionsRoute: The7QuestionsRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   WaitlistRoute: WaitlistRoute,
+  ArticlesSlugRoute: ArticlesSlugRoute,
   DiagnosticResultRoute: DiagnosticResultRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
+  ArticlesIndexRoute: ArticlesIndexRoute,
   DiagnosticIndexRoute: DiagnosticIndexRoute,
   ApiPublicDiagnosticEmailRoute: ApiPublicDiagnosticEmailRoute,
   ApiPublicDiagnosticIncompleteRoute: ApiPublicDiagnosticIncompleteRoute,
@@ -855,13 +897,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

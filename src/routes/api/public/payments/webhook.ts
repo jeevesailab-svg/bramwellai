@@ -33,7 +33,7 @@ export async function sendReceiptEmail(opts: {
     ? "https://calendar.app.google/QWKYUsrzx2k44UE76"
     : process.env.PUBLIC_APP_URL
       ? `${process.env.PUBLIC_APP_URL}/portal/welcome`
-      : "https://bramwellai.com/portal/welcome";
+      : "https://www.bramwellai.com/portal/welcome";
   const amount = `${opts.currency.toUpperCase()} $${(opts.amountCents / 100).toFixed(2)}`;
 
   const template = TEMPLATES["enrolment-confirmed"];
