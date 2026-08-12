@@ -1,6 +1,7 @@
 import { getScoreBand, SCORE_SCALE, getCeoGap } from "@/lib/scoreBand";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 export const Route = createFileRoute("/diagnostic/result")({
   component: DiagnosticResultPage,
@@ -196,6 +197,15 @@ function DiagnosticResultPage() {
     | { kind: "error"; message: string; incomplete?: boolean }
     | { kind: "ready"; result: Result }
   >({ kind: "loading" });
+
+  useEffect(() => {
+    if (state.kind !== "ready") return;
+    trackEvent("completed_diagnostic", {
+      score: state.result.readiness_score,
+      communication_type: state.result.communication_type,
+      recommended_pathway: state.result.recommended_pathway,
+    });
+  }, [state]);
 
   useEffect(() => {
     if (!id) {

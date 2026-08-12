@@ -5,6 +5,7 @@ import { useStripeCheckout } from "@/hooks/useStripeCheckout";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { CtaButton } from "@/components/site/CtaButton";
 import { SiteNav, SiteFooter } from "@/components/site/SiteChrome";
+import { trackEvent } from "@/lib/analytics";
 
 const PRICE_ID = "voice_mastery_30day_once";
 const SHOW_TESTIMONIALS = true;
@@ -145,6 +146,7 @@ function ProgramPage() {
   }, []);
 
   const startCheckout = () => {
+    trackEvent("begin_checkout", { product: "voice_mastery_30day" });
     if (!user) {
       try {
         sessionStorage.setItem("bramwell_pending_purchase", "mastery");
