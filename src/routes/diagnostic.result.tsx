@@ -199,6 +199,15 @@ function DiagnosticResultPage() {
   >({ kind: "loading" });
 
   useEffect(() => {
+    if (state.kind !== "ready") return;
+    trackEvent("completed_diagnostic", {
+      score: state.result.readiness_score,
+      communication_type: state.result.communication_type,
+      recommended_pathway: state.result.recommended_pathway,
+    });
+  }, [state]);
+
+  useEffect(() => {
     if (!id) {
       setState({ kind: "error", message: "Missing diagnostic id." });
       return;
