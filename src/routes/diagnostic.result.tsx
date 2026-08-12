@@ -1,6 +1,7 @@
 import { getScoreBand, SCORE_SCALE, getCeoGap } from "@/lib/scoreBand";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 export const Route = createFileRoute("/diagnostic/result")({
   component: DiagnosticResultPage,
