@@ -16,4 +16,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://www.bramwellai.com/sitemap.xml
+Sitemap: https://bramwellai.com/sitemap.xml
