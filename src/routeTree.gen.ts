@@ -31,6 +31,7 @@ import { Route as PortalSetupRouteImport } from './routes/portal.setup'
 import { Route as PortalCoachRouteImport } from './routes/portal.coach'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as DiagnosticResultRouteImport } from './routes/diagnostic.result'
+import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
 import { Route as PortalSessionsIndexRouteImport } from './routes/portal.sessions.index'
 import { Route as PortalSessionsSessionIdRouteImport } from './routes/portal.sessions.$sessionId'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
@@ -159,6 +160,11 @@ const DiagnosticResultRoute = DiagnosticResultRouteImport.update({
   path: '/diagnostic/result',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
+  id: '/articles/$slug',
+  path: '/articles/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortalSessionsIndexRoute = PortalSessionsIndexRouteImport.update({
   id: '/sessions/',
   path: '/sessions/',
@@ -270,6 +276,7 @@ export interface FileRoutesByFullPath {
   '/the-7-questions': typeof The7QuestionsRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/waitlist': typeof WaitlistRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/portal/coach': typeof PortalCoachRoute
@@ -310,6 +317,7 @@ export interface FileRoutesByTo {
   '/the-7-questions': typeof The7QuestionsRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/waitlist': typeof WaitlistRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/portal/coach': typeof PortalCoachRoute
@@ -352,6 +360,7 @@ export interface FileRoutesById {
   '/the-7-questions': typeof The7QuestionsRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/waitlist': typeof WaitlistRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/diagnostic/result': typeof DiagnosticResultRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/portal/coach': typeof PortalCoachRoute
@@ -395,6 +404,7 @@ export interface FileRouteTypes {
     | '/the-7-questions'
     | '/unsubscribe'
     | '/waitlist'
+    | '/articles/$slug'
     | '/diagnostic/result'
     | '/email/unsubscribe'
     | '/portal/coach'
@@ -435,6 +445,7 @@ export interface FileRouteTypes {
     | '/the-7-questions'
     | '/unsubscribe'
     | '/waitlist'
+    | '/articles/$slug'
     | '/diagnostic/result'
     | '/email/unsubscribe'
     | '/portal/coach'
@@ -476,6 +487,7 @@ export interface FileRouteTypes {
     | '/the-7-questions'
     | '/unsubscribe'
     | '/waitlist'
+    | '/articles/$slug'
     | '/diagnostic/result'
     | '/email/unsubscribe'
     | '/portal/coach'
@@ -518,6 +530,7 @@ export interface RootRouteChildren {
   The7QuestionsRoute: typeof The7QuestionsRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   WaitlistRoute: typeof WaitlistRoute
+  ArticlesSlugRoute: typeof ArticlesSlugRoute
   DiagnosticResultRoute: typeof DiagnosticResultRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ArticlesIndexRoute: typeof ArticlesIndexRoute
@@ -695,6 +708,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DiagnosticResultRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/articles/$slug': {
+      id: '/articles/$slug'
+      path: '/articles/$slug'
+      fullPath: '/articles/$slug'
+      preLoaderRoute: typeof ArticlesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portal/sessions/': {
       id: '/portal/sessions/'
       path: '/sessions'
@@ -853,6 +873,7 @@ const rootRouteChildren: RootRouteChildren = {
   The7QuestionsRoute: The7QuestionsRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   WaitlistRoute: WaitlistRoute,
+  ArticlesSlugRoute: ArticlesSlugRoute,
   DiagnosticResultRoute: DiagnosticResultRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ArticlesIndexRoute: ArticlesIndexRoute,
