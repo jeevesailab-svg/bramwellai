@@ -68,4 +68,32 @@ export async function subscribeToNurture(
       err instanceof Error ? err.message : String(err),
     );
   }
+
+  // The bulk subscribe job does not reliably persist custom properties,
+  // so upsert them explicitly.
+  if (Object.keys(properties).length) {
+    try {
+      await fetch("https://a.klaviyo.com/api/profile-import/", {
+        method: "POST",
+        headers: {
+          Authorization: `Klaviyo-API-Key ${apiKey}`,
+          "Content-Type": "application/json",
+          accept: "application/json",
+          revision: KLAVIYO_REVISION,
+        },
+        body: JSON.stringify({
+          data: {
+            type: "profile",
+            attributes: {
+              email: email.toLowerCase(),
+              ...(firstName ? { first_name: firstName } : {}),
+              properties,
+            },
+          },
+        }),
+      });
+    } catch {
+      // non-blocking
+    }
+  }
 }
