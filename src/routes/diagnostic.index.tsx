@@ -626,6 +626,8 @@ function DiagnosticPage() {
 
   const startDiagnostic = useCallback(async () => {
     trackEvent("started_diagnostic");
+    const lead = leadRef.current;
+    void trackFunnel("diagnostic_start", { has_email: Boolean(lead.email) }, { email: lead.email });
     setErrorMsg(null);
     setRateLimited(false);
     setPhase("connecting");
@@ -648,6 +650,8 @@ function DiagnosticPage() {
 
       const res = await fetch("/api/public/diagnostic-token", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: lead.email, firstName: lead.firstName }),
       });
       if (!res.ok) {
         const body = (await res.json().catch(() => ({}))) as { error?: string };
@@ -668,12 +672,16 @@ function DiagnosticPage() {
       sessionIdRef.current = sessionId;
       setCurrentSessionId(sessionId);
       window.sessionStorage.setItem("bramwell-diagnostic-session-id", sessionId);
+      void trackFunnel("diagnostic_session_created", {}, {
+        email: lead.email,
+        diagnosticSessionId: sessionId,
+      });
       transcriptRef.current = [];
       submittedRef.current = false;
       const dynamicVariables = {
         sessionId,
         session_id: sessionId,
-        user_first_name: "there",
+        user_first_name: lead.firstName || "there",
       };
 
       if (authMode === "signed-url" && signedUrl) {
