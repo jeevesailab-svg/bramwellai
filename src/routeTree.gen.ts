@@ -32,6 +32,7 @@ import { Route as DiagnosticResultRouteImport } from './routes/diagnostic.result
 import { Route as PortalSessionsIndexRouteImport } from './routes/portal.sessions.index'
 import { Route as PortalSessionsSessionIdRouteImport } from './routes/portal.sessions.$sessionId'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
 import { Route as ApiPublicQuizLeadRouteImport } from './routes/api/public/quiz-lead'
 import { Route as ApiPublicKlaviyoEventRouteImport } from './routes/api/public/klaviyo-event'
 import { Route as ApiPublicFoundersApplyRouteImport } from './routes/api/public/founders-apply'
@@ -161,6 +162,11 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
+  id: '/api/public/track',
+  path: '/api/public/track',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicQuizLeadRoute = ApiPublicQuizLeadRouteImport.update({
   id: '/api/public/quiz-lead',
   path: '/api/public/quiz-lead',
@@ -266,6 +272,7 @@ export interface FileRoutesByFullPath {
   '/api/public/founders-apply': typeof ApiPublicFoundersApplyRoute
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
+  '/api/public/track': typeof ApiPublicTrackRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/portal/sessions/$sessionId': typeof PortalSessionsSessionIdRoute
   '/portal/sessions/': typeof PortalSessionsIndexRoute
@@ -303,6 +310,7 @@ export interface FileRoutesByTo {
   '/api/public/founders-apply': typeof ApiPublicFoundersApplyRoute
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
+  '/api/public/track': typeof ApiPublicTrackRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/portal/sessions/$sessionId': typeof PortalSessionsSessionIdRoute
   '/portal/sessions': typeof PortalSessionsIndexRoute
@@ -342,6 +350,7 @@ export interface FileRoutesById {
   '/api/public/founders-apply': typeof ApiPublicFoundersApplyRoute
   '/api/public/klaviyo-event': typeof ApiPublicKlaviyoEventRoute
   '/api/public/quiz-lead': typeof ApiPublicQuizLeadRoute
+  '/api/public/track': typeof ApiPublicTrackRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/portal/sessions/$sessionId': typeof PortalSessionsSessionIdRoute
   '/portal/sessions/': typeof PortalSessionsIndexRoute
@@ -382,6 +391,7 @@ export interface FileRouteTypes {
     | '/api/public/founders-apply'
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
+    | '/api/public/track'
     | '/lovable/email/suppression'
     | '/portal/sessions/$sessionId'
     | '/portal/sessions/'
@@ -419,6 +429,7 @@ export interface FileRouteTypes {
     | '/api/public/founders-apply'
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
+    | '/api/public/track'
     | '/lovable/email/suppression'
     | '/portal/sessions/$sessionId'
     | '/portal/sessions'
@@ -457,6 +468,7 @@ export interface FileRouteTypes {
     | '/api/public/founders-apply'
     | '/api/public/klaviyo-event'
     | '/api/public/quiz-lead'
+    | '/api/public/track'
     | '/lovable/email/suppression'
     | '/portal/sessions/$sessionId'
     | '/portal/sessions/'
@@ -492,6 +504,7 @@ export interface RootRouteChildren {
   ApiPublicFoundersApplyRoute: typeof ApiPublicFoundersApplyRoute
   ApiPublicKlaviyoEventRoute: typeof ApiPublicKlaviyoEventRoute
   ApiPublicQuizLeadRoute: typeof ApiPublicQuizLeadRoute
+  ApiPublicTrackRoute: typeof ApiPublicTrackRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicPaymentsTestEmailRoute: typeof ApiPublicPaymentsTestEmailRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
@@ -663,6 +676,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/track': {
+      id: '/api/public/track'
+      path: '/api/public/track'
+      fullPath: '/api/public/track'
+      preLoaderRoute: typeof ApiPublicTrackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/quiz-lead': {
       id: '/api/public/quiz-lead'
       path: '/api/public/quiz-lead'
@@ -803,6 +823,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicFoundersApplyRoute: ApiPublicFoundersApplyRoute,
   ApiPublicKlaviyoEventRoute: ApiPublicKlaviyoEventRoute,
   ApiPublicQuizLeadRoute: ApiPublicQuizLeadRoute,
+  ApiPublicTrackRoute: ApiPublicTrackRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicPaymentsTestEmailRoute: ApiPublicPaymentsTestEmailRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
@@ -813,13 +834,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
