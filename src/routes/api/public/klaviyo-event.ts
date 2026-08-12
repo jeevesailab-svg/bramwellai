@@ -25,7 +25,9 @@ export const Route = createFileRoute("/api/public/klaviyo-event")({
       GET: async () => {
         const apiKey = process.env.KLAVIYO_PRIVATE_API_KEY;
         const r = await fetch("https://a.klaviyo.com/api/lists/", {
-          headers: { Authorization: `Klaviyo-API-Key ${apiKey}`, revision: KLAVIYO_REVISION, accept: "application/json" },
+          method: "POST",
+          headers: { Authorization: `Klaviyo-API-Key ${apiKey}`, revision: KLAVIYO_REVISION, accept: "application/json", "Content-Type": "application/json" },
+          body: JSON.stringify({ data: { type: "list", attributes: { name: "Bramwell Diagnostic Leads" } } }),
         });
         return new Response(await r.text(), { status: r.status });
       },
