@@ -11,8 +11,8 @@ function key() {
  */
 export async function subscribeToNurture(
   email: string,
-  firstName?: string | null,
-  extraProps?: Record<string, unknown>,
+  _firstName?: string | null,
+  _extraProps?: Record<string, unknown>,
 ): Promise<void> {
   const apiKey = key();
   const listId = process.env.KLAVIYO_LIST_ID;
@@ -28,8 +28,6 @@ export async function subscribeToNurture(
               type: "profile",
               attributes: {
                 email: email.toLowerCase(),
-                ...(firstName ? { first_name: firstName } : {}),
-                ...(extraProps ? { properties: extraProps } : {}),
                 subscriptions: {
                   email: { marketing: { consent: "SUBSCRIBED" } },
                 },
