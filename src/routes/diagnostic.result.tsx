@@ -68,9 +68,6 @@ type Metrics = {
   rewrite?: { original: string; rewritten: string; why: string };
 };
 
-const STRIPE: Record<PathwayKey, string> = {
-  ceo: import.meta.env.VITE_STRIPE_CEO ?? "#",
-};
 
 const TYPE_DESCRIPTIONS: Record<string, string> = {
   structure_gap:
@@ -378,10 +375,7 @@ function CeoBenchmark({ score }: { score: number }) {
 }
 
 function ResultBodyInner({ result }: { result: Result }) {
-  const pathwayKey = result.recommended_pathway;
-  const stripeHref = STRIPE[pathwayKey];
-  const isStubStripe = stripeHref === "#";
-  const outcomes = PATHWAY_OUTCOMES[pathwayKey];
+  const outcomes = PATHWAY_OUTCOMES[result.recommended_pathway];
 
   return (
     <div className="space-y-12">
