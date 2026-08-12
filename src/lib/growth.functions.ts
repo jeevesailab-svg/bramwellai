@@ -29,7 +29,10 @@ export const getGrowthSnapshot = createServerFn({ method: "GET" }).handler(
       apply: (q: any) => any = (q) => q,
     ): Promise<number> => {
       const { count: c } = await apply(
-        supabaseAdmin.from(table).select("id", { count: "exact", head: true }),
+        (supabaseAdmin.from as (t: string) => any)(table).select("id", {
+          count: "exact",
+          head: true,
+        }),
       );
       return c ?? 0;
     };
