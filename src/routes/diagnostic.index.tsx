@@ -2,7 +2,7 @@ import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CtaButton } from "@/components/site/CtaButton";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent, trackFunnel } from "@/lib/analytics";
 
 export const Route = createFileRoute("/diagnostic/")({
   component: DiagnosticRoute,
