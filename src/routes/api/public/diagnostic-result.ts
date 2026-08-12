@@ -45,11 +45,7 @@ const MetricsSchema = z
   .partial();
 
 const PATHWAY = {
-  graduate: { name: "Graduate Interview Sprint", price: "$99 AUD" },
-  comeback: { name: "Career Comeback Sprint", price: "$199 AUD" },
-  confidence: { name: "Interview Confidence Sprint", price: "$249 AUD" },
-  executive: { name: "Executive Communication Sprint", price: "$499 AUD" },
-  club: { name: "30 Day Voice Mastery Program", price: "$349 USD, one payment" },
+  ceo: { name: "Speak Like a CEO 30 Day Program", price: "$349 USD, one payment" },
 } as const;
 
 type CommunicationType =
