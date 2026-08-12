@@ -11,7 +11,7 @@ const articlesQueryOptions = queryOptions({
   queryFn: () => getPublishedArticles(),
 });
 
-export const Route = createFileRoute("/articles")({
+export const Route = createFileRoute("/articles/")({
   loader: async ({ context }) => {
     await context.queryClient.ensureQueryData(articlesQueryOptions);
   },
