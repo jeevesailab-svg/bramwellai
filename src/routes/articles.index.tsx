@@ -4,7 +4,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { queryOptions } from "@tanstack/react-query";
 import { CtaButton } from "@/components/site/CtaButton";
 
-const SITE_URL = "https://www.bramwellai.com";
+const SITE_URL = "https://bramwellai.com";
 
 const articlesQueryOptions = queryOptions({
   queryKey: ["published-articles"],

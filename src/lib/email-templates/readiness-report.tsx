@@ -62,8 +62,8 @@ const ReadinessReport = ({ firstName, score, communicationType, gaps, sessionId 
   const ceo = getCeoGap(value)
   const band = getScoreBand(value)
   const resultUrl = sessionId
-    ? `https://www.bramwellai.com/diagnostic/result?id=${sessionId}`
-    : 'https://www.bramwellai.com/program'
+    ? `https://bramwellai.com/diagnostic/result?id=${sessionId}`
+    : 'https://bramwellai.com/program'
 
   return (
     <Html lang="en" dir="ltr">
@@ -124,7 +124,7 @@ const ReadinessReport = ({ firstName, score, communicationType, gaps, sessionId 
             signals, then high-stakes rehearsal. Every session is impromptu and scored, with weekly
             check-ins and a Day 30 retest that proves the change. One payment of $349 USD.
           </Text>
-          <Button href="https://www.bramwellai.com/program?resume=mastery" style={cta}>
+          <Button href="https://bramwellai.com/program?resume=mastery" style={cta}>
             Get started, $349
           </Button>
 

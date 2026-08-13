@@ -37,9 +37,9 @@ export const Route = createFileRoute("/program")({
         },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
-        { property: "og:url", content: "https://www.bramwellai.com/program" },
+        { property: "og:url", content: "https://bramwellai.com/program" },
       ],
-    links: [{ rel: "canonical", href: "https://www.bramwellai.com/program" }],
+    links: [{ rel: "canonical", href: "https://bramwellai.com/program" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -50,13 +50,13 @@ export const Route = createFileRoute("/program")({
           description:
             "A 30 day voice training program with Bramwell, a live AI voice mentor. Daily practice, every session scored against a CEO benchmark of 88.",
           brand: { "@type": "Brand", name: "Bramwell AI" },
-          url: "https://www.bramwellai.com/program",
+          url: "https://bramwellai.com/program",
           offers: {
             "@type": "Offer",
             price: "349",
             priceCurrency: "USD",
             availability: "https://schema.org/InStock",
-            url: "https://www.bramwellai.com/program",
+            url: "https://bramwellai.com/program",
           },
         }),
       },

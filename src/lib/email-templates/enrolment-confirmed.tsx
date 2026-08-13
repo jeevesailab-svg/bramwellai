@@ -45,7 +45,7 @@ const EnrolmentConfirmed = ({
   nextStepDescription,
 }: Props) => {
   const greeting = firstName?.trim() ? `${firstName.trim()},` : 'Hello,'
-  const url = portalUrl || 'https://www.bramwellai.com/portal/welcome'
+  const url = portalUrl || 'https://bramwellai.com/portal/welcome'
   const isB2B = url.includes('calendar.app.google')
   const label = nextStepLabel || (isB2B ? 'Book your kickoff call' : 'Begin onboarding')
   const description =
@@ -89,6 +89,6 @@ export const template = {
     firstName: 'Sarah',
     productName: 'Speak Like a CEO, 30 Day Program',
     amount: 'USD $349.00',
-    portalUrl: 'https://www.bramwellai.com/portal/welcome',
+    portalUrl: 'https://bramwellai.com/portal/welcome',
   },
 } satisfies TemplateEntry
