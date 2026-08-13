@@ -25,6 +25,7 @@ export const Route = createFileRoute("/articles/$slug")({
   head: ({ loaderData }) => {
     const article = loaderData;
     const url = `${SITE_URL}/articles/${article?.slug ?? ""}`;
+    const faqItems: FAQItem[] = Array.isArray(article?.faq) ? (article.faq as FAQItem[]) : [];
     return {
       meta: [
         { title: `${article?.title ?? "Article"} | Bramwell AI` },
@@ -56,6 +57,22 @@ export const Route = createFileRoute("/articles/$slug")({
                 mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/articles/${article.slug}` },
               }),
             },
+            ...(faqItems.length
+              ? [
+                  {
+                    type: "application/ld+json",
+                    children: JSON.stringify({
+                      "@context": "https://schema.org",
+                      "@type": "FAQPage",
+                      mainEntity: faqItems.map((item) => ({
+                        "@type": "Question",
+                        name: item.question,
+                        acceptedAnswer: { "@type": "Answer", text: item.answer },
+                      })),
+                    }),
+                  },
+                ]
+              : []),
           ]
         : [],
     };
