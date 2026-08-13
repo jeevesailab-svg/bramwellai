@@ -14,7 +14,7 @@ import appCss from "../styles.css?url";
 import { initGA, trackPageView, trackFunnel } from "@/lib/analytics";
 import { captureAttribution } from "@/lib/attribution";
 
-const SITE_URL = "https://www.bramwellai.com";
+const SITE_URL = "https://bramwellai.com";
 
 function NotFoundComponent() {
   return (

@@ -20,14 +20,14 @@ export const Route = createFileRoute("/diagnostic/")({
           "Meet Bramwell. The AI coach that teaches you to speak like a CEO. Try a free 5-minute voice session.",
       },
       { property: "og:title", content: "Not a course. A coach. | 5 minutes | Bramwell.ai" },
-      { property: "og:url", content: "https://www.bramwellai.com/diagnostic" },
+      { property: "og:url", content: "https://bramwellai.com/diagnostic" },
       {
         property: "og:description",
         content:
           "One free 5-minute voice session with Bramwell. Get your Readiness Score, communication type, and the three biggest gaps to fix. No login, no card.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://www.bramwellai.com/diagnostic" }],
+    links: [{ rel: "canonical", href: "https://bramwellai.com/diagnostic" }],
   }),
 });
 

@@ -23,9 +23,9 @@ export const Route = createFileRoute("/founders")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:url", content: "https://www.bramwellai.com/founders" },
+      { property: "og:url", content: "https://bramwellai.com/founders" },
     ],
-    links: [{ rel: "canonical", href: "https://www.bramwellai.com/founders" }],
+    links: [{ rel: "canonical", href: "https://bramwellai.com/founders" }],
   }),
 });
 
