@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WaitlistRouteImport } from './routes/waitlist'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as The7QuestionsRouteImport } from './routes/the-7-questions'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ProgramRouteImport } from './routes/program'
 import { Route as PricingRouteImport } from './routes/pricing'
@@ -63,6 +64,11 @@ const UnsubscribeRoute = UnsubscribeRouteImport.update({
 const The7QuestionsRoute = The7QuestionsRouteImport.update({
   id: '/the-7-questions',
   path: '/the-7-questions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -273,6 +279,7 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/program': typeof ProgramRoute
   '/signup': typeof SignupRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/the-7-questions': typeof The7QuestionsRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/waitlist': typeof WaitlistRoute
@@ -314,6 +321,7 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/program': typeof ProgramRoute
   '/signup': typeof SignupRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/the-7-questions': typeof The7QuestionsRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/waitlist': typeof WaitlistRoute
@@ -357,6 +365,7 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/program': typeof ProgramRoute
   '/signup': typeof SignupRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/the-7-questions': typeof The7QuestionsRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/waitlist': typeof WaitlistRoute
@@ -401,6 +410,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/program'
     | '/signup'
+    | '/sitemap.xml'
     | '/the-7-questions'
     | '/unsubscribe'
     | '/waitlist'
@@ -442,6 +452,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/program'
     | '/signup'
+    | '/sitemap.xml'
     | '/the-7-questions'
     | '/unsubscribe'
     | '/waitlist'
@@ -484,6 +495,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/program'
     | '/signup'
+    | '/sitemap.xml'
     | '/the-7-questions'
     | '/unsubscribe'
     | '/waitlist'
@@ -527,6 +539,7 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   ProgramRoute: typeof ProgramRoute
   SignupRoute: typeof SignupRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   The7QuestionsRoute: typeof The7QuestionsRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   WaitlistRoute: typeof WaitlistRoute
@@ -573,6 +586,13 @@ declare module '@tanstack/react-router' {
       path: '/the-7-questions'
       fullPath: '/the-7-questions'
       preLoaderRoute: typeof The7QuestionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signup': {
@@ -870,6 +890,7 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   ProgramRoute: ProgramRoute,
   SignupRoute: SignupRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   The7QuestionsRoute: The7QuestionsRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   WaitlistRoute: WaitlistRoute,
